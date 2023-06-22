@@ -1,0 +1,150 @@
+@media screen and (min-width:992px){
+    .error-name{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:1vw;
+        position:absolute;
+        left:6%;
+        top:17%;
+        color:red;
+    }
+    .error-phone{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:1vw;
+        position:absolute;
+        left:56%;
+        top:17%;
+        color:red;
+    }
+    .error-clothes{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:1vw;
+        position:absolute;
+        left:6%;
+        top:105%;
+        color:red;
+    }
+    .error-address{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:1vw;
+        position:absolute;
+        left:6%;
+        top:102%;
+        color:red;
+    }
+    .error-disable{
+        display:none;
+    }
+
+    .bookservice-time{
+        border-style:solid;
+        border-color:#6759ff;
+        border-width:1px;
+        border-radius:5px;
+        background-color:transparent;
+        color:#6759ff;
+        font-family:'Courier New', Courier, monospace;
+        font-size:1vw;
+        font-weight:bold;
+    }
+    .selected-time{
+        border-style:solid;
+        border-color:#6759ff;
+        border-width:1px;
+        border-radius:5px;
+        background-color:#6759ff;
+        color:#fff;
+        font-family:'Courier New', Courier, monospace;
+        font-size:1vw;
+        font-weight:bold;
+    }
+    .bookservice-pickup{
+        font-family:'Courier New', Courier, monospace;
+        font-size:0.9vw;
+        position:absolute;
+        color:#6759ff;
+        font-weight:bold;
+        margin:0px;
+        left:7.5%;
+        top:67%;
+    }
+}
+
+
+
+@media screen and (max-width:576px){
+    .error-name{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:2vw;
+        position:absolute;
+        left:7%;
+        top:16.5%;
+        color:red;
+    }
+    .error-phone{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:2vw;
+        position:absolute;
+        left:7%;
+        top:32.5%;
+        color:red;
+    }
+    .error-clothes{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:2vw;
+        position:absolute;
+        left:3%;
+        top: 105%;
+        color:red;
+    }
+    .error-address{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:2vw;
+        position:absolute;
+        left:7%;
+        top:79%;
+        color:red;
+    }
+    .error-disable{
+        display:none;
+    }
+    .bookservice-time{
+        border-style:solid;
+        border-color:#6759ff;
+        border-width:1px;
+        border-radius:2px;
+        background-color:transparent;
+        color:#6759ff;
+        font-family:'Courier New', Courier, monospace;
+        font-size:2.5vw;
+        font-weight:bold;
+        height:60%;
+        width:15%;
+        margin-top:2.5%;
+    }
+
+    .selected-time{
+        border-style:solid;
+        border-color:#6759ff;
+        border-width:1px;
+        border-radius:5px;
+        background-color:#6759ff;
+        color:#fff;
+        font-family:'Courier New', Courier, monospace;
+        font-size:2.5vw;
+        font-weight:bold;
+        height:60%;
+        width:15%;
+        margin-top:2.5%;
+    }
+
+    .bookservice-pickup{
+        font-family:'Courier New', Courier, monospace;
+        font-size:2vw;
+        position:absolute;
+        color:#6759ff;
+        font-weight:bold;
+        margin:0px;
+        left:3.5%;
+        top:78.5%;
+    }
+}

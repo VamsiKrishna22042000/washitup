@@ -1,0 +1,39 @@
+.set-counter{
+    height:8vh;
+    width:14.5vw;
+    background-color:#6759ff;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    align-items:center;
+    border-radius:10px;
+    margin-right:4vw;
+}
+
+.set-counter-button{
+    height:60%;
+    width:20%;
+    background-color:white;
+    border-radius:5px;
+    border-width:0px;
+    color:#6759ff;
+    font-size:2vw;
+    font-weight:bold;
+    text-align:center;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding-top:0px;
+}
+
+.set-counter-para{
+    font-size:5vh;
+    color:#fff;
+    padding-top:6%;
+}
+
+
+.set-counter-icon{
+    color:#fff;
+    font-size:5vh;
+}
