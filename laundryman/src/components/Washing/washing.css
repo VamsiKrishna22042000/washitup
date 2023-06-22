@@ -59,7 +59,7 @@
     .washing-total-con{
         position:relative;
         width: 85%;
-        height: 50vh;
+        height: 50%;
         margin-top:5%;
         margin-left:8%;
         background: #ffffff;
@@ -82,7 +82,7 @@
    
    .washing-para{
        font-family:'Courier New', Courier, monospace;
-       font-size:3vh;
+       font-size:3%;
        color:#2B8DFC;
        font-weight:bold;
        margin-top:8%;

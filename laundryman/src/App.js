@@ -7,12 +7,13 @@ import LaundryBody from './components/LaundryBody/index'
 
 import LaundryNav from './components/LaundryMain/index';
 
+
 function App() {
   return (
-    <div className='total-background'>
+    <>
       <LaundryNav/>
       <LaundryBody/>
-    </div>
+    </>
   )
 }
 

@@ -178,7 +178,7 @@
  .add-Clothes{
         position:relative;
         width: 85%;
-        height: 50vh;
+        height: 50%;
         margin-top:5%;
         margin-left:8%;
         background: #ffffff;
@@ -196,7 +196,7 @@
         flex-wrap:wrap;
     }
     .set-counter{
-        height:7vh;
+        height:7%;
         width:40%;
         background-color:transparent;
         border-color:#6759ff;
@@ -215,7 +215,7 @@
     }
     
     .set-counter-button{
-        height:6vh;
+        height:6%;
         width:5vw;
         background-color:transparent;
         border-width:0px;

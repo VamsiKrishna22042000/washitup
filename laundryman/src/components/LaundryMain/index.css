@@ -3,16 +3,7 @@
     margin:0px;
 }
 
-.map{
-    position: absolute;
-    height:60vh;
-    width:30vw;
-    top:0;
-    bottom:0;
-    right: 0;
-    left:0;
-    background-color:red;
-}
+
 
 @media screen and (min-width:992px){
     .loc{
@@ -763,7 +754,7 @@
         align-items:flex-start;
     }
     .hamburger{
-        height:2vh;
+        height:2%;
         width:2vw;
         margin-right:10vw;
         margin-top:2vh;
@@ -804,7 +795,7 @@
        background-color:#fff;
    }
    .back2-head{
-        margin-top: 10vh;
+        margin-top: 10%;
         font-family:Arial, Helvetica, sans-serif;
         font-size: 8vw;
         text-align: center;
@@ -900,7 +891,7 @@
     font-size:1vw;
 }
 .ic{
-   height:10vw;
+   height:10%;
    width:10vw;
    align-self:flex-start;
    margin-top:3vh;
@@ -911,7 +902,7 @@
     display:inline;
     margin-left:15%;
     width:70%;
-    height:2vh;
+    height:2%;
     display:flex;
     justify-content:space-around;
 }
@@ -926,7 +917,7 @@
 .iphone{
     position:absolute;
     padding-top:15vh;
-    height:70vh;
+    height:70%;
     width:100%;
     margin-top:3vh;
 }
@@ -959,7 +950,7 @@
     justify-content: space-around;
     position: absolute;
     background-color: #6759FF;
-    height: 25vh;
+    height: 25%;
     border-radius: 20px;
     width: 20vw;
     margin-top: 35vh;
@@ -967,14 +958,14 @@
     z-index: 5;
 } .uifry {
     margin-top: 2vh;
-    height: 3vh;
+    height: 3%;
     width: 100%;
     transform: scale(1.2);
 }
 .visa-head {
     margin-left: 7vh;
     margin-top: 2vh;
-    height: 3vh;
+    height: 3%;
     width: 100%;
     transform: scale(1.2);
 }
@@ -1015,7 +1006,7 @@
 }
 
 .navbar-nav{
-    height:30vh;
+    height:30%;
     margin-left:9.5%;
     margin-top:5%;
     width:100vw;
@@ -1031,7 +1022,7 @@
     color:#000000;
 }
 .but{
-    height:4vh; 
+    height:4%; 
     display:flex;
     width:25vw;
     justify-content:center;
@@ -1087,7 +1078,7 @@
     margin-left:8%;
 }
 .butt2{
-    height:6vh;
+    height:6%;
     width:33vw;
     border-radius:7px;
     border-width:0px;
@@ -1099,12 +1090,12 @@
     position:absolute;
     left:-15px;
     margin-top:30vh;
-    height:70vh;
+    height:70%;
 }
 .but1 {
     margin-top: 0px;
     width: 60vw;
-    height: 12vw;
+    height: 12%;
     background-color: #6759ff;
 }
 .input1 {
@@ -1118,7 +1109,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3vw;
     padding-left: 9vw;
-    height: 6vh;
+    height: 6%;
     width: 90%;
     border-style: solid;
     border-radius: 6px;
@@ -1128,7 +1119,7 @@
 }
 .name2 {
     padding-left: 8vw;
-    height: 10vw;
+    height: 10%;
     width: 76vw;
     margin-left: 5vw;
     border-style: solid;
@@ -1167,7 +1158,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-    height:20vh;
+    height:20%;
     display:flex;
     flex-direction:row;
     justify-content:flex-start;
@@ -1231,7 +1222,7 @@
 .login {
     position:relative;
     width: 85%;
-    height: 50vh;
+    height: 50%;
     margin-top:5%;
     margin-left:8%;
     background: #ffffff;
@@ -1251,7 +1242,7 @@
 }
 
 .alliphones{
-    height:83vh;
+    height:83%;
     width:100vw;
     margin-top:13vh;
     position: relative;
@@ -1265,7 +1256,7 @@
 }
 .iphoness{
     position: relative;
-    height:50vh;
+    height:50%;
     width:120%;
     left:15%;
     margin-top:50%;
@@ -1311,7 +1302,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    height: 7vh;
+    height: 7%;
     width: 10vw;
     margin-right: 1.5vw;
 }
@@ -1321,13 +1312,13 @@
 
 .background4{
     margin-top:35vh;
-    height:80vh;
+    height:80%;
     width:100vw;
     background-color:#E1E1E1;
     position: relative;
 }
 .services-section{
-     height:30vh;
+     height:30%;
      width:80vw;
      background-color:#1E3661;
      color:#fff;
@@ -1364,7 +1355,7 @@
          z-index:0;
     }
     .butt5{
-        height:7vh;
+        height:7%;
     }
 
     .contentb5{
@@ -1401,7 +1392,7 @@
         color:#000;
     }
     .subsinput{
-        height:8vh;
+        height:8%;
         border-width:0px;
         padding-left:1vw;
         font-size:1vw;
@@ -1463,14 +1454,14 @@
         padding: 5vw;
         display: flex;
         justify-content: space-around;
-        height: 138vh;
+        height: 138%;
         width: 100%;
         margin-top: 7vh;
     }
     .phone2 {
         display: flex;
         justify-content: space-around;
-        height: 138vh;
+        height: 138%;
         width: 100%;
         padding: 5vw;
         margin-top: 7vh;
@@ -1480,7 +1471,7 @@
         flex-direction: column;
         justify-content: space-between;
         align-items:flex-start;
-        height: 145vh;
+        height: 145%;
         width: 100%;
         text-align: left;
     }
@@ -1536,7 +1527,7 @@
         justify-content: space-around;
         position: absolute;
         background-color: #6759FF;
-        height: 14vh;
+        height: 14%;
         border-radius: 10px;
         width: 37vw;
         margin-top: 33vh;
@@ -1545,14 +1536,14 @@
     }
     .uifry {
         margin-top: 0.5vh;
-        height: 3vh;
+        height: 3%;
         width: 100%;
         transform: scale(0.9);
     }
     .visa-head {
         margin-left: 7vh;
         margin-top: 0.5vh;
-        height: 3vh;
+        height: 3%;
         width: 100%;
         transform: scale(0.6);
     }.number {
@@ -1586,7 +1577,7 @@
 
 
     .services-section{
-        height:20vh;
+        height:20%;
         z-index:2;
         margin-bottom:5vh;
         display:flex;
@@ -1611,7 +1602,7 @@
 
     .butt5{
         width:25vw;
-        height:6vh;
+        height:6%;
         font-family: Arial, Helvetica, sans-serif;
         font-size:3vw;
         margin-right:5vw;
@@ -1630,7 +1621,7 @@
         margin-bottom: 0px;
         margin-left: 0px;
         margin-top: 10vh;
-        height: 70vh;
+        height: 70%;
         width: 100%;
         background: #E1E1E1;
         z-index: 1;
@@ -1670,7 +1661,7 @@
         border-radius: 10px;
         font-size: 3vw;
         padding-left: 2%;
-        height: 6vh;
+        height: 6%;
         width: 90%;
     }
     
@@ -1691,7 +1682,7 @@
     .services {
         color: grey;
         font-family: Arial, Helvetica, sans-serif;
-        height: 33vh;
+        height: 33%;
         width: 40vw;
         justify-content:flex-start;
         font-size:3vw;
@@ -1712,7 +1703,7 @@
     .button-container-5{
         position: relative;
         width:100%;
-        height: 7vh;
+        height: 7%;
     }
     .b5butt {
         border-width: 0px;
@@ -1727,7 +1718,7 @@
         padding-bottom:6%;
         top:-160%;
         left:40%;
-        height:1vh;
+        height:1%;
         width:1vw;
     }
     .donotshow{
@@ -1753,7 +1744,7 @@
         padding-bottom:6%;
         top:-193%;
         left:42%;
-        height:1vh;
+        height:1%;
         width:1vw;
     }
 
@@ -1784,7 +1775,7 @@
         padding-bottom:6%;
         top:-172%;
         left:42%;
-        height:1vh;
+        height:1%;
         width:1vw;
     }
 
@@ -1792,7 +1783,7 @@
         border-radius: 10px;
         font-size: 3vw;
         padding-left: 2%;
-        height: 6.5vh;
+        height: 6.5%;
         width: 90%;
     }
 
