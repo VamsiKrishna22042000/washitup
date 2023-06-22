@@ -33,3 +33,9 @@
     transform: rotate(360deg);
   }
 }
+
+.total-background{
+  resize:none;
+  margin:0px;
+  box-sizing:border-box;
+}
