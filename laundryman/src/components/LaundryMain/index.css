@@ -1242,7 +1242,8 @@
     justify-content:space-evenly;
     display:flex;
     overflow:hidden;
-    min-height:50vh;
+    resize:none;
+    padding-top:3%;
 }
 
 .blog{
