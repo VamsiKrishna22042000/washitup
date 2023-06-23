@@ -178,7 +178,7 @@
  .add-Clothes{
         position:relative;
         width: 85%;
-        height: 50%;
+        height:auto;
         margin-top:5%;
         margin-left:8%;
         background: #ffffff;
@@ -196,7 +196,6 @@
         flex-wrap:wrap;
     }
     .set-counter{
-        height:7%;
         width:40%;
         background-color:transparent;
         border-color:#6759ff;
@@ -209,13 +208,14 @@
         border-radius:5px;
         margin-right:1vw;
         margin-left:1vw;
-        padding-top:7.5%;
-        padding-bottom:2%;
         position: relative;
+        margin-top:2%;
+        margin-bottom:2%;
+        padding-top:2%;
+
     }
     
     .set-counter-button{
-        height:6%;
         width:5vw;
         background-color:transparent;
         border-width:0px;
@@ -252,7 +252,7 @@
         text-align:center;
         position:absolute;
         font-weight:bold;
-        top:-3%;
+        top:0px;
     }
     .set-counter-total-price-icon{
         font-size:2vh;
@@ -270,7 +270,7 @@
         left:64.5%;
         text-align:center;
         position:absolute;
-        top: 5.5%;
+        top: 7.2%;
     }
     
     .set-counter-name{
@@ -291,7 +291,7 @@
         text-align:center;
         position:absolute;
         font-weight:bold;
-        top:2%
+        top:2.5%
     }
     
     .counter-total-value{
@@ -302,7 +302,7 @@
         text-align:center;
         position:absolute;
         font-weight:bold;
-        top:2%
+        top:2.5%
     }
     
     .wash-button{
@@ -310,7 +310,8 @@
         background-color: #6759ff;
         border-radius:10px;
         color:#fff;
-        padding: 2.5%;
+        padding-top: 5%;
+        padding-bottom:5%;
         border-width:0px;
         font-family:Arial, Helvetica, sans-serif;
         font-size:4vw;
@@ -318,6 +319,9 @@
         flex-direction:row;
         align-items:center;
         justify-content:center;
+        margin-top:3%;
+        margin-bottom:3%;
+
     }
     
     .wash-clothes-icon{

@@ -39,7 +39,6 @@
     .success-total-con{
         position:relative;
         width: 85%;
-        height: 50%;
         margin-top:5%;
         margin-left:8%;
         background: #ffffff;
@@ -51,10 +50,10 @@
         align-items:center;
         display:flex;
         overflow:hidden;
-        padding-top:10%;
+        padding-top:20%;
         padding-left:5%;
         padding-right:5%;
-        padding-bottom:5%;
+        padding-bottom:20%;
         flex-wrap:wrap;
     }
     .success-anime{
