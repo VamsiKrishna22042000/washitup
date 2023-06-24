@@ -288,7 +288,7 @@
         font-size:2.5vh;
         font-weight:bold;
         display: flex;
-        align-items: flex-end;
+        align-items:center;
         justify-content:center;
         padding-top:0px;
         margin-bottom:1vh;
@@ -310,7 +310,7 @@
         font-size:2.5vh;
         font-weight:bold;
         display: flex;
-        align-items: flex-end;
+        align-items:center;
         justify-content:center;
         padding-top:0px;
         margin-bottom:1vh;
