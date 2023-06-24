@@ -287,7 +287,10 @@
         color:#6759ff;
         font-size:2.5vh;
         font-weight:bold;
-        text-align:center;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        padding-top:0px;
         margin-bottom:1vh;
         border-color: #6759ff;
         border-style:solid;
@@ -306,7 +309,10 @@
         color:#fff;
         font-size:2.5vh;
         font-weight:bold;
-        text-align:center;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        padding-top:0px;
         margin-bottom:1vh;
         border-color: #6759ff;
         border-style:solid;
