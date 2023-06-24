@@ -60,7 +60,7 @@ function LaundryNav() {
         <div className="background1-con">
           <div className="bar" bg="#b8dde3" variant="light">
             <div className="navbarcontainer">
-              <div href="#home" className="main-head">Logo Space</div>
+              <img href="#logo" className="main-head" src="./washituplogo.png" alt="Main Logo"/>
                <div id="contents" className="navbar-nav donotshow">
                 <div  href="#home" className="home">Home</div>
                 <div href="#features">About us</div>
