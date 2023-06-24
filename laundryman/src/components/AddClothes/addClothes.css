@@ -288,7 +288,7 @@
         font-size:2.5vh;
         font-weight:bold;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content:center;
         padding-top:0px;
         margin-bottom:1vh;
@@ -299,7 +299,6 @@
         width:13%;
         height:28%;
         margin-top:7%;
-        padding-top:4%;
         box-shadow: 0.6px 0.6px 0.6px 0.6px gray;
     }
 
@@ -311,7 +310,7 @@
         font-size:2.5vh;
         font-weight:bold;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content:center;
         padding-top:0px;
         margin-bottom:1vh;
@@ -322,7 +321,6 @@
         width:13%;
         height:28%;
         margin-top:7%;
-        padding-top:4%;
         box-shadow: 0.6px 0.6px 0.6px 0.6px gray;
     }
 
