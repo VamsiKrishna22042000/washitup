@@ -120,13 +120,18 @@
         height:60%;
         width:15%;
         margin-top:2.5%;
+        padding-top:1%;
     }
+
+    
+   
+
 
     .selected-time{
         border-style:solid;
         border-color:#6759ff;
         border-width:1px;
-        border-radius:5px;
+        border-radius:2px;
         background-color:#6759ff;
         color:#fff;
         font-family:'Courier New', Courier, monospace;
@@ -135,6 +140,7 @@
         height:60%;
         width:15%;
         margin-top:2.5%;
+        padding-top:1%;
     }
 
     .bookservice-pickup{
