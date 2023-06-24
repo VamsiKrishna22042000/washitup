@@ -172,7 +172,7 @@
 }
 
 .counter-buttons-container{
-    width:57%;
+    width:60%;
     display:flex;
     flex-direction:column;
     justify-content:space-evenly;
