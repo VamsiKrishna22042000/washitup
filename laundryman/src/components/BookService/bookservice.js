@@ -114,7 +114,7 @@ const timeArray = [
                 console.log(latitude)
                 console.log(longitude)
                 const apikey = "AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ"
-                const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=true/false&key=${apikey}`
+                const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false&key=${apikey}`
                 
                 const response = await fetch (url,)
                 const jsonData = await response.json()
