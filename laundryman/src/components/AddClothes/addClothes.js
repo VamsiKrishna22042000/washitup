@@ -233,7 +233,7 @@ const AddClothes = (props) =>{
            
             
             const receivedCount = count[parseInt(event.target.id)]
-
+            console.log(event.target.id)
         /** In case of updating the state shortcut name are reversed and which were given as id to the buttons*/
             if(receivedCount === 15){
                 const itemId = parseInt(event.target.id)
@@ -250,7 +250,8 @@ const AddClothes = (props) =>{
 
     const decrementCount = (event) =>{
         /** In case of decrement the state shortcut name are remains same and which were given as id to the buttons*/
-        const receivedCount = count[parseInt+(event.target.id)]
+        const receivedCount = count[parseInt(event.target.id)]
+        console.log(event.target.id)
         if(receivedCount === 0){
                 const itemId = parseInt(event.target.id)
                 setCount(prevCount=>({...count,[itemId]:prevCount[itemId]= 0}))
