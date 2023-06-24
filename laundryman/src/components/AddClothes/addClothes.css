@@ -295,10 +295,7 @@
         border-style:solid;
         border-width:1px;
         border-radius:50%;
-        width:13%;
-        height:28%;
         margin-top:7%;
-        padding-top:5%;
         box-shadow: 0.6px 0.6px 0.6px 0.6px gray;
     }
 
@@ -312,14 +309,11 @@
         display: flex;
         align-items:center;
         justify-content:center;
-        padding-top:5%;
         margin-bottom:1vh;
         border-color: #6759ff;
         border-style:solid;
         border-width:1px;
         border-radius:50%;
-        width:13%;
-        height:28%;
         margin-top:7%;
         box-shadow: 0.6px 0.6px 0.6px 0.6px gray;
     }
