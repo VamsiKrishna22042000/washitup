@@ -261,7 +261,7 @@
         flex-wrap:wrap;
     }
     .set-counter{
-        width:45%;
+        width:47%;
         background-color:transparent;
         border-color:#6759ff;
         border-style:solid;
@@ -412,14 +412,13 @@
     }
 
     .counter-buttons-container{
-        width:80%;
+        width:85%;
         display:flex;
         flex-direction:column;
         justify-content:space-evenly;
         align-items:center;
         flex-direction:row;
         display:inline;
-        margin-left:-3%;
         position:absolute;
         top:9%;
     }
