@@ -119,8 +119,8 @@ const timeArray = [
                 const response = await fetch (url,)
                 const jsonData = await response.json()
                 if(response.ok===true){
-                  setAddress(jsonData.error_message)
-                  console.log(jsonData)
+                  setAddress(jsonData.results[0].formatted_address)
+                  console.log(jsonData.results[0].formatted_address)
                 }else{
                   alert(jsonData.error_message)
                 }
