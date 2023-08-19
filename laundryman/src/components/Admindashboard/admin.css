@@ -252,8 +252,44 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    border-color: #fff;
+    border-color: transparent;
+    padding-left: 2%;
+    cursor: pointer;
   }
+  .order-body-para1 {
+    height: 4vh;
+    width: 10%;
+    margin: 0;
+    border-style: solid;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    border-color: transparent;
+    padding-left: 2%;
+    cursor: pointer;
+  }
+
+  .order-body-select {
+    height: 4vh;
+    width: 10%;
+    margin: 0;
+    border-style: solid;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    border-color: #fff;
+    margin-right: 5%;
+    margin-left: -5%;
+    background-color: #53545c20;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+  }
+
   .order-body-header2 {
     height: 10%;
     width: 100%;

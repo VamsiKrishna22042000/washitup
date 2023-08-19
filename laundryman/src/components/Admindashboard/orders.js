@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./admin.css";
 
 import { AiOutlinePlus } from "react-icons/ai";
@@ -8,7 +9,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -16,7 +17,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -24,7 +25,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -32,7 +33,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -40,7 +41,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -48,7 +49,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -56,7 +57,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -64,7 +65,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -72,7 +73,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -80,7 +81,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -88,7 +89,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -96,7 +97,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -104,7 +105,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -112,7 +113,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -120,7 +121,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -128,7 +129,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -136,7 +137,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -144,7 +145,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -152,7 +153,7 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
   {
@@ -160,44 +161,14 @@ const customers = [
     date: "31 Aug 2023 - 01:35 pm",
     id: "31 Aug 2023 - 01:35 pm",
     price: "₹2,220.00",
-    action: "Completed",
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: "Completed",
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: "Completed",
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: "Completed",
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: "Completed",
+    action: ["Active", "In Progress", "Completed"],
     status: "Completed",
   },
 ];
 
 const Orders = () => {
+  const [progress, setProgress] = useState("Active");
+
   return (
     <section className="order-body">
       <div className="order-summary-head">
@@ -226,8 +197,12 @@ const Orders = () => {
           <p className="order-body-para">Order Date</p>
           <p className="order-body-para">Order Id</p>
           <p className="order-body-para">Order Total</p>
-          <p className="order-body-para">Action</p>
-          <p className="order-body-para">Status</p>
+          <p style={{ backgroundColor: "white" }} className="order-body-select">
+            Action
+          </p>
+          <p style={{ backgroundColor: "white" }} className="order-body-para1">
+            Status
+          </p>
         </div>
         {customers.map((each) => (
           <div className="order-body-header2">
@@ -235,8 +210,40 @@ const Orders = () => {
             <p className="order-body-para">{each.date}</p>
             <p className="order-body-para">{each.id}</p>
             <p className="order-body-para">{each.price}</p>
-            <p className="order-body-para">{each.action}</p>
-            <p className="order-body-para">{each.status}</p>
+            <select
+              onChange={(e) => {
+                setProgress(e.target.value);
+              }}
+              className="order-body-select"
+            >
+              {each.action.map((e) => (
+                <option>{e}</option>
+              ))}
+            </select>
+            <p
+              style={
+                progress === "Active"
+                  ? {
+                      backgroundColor: "#FF000025",
+                      color: "#FF0000",
+                      borderRadius: "10px",
+                    }
+                  : progress === "In Progress"
+                  ? {
+                      color: "#6759FF",
+                      backgroundColor: "#6759FF25",
+                      borderRadius: "10px",
+                    }
+                  : progress === "Completed" && {
+                      color: "#519C66",
+                      backgroundColor: "#519C6625",
+                      borderRadius: "10px",
+                    }
+              }
+              className="order-body-para1"
+            >
+              {progress}
+            </p>
           </div>
         ))}
       </div>
