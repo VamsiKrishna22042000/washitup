@@ -191,6 +191,20 @@
     padding-right: 1%;
     border-radius: 5px;
   }
+  .assign-vendor {
+    font-size: 1.1vw;
+    border-width: 0;
+    background-color: #6759ff;
+    color: #fff;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    border-radius: 5px;
+  }
   .order-summary-view {
     height: 30%;
     width: 100%;

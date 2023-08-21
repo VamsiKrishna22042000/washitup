@@ -8,6 +8,8 @@ import { CgProfile } from "react-icons/cg";
 
 import Orders from "./orders";
 
+import Customers from "./customer";
+
 const availableSection = [
   {
     imgUrl1: "/dashboard1.png",
@@ -97,6 +99,8 @@ const AdminDashboard = () => {
           <Dashboard />
         ) : selectedSection === "Orders" ? (
           <Orders />
+        ) : selectedSection === "Customers" ? (
+          <Customers />
         ) : null}
       </div>
     </div>

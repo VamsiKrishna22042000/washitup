@@ -212,7 +212,10 @@ const AddClothes = (props) => {
       const errorMessage = document.getElementById("add-clothes-err");
       errorMessage.classList.add("add-clothes-error-msg-disable");
       const { wash } = props;
-      wash(); /** Call back funciton to navigate to the bookservice.js*/
+      const filteredItems = clothes.filter((each) => each.count > 0);
+      wash(
+        filteredItems
+      ); /** Call back funciton to navigate to the bookservice.js*/
     } else {
       const errorMessage = document.getElementById("add-clothes-err");
       errorMessage.classList.remove("add-clothes-error-msg-disable");

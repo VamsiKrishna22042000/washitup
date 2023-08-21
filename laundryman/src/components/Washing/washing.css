@@ -19,8 +19,9 @@
     align-items: center;
   }
   .washing-anime {
-    width: 69%;
-    margin-left: 20%;
+    width: 33%;
+    margin-left: 4%;
+    margin-top: 3%;
   }
 
   .washing-para {
@@ -34,7 +35,7 @@
   .washing-loader {
     position: absolute;
     height: 15%;
-    top: 79%;
+    top: 80%;
     left: 60%;
   }
 
@@ -79,7 +80,7 @@
     flex-wrap: wrap;
   }
   .washing-anime {
-    width: 50%;
+    width: 30%;
     height: 100px;
     margin-top: 20%;
   }
@@ -98,8 +99,7 @@
     position: absolute;
     height: 15%;
     top: 61%;
-    left: 81%;
-    width: 10%;
+    left: 77%;
   }
 
   .washing-note {

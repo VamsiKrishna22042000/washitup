@@ -24,12 +24,15 @@ function LaundryNav() {
 
   const [selectedTime, setSelectedTime] = useState("");
 
+  const [items, setItems] = useState([]);
+
   const bookService = () => {
     setService(changeComponents.success);
   };
 
-  const washClothes = () => {
+  const washClothes = (selectedtoWash) => {
     setService(changeComponents.bookService);
+    setItems(selectedtoWash);
   };
 
   const washing = () => {
@@ -117,7 +120,12 @@ function LaundryNav() {
       {service === changeComponents.washClothes ? (
         <AddClothes wash={washClothes} />
       ) : service === changeComponents.bookService ? (
-        <BookService book={bookService} time={time} getTime={getTime} />
+        <BookService
+          items={items}
+          book={bookService}
+          time={time}
+          getTime={getTime}
+        />
       ) : service === changeComponents.success ? (
         <Success washing={washing} />
       ) : (
