@@ -1,577 +1,1204 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./admin.css";
 
-import { AiOutlinePlus } from "react-icons/ai";
-
-const customers = [
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-  {
-    name: "Surendra Singh Chadra chatarjee Surendra Singh Chadra chatarjee",
-    date: "31 Aug 2023 - 01:35 pm",
-    id: "31 Aug 2023 - 01:35 pm",
-    price: "₹2,220.00",
-    action: ["Active", "In Progress", "Completed"],
-    status: "Completed",
-  },
-];
-
-const details = [
-  {
-    imgUrl: "/Men-shirt.png",
-    productName: "shirt",
-    category: "men",
-    price: 90,
-    quantity: 3,
-    orderTotal: 500,
-  },
-  {
-    imgUrl: "/Men-shirt.png",
-    productName: "shirt",
-    category: "men",
-    price: 90,
-    quantity: 3,
-    orderTotal: 700,
-  },
-  {
-    imgUrl: "/Men-shirt.png",
-    productName: "shirt",
-    category: "men",
-    price: 50,
-    quantity: 3,
-    orderTotal: 200,
-  },
-  {
-    imgUrl: "/Men-shirt.png",
-    productName: "shirt",
-    category: "men",
-    price: 66,
-    quantity: 3,
-    orderTotal: 900,
-  },
-  {
-    imgUrl: "/Men-shirt.png",
-    productName: "shirt",
-    category: "men",
-    price: 70,
-    quantity: 3,
-    orderTotal: 600,
-  },
-  {
-    imgUrl: "/Men-shirt.png",
-    productName: "shirt",
-    category: "men",
-    price: 80,
-    quantity: 3,
-    orderTotal: "$2500",
-  },
-  {
-    imgUrl: "/Men-shirt.png",
-    productName: "shirt",
-    category: "men",
-    price: 40,
-    quantity: 3,
-    orderTotal: "$2500",
-  },
-];
+import { TailSpin } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Orders = () => {
-  const [progress, setProgress] = useState("Active");
+  /**allorders is the state used to get all the orders of all the user's */
+  const [allorders, setAllOrders] = useState([]);
 
+  /**selected Customer state is used to get the particular order detials(items which user selected)  array of a particular user*/
   const [selectedCustomer, setSelectedCustomer] = useState("");
-  const [total, setTotal] = useState("7000");
 
-  return (
-    <section className="order-body">
-      {selectedCustomer === "" ? (
-        <div className="order-summary-head">
-          <h6 style={{ color: "#53545c" }}>Orders Summary</h6>
-          <button className="create-new-order" type="button">
-            <AiOutlinePlus />
-            Create New Order
-          </button>
+  /**items is a state used to store the items that were selected by the particular user which was obtained from the particular selected user*/
+  const [items, setItems] = useState([]);
+
+  /**count is a state to store the count of active,inprogress,completed,canceled orders */
+  const [count, setCount] = useState({
+    active: "",
+    inprogress: "",
+    completed: "",
+    cancel: "",
+  });
+
+  /**search customer is used to filter the allordes array based on the customer name which was searched in the search box */
+  const [searchedCustomer, setSearchedCustomer] = useState("");
+
+  useEffect(() => {
+    getAllOrders();
+  }, []);
+
+  /**getAllOrders is a function to get alltheorders that were booked by all users*/
+
+  const getAllOrders = async () => {
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (response.ok) {
+      /**This is an array to insert name,mobileNumber,userId of the user into the each order object which were in the array of orders */
+      let eachObjInsertedWithNumberName = [];
+
+      let activeCount = 0;
+
+      let inprogressCount = 0;
+
+      let completedCount = 0;
+
+      let cancelCount = 0;
+
+      for (let each of data) {
+        const mobileNumber = each.mobileNumber;
+        const name = each.name;
+        const userId = each._id;
+        for (let eachorder of each.orders) {
+          if (eachorder.progress === "Active") {
+            activeCount = activeCount + 1;
+          }
+
+          if (eachorder.progress === "In Progress") {
+            inprogressCount = inprogressCount + 1;
+          }
+
+          if (eachorder.progress === "Completed") {
+            completedCount = completedCount + 1;
+          }
+
+          if (eachorder.progress === "cancel") {
+            cancelCount = cancelCount + 1;
+          }
+
+          eachObjInsertedWithNumberName.push({
+            ...eachorder,
+            mobileNumber /**mobile number,name,userId were added into each order object which were not obtained out of the object from backend */,
+            name,
+            userId,
+          });
+        }
+      }
+
+      /**Sorted the array of orders based onthe latest date */
+
+      eachObjInsertedWithNumberName.sort(function (a, b) {
+        var datePartsA = a.date.split("-").map(Number); // Convert date strings to arrays of numbers
+        var datePartsB = b.date.split("-").map(Number);
+
+        // Compare the date parts (year, month, day) in descending order
+        if (datePartsA[2] < datePartsB[2]) return 1; // Compare years
+        if (datePartsA[2] > datePartsB[2]) return -1;
+        if (datePartsA[1] < datePartsB[1]) return 1; // Compare months
+        if (datePartsA[1] > datePartsB[1]) return -1;
+        if (datePartsA[0] < datePartsB[0]) return 1; // Compare days
+        if (datePartsA[0] > datePartsB[0]) return -1;
+        return 0;
+      });
+
+      setCount({
+        active: activeCount,
+        inprogress: inprogressCount,
+        completed: completedCount,
+        cancel: cancelCount,
+      });
+
+      console.log(eachObjInsertedWithNumberName);
+
+      setAllOrders(eachObjInsertedWithNumberName);
+    }
+  };
+
+  /**Function used to Filter the items of the selected user to view the users order detials*/
+  const filterCustomer = (e) => {
+    const selectedCustomerOrder = allorders.filter(
+      (each) => each._id === e.target.id
+    );
+
+    let itemsObtained = [];
+
+    for (let each of selectedCustomerOrder[0].items) {
+      itemsObtained.push({
+        count: each.itemCount,
+        id: each._id,
+        itemCategory: each.itemId.category,
+        itemName: each.itemId.name,
+        price: each.itemId.price,
+      });
+    }
+
+    setItems(itemsObtained);
+    setSelectedCustomer(selectedCustomerOrder);
+  };
+
+  /**Function used to filter all the orders based on the username enterd in the search box */
+  const filterdAllOrders = allorders.filter((each) =>
+    each.name.toLowerCase().startsWith(searchedCustomer.toLowerCase())
+  );
+
+  /**Function used to set the progress of the particular order(active,inprogress,completed,cancel) */
+  const settingProgress = async (e) => {
+    setAllOrders([]);
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
+    let userId = e.target.getAttribute("userId");
+    let orderId = e.target.id;
+    let progress = e.target.value;
+
+    const reqConfigure = {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({ userId, orderId, progress }),
+    };
+
+    const response = await fetch(url, reqConfigure);
+
+    if (response.ok) {
+      getAllOrders();
+    }
+  };
+
+  /**showAddVendor state is used to show the modalbox to assign a vendor */
+  const [showAddVendor, setshowAddVendor] = useState(false);
+
+  /**Component to show the modalbox of after clicking assign vendor in the orders section of a particular order */
+  const ModalAssginVendor = () => {
+    /**State to get all the vendors inthe modalbox component */
+    const [load, setLoad] = useState(true);
+    const [vendors, setVendors] = useState([]);
+
+    /**state used to store  the search */
+    const [searchedVendor, setSearchedVendor] = useState("");
+
+    useEffect(() => {
+      getAllVendors();
+    }, []);
+
+    const filteredVendors = vendors.filter((each) =>
+      each.name.toLowerCase().startsWith(searchedVendor.toLowerCase())
+    );
+
+    /**Function to get all the vendors */
+    const getAllVendors = async () => {
+      const url = "https://washitup.onrender.com/api/admin/getAllVendors";
+
+      const response = await fetch(url);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data.data);
+        setLoad(false);
+        setVendors(data.data);
+      }
+    };
+
+    /**Function to assign an order to particular vendor */
+    const assignVendor = async (e) => {
+      setLoad(true);
+      let userId = selectedCustomer[0].userId;
+      let orderId = selectedCustomer[0]._id;
+      let vendorId = e.target.id;
+
+      const url = "https://washitup.onrender.com/api/admin/assignNewVendor";
+
+      const reqConfigure = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ vendorId, orderId, userId }),
+      };
+
+      const response = await fetch(url, reqConfigure);
+
+      if (response.ok) {
+        toast.success("Assigned Vendor", {
+          position: "top-center",
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+        setTimeout(() => {
+          setshowAddVendor(false);
+          setSelectedCustomer("");
+          setAllOrders([]);
+          getAllOrders();
+        }, 1500);
+      }
+    };
+
+    return load ? (
+      <>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#53545c99",
+            zIndex: 2,
+          }}
+        ></div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          className="assign-vendor-modal-box"
+        >
+          <ToastContainer />
+          <TailSpin color="#6759ff" height={50} width={50} />
         </div>
-      ) : (
-        <div className="order-summary-head">
-          <h6 style={{ color: "#53545c" }}>
-            Orders Id : #98as7df87as8d97fg8a9sg
-          </h6>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              height: "100%",
-              width: "25%",
-            }}
-          >
-            <button className="assign-vendor" type="button">
-              Assign Vendor
-            </button>
-            <button
-              style={{ backgroundColor: "#CC5F5F" }}
-              className="assign-vendor"
-              type="button"
-            >
-              Cancel Order
-            </button>
+      </>
+    ) : (
+      <>
+        <ToastContainer />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#53545c99",
+            zIndex: 2,
+          }}
+        ></div>
+        {/**Modal box of the assign vendor */}
+        <div className="assign-vendor-modal-box">
+          <div className="order-summary-body">
+            {/**Button use to show the assign vendor modalbox */}
             <button
               onClick={() => {
-                setSelectedCustomer("");
+                setshowAddVendor(false);
               }}
               type="button"
               style={{
+                position: "absolute",
                 backgroundColor: "transparent",
-                marginLeft: "1%",
                 borderWidth: 0,
                 color: "#6759FF",
                 fontWeight: "bold",
                 fontSize: "1.5vw",
+                right: 20,
+                top: 10,
               }}
             >
               ✕
             </button>
-          </div>
-        </div>
-      )}
-      {selectedCustomer === "" ? (
-        <div className="order-summary-view">
-          <div className="summary-view">Vamsi</div>
-          <div className="summary-view">Vamsi</div>
-          <div className="summary-view">Vamsi</div>
-        </div>
-      ) : (
-        <div className="order-summary-view">
-          <div style={{ position: "relative" }} className="summary-view">
-            <div
-              style={{
-                height: "25%",
-                width: "12%",
-                backgroundColor: "#FFCC9169",
-                display: "flex",
-
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "10px",
-              }}
-            >
-              <img
-                style={{ height: "70%", width: "70%" }}
-                src="/profile2.png"
-                alt="Profile"
-              />
-            </div>
-            <p
-              style={{
-                position: "absolute",
-                top: "10%",
-                left: "18%",
-                color: "#8B8D97",
-              }}
-            >
-              Vamsi Krishna
-            </p>
-            <p
-              style={{
-                position: "absolute",
-                bottom: "40%",
-                left: "5%",
-                color: "#8B8D97",
-                fontSize: "0.85vw",
-              }}
-            >
-              Mobile Number
-            </p>
-            <p
-              style={{
-                position: "absolute",
-                bottom: "25%",
-                left: "5%",
-                color: "#45464E",
-                fontSize: "1.1vw",
-              }}
-            >
-              +91-7013858623
-            </p>
-          </div>
-          <div
-            style={{ position: "relative", overflow: "hidden" }}
-            className="summary-view"
-          >
-            <div
-              style={{
-                height: "25%",
-                width: "12%",
-                backgroundColor: "#FFCC9169",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "10px",
-              }}
-            >
-              <img
-                style={{ height: "70%", width: "70%" }}
-                src="/location2.png"
-                alt="Profile"
-              />
-            </div>
-            <p
-              style={{
-                position: "absolute",
-                bottom: "40%",
-                left: "5%",
-                color: "#8B8D97",
-                fontSize: "0.85vw",
-              }}
-            >
-              Address
-            </p>
-            <p
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "5%",
-                color: "#45464E",
-                fontSize: "0.9vw",
-              }}
-            >
-              H.No. 4-7-18/B, Besides Maruti Suzuki Show room New Raghavendra
-              Nagar, Nacharam, Hyderabad. Sri Venkateswara Boys Hostel
-            </p>
-          </div>
-          <div style={{ position: "relative" }} className="summary-view">
-            <div
-              style={{
-                height: "25%",
-                width: "12%",
-                backgroundColor: "#FFCC9169",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "8px",
-              }}
-            >
-              <img
-                style={{ height: "70%", width: "70%" }}
-                src="/creditcard.png"
-                alt="Profile"
-              />
-            </div>
-            <p
-              style={{
-                position: "absolute",
-                bottom: "40%",
-                left: "5%",
-                color: "#8B8D97",
-                fontSize: "0.85vw",
-              }}
-            >
-              Payment Method
-            </p>
-            <p
-              style={{
-                position: "absolute",
-                bottom: "25%",
-                left: "5%",
-                color: "#45464E",
-                fontSize: "1.1vw",
-              }}
-            >
-              Cash After Service
-            </p>
-          </div>
-        </div>
-      )}
-      {selectedCustomer === "" ? (
-        <div className="order-summary-body">
-          <div className="order-body-header">
-            <h6 style={{ margin: 0 }}>Customer Orders</h6>
-            <input
-              style={{ outline: "none", fontSize: "1vw" }}
-              type="search"
-              placeholder="Search Customer"
-            />
-          </div>
-          <div className="order-body-header1">
-            <p className="order-body-para">Customer Name</p>
-            <p className="order-body-para">Order Date</p>
-            <p className="order-body-para">Order Id</p>
-            <p className="order-body-para">Order Total</p>
-            <p
-              style={{ backgroundColor: "white" }}
-              className="order-body-select"
-            >
-              Action
-            </p>
-            <p
-              style={{ backgroundColor: "white" }}
-              className="order-body-para1"
-            >
-              Status
-            </p>
-          </div>
-          {customers.map((each) => (
-            <div className="order-body-header2">
-              <p
-                onClick={() => {
-                  setSelectedCustomer(".");
-                }}
-                className="order-body-para"
-              >
-                {each.name}
-              </p>
-              <p className="order-body-para">{each.date}</p>
-              <p className="order-body-para">{each.id}</p>
-              <p className="order-body-para">{each.price}</p>
-              <select
+            <div className="order-body-header">
+              <h6 style={{ margin: 0 }}>Vendors</h6>
+              {/**Search box used to search the vendors in the modal box*/}
+              <input
                 onChange={(e) => {
-                  setProgress(e.target.value);
+                  setSearchedVendor(e.target.value);
                 }}
-                className="order-body-select"
-              >
-                {each.action.map((e) => (
-                  <option>{e}</option>
-                ))}
-              </select>
-              <p
-                style={
-                  progress === "Active"
-                    ? {
-                        backgroundColor: "#FF000025",
-                        color: "#FF0000",
-                        borderRadius: "10px",
-                      }
-                    : progress === "In Progress"
-                    ? {
-                        color: "#6759FF",
-                        backgroundColor: "#6759FF25",
-                        borderRadius: "10px",
-                      }
-                    : progress === "Completed" && {
-                        color: "#519C66",
-                        backgroundColor: "#519C6625",
-                        borderRadius: "10px",
-                      }
-                }
-                className="order-body-para1"
-              >
-                {progress}
+                style={{ outline: "none", fontSize: "1vw" }}
+                type="search"
+                placeholder="Search Vendors"
+              />
+            </div>
+            <div className="order-body-header1">
+              <p style={{ width: "20%" }} className="order-body-para">
+                Vendor Name
+              </p>
+              <p style={{ width: "20%" }} className="order-body-para">
+                Mobile Number
+              </p>
+
+              <p style={{ width: "20%" }} className="order-body-para">
+                Address
+              </p>
+
+              <p style={{ width: "20%" }} className="order-body-para">
+                Pincode
+              </p>
+              <p style={{ width: "20%" }} className="order-body-para">
+                Assign
               </p>
             </div>
-          ))}
+            {/**Available vendor's data*/}
+            {filteredVendors.map((each) => (
+              <div key={each.id} className="order-body-header2">
+                <p
+                  id={each._id}
+                  className="order-body-para"
+                  style={{ textTransform: "capitalize", width: "20%" }}
+                >
+                  {each.name}
+                </p>
+                <p
+                  style={{ width: "20%" }}
+                  id={each.id}
+                  className="order-body-para"
+                >
+                  {each.mobileNumber}
+                </p>
+
+                <p
+                  style={{ width: "20%" }}
+                  id={each.id}
+                  className="order-body-para"
+                >
+                  {each.location}
+                </p>
+                <p
+                  style={{ width: "20%" }}
+                  id={each.id}
+                  className="order-body-para"
+                >
+                  {each.pinCode}
+                </p>
+                {/**buttons to assgin the vendor */}
+                {selectedCustomer[0].vendorId === "empty" ? (
+                  <button
+                    id={each._id}
+                    onClick={assignVendor}
+                    type="button"
+                    style={{
+                      width: "15%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      borderWidth: "0px",
+                      color: "#fff",
+                      backgroundColor: "green",
+                    }}
+                  >
+                    Assign
+                  </button>
+                ) : (
+                  selectedCustomer[0].vendorId !== each._id && (
+                    <button
+                      id={each._id}
+                      onClick={assignVendor}
+                      type="button"
+                      style={{
+                        width: "15%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "8px",
+                        borderWidth: "0px",
+                        color: "#fff",
+                        backgroundColor: "#F50000",
+                      }}
+                    >
+                      Change
+                    </button>
+                  )
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      ) : (
-        <div className="order-summary-body">
-          <div className="order-body-header">
-            <h6 style={{ margin: 0 }}>
-              Items
-              <span
+      </>
+    );
+  };
+
+  return allorders.length > 0 ? (
+    <>
+      {showAddVendor && <ModalAssginVendor />}
+      <section className="order-body">
+        {selectedCustomer === "" ? (
+          <div className="order-summary-head">
+            {/**Before selecting particular order */}
+            <h6 style={{ color: "#53545c" }}>Orders Summary</h6>
+          </div>
+        ) : (
+          <div className="order-summary-head">
+            {/**After selecting particular order */}
+            <h6 style={{ color: "#53545c" }}>
+              Orders Id : {selectedCustomer[0]._id}
+            </h6>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                height: "100%",
+                width: "25%",
+              }}
+            >
+              {/**Button use to show the assign vendor modalbox*/}
+              {selectedCustomer[0].vendorId === "empty" ? (
+                <button
+                  onClick={() => {
+                    setshowAddVendor(!showAddVendor);
+                  }}
+                  className="assign-vendor"
+                  type="button"
+                >
+                  Assign Vendor
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setshowAddVendor(!showAddVendor);
+                  }}
+                  className="assign-vendor"
+                  style={{ backgroundColor: "#F50000" }}
+                  type="button"
+                >
+                  Change Vendor
+                </button>
+              )}
+              {/**Button use to notshow details of particular order*/}
+              <button
+                onClick={() => {
+                  setSelectedCustomer("");
+                }}
+                type="button"
                 style={{
+                  backgroundColor: "transparent",
+                  marginLeft: "1%",
+                  borderWidth: 0,
                   color: "#6759FF",
                   fontWeight: "bold",
-                  marginLeft: "8%",
+                  fontSize: "1.5vw",
                 }}
               >
-                {details.length}
-              </span>
-            </h6>
-            <input
-              style={{ outline: "none", fontSize: "1vw" }}
-              type="search"
-              placeholder="Search Item"
-            />
+                ✕
+              </button>
+            </div>
           </div>
-          <div className="order-body-header1">
-            <div className="order-body-para">Image</div>
-            <p className="order-body-para">Item Type</p>
-            <p className="order-body-para">Category</p>
-            <p className="order-body-para">Unit Price</p>
-            <p className="order-body-para">Quantity</p>
-            <p className="order-body-para">Order Total</p>
-          </div>
-          {details.map((each) => (
-            <div className="order-body-header2">
-              <div className="order-body-para">
+        )}
+        {selectedCustomer === "" ? (
+          allorders.length > 0 && (
+            <div className="order-summary-view">
+              {/**Count of active inprogress completed and cancel orders, booked by the users  */}
+              <div style={{ position: "relative" }} className="summary-view">
+                <div
+                  style={{
+                    height: "25%",
+                    width: "12%",
+                    backgroundColor: "#FFCC9169",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <img
+                    style={{ height: "70%", width: "70%" }}
+                    src="/order2.png"
+                    alt="Profile"
+                  />
+                </div>
+                <p
+                  style={{
+                    position: "absolute",
+                    bottom: "40%",
+                    left: "5%",
+                    color: "#8B8D97",
+                    fontSize: "0.85vw",
+                  }}
+                >
+                  Total Orders
+                </p>
+
+                {allorders.length > 1000 && allorders.length < 100000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "25%",
+                      left: "5%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {parseInt(allorders.length) / 1000} K
+                  </p>
+                ) : allorders.length > 100000 && allorders.length < 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "25%",
+                      left: "5%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {parseInt(allorders.length) / 100000} L
+                  </p>
+                ) : allorders.length > 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "25%",
+                      left: "5%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {parseInt(allorders.length) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "25%",
+                      left: "5%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {allorders.length}
+                  </p>
+                )}
+
+                <p
+                  style={{
+                    position: "absolute",
+                    bottom: "13%",
+                    left: "5%",
+                    color: "#8B8D97",
+                    fontSize: "0.85vw",
+                  }}
+                >
+                  Active
+                </p>
+
+                {count.active > 1000 && count.active < 100000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "5%",
+                      color: "#FFA000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.active) / 1000} K
+                  </p>
+                ) : count.active > 100000 && count.active < 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "5%",
+                      color: "#FFA000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.active) / 100000} L
+                  </p>
+                ) : count.active > 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "5%",
+                      color: "#FFA000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.active) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "5%",
+                      color: "#FFA000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {count.active}
+                  </p>
+                )}
+
+                <p
+                  style={{
+                    position: "absolute",
+                    bottom: "13%",
+                    left: "25%",
+                    color: "#8B8D97",
+                    fontSize: "0.85vw",
+                  }}
+                >
+                  In Progress
+                </p>
+                {count.inprogress > 1000 && count.inprogress < 100000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "25%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.inprogress) / 1000} K
+                  </p>
+                ) : count.inprogress > 100000 && count.inprogress < 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "25%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.inprogress) / 100000} L
+                  </p>
+                ) : count.inprogress > 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "25%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.inprogress) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "25%",
+                      color: "#6759FF",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {count.inprogress}
+                  </p>
+                )}
+                <p
+                  style={{
+                    position: "absolute",
+                    bottom: "13%",
+                    left: "52%",
+                    color: "#8B8D97",
+                    fontSize: "0.85vw",
+                  }}
+                >
+                  Completed
+                </p>
+
+                {count.completed > 1000 && count.completed < 100000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "52%",
+                      color: "green",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.completed) / 1000} K
+                  </p>
+                ) : count.completed > 100000 && count.completed < 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "52%",
+                      color: "green",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.completed) / 100000} L
+                  </p>
+                ) : count.completed > 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "52%",
+                      color: "green",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.completed) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "52%",
+                      color: "green",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {count.completed}
+                  </p>
+                )}
+
+                <p
+                  style={{
+                    position: "absolute",
+                    bottom: "13%",
+                    left: "80%",
+                    color: "#8B8D97",
+                    fontSize: "0.85vw",
+                  }}
+                >
+                  Cancel
+                </p>
+
+                {count.cancel > 1000 && count.cancel < 100000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "80%",
+                      color: "#FF0000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.cancel) / 1000} K
+                  </p>
+                ) : count.cancel > 100000 && count.cancel < 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "80%",
+                      color: "#FF0000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.cancel) / 100000} L
+                  </p>
+                ) : count.cancel > 1000000 ? (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "80%",
+                      color: "#FF0000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {parseInt(count.cancel) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "0%",
+                      left: "80%",
+                      color: "#FF0000",
+                      fontSize: "1.2vw",
+                    }}
+                  >
+                    {count.cancel}
+                  </p>
+                )}
+              </div>
+            </div>
+          )
+        ) : (
+          <div className="order-summary-view">
+            {/**Details of the user*/}
+            <div style={{ position: "relative" }} className="summary-view">
+              <div
+                style={{
+                  height: "25%",
+                  width: "12%",
+                  backgroundColor: "#FFCC9169",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "10px",
+                }}
+              >
                 <img
-                  style={{ height: "100%", width: "16%" }}
-                  src={each.imgUrl}
-                  alt={each.productName}
+                  style={{ height: "70%", width: "70%" }}
+                  src="/profile2.png"
+                  alt="Profile"
                 />
               </div>
-
               <p
-                style={{ textTransform: "capitalize" }}
-                className="order-body-para"
+                style={{
+                  position: "absolute",
+                  top: "10%",
+                  left: "18%",
+                  color: "#8B8D97",
+                  textTransform: "capitalize",
+                }}
               >
-                {each.productName}
+                {selectedCustomer[0].name}
               </p>
               <p
-                style={{ textTransform: "capitalize" }}
-                className="order-body-para"
+                style={{
+                  position: "absolute",
+                  bottom: "40%",
+                  left: "5%",
+                  color: "#8B8D97",
+                  fontSize: "0.85vw",
+                }}
               >
-                {each.category}
+                Mobile Number
               </p>
-              <p className="order-body-para">₹ {each.price}</p>
-              <p className="order-body-para">{each.quantity}</p>
-              <p className="order-body-para">{each.price * each.quantity}</p>
+              <p
+                style={{
+                  position: "absolute",
+                  bottom: "25%",
+                  left: "5%",
+                  color: "#45464E",
+                  fontSize: "1.1vw",
+                }}
+              >
+                {selectedCustomer[0].mobileNumber}
+              </p>
             </div>
-          ))}
-          <div className="order-body-header">
-            <h6 style={{ marginLeft: "80%" }}>Total : ₹ {total}</h6>
+            <div
+              style={{ position: "relative", overflow: "hidden" }}
+              className="summary-view"
+            >
+              <div
+                style={{
+                  height: "25%",
+                  width: "12%",
+                  backgroundColor: "#FFCC9169",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "10px",
+                }}
+              >
+                <img
+                  style={{ height: "70%", width: "70%" }}
+                  src="/location2.png"
+                  alt="Profile"
+                />
+              </div>
+              <p
+                style={{
+                  position: "absolute",
+                  bottom: "40%",
+                  left: "5%",
+                  color: "#8B8D97",
+                  fontSize: "0.85vw",
+                }}
+              >
+                Address
+              </p>
+              <p
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "5%",
+                  color: "#45464E",
+                  fontSize: "0.9vw",
+                  width: "90%",
+                }}
+              >
+                {selectedCustomer[0].address}
+              </p>
+            </div>
+            <div style={{ position: "relative" }} className="summary-view">
+              <div
+                style={{
+                  height: "25%",
+                  width: "12%",
+                  backgroundColor: "#FFCC9169",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                }}
+              >
+                <img
+                  style={{ height: "70%", width: "70%" }}
+                  src="/creditcard.png"
+                  alt="Profile"
+                />
+              </div>
+              <p
+                style={{
+                  position: "absolute",
+                  bottom: "40%",
+                  left: "5%",
+                  color: "#8B8D97",
+                  fontSize: "0.85vw",
+                }}
+              >
+                Payment Method
+              </p>
+              <p
+                style={{
+                  position: "absolute",
+                  bottom: "25%",
+                  left: "5%",
+                  color: "#45464E",
+                  fontSize: "1.1vw",
+                }}
+              >
+                Cash After Service
+              </p>
+            </div>
           </div>
-        </div>
-      )}
-    </section>
+        )}
+        {selectedCustomer === "" ? (
+          <div className="order-summary-body">
+            <div className="order-body-header">
+              <h6 style={{ margin: 0 }}>Customer Orders</h6>
+              <input
+                onChange={(e) => {
+                  setSearchedCustomer(e.target.value);
+                }}
+                style={{ outline: "none", fontSize: "1vw" }}
+                type="search"
+                placeholder="Search Customer"
+              />
+            </div>
+            <div className="order-body-header1">
+              <p className="order-body-para">Customer Name</p>
+              <p className="order-body-para">Order Date</p>
+              <p style={{ width: "20%" }} className="order-body-para">
+                Order Id
+              </p>
+              <p className="order-body-para">Order Total</p>
+              <p
+                style={{ backgroundColor: "white" }}
+                className="order-body-select"
+              >
+                Action
+              </p>
+              <p
+                style={{ backgroundColor: "white" }}
+                className="order-body-para1"
+              >
+                Status
+              </p>
+            </div>
+            {filterdAllOrders.map((each) => (
+              <div key={each._id} className="order-body-header2">
+                {/**all orders booked by the user sorted based on the date */}
+                <p
+                  style={{ textTransform: "capitalize" }}
+                  id={each._id}
+                  onClick={filterCustomer}
+                  className="order-body-para"
+                >
+                  {each.name}
+                </p>
+                <p
+                  id={each._id}
+                  onClick={filterCustomer}
+                  className="order-body-para"
+                >
+                  {each.date} - {each.time}
+                </p>
+                <p
+                  id={each._id}
+                  onClick={filterCustomer}
+                  style={{ width: "20%" }}
+                  className="order-body-para"
+                >
+                  {each._id}
+                </p>
+
+                {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.totalAmount) / 1000} K
+                  </p>
+                ) : each.totalAmount > 100000 && each.totalAmount < 1000000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.totalAmount) / 100000} L
+                  </p>
+                ) : each.totalAmount > 1000000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.totalAmount) / 1000000} M
+                  </p>
+                ) : (
+                  <p className="order-body-para">₹ {each.totalAmount}</p>
+                )}
+
+                <select
+                  userId={each.userId}
+                  id={each._id}
+                  onChange={settingProgress}
+                  className="order-body-select"
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {each.action.map((e) => (
+                    <option
+                      style={{ textTransform: "capitalize" }}
+                      selected={each.progress === e ? true : false}
+                    >
+                      {e}
+                    </option>
+                  ))}
+                </select>
+                <p
+                  style={
+                    each.progress === "Active"
+                      ? {
+                          backgroundColor: "#FFA00025",
+                          color: "#FFA000",
+                          borderRadius: "10px",
+                          textTransform: "capitalize",
+                        }
+                      : each.progress === "In Progress"
+                      ? {
+                          color: "#6759FF",
+                          backgroundColor: "#6759FF25",
+                          borderRadius: "10px",
+                          textTransform: "capitalize",
+                        }
+                      : each.progress === "Completed"
+                      ? {
+                          color: "#519C66",
+                          backgroundColor: "#519C6625",
+                          borderRadius: "10px",
+                          textTransform: "capitalize",
+                        }
+                      : each.progress === "cancel" && {
+                          color: "#FF0000",
+                          backgroundColor: "#FF000025",
+                          borderRadius: "10px",
+                          textTransform: "capitalize",
+                        }
+                  }
+                  className="order-body-para1"
+                >
+                  {each.progress}
+                </p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="order-summary-body">
+            <div className="order-body-header">
+              <h6 style={{ margin: 0 }}>
+                Items
+                <span
+                  style={{
+                    color: "#6759FF",
+                    fontWeight: "bold",
+                    marginLeft: "8%",
+                  }}
+                >
+                  {items.length}
+                </span>
+              </h6>
+            </div>
+            <div className="order-body-header1">
+              <div className="order-body-para">Image</div>
+              <p className="order-body-para">Item Type</p>
+              <p className="order-body-para">Category</p>
+              <p className="order-body-para">Unit Price</p>
+              <p className="order-body-para">Quantity</p>
+              <p className="order-body-para">Order Total</p>
+            </div>
+            {items.map((each) => (
+              <div key={each.id} className="order-body-header2">
+                <div className="order-body-para">
+                  <img
+                    style={{ height: "100%", width: "16%" }}
+                    src="/Men-shirt.png"
+                    alt={each.productName}
+                  />
+                </div>
+
+                <p
+                  style={{ textTransform: "capitalize" }}
+                  className="order-body-para"
+                >
+                  {each.itemName}
+                </p>
+                <p
+                  style={{ textTransform: "capitalize" }}
+                  className="order-body-para"
+                >
+                  {each.itemCategory}
+                </p>
+                {each.price > 1000 && each.price < 100000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.price) / 1000} K
+                  </p>
+                ) : each.price > 100000 && each.price < 1000000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.price) / 100000} L
+                  </p>
+                ) : each.price > 1000000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.price) / 1000000} M
+                  </p>
+                ) : (
+                  <p className="order-body-para">₹ {each.price}</p>
+                )}
+
+                <p className="order-body-para">{each.count}</p>
+                {each.price * each.count > 1000 &&
+                each.price * each.count < 100000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.price * each.count) / 1000} K
+                  </p>
+                ) : each.price * each.count > 100000 &&
+                  each.price * each.count < 1000000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.price * each.count) / 100000} L
+                  </p>
+                ) : each.price * each.count > 1000000 ? (
+                  <p className="order-body-para">
+                    ₹ {parseInt(each.price * each.count) / 1000000} M
+                  </p>
+                ) : (
+                  <p className="order-body-para">₹ {each.price * each.count}</p>
+                )}
+              </div>
+            ))}
+            <div className="order-body-header">
+              {selectedCustomer[0].totalAmount > 1000 &&
+              selectedCustomer[0].totalAmount < 100000 ? (
+                <h6 style={{ marginLeft: "80%" }}>
+                  Total : ₹ {parseInt(selectedCustomer[0].totalAmount) / 1000} K
+                </h6>
+              ) : selectedCustomer[0].totalAmount > 100000 &&
+                selectedCustomer[0].totalAmount < 1000000 ? (
+                <h6 style={{ marginLeft: "80%" }}>
+                  Total : ₹ {parseInt(selectedCustomer[0].totalAmount) / 100000}{" "}
+                  L
+                </h6>
+              ) : selectedCustomer[0].totalAmount > 1000000 ? (
+                <h6 style={{ marginLeft: "80%" }}>
+                  Total : ₹{" "}
+                  {parseInt(selectedCustomer[0].totalAmount) / 1000000} M
+                </h6>
+              ) : (
+                <h6 style={{ marginLeft: "80%" }}>
+                  Total : ₹ {selectedCustomer[0].totalAmount}
+                </h6>
+              )}
+            </div>
+          </div>
+        )}
+      </section>
+    </>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      className="order-body"
+    >
+      <TailSpin color="#6759ff" height={50} width={50} />
+    </div>
   );
 };
 export default Orders;

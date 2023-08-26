@@ -9,9 +9,11 @@ import AddClothes from "../AddClothes/addClothes";
 import Success from "../Success/success";
 
 import Washing from "../Washing/washing";
+import AddCoupon from "../AddCoupon/addCoupon";
 
 const changeComponents = {
   success: "SUCCESS",
+  addCoupon: "COUPON",
   bookService: "BOOK_SERVICE",
   washClothes: "WASH_CLOTHES",
   washing: "WASHING",
@@ -26,8 +28,11 @@ function LaundryNav() {
 
   const [items, setItems] = useState([]);
 
-  const bookService = () => {
-    setService(changeComponents.success);
+  const [dataTobeSent, setDataTobeSent] = useState("");
+
+  const bookService = (data) => {
+    setService(changeComponents.addCoupon);
+    setDataTobeSent(data);
   };
 
   const washClothes = (selectedtoWash) => {
@@ -42,6 +47,10 @@ function LaundryNav() {
   const getTime = (e) => {
     setTime(e.id);
     setSelectedTime(e.time);
+  };
+
+  const setSuccess = () => {
+    setService(changeComponents.success);
   };
 
   const navcontentshamberger = () => {
@@ -95,7 +104,7 @@ function LaundryNav() {
         <img className="cyancon" src="./cyan.png" alt="cyancon" />
         <p className="head">
           Get The Best <br /> Laundry Service <br /> At Your
-          <span className="sp">Door Step</span>
+          <span className="sp"> Door Step</span>
         </p>
         <p className="para1123">
           Book laundry service with our app in just few & easy steps
@@ -125,6 +134,12 @@ function LaundryNav() {
           book={bookService}
           time={time}
           getTime={getTime}
+        />
+      ) : service === changeComponents.addCoupon ? (
+        <AddCoupon
+          items={items}
+          dataTobeSent={dataTobeSent}
+          success={setSuccess}
         />
       ) : service === changeComponents.success ? (
         <Success washing={washing} />

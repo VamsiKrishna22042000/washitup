@@ -10,6 +10,10 @@ import Orders from "./orders";
 
 import Customers from "./customer";
 
+import Services from "./services";
+
+import Vendors from "./vendor";
+
 const availableSection = [
   {
     imgUrl1: "/dashboard1.png",
@@ -99,9 +103,13 @@ const AdminDashboard = () => {
           <Dashboard />
         ) : selectedSection === "Orders" ? (
           <Orders />
+        ) : selectedSection === "Services" ? (
+          <Services />
         ) : selectedSection === "Customers" ? (
           <Customers />
-        ) : null}
+        ) : (
+          <Vendors />
+        )}
       </div>
     </div>
   );

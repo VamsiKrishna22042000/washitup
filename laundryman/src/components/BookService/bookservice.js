@@ -205,28 +205,14 @@ const BookService = (props) => {
           mobileNumber: input.number,
           location: geoLoc,
           address: userAddress,
-          date: `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`,
+          date: `${date.getDate()}-0${
+            date.getMonth() + 1
+          }-${date.getFullYear()}`,
           time: input.timeSelected,
           items: itemsTobeSent,
         };
 
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/user/bookOrder`;
-
-        const options = {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "Application/json",
-          },
-
-          body: JSON.stringify(dataTobeSent),
-        };
-
-        const response = await fetch(url, options);
-
-        if (response.ok) {
-          book();
-        }
+        book(dataTobeSent);
       }
     }
   };
