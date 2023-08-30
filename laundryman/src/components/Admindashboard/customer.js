@@ -185,7 +185,44 @@ const Customers = () => {
     const data = await response.json();
 
     if (response.ok) {
-      setAllCustomers(data);
+      const userArray = [];
+      const userIdArray = [];
+
+      for (let each of data) {
+        if (userArray.length > 0) {
+          if (!userIdArray.includes(each.userId._id)) {
+            userIdArray.push(each.userId._id);
+            userArray.push({
+              name: each.userId.name,
+              mobileNumber: each.userId.mobileNumber,
+              address: each.address,
+              location: each.location,
+              _id: each.userId._id,
+              orders: [],
+            });
+          }
+        } else {
+          userIdArray.push(each.userId._id);
+          userArray.push({
+            name: each.userId.name,
+            mobileNumber: each.userId.mobileNumber,
+            address: each.address,
+            location: each.location,
+            _id: each.userId._id,
+            orders: [],
+          });
+        }
+      }
+
+      for (let e2 of userArray) {
+        for (let each2 of data) {
+          if (e2._id === each2.userId._id) {
+            e2.orders.push(each2);
+          }
+        }
+      }
+
+      setAllCustomers(userArray);
     }
   };
 
@@ -199,6 +236,8 @@ const Customers = () => {
       (each) => (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
     );
 
+    console.log(totalOrdersAmount);
+
     if (
       parseInt(totalOrdersAmount) > 1000 &&
       parseInt(totalOrdersAmount) < 100000
@@ -211,6 +250,8 @@ const Customers = () => {
       setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
     } else if (parseInt(totalOrdersAmount) > 1000000) {
       setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
+    } else {
+      setTotal(totalOrdersAmount);
     }
 
     setUserId(selectedCustomerOrder[0]._id);
@@ -225,8 +266,45 @@ const Customers = () => {
     const data = await response.json();
 
     if (response.ok) {
+      const userArray = [];
+      const userIdArray = [];
+
+      for (let each of data) {
+        if (userArray.length > 0) {
+          if (!userIdArray.includes(each.userId._id)) {
+            userIdArray.push(each.userId._id);
+            userArray.push({
+              name: each.userId.name,
+              mobileNumber: each.userId.mobileNumber,
+              address: each.address,
+              location: each.location,
+              _id: each.userId._id,
+              orders: [],
+            });
+          }
+        } else {
+          userIdArray.push(each.userId._id);
+          userArray.push({
+            name: each.userId.name,
+            mobileNumber: each.userId.mobileNumber,
+            address: each.address,
+            location: each.location,
+            _id: each.userId._id,
+            orders: [],
+          });
+        }
+      }
+
+      for (let e2 of userArray) {
+        for (let each2 of data) {
+          if (e2._id === each2.userId._id) {
+            e2.orders.push(each2);
+          }
+        }
+      }
+
       let totalOrdersAmount = 0;
-      const selectedCustomerOrder = data.filter((each) => each._id === id);
+      const selectedCustomerOrder = userArray.filter((each) => each._id === id);
       setSelectedCustomer(selectedCustomerOrder);
       selectedCustomerOrder[0].orders.map(
         (each) => (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
@@ -244,6 +322,8 @@ const Customers = () => {
         setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
       } else if (parseInt(totalOrdersAmount) > 1000000) {
         setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
+      } else {
+        setTotal(totalOrdersAmount);
       }
       console.log(selectedCustomerOrder);
       setSelectedOrders(selectedCustomerOrder[0].orders);
@@ -335,7 +415,7 @@ const Customers = () => {
                     fontSize: "0.85vw",
                   }}
                 >
-                  Total Customers
+                  Total Customers With Atleast One Order
                 </p>
                 <p
                   style={{
@@ -351,10 +431,9 @@ const Customers = () => {
                 </p>
               </div>
             </div>
-
             <div className="order-summary-body">
               <div className="order-body-header">
-                <h6 style={{ margin: 0 }}>Customers</h6>
+                <h6 style={{ margin: 0 }}>Customers With Atleast One Order</h6>
                 <input
                   onChange={(e) => {
                     setSearchedCustomer(e.target.value);
@@ -371,62 +450,107 @@ const Customers = () => {
                 <p className="order-body-para">Address</p>
                 <p className="order-body-para">Location</p>
               </div>
-              {filterdAllCustomer.map(
-                (each) =>
-                  each.orders.length > 0 && (
-                    <div key={each._id} className="order-body-header2">
-                      <div
+              {filterdAllCustomer.map((each) =>
+                each.orders.length > 0 ? (
+                  <div key={each._id} className="order-body-header2">
+                    <div
+                      id={each._id}
+                      onClick={filterCustomer}
+                      style={{ position: "relative" }}
+                      className="order-body-para"
+                    >
+                      <img
                         id={each._id}
                         onClick={filterCustomer}
-                        style={{ position: "relative" }}
-                        className="order-body-para"
-                      >
-                        <img
-                          id={each._id}
-                          onClick={filterCustomer}
-                          style={{
-                            height: "100%",
-                            width: "15%",
-                            position: "absolute",
-                            left: "35%",
-                          }}
-                          src="/profile2.png"
-                          alt={each.name}
-                        />
-                      </div>
-                      <p
-                        id={each._id}
-                        onClick={filterCustomer}
-                        className="order-body-para"
-                        style={{ textTransform: "capitalize" }}
-                      >
-                        {each.name}
-                      </p>
-                      <p
-                        id={each._id}
-                        onClick={filterCustomer}
-                        className="order-body-para"
-                      >
-                        {each.mobileNumber}
-                      </p>
-                      <p
-                        id={each._id}
-                        onClick={filterCustomer}
-                        className="order-body-para"
-                        style={{ textTransform: "capitalize" }}
-                      >
-                        {each.orders[each.orders.length - 1].address}
-                      </p>
-                      <p
-                        id={each._id}
-                        onClick={filterCustomer}
-                        className="order-body-para"
-                        style={{ textTransform: "capitalize" }}
-                      >
-                        {each.orders[each.orders.length - 1].location}
-                      </p>
+                        style={{
+                          height: "100%",
+                          width: "15%",
+                          position: "absolute",
+                          left: "35%",
+                        }}
+                        src="/profile2.png"
+                        alt={each.name}
+                      />
                     </div>
-                  )
+                    <p
+                      id={each._id}
+                      onClick={filterCustomer}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize" }}
+                    >
+                      {each.name}
+                    </p>
+                    <p
+                      id={each._id}
+                      onClick={filterCustomer}
+                      className="order-body-para"
+                    >
+                      {each.mobileNumber}
+                    </p>
+                    <p
+                      id={each._id}
+                      onClick={filterCustomer}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize" }}
+                    >
+                      {each.orders[each.orders.length - 1].address}
+                    </p>
+                    <p
+                      id={each._id}
+                      onClick={filterCustomer}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize" }}
+                    >
+                      {each.orders[each.orders.length - 1].location}
+                    </p>
+                  </div>
+                ) : (
+                  <div
+                    style={{ backgroundColor: "#80808030" }}
+                    key={each._id}
+                    className="order-body-header2"
+                  >
+                    <div
+                      id={each._id}
+                      style={{ position: "relative" }}
+                      className="order-body-para"
+                    >
+                      <img
+                        id={each._id}
+                        style={{
+                          height: "100%",
+                          width: "15%",
+                          position: "absolute",
+                          left: "35%",
+                        }}
+                        src="/profile2.png"
+                        alt={each.name}
+                      />
+                    </div>
+                    <p
+                      id={each._id}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize" }}
+                    >
+                      {each.name}
+                    </p>
+                    <p id={each._id} className="order-body-para">
+                      {each.mobileNumber}
+                    </p>
+                    <p
+                      id={each._id}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize" }}
+                    ></p>
+                    <p
+                      id={each._id}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize" }}
+                    >
+                      No Orders Yet
+                    </p>
+                  </div>
+                )
               )}
             </div>
           </section>
@@ -647,6 +771,7 @@ const Customers = () => {
               <p style={{ width: "20%" }} className="order-body-para">
                 Order Id
               </p>
+              <p className="order-body-para">Type Of Washing</p>
               <p className="order-body-para">Order Total</p>
               <p
                 style={{ backgroundColor: "white" }}
@@ -674,6 +799,12 @@ const Customers = () => {
                 </p>
                 <p style={{ width: "20%" }} className="order-body-para">
                   {each._id}
+                </p>
+                <p
+                  style={{ textTransform: "capitalize" }}
+                  className="order-body-para"
+                >
+                  {each.service}
                 </p>
                 {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
                   <p className="order-body-para">

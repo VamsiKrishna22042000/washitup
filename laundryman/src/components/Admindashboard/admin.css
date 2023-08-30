@@ -410,4 +410,21 @@
     font-size: 1vw;
     color: #53545c;
   }
+
+  .add-service-modal-box {
+    position: absolute;
+    z-index: 3;
+    background-color: #fff;
+    height: auto;
+    width: 25vw;
+    top: 12%;
+    left: 38%;
+    border-radius: 15px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1vw;
+    color: #53545c;
+  }
 }

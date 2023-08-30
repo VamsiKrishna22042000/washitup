@@ -1,0 +1,144 @@
+/* TestimonialSlider.css */
+
+.testimonial {
+  text-align: center;
+  padding: 20px;
+  position: relative; /* Needed for customer images */
+}
+
+.testimonial p {
+  font-size: 16px;
+}
+
+.testimonial-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.customer-image {
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  border-radius: 5px; /* Rounded customer images */
+  object-fit: cover; /* Ensure images maintain aspect ratio */
+}
+
+.slick-dots {
+  margin: -1%;
+}
+
+/* Apply styles to individual dots */
+
+/* Media query for screens with a minimum width of 992px */
+@media screen and (min-width: 992px) {
+  .testimonial-slider {
+    height: auto;
+    width: 100%;
+    border-style: solid;
+    margin-bottom: -18%;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .testimonial-head {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 3%;
+    margin-bottom: 2%;
+    font-size: 2.5vw;
+    color: #6759ff;
+  }
+  .testimonial {
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    flex-direction: column;
+  }
+  .testimonial p {
+    margin-top: 5%;
+    font-size: 1vw;
+  }
+
+  .customer-image {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    border-radius: 5px; /* Rounded customer images */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+    align-self: center;
+    margin-left: 38%;
+  }
+}
+
+/* Media query for screens with a maximum width of 660px */
+@media screen and (max-width: 660px) {
+  .testimonial-slider {
+    height: auto;
+    width: 100%;
+    border-style: solid;
+    margin-bottom: -18%;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .testimonial-head {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 3%;
+    margin-bottom: 2%;
+    font-size: 4vw;
+    color: #6759ff;
+  }
+  .testimonial {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .testimonial p {
+    margin-top: 10%;
+    font-size: 3vw;
+    width: 95%;
+    padding-left: 5%;
+  }
+  .customer-image {
+    width: 85px; /* Adjust the size as needed */
+    height: 85px; /* Adjust the size as needed */
+    border-radius: 5px; /* Rounded customer images */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+    align-self: center;
+    margin-left: 38%;
+  }
+}
+
+/* Custom arrows for the slider */
+.custom-arrow {
+  width: 30px;
+  height: 30px;
+  background-color: #33333370;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  border-radius: 50%;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+  padding-bottom: 0.23%;
+}
+
+.custom-arrow:hover {
+  background-color: #555;
+}
+
+.prev {
+  left: 5px;
+}
+
+.next {
+  right: 5px;
+}

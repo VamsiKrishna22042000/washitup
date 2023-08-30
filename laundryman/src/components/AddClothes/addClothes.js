@@ -8,178 +8,6 @@ import { useEffect, useState } from "react";
 
 import { TailSpin } from "react-loader-spinner";
 
-const clothesStore = [
-  {
-    id: 1,
-    category: "Men",
-    name: "Shirt",
-    imgUrl: "Men-shirt",
-    price: 10,
-  },
-  {
-    id: 2,
-    category: "Men",
-    name: "T-Shirt",
-    imgUrl: "Men-tshirt",
-    price: 10,
-  },
-  {
-    id: 3,
-    category: "Men",
-    name: "Trousers",
-    imgUrl: "Men-trousers",
-    price: 10,
-  },
-  {
-    id: 4,
-    category: "Men",
-    name: "Shorts",
-    imgUrl: "Men-shorts",
-    price: 10,
-  },
-  {
-    id: 5,
-    category: "Men",
-    name: "Jeans",
-    imgUrl: "Men-jeans",
-    price: 10,
-  },
-  {
-    id: 6,
-    category: "Men",
-    name: "Breifs",
-    imgUrl: "Men-breifs",
-    price: 10,
-  },
-
-  {
-    id: 7,
-    category: "Women",
-    name: "Shirt",
-    imgUrl: "Women-shirt",
-    price: 10,
-  },
-  {
-    id: 8,
-    category: "Women",
-    name: "T-shirt",
-    imgUrl: "Women-tshirt",
-    price: 10,
-  },
-  {
-    id: 9,
-    category: "Women",
-    name: "Shorts",
-    imgUrl: "Women-shorts",
-    price: 10,
-  },
-  {
-    id: 10,
-    category: "Women",
-    name: "Leggins",
-    imgUrl: "Women-leggins",
-    price: 10,
-  },
-  {
-    id: 11,
-    category: "Women",
-    name: "Jeans",
-    imgUrl: "Women-jeans",
-    price: 10,
-  },
-  {
-    id: 12,
-    category: "Women",
-    name: "Jumpsuit",
-    imgUrl: "Women-jumpsuit",
-    price: 10,
-  },
-  {
-    id: 13,
-    category: "Kids",
-    name: "Combo",
-    imgUrl: "kids-tshirtShort",
-    price: 10,
-  },
-  {
-    id: 14,
-    category: "Kids",
-    name: "Frock",
-    imgUrl: "kids-frock",
-    price: 10,
-  },
-  {
-    id: 15,
-    category: "Kids",
-    name: "Jumpsuit",
-    imgUrl: "kids-jumpsuit",
-    price: 10,
-  },
-  {
-    id: 16,
-    category: "Kids",
-    name: "Boy's Dress",
-    imgUrl: "baby-boy-dress",
-    price: 10,
-  },
-  {
-    id: 17,
-    category: "Kids",
-    name: "Girl's Dress",
-    imgUrl: "baby-girl-dress",
-    price: 10,
-  },
-  {
-    id: 18,
-    category: "Kids",
-    name: "Hoodie",
-    imgUrl: "baby-hoodie",
-    price: 10,
-  },
-  {
-    id: 19,
-    category: "Household",
-    name: "Arpon",
-    imgUrl: "household-apron",
-    price: 10,
-  },
-  {
-    id: 20,
-    category: "Household",
-    name: "Towel",
-    imgUrl: "household-towel",
-    price: 10,
-  },
-  {
-    id: 21,
-    category: "Household",
-    name: "Blankets",
-    imgUrl: "household-blankets",
-    price: 10,
-  },
-  {
-    id: 22,
-    category: "Household",
-    name: "Pillow covers",
-    imgUrl: "household-pillowcovers",
-    price: 10,
-  },
-  {
-    id: 23,
-    category: "Household",
-    name: "Carpet",
-    imgUrl: "household-carpet",
-    price: 10,
-  },
-  {
-    id: 24,
-    category: "Household",
-    name: "Bed cover",
-    imgUrl: "household-bedcover",
-    price: 10,
-  },
-];
-
 const AddClothes = (props) => {
   const [clothes, setClothesStore] = useState([]);
 
@@ -199,7 +27,6 @@ const AddClothes = (props) => {
       const obtainedData = data.data.map((each) => ({
         ...each,
         count: 0,
-        imgUrl: "/Men-shirt.png",
       }));
 
       setClothesStore(obtainedData);
@@ -329,11 +156,7 @@ const AddClothes = (props) => {
         {/** Displaying the filterd Items*/}
         {filterStore.map((each) => (
           <div className="set-counter">
-            <img
-              src={each.imgUrl}
-              className="set-counter-icon"
-              alt={each._id}
-            />
+            <img src={each.image} className="set-counter-icon" alt={each._id} />
             <button
               price={each.price}
               id={each._id}

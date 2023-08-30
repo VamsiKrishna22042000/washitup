@@ -11,13 +11,7 @@ const Washing = (props) => {
           timing Relax !
         </p>
       </div>
-      <img
-        className="washing-anime"
-        src="./washing-machine.gif"
-        alt="Washing"
-      />
-      <p className="washing-para">Washing</p>
-      <img className="washing-loader" src="./loading-dots.gif" alt="loading" />
+      <img className="washing-anime" src="./deliveryboy.gif" alt="Washing" />
     </div>
   );
 };

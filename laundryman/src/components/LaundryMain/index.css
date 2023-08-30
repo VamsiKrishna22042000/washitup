@@ -65,6 +65,7 @@
     align-items: center;
     height: 45vh;
     width: 100%;
+    cursor: pointer;
   }
 
   .boxshow {
@@ -799,6 +800,7 @@
   }
   .span2 {
     color: #6759ff;
+    margin-left: 5%;
   }
   .tagline {
     font-family: Arial, Helvetica, sans-serif;
@@ -1497,11 +1499,11 @@
     justify-content: space-around;
     position: absolute;
     background-color: #6759ff;
-    height: 14vh;
+    height: 12vh;
     border-radius: 10px;
-    width: 37vw;
-    margin-top: 33vh;
-    margin-left: 60vw;
+    width: 42vw;
+    margin-top: 26vh;
+    margin-left: 75vw;
     z-index: 5;
   }
   .uifry {
@@ -1520,7 +1522,7 @@
   .number {
     top: 7vh;
     width: 2vw;
-    margin-right: 29vw;
+    margin-right: 36vw;
     font-size: 4vw;
     color: #ffffff;
     position: absolute;
@@ -1528,7 +1530,7 @@
     align-self: flex-end;
   }
   .number1 {
-    margin-right: 5vw;
+    margin-right: 2vw;
     margin-bottom: 0.5vh;
     font-size: 4vw;
     color: #ffffff;

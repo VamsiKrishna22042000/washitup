@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddCoupon = (props) => {
-  const { items, dataTobeSent, success } = props;
+  const { typeOfWashing, items, dataTobeSent, success } = props;
 
   const [total, setTotal] = useState("");
 
@@ -26,7 +26,11 @@ const AddCoupon = (props) => {
         "Content-Type": "Application/json",
       },
 
-      body: JSON.stringify({ ...dataTobeSent, totalAmount }),
+      body: JSON.stringify({
+        ...dataTobeSent,
+        totalAmount,
+        service: typeOfWashing,
+      }),
     };
 
     const response = await fetch(url, options);

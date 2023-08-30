@@ -10,10 +10,12 @@ import Success from "../Success/success";
 
 import Washing from "../Washing/washing";
 import AddCoupon from "../AddCoupon/addCoupon";
+import TypeOfWashing from "../TypeOfWashing/typeOfWashing";
 
 const changeComponents = {
   success: "SUCCESS",
   addCoupon: "COUPON",
+  typeOfWash: "TYPEOFWASHING ",
   bookService: "BOOK_SERVICE",
   washClothes: "WASH_CLOTHES",
   washing: "WASHING",
@@ -23,6 +25,8 @@ function LaundryNav() {
   const [service, setService] = useState(changeComponents.washClothes);
 
   const [time, setTime] = useState(0);
+
+  const [typeOfWashing, setTypeofWashing] = useState("");
 
   const [selectedTime, setSelectedTime] = useState("");
 
@@ -36,8 +40,14 @@ function LaundryNav() {
   };
 
   const washClothes = (selectedtoWash) => {
-    setService(changeComponents.bookService);
+    setService(changeComponents.typeOfWash);
     setItems(selectedtoWash);
+  };
+
+  const callBackForTypeOfWashing = (type) => {
+    console.log(type);
+    setService(changeComponents.bookService);
+    setTypeofWashing(type);
   };
 
   const washing = () => {
@@ -69,7 +79,11 @@ function LaundryNav() {
             src="./washituplogo.png"
             alt="Main Logo"
           />
-          <div id="contents" className="navbar-nav donotshow">
+          <div
+            style={{ cursor: "pointer" }}
+            id="contents"
+            className="navbar-nav donotshow"
+          >
             <div href="#home" className="home">
               Home
             </div>
@@ -128,6 +142,8 @@ function LaundryNav() {
       </div>
       {service === changeComponents.washClothes ? (
         <AddClothes wash={washClothes} />
+      ) : service === changeComponents.typeOfWash ? (
+        <TypeOfWashing type={callBackForTypeOfWashing} />
       ) : service === changeComponents.bookService ? (
         <BookService
           items={items}
@@ -140,6 +156,7 @@ function LaundryNav() {
           items={items}
           dataTobeSent={dataTobeSent}
           success={setSuccess}
+          typeOfWashing={typeOfWashing}
         />
       ) : service === changeComponents.success ? (
         <Success washing={washing} />
@@ -147,6 +164,10 @@ function LaundryNav() {
         <Washing selectedTime={selectedTime} />
       )}
       <img className="impink" src="./pinkcon.png" alt="pinkcon" />
+      <div
+        style={{ position: "absolute" }}
+        class="elfsight-app-7c53dc20-f0e1-4689-a2cd-9ffc37dc68ff"
+      ></div>
     </div>
   );
 }
