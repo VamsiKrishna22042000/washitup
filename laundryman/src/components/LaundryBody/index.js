@@ -35,7 +35,7 @@ const fearturesOfback2 = [
     imageUrl: "price.png",
     featureName: "Competitive Pricing",
     feature:
-      "Our transparent, budget-friendly rates for high-quality laundry services make premium care accessible to all, allowing you to enjoy both savings and top-notch cleanliness.",
+      "Our transparent, budget-friendly rates for high-quality laundry services make premium care accessible to all, allowing you to enjoy top-notch cleanliness.",
   },
 
   {
@@ -138,7 +138,8 @@ class LaundryBody extends Component {
     return (
       <div className="background-2">
         <h1 className="back2-head">
-          Why To Choose <span className="span2"> WashIt Up </span>?
+          Why To Choose
+          <span className="span2">{"  "} WashIt Up </span>?
         </h1>
         <p className="tagline"></p>
 

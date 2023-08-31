@@ -7,6 +7,8 @@
   .women1 {
     height: 100%;
     margin-top: 8%;
+    margin-left: 7%;
+    margin-right: 5%;
   }
   .women2 {
     height: 100%;
@@ -151,6 +153,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1vw;
     text-align: start;
+    padding-bottom: 3%;
   }
 
   .p1 {
@@ -580,16 +583,16 @@
     text-align: left;
   }
   .b3butt {
-    border-radius: 5px;
-    border-color: #c9c4ff;
+    border-width: 0px;
     font-size: 1vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    height: 7vh;
+    height: 6.5vh;
     width: 10vw;
     margin-right: 1.5vw;
+    padding: 0;
   }
   .b33 {
     display: flex;
@@ -626,12 +629,21 @@
     font-weight: 1000;
   }
   .buttons {
-    width: 40%;
+    width: 20%;
     display: flex;
     flex-direction: row;
     z-index: 1;
     position: absolute;
     margin-left: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vw;
+    border-color: #fff;
+    border-radius: 10px;
+    color: #6759ff;
+    background-color: #fff;
   }
   .purple {
     height: 100%;
@@ -662,7 +674,7 @@
   }
   .subshead {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2.1vw;
+    width: 70%;
     font-weight: 1000;
   }
   .subspara {
@@ -670,6 +682,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2vw;
     color: gray;
+    margin-left: 4%;
   }
   .subsnews {
     margin-top: 1vh;
@@ -708,8 +721,8 @@
     padding-top: 1vh;
     padding-bottom: 1vh;
     border-radius: 5px;
-    top: 1vh;
-    left: 16vw;
+    top: 0.5vh;
+    left: 15.5vw;
   }
   .fb {
     margin-top: 3vh;
@@ -737,6 +750,7 @@
     font-size: 1.1vw;
     color: #000;
     text-align: center;
+    background-color: #e1e1e1;
   }
 
   .navbar-nav {
@@ -763,10 +777,9 @@
 @media screen and (max-width: 576px) {
   .women1 {
     position: absolute;
-    height: 60%;
-    width: 115%;
-    margin-left: -15%;
-    margin-top: 5vh;
+    height: 55%;
+    width: 100%;
+    margin-top: 8vh;
   }
   .women2 {
     position: absolute;
@@ -908,6 +921,8 @@
     text-align: start;
     margin-top: 15vh;
     margin-left: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 8%;
   }
 
   .p1 {
@@ -1304,7 +1319,8 @@
     margin-left: 10vw;
   }
   .b3para {
-    margin-bottom: 0px;
+    margin-top: -10%;
+    margin-bottom: -3%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3.5vw;
     color: #66666d;
@@ -1315,7 +1331,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 800;
     font-size: 7vw;
-    margin-bottom: 0px;
+    margin-bottom: -3%;
     text-align: left;
   }
   .b3des {
@@ -1326,8 +1342,7 @@
     text-align: left;
   }
   .b3butt {
-    border-radius: 5px;
-    border-color: #c9c4ff;
+    border-width: 0px;
     font-size: 2.7vw;
     display: flex;
     flex-direction: row;
@@ -1335,11 +1350,11 @@
     justify-content: space-around;
     width: 25vw;
     margin-right: 1.5vw;
-    padding: 1.5%;
     font-weight: bold;
   }
   .b33 {
-    display: none;
+    display: inline-flex;
+    margin-top: 1%;
   }
 
   .background4 {
@@ -1369,7 +1384,7 @@
     width: 100%;
   }
   .buttons {
-    width: 40%;
+    width: 10%;
     display: flex;
     flex-direction: row;
     z-index: 1;
@@ -1401,15 +1416,14 @@
     margin-right: 5vw;
   }
   .subshead {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 2.1vw;
-    font-weight: 1000;
+    width: 50%;
   }
   .subspara {
     margin-top: 1vh;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2vw;
     color: gray;
+    margin-left: 3%;
   }
   .subsnews {
     margin-top: 1vh;
@@ -1604,9 +1618,19 @@
     margin-left: 0px;
   }
   .buttons {
-    width: 100%;
+    width: 35%;
     left: -46vw;
     bottom: 2.5vh;
+    font-size: 4vw;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-radius: 8px;
+    border-color: #fff;
+    color: #6759ff;
   }
 
   .butt5 {
