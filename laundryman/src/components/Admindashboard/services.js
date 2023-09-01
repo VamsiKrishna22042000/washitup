@@ -8,18 +8,23 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 
 const Services = () => {
+  /**items is state to store all the available items which are provided for the service */
   const [items, setClothesStore] = useState([]);
+
+  /**state which is used to show add new item modal box*/
   const [showAddModal, setAddModal] = useState("");
 
+  /**state which is used  */
   const [showModalEdit, setEditModal] = useState("");
 
+  /**state to store the available category of items to display as a dropdown in the edit or adding a new item*/
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getTheCategories();
   }, []);
 
-  /** Getting all the category of clothes */
+  /** function to get all the category of clothes */
   const getTheCategories = async () => {
     const url = `https://washitup.onrender.com/api/user/getAllCategories`;
 
@@ -43,7 +48,9 @@ const Services = () => {
     }
   };
 
+  /**Function to show add modal box component add an item*/
   const AddNewCategoryModal = () => {
+    /**State to store the date entered in the additem modalbox*/
     const [toAddCategory, setCategory] = useState({
       category: "Select",
       name: "",
@@ -51,6 +58,7 @@ const Services = () => {
       image: "",
     });
 
+    /**Function that update's the input date to the state*/
     const addCategory = (e) => {
       if (e.target.id === "category") {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
@@ -65,6 +73,7 @@ const Services = () => {
 
     const [load, setLoad] = useState(true);
 
+    /**Function to add the a new item */
     const updateCategory = async () => {
       if (toAddCategory.category === "Select") {
         toast.error("Please Select Category", {
@@ -231,6 +240,7 @@ const Services = () => {
     );
   };
 
+  /**Function to show edit modal box component to edit an item */
   const EditNewCategoryModal = () => {
     const filterItemFromArray = items.filter(
       (each) => each._id === showModalEdit
@@ -238,6 +248,7 @@ const Services = () => {
 
     console.log(filterItemFromArray);
 
+    /**Demo state to check weather there is any change in the data enter and the data that already exists */
     const [toAddCategory, setCategory] = useState({
       category: filterItemFromArray[0].category,
       name: filterItemFromArray[0].name,
@@ -245,6 +256,7 @@ const Services = () => {
       image: filterItemFromArray[0].image,
     });
 
+    /**Main state to store the edited Data*/
     const [toEdit, setEditCategory] = useState({
       category: filterItemFromArray[0].category,
       name: filterItemFromArray[0].name,
@@ -254,6 +266,7 @@ const Services = () => {
 
     const [load, setLoad] = useState(true);
 
+    /**Function to update the date to toEdit state */
     const addCategory = (e) => {
       if (e.target.id === "category") {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
@@ -266,6 +279,7 @@ const Services = () => {
       }
     };
 
+    /**Function make an api call to edit the existing data*/
     const updateCategory = async () => {
       if (
         toAddCategory.category !== toEdit.category ||

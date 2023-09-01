@@ -2,6 +2,7 @@ import "../LaundryMain/index.css";
 
 import { Component } from "react";
 
+/**Second component why to choose washitup feature box*/
 class FeatureBox extends Component {
   render() {
     const { each } = this.props;

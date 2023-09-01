@@ -1,5 +1,6 @@
 import "../LaundryMain/index.css";
 
+/**Component that show's screen 4 to download the mobile app in the home page of the user */
 const Alliphones = () => {
   return (
     <div className="alliphones">

@@ -6,6 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { BsArrowRight } from "react-icons/bs";
 
+{
+  /**Second componet in the main box to select type of wash that a user want */
+}
+
 const TypeOfWashing = (props) => {
   const { type } = props;
 

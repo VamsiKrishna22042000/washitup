@@ -1,25 +1,28 @@
+import "./success.css";
 
-import './success.css'
+import { useEffect } from "react";
 
-import { useEffect } from 'react'
-
-
-
-const Success = (props) =>{
-    
-
-    useEffect(()=>{
-        setTimeout(()=>{
-            const{washing}=props
-            washing()
-        },2200)
-    },[])
-
-
-    return(
-    <div className='success-total-con'>
-     <img className='success-anime' src="./successful-animation.gif" alt="Successful"/>
-     <p className='success-para'>Booked</p>
-    </div>)
+{
+  /**Component that show's booked animation and automatically redirects to washing that show's delivery boy animation */
 }
-export default Success
+
+const Success = (props) => {
+  useEffect(() => {
+    setTimeout(() => {
+      const { washing } = props;
+      washing();
+    }, 2200);
+  }, []);
+
+  return (
+    <div className="success-total-con">
+      <img
+        className="success-anime"
+        src="./successful-animation.gif"
+        alt="Successful"
+      />
+      <p className="success-para">Booked</p>
+    </div>
+  );
+};
+export default Success;

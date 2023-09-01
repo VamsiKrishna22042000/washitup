@@ -10,6 +10,7 @@ import Alliphones from "./alliphones";
 
 import Lastsetion from "./lastsection";
 
+/**Varible stores data to pass it to second component to why to choose washitup */
 const fearturesOfback2 = [
   {
     id: "fe1",
@@ -47,6 +48,8 @@ const fearturesOfback2 = [
       "We take pride in eco-conscious practices, minimizing our environmental impact while maintaining your clothes' freshness, quality, and sustainability.",
   },
 ];
+
+/**Variable that stores the features which are passed to 3rd&4th component toshow the features of the wash itup */
 const iphones = [
   {
     class: "women1",
@@ -81,7 +84,9 @@ const iphones = [
     fe3: "Have a question or need assistance? Our friendly customer support team is here to assist you every step of the way.",
   },
 ];
+
 class LaundryBody extends Component {
+  /**Function to change the feature on clicking the dots in the mobile mode*/
   boxchange = (event) => {
     if (event.target.id === "dt1") {
       let box1 = document.getElementById("fe1");

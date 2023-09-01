@@ -21,6 +21,9 @@ const changeComponents = {
   washing: "WASHING",
 };
 
+{
+  /**Component which is the merge point of all the component's that which are displayed in the main page  and has the call back functions to pass from one component to another component*/
+}
 function LaundryNav() {
   const [service, setService] = useState(changeComponents.washClothes);
 

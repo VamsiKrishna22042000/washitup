@@ -6,6 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 
 import { AiFillTwitterCircle } from "react-icons/ai";
 
+/**Last component that show's the washitup related static data and the social media icons related to washitup */
 const Lastsetion = () => {
   return (
     <div className="background4">

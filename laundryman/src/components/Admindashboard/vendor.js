@@ -12,24 +12,30 @@ import { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 
 const Vendors = () => {
+  /**State to show the addVendor Modal Box*/
   const [showAddVendor, setAddVendor] = useState(false);
-
+  /**State to store the available vendors*/
   const [vendors, setVendors] = useState([]);
 
+  /**State which get's updated by search vendor search box to filter vendor based on thier name*/
   const [searchedVendor, setSearchedVendor] = useState("");
 
   const [load, setLoad] = useState(true);
 
+  /**state to store total cost of orders assigned to a particual vendor */
   const [total, setTotal] = useState(0);
 
+  /**state to navigate from mainsection of vendor to subsection of vendor to show all the orders assigned to the vendor */
   const [showVendorOrders, setVendorOrders] = useState([]);
 
+  /**state to store all the orders assigned to a particular vendor */
   const [subOrders, setSubOrders] = useState([]);
 
   useEffect(() => {
     getAllVendors();
   }, []);
 
+  /**Function to get all the vendor and set vendor to allVendors state */
   const getAllVendors = async () => {
     const url = "https://washitup.onrender.com/api/admin/getAllVendors";
 
@@ -44,6 +50,7 @@ const Vendors = () => {
     }
   };
 
+  /**Modal Box to add vendor */
   const AddVendorModel = (props) => {
     const { setAddVendor } = props;
 
@@ -357,10 +364,12 @@ const Vendors = () => {
     );
   };
 
+  /**function which update's the search vendor*/
   const filteredVendors = vendors.filter((each) =>
     each.name.toLowerCase().startsWith(searchedVendor.toLowerCase())
   );
 
+  /**Function to which helps to navigate to a particular vendor details(from main-section to subsection of a vendor) */
   const filterVendorOrders = (e) => {
     const filterdOrder = vendors.filter((each) => each._id === e.target.id);
 
@@ -400,6 +409,7 @@ const Vendors = () => {
     setVendorOrders(filterdOrder);
   };
 
+  /**Same as filterVendorOrders2 but when we update the progress of a order in the subsection of the vendor*/
   const filterVendorOrders2 = async (vendorId) => {
     const url = "https://washitup.onrender.com/api/admin/getAllVendors";
 
@@ -450,6 +460,7 @@ const Vendors = () => {
     }
   };
 
+  /**Function to change the progress of the orders in the subsection of the vendor */
   const settingProgress = async (e) => {
     setLoad(true);
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
@@ -478,7 +489,9 @@ const Vendors = () => {
 
   return !load ? (
     <>
+      {/**Terinary operator to show addvedor modal box or not */}
       {showAddVendor && <AddVendorModel setAddVendor={setAddVendor} />}
+      {/**Terinary operator to navigate between the main and subsection*/}
       {showVendorOrders.length > 0 ? (
         subOrders !== "" ? (
           <section className="order-body">
