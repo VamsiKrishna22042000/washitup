@@ -4,6 +4,18 @@
 }
 
 @media screen and (min-width: 992px) {
+  .last-section-icons {
+    font-size: 2.5vw;
+    margin-right: 2%;
+    color: #dd246e;
+    margin-top: 1%;
+  }
+  .last-section-icons1 {
+    font-size: 2.2vw;
+    margin-right: 2%;
+    color: #dd246e;
+    margin-top: 1%;
+  }
   .women1 {
     height: 100%;
     margin-top: 8%;
@@ -775,6 +787,18 @@
 }
 
 @media screen and (max-width: 576px) {
+  .last-section-icons {
+    font-size: 7vw;
+    margin-right: 3%;
+    color: #dd246e;
+    margin-top: 5%;
+  }
+  .last-section-icons1 {
+    font-size: 6.3vw;
+    margin-right: 3%;
+    color: #dd246e;
+    margin-top: 5%;
+  }
   .women1 {
     position: absolute;
     height: 55%;
@@ -850,7 +874,7 @@
   }
   .span2 {
     color: #6759ff;
-    margin-left: 6%;
+    margin-left: 5%;
   }
   .tagline {
     font-family: Arial, Helvetica, sans-serif;

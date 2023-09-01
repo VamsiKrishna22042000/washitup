@@ -139,7 +139,7 @@ class LaundryBody extends Component {
       <div className="background-2">
         <h1 className="back2-head">
           Why To Choose
-          <span className="span2">{"  "} WashIt Up </span>?
+          <span className="span2">{"                   "} WashIt Up </span>?
         </h1>
         <p className="tagline"></p>
 
