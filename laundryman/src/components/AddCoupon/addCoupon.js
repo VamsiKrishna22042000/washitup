@@ -138,10 +138,6 @@ const AddCoupon = (props) => {
                 textAlign: "start",
                 padding: "0",
                 overflow: "hidden",
-                textOverflow: "ellipsis",
-                display: "-webkit-box", // Display as a flexible box
-                WebkitLineClamp: 1, // Limit to 1 line
-                WebkitBoxOrient: "vertical", // Display vertically
               }}
             >
               {each.category} - {each.name}
@@ -152,8 +148,6 @@ const AddCoupon = (props) => {
                 textTransform: "capitalize",
                 textAlign: "center",
                 padding: "0",
-                textOverflow: "ellipsis",
-                lineClamp: 1,
               }}
             >
               {each.count}
@@ -164,8 +158,6 @@ const AddCoupon = (props) => {
                 textTransform: "capitalize",
                 textAlign: "center",
                 padding: "0",
-                textOverflow: "ellipsis",
-                lineClamp: 1,
               }}
             >
               ₹ {each.price}
@@ -178,79 +170,35 @@ const AddCoupon = (props) => {
         className="apply-coupon-box"
       >
         {discount === 0 ? (
-          <>
-            <p
-              style={{
-                margin: 0,
-                height: "1vh",
-                position: "absolute",
-                fontWeight: "bold",
-              }}
-            >
-              Total
-            </p>
-            <p
-              style={{
-                margin: 0,
-                height: "1vh",
-                position: "absolute",
-                right: "10%",
-                fontWeight: "bold",
-              }}
-            >
-              ₹ {total}
-            </p>
-          </>
+          <p
+            style={{
+              margin: 0,
+              height: "1vh",
+              position: "absolute",
+            }}
+          >
+            Total : ₹ {total}
+          </p>
         ) : (
-          <>
-            <p
+          <p
+            style={{
+              margin: 0,
+              height: "1vh",
+              position: "absolute",
+              color: "green",
+            }}
+          >
+            Total : ₹ {total - discount}
+            <span
               style={{
-                margin: 0,
-                height: "1vh",
-                position: "absolute",
-                fontWeight: "bold",
+                color: "#808080",
+                textDecoration: "line-through",
+                marginLeft: 8,
               }}
             >
-              Sub Total
-            </p>
-            <p
-              style={{
-                margin: 0,
-                height: "1vh",
-                position: "absolute",
-                right: "10%",
-                fontWeight: "bold",
-              }}
-            >
-              ₹ {total}
-            </p>
-            <p
-              style={{
-                margin: 0,
-                height: "1vh",
-                position: "absolute",
-                left: "0%",
-                fontWeight: "bold",
-                marginTop: "15%",
-                color: "green",
-              }}
-            >
-              Total
-            </p>
-            <p
-              style={{
-                margin: 0,
-                height: "1vh",
-                position: "absolute",
-                right: "10%",
-                fontWeight: "bold",
-                marginTop: "15%",
-                color: "green",
-              }}
-            >
-              ₹ {total - discount}
-            </p>
-          </>
+              {total}
+            </span>
+          </p>
         )}
       </div>
       <button

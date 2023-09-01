@@ -1163,16 +1163,12 @@ const Orders = () => {
                 />
               </div>
               <div className="order-body-header1">
-                <p style={{ width: "14%" }} className="order-body-para">
-                  Customer Name
-                </p>
+                <p className="order-body-para">Customer Name</p>
                 <p className="order-body-para">Order Date</p>
                 <p style={{ width: "20%" }} className="order-body-para">
                   Order Id
                 </p>
-                <p style={{ width: "14%" }} className="order-body-para">
-                  Type of Wash
-                </p>
+                <p className="order-body-para">Type of Wash</p>
                 <p className="order-body-para">Order Total</p>
                 <p
                   style={{ backgroundColor: "white" }}
@@ -1191,7 +1187,7 @@ const Orders = () => {
                 <div key={each._id} className="order-body-header2">
                   {/**all orders booked by the user sorted based on the date */}
                   <p
-                    style={{ textTransform: "capitalize", width: "14%" }}
+                    style={{ textTransform: "capitalize" }}
                     id={each._id}
                     onClick={filterCustomer}
                     className="order-body-para"
@@ -1217,7 +1213,7 @@ const Orders = () => {
                     id={each._id}
                     onClick={filterCustomer}
                     className="order-body-para"
-                    style={{ textTransform: "capitalize", width: "14%" }}
+                    style={{ textTransform: "capitalize" }}
                   >
                     {each.service}
                   </p>
