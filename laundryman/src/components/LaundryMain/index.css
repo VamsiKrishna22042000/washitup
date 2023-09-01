@@ -75,6 +75,9 @@
     text-align: center;
     font-weight: bolder;
   }
+  .back2-head2 {
+    display: none;
+  }
   .span2 {
     color: #6759ff;
   }
@@ -864,7 +867,12 @@
     width: 100vw;
     background-color: #fff;
   }
+
   .back2-head {
+    display: none;
+  }
+
+  .back2-head2 {
     margin-top: 10vh;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 8vw;
