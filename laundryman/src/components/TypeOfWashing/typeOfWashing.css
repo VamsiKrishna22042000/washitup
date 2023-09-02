@@ -9,55 +9,95 @@
     border-radius: 15px;
     z-index: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     overflow: hidden;
     min-height: 65vh;
     font-family: Arial, Helvetica, sans-serif;
     padding-bottom: 1%;
-    color: #9359ff;
+    color: #6759ff;
   }
   .type-of-head {
-    position: relative;
+    position: absolute;
     font-family: Arial, Helvetica, sans-serif;
+    top: 8%;
     margin-bottom: -5%;
+    font-weight: 1000;
   }
   .type-of-button {
     border-style: solid;
-    border-color: #9359ff;
+    border-color: #6759ff;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
-    width: 50%;
-    border-radius: 5px;
-    height: 10vh;
+    width: 22.5%;
+    border-radius: 15px;
+    height: 19vh;
     background-color: #ffffff;
-    color: #9359ff;
-  }
-
-  .type-of-button:hover {
-    border-style: solid;
-    border-color: rgb(0, 147, 32);
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 50%;
-    border-radius: 5px;
-    height: 10vh;
-    background-color: #ffffff;
-    color: rgb(0, 147, 32);
+    color: #6759ff;
+    font-weight: bold;
   }
 
   .type-of-image {
-    height: 70%;
-    width: 15%;
+    height: 45%;
+    width: 45%;
+  }
+  .type-of-button1 {
+    border-style: solid;
+    border-color: #6759ff;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width: 22.5%;
+    border-radius: 15px;
+    height: 19vh;
+    background-color: #ffffff;
+    color: #6759ff;
+    font-weight: bold;
+    background-color: #6759ff20;
+  }
+  .type-of-wash-continue {
+    position: absolute;
+    width: 80%;
+    background-color: #6759ff;
+    border-radius: 10px;
+    color: #fff;
+    padding: 3%;
+    border-width: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 5%;
+    bottom: 2%;
+  }
+  .type-of-wash-con {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
   }
 }
 
 @media screen and (max-width: 600px) {
+  .type-of-head {
+    color: #6759ff;
+    font-size: 5vw;
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 8%;
+    margin-bottom: -5%;
+    font-weight: 1000;
+  }
   .type-of-wash {
     position: relative;
+    height: 38vh;
     width: 85%;
     margin-top: 5%;
     margin-left: 8%;
@@ -78,41 +118,64 @@
   }
 
   .type-of-button {
-    margin-top: 5%;
-    margin-bottom: 5%;
     border-style: solid;
-    border-color: #9359ff;
+    border-color: #6759ff;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
+    width: 23%;
+    border-radius: 10px;
+    height: 10vh;
     background-color: #ffffff;
-    width: 75%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    border-radius: 5px;
-    color: #9359ff;
-  }
-
-  .type-of-button:hover {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    border-style: solid;
-    border-color: rgb(0, 147, 32);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #ffffff;
-    width: 75%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    border-radius: 5px;
-    color: rgb(0, 147, 32);
+    color: #6759ff;
+    font-weight: bold;
+    font-size: 2.2vw;
   }
 
   .type-of-image {
-    height: 70%;
-    width: 15%;
+    height: 45%;
+    width: 45%;
+  }
+  .type-of-button1 {
+    border-style: solid;
+    border-color: #6759ff;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width: 23%;
+    border-radius: 10px;
+    height: 10vh;
+    background-color: #6759ff20;
+    color: #6759ff;
+    font-weight: bold;
+    font-size: 2.2vw;
+  }
+  .type-of-wash-continue {
+    position: absolute;
+    width: 80%;
+    background-color: #6759ff;
+    border-radius: 10px;
+    color: #fff;
+    padding: 3%;
+    border-width: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3.5vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 5%;
+    bottom: 2%;
+  }
+  .type-of-wash-con {
+    margin-top: -30%;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
   }
 }

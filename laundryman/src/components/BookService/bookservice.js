@@ -187,8 +187,8 @@ const BookService = (props) => {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
       };
 
-      if (removeTimeFromDate(date) < removeTimeFromDate(new Date())) {
-        toast.error("Cannot select previous dates", {
+      if (removeTimeFromDate(date) <= removeTimeFromDate(new Date())) {
+        toast.error("Select From Tomorrow", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
