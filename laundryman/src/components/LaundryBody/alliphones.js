@@ -1,3 +1,5 @@
+import "../LaundryMain/index.css";
+
 /**Component that show's screen 4 to download the mobile app in the home page of the user */
 const Alliphones = () => {
   return (
@@ -25,8 +27,9 @@ const Alliphones = () => {
             />
           </button>
         </div>
-         <img src="./all iphones.png" className="iphoness" alt="alliphones"/>
-         </div>
-   )
-}
-export default Alliphones
+      </div>
+      <img src="./all iphones.png" className="iphoness" alt="alliphones" />
+    </div>
+  );
+};
+export default Alliphones;
