@@ -795,12 +795,16 @@ const Customers = () => {
               </h6>
             </div>
             <div className="order-body-header1">
-              <p className="order-body-para">Customer Name</p>
+              <p style={{ width: "14%" }} className="order-body-para">
+                Customer Name
+              </p>
               <p className="order-body-para">Order Date</p>
               <p style={{ width: "20%" }} className="order-body-para">
                 Order Id
               </p>
-              <p className="order-body-para">Type Of Washing</p>
+              <p style={{ width: "14%" }} className="order-body-para">
+                Type Of Washing
+              </p>
               <p className="order-body-para">Order Total</p>
               <p
                 style={{ backgroundColor: "white" }}
@@ -818,7 +822,7 @@ const Customers = () => {
             {selectedOrders.map((each) => (
               <div className="order-body-header2">
                 <p
-                  style={{ textTransform: "capitalize" }}
+                  style={{ textTransform: "capitalize", width: "14%" }}
                   className="order-body-para"
                 >
                   {selectedCustomer[0].name}
@@ -830,7 +834,7 @@ const Customers = () => {
                   {each._id}
                 </p>
                 <p
-                  style={{ textTransform: "capitalize" }}
+                  style={{ textTransform: "capitalize", width: "14%" }}
                   className="order-body-para"
                 >
                   {each.service}

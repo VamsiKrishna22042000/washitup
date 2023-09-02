@@ -159,6 +159,10 @@ const AddCoupon = (props) => {
                 textAlign: "start",
                 padding: "0",
                 overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box", // Display as a flexible box
+                WebkitLineClamp: 1, // Limit to 1 line
+                WebkitBoxOrient: "vertical", // Display vertically
               }}
             >
               {each.category} - {each.name}
@@ -169,6 +173,8 @@ const AddCoupon = (props) => {
                 textTransform: "capitalize",
                 textAlign: "center",
                 padding: "0",
+                textOverflow: "ellipsis",
+                lineClamp: 1,
               }}
             >
               {each.count}
@@ -179,6 +185,8 @@ const AddCoupon = (props) => {
                 textTransform: "capitalize",
                 textAlign: "center",
                 padding: "0",
+                textOverflow: "ellipsis",
+                lineClamp: 1,
               }}
             >
               ₹ {each.price}
@@ -192,35 +200,79 @@ const AddCoupon = (props) => {
       >
         {/**Total price before discount and after discount */}{" "}
         {discount === 0 ? (
-          <p
-            style={{
-              margin: 0,
-              height: "1vh",
-              position: "absolute",
-            }}
-          >
-            Total : ₹ {total}
-          </p>
-        ) : (
-          <p
-            style={{
-              margin: 0,
-              height: "1vh",
-              position: "absolute",
-              color: "green",
-            }}
-          >
-            Total : ₹ {total - discount}
-            <span
+          <>
+            <p
               style={{
-                color: "#808080",
-                textDecoration: "line-through",
-                marginLeft: 8,
+                margin: 0,
+                height: "1vh",
+                position: "absolute",
+                fontWeight: "bold",
               }}
             >
-              {total}
-            </span>
-          </p>
+              Total
+            </p>
+            <p
+              style={{
+                margin: 0,
+                height: "1vh",
+                position: "absolute",
+                right: "10%",
+                fontWeight: "bold",
+              }}
+            >
+              ₹ {total}
+            </p>
+          </>
+        ) : (
+          <>
+            <p
+              style={{
+                margin: 0,
+                height: "1vh",
+                position: "absolute",
+                fontWeight: "bold",
+              }}
+            >
+              Sub Total
+            </p>
+            <p
+              style={{
+                margin: 0,
+                height: "1vh",
+                position: "absolute",
+                right: "10%",
+                fontWeight: "bold",
+              }}
+            >
+              ₹ {total}
+            </p>
+            <p
+              style={{
+                margin: 0,
+                height: "1vh",
+                position: "absolute",
+                left: "0%",
+                fontWeight: "bold",
+                marginTop: "15%",
+                color: "green",
+              }}
+            >
+              Total
+            </p>
+            <p
+              style={{
+                margin: 0,
+                height: "1vh",
+                position: "absolute",
+                right: "10%",
+                fontWeight: "bold",
+                marginTop: "15%",
+                color: "green",
+              }}
+            >
+              ₹ {total - discount}
+            </p>
+          </>
         )}
       </div>
       {/**Button used to book the laundry hits the setToWashing Function*/}

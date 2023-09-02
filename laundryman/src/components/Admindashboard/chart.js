@@ -4,12 +4,17 @@ import { Pie } from 'react-chartjs-2';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-export function OrderChart({ data }) {
+export function OrderChart({data}) {
+
+  if(data){
+    console.log(data,"dat")
+  }
+
   const pieChartData = {
     labels: ['Total Orders', 'Completed Orders'],
     datasets: [
       {
-        label: '', // Empty string for the legend label
+        label: '# of Orders',
         data: [data.totalOrders, data.activeOrdersCount],
         backgroundColor: [
           'rgba(255, 99, 132, 0.7)', // Color for Total Orders
@@ -31,28 +36,6 @@ export function OrderChart({ data }) {
         labels: {
           font: {
             size: 14,
-          },
-          
-          generateLabels: (chart) => {
-            const data = chart.data;
-            if (data.labels.length && data.datasets.length) {
-              return data.labels.map((label, i) => {
-                const meta = chart.getDatasetMeta(0);
-                const ds = data.datasets[0];
-                const arc = meta.data[i];
-                const value = ds.data[i];
-                const percentage = ((value / ds.data.reduce((acc, val) => acc + val)) * 100).toFixed(1);
-                return {
-                  text: `${label}: ${value} (${percentage}%)`,
-                  fillStyle: ds.backgroundColor[i],
-                  strokeStyle: ds.borderColor[i],
-                  lineWidth: ds.borderWidth,
-                  hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
-                 
-                };
-              });
-            }
-            return [];
           },
         },
       },
