@@ -10,6 +10,7 @@ import Alliphones from "./alliphones";
 
 import Lastsetion from "./lastsection";
 
+/**Varible stores data to pass it to second component to why to choose washitup */
 const fearturesOfback2 = [
   {
     id: "fe1",
@@ -35,6 +36,8 @@ const fearturesOfback2 = [
     imageUrl: "services_outline_24",
   },
 ];
+
+/**Variable that stores the features which are passed to 3rd&4th component toshow the features of the wash itup */
 const iphones = [
   {
     iurl: "iphone",
@@ -49,7 +52,9 @@ const iphones = [
     phonecon: "phone2",
   },
 ];
+
 class LaundryBody extends Component {
+  /**Function to change the feature on clicking the dots in the mobile mode*/
   boxchange = (event) => {
     if (event.target.id === "dt1") {
       let box1 = document.getElementById("fe1");

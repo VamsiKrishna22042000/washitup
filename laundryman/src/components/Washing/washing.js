@@ -1,8 +1,9 @@
 import "./washing.css";
 
-const Washing = (props) => {
-  const { selectedTime } = props;
-
+{
+  /**Final component in the main box that show's delivery boy animation in the main page */
+}
+const Washing = () => {
   return (
     <div className="washing-total-con">
       <div className="washing-note">
