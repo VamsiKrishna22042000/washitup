@@ -10,12 +10,35 @@ export function OrderChart({data}) {
     console.log(data,"dat")
   }
 
+
+  let labels = [];
+  
+  if (data.totalOrders) {
+    labels.push('Total Orders');
+  }
+
+  if (data.activeOrdersCount) {
+    labels.push('Completed Orders');
+  }
+
+  if (data.totalRevenue) {
+    labels.push('Total Revenue');
+  }
+
+  if (data.todayRevenue) {
+    labels.push('Today Revenue');
+  }
+
+
   const pieChartData = {
-    labels: ['Total Orders', 'Completed Orders'],
+    labels: labels,
     datasets: [
       {
-        label: '# of Orders',
-        data: [data.totalOrders, data.activeOrdersCount],
+        // label: '# of Orders',
+        data: [
+          data.totalOrders || data.totalRevenue,
+          data.activeOrdersCount || data.todayRevenue,
+        ],
         backgroundColor: [
           'rgba(255, 99, 132, 0.7)', // Color for Total Orders
           'rgba(54, 162, 235, 0.7)', // Color for Completed Orders

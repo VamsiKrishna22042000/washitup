@@ -7,6 +7,10 @@ import { OrderChart } from "./chart";
 const Dashboard = () => {
   /**State used to store the dashboard data obtained for getDashboardData function*/
   const [dashboardData, setDashBoardData] = useState([]);
+  const [revenueData, setRevenueData] = useState({
+    todayRevenue: 0,
+    totalRevenue: 0,
+  });
 
   const [load, setLoad] = useState(true);
 
@@ -16,17 +20,48 @@ const Dashboard = () => {
 
   /**Function to get all the dashboard Data */
   const getDashboardData = async () => {
-    const url = "https://washitup.onrender.com/api/admin/getAllCounts";
 
-    const respone = await fetch(url);
+    try {
 
-    const data = await respone.json();
+      const url = "https://washitup.onrender.com/api/admin/getAllCounts";
 
-    if (respone.ok) {
-      // console.log(data,"dataaa");
-      setDashBoardData(data.data);
-      setLoad(false);
+      const respone = await fetch(url);
+
+      const data = await respone.json();
+
+      if (respone.ok) {
+        // console.log(data,"dataaa");
+        setDashBoardData(data.data);
+        setLoad(false);
+      }
+      const revenueUrl = "https://washitup.onrender.com/api/admin/totalRevenue";
+      const revenueResponse = await fetch(revenueUrl)
+      const revenueData = await revenueResponse.json()
+
+      if (revenueResponse.ok) {
+        // console.log(revenueData.data[0].total,"rev")
+        setRevenueData((prevData) => ({
+          ...prevData,
+          totalRevenue: revenueData.data[0].total,
+        }));
+      }
+      const todayRevenueUrl = "https://washitup.onrender.com/api/admin/todayRevenue";
+      const todayRevenueResponse = await fetch(todayRevenueUrl)
+      const todayRevenueData = await todayRevenueResponse.json()
+
+      if (todayRevenueResponse.ok) {
+        // console.log(todayRevenueData.todaySale, "reve")
+        setRevenueData((prevData) => ({
+          ...prevData,
+          todayRevenue: todayRevenueData.todaySale,
+        }));
+
+      }
+
+    } catch (error) {
+      console.log(error)
     }
+
   };
 
   return !load ? (
@@ -46,7 +81,7 @@ const Dashboard = () => {
             >
               {/**Total Sale obtained From the dashboardData state  */}
               {dashboardData.totalSale > 1000 &&
-              dashboardData.totalSale < 100000 ? (
+                dashboardData.totalSale < 100000 ? (
                 <h4 style={{ color: "#6759ff" }}>
                   ₹ {parseInt(dashboardData.totalSale) / 1000} K
                 </h4>
@@ -115,7 +150,7 @@ const Dashboard = () => {
                 }}
               >
                 {dashboardData.totalOrders > 1000 &&
-                dashboardData.totalOrders < 100000 ? (
+                  dashboardData.totalOrders < 100000 ? (
                   <h4 style={{ color: "#6759ff" }}>
                     {parseInt(dashboardData.totalOrders) / 1000} K
                   </h4>
@@ -137,7 +172,7 @@ const Dashboard = () => {
               <div className="active-orders">
                 <p>Active</p>
                 {dashboardData.activeOrdersCount > 1000 &&
-                dashboardData.activeOrdersCount < 100000 ? (
+                  dashboardData.activeOrdersCount < 100000 ? (
                   <p
                     style={{
                       color: "green",
@@ -183,7 +218,7 @@ const Dashboard = () => {
               <div className="active-orders">
                 <p>Completed</p>
                 {dashboardData.completedOrdersCount > 1000 &&
-                dashboardData.completedOrdersCount < 100000 ? (
+                  dashboardData.completedOrdersCount < 100000 ? (
                   <p
                     style={{
                       color: "red",
@@ -241,7 +276,7 @@ const Dashboard = () => {
               }}
             >
               {dashboardData.customers > 1000 &&
-              dashboardData.customers < 100000 ? (
+                dashboardData.customers < 100000 ? (
                 <h4 style={{ color: "#6759ff" }}>
                   {parseInt(dashboardData.customers) / 1000} K
                 </h4>
@@ -272,7 +307,7 @@ const Dashboard = () => {
               }}
             >
               {dashboardData.vendors > 1000 &&
-              dashboardData.vendors < 100000 ? (
+                dashboardData.vendors < 100000 ? (
                 <h4 style={{ color: "#6759ff" }}>
                   {parseInt(dashboardData.vendors) / 1000} K
                 </h4>
@@ -303,6 +338,9 @@ const Dashboard = () => {
         >
           <div style={{ width: "300px", height: "300px" }}>
             <OrderChart data={dashboardData} />
+          </div>
+          <div style={{ width: "300px", height: "300px" }}>
+            <OrderChart data={revenueData} />
           </div>
         </section>
       </div>
