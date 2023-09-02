@@ -28,6 +28,7 @@ const Orders = () => {
 
   const [load, setLoad] = useState(false);
 
+  /**To get all the order before mounting by an api call*/
   useEffect(() => {
     getAllOrders();
   }, []);
@@ -188,7 +189,7 @@ const Orders = () => {
     }
   };
 
-  /**Fuction to update progress in the sub section */
+  /**Fuction to update progress in the sub section and*/
   const filterCustomer2 = async (orderId) => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
@@ -302,6 +303,7 @@ const Orders = () => {
       }
     };
 
+    /**Function to change the assigned vendor */
     const changeVendor = async (e) => {
       setLoad(true);
       let orderId = selectedCustomer[0]._id;

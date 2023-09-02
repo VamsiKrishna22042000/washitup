@@ -50,6 +50,7 @@ const BookService = (props) => {
 
   const [pincode, setPincode] = useState("");
 
+  /**Array to store the pincodes that which we provide service for those areas*/
   const availablePincodes = [
     524002, 531022, 531027, 531115, 531077, 531035, 531040, 531030, 531002,
     531117, 531055, 531002, 531035, 531001, 531022, 531118, 531111, 531084,
@@ -130,6 +131,7 @@ const BookService = (props) => {
     535145, 535145, 535273, 535183, 535183, 535145, 535145, 535145, 535145,
   ];
 
+  /**Function to navigate from the where & who section to coupon section of the main component */
   const bookNow = async () => {
     if (input.name === "") {
       toast.error("Please Enter Name", {
@@ -217,6 +219,7 @@ const BookService = (props) => {
     }
   };
 
+  /**Function to get the precise location of a use by converting latitude and logitude to address*/
   const reverseGeoCoding = async () => {
     if (latitude !== "" && longitude !== "") {
       console.log(latitude);
@@ -245,6 +248,7 @@ const BookService = (props) => {
     }
   };
 
+  /**State to update time selected by the user */
   const selectedTime = (e) => {
     getTime(e);
     setInputs((prevValues) => ({
@@ -253,6 +257,7 @@ const BookService = (props) => {
     }));
   };
 
+  /**Function to generate the coordinates(Latitude and longitude) for reversegeocoding*/
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);

@@ -14,6 +14,7 @@ import Services from "./services";
 
 import Vendors from "./vendor";
 
+/**available Section is a variable used to show the section that are present in the dashboard */
 const availableSection = [
   {
     imgUrl1: "/dashboard1.png",
@@ -43,10 +44,12 @@ const availableSection = [
 ];
 
 const AdminDashboard = () => {
+  /**State used to store the section selected and display the component related to the selected section*/
   const [selectedSection, setSection] = useState("Dashboard");
 
   return (
     <div className="total-dashboard-container">
+      {/**side box used to display the available sections form the variable available section*/}
       <aside className="aside-board">
         <img
           className="aside-logo"
@@ -79,6 +82,7 @@ const AdminDashboard = () => {
         </section>
       </aside>
       <div className="header-body">
+        {/**Header box which shows the admin name */}
         <header className="dashboard-header">
           <h5 style={{ color: "#53545c", marginLeft: "3%" }}>Dashboard</h5>
           <div
@@ -99,6 +103,7 @@ const AdminDashboard = () => {
             </h4>
           </div>
         </header>
+        {/**Ternary operators used to display the component's based onthe selected section*/}
         {selectedSection === "Dashboard" ? (
           <Dashboard />
         ) : selectedSection === "Orders" ? (

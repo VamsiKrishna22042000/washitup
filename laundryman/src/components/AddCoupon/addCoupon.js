@@ -8,13 +8,25 @@ const AddCoupon = (props) => {
   const { typeOfWashing, items, dataTobeSent, success } = props;
 
   const [total, setTotal] = useState("");
+  {
+    /**state to store total of all the items*/
+  }
 
   const [discount, setDiscount] = useState(0);
+  {
+    /**state to store discount*/
+  }
 
   const [couponCode, setCouponCode] = useState("");
+  {
+    /**state to store the coupon code */
+  }
 
   const [loadCelebration, setCelebration] = useState(false);
 
+  {
+    /**Function used to book the laundry by passing the itemsSelected, typeofWash,userForm */
+  }
   const setToWashing = async () => {
     let totalAmount = total - discount;
     const url = `${process.env.REACT_APP_ROOT_URL}/api/user/bookOrder`;
@@ -39,6 +51,9 @@ const AddCoupon = (props) => {
     }
   };
 
+  {
+    /**Function used to apply the coupon and get the discount of the coupon and update the state of the discount */
+  }
   const applyCoupon = async () => {
     const url = "https://washitup.onrender.com/api/user/applyCoupon";
 
@@ -80,6 +95,9 @@ const AddCoupon = (props) => {
     }
   };
 
+  {
+    /**useEffect used to get the total price of all the items selected by the user before mounting */
+  }
   useEffect(() => {
     let totalPrice = 0;
     items.map((each) => (totalPrice = totalPrice + each.price * each.count));
@@ -88,9 +106,11 @@ const AddCoupon = (props) => {
 
   return (
     <div className="login-book-service-coupon">
+      {/**Used to load the celebrate animation for 3s after applying coupon*/}
       {loadCelebration && (
         <img className="celebration" src="/celebration.gif" alt="Celebration" />
       )}
+      {/**Discount box used to show that the discount is available or not */}{" "}
       {discount === 0 ? (
         total > 300 ? (
           <div className="apply-coupon-box">
@@ -128,6 +148,7 @@ const AddCoupon = (props) => {
           />
         </div>
       )}
+      {/**box used to show all the items selected but user for laundry along with count and price of each item */}
       <div className="apply-coupon-box2">
         {items.map((each) => (
           <div className="items-con-coupon">
@@ -169,6 +190,7 @@ const AddCoupon = (props) => {
         style={{ marginTop: "-5%", position: "relative" }}
         className="apply-coupon-box"
       >
+        {/**Total price before discount and after discount */}{" "}
         {discount === 0 ? (
           <p
             style={{
@@ -201,6 +223,7 @@ const AddCoupon = (props) => {
           </p>
         )}
       </div>
+      {/**Button used to book the laundry hits the setToWashing Function*/}
       <button
         onClick={setToWashing}
         className="apply-coupon-button2"

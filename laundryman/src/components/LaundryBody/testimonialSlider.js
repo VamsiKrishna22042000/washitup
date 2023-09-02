@@ -6,6 +6,7 @@ import "./TestimonialSlider.css";
 
 // Existing code above...
 
+/**Variable to store the data showed in the testimonial slider */
 const testimonialData = [
   {
     id: 1,
@@ -47,6 +48,7 @@ const testimonialData = [
 
 // Rest of the existing code...
 
+/**Slide developed by using react-slick library for both mobile and desktop to show customer reviews*/
 const TestimonialSlider = () => {
   const settings = {
     dots: true,

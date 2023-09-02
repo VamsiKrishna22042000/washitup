@@ -15,15 +15,17 @@ import { TailSpin } from "react-loader-spinner";
 
 /**Modal Box for Adding Customer */
 const AddCustomerModel = (props) => {
+  /** */
   const { setAddCustomer, getAllCustomers } = props;
 
-  /** phonenumber state */
-
+  /**State which stores the user name entered */
   const [newUser, setNewUser] = useState("");
 
+  /**State which stores the mobile number entered*/
   const [value, setValue] = useState();
   const [load, setLoad] = useState(false);
 
+  /**Function to make api call to add a new user*/
   const addUser = async () => {
     if (newUser === "") {
       toast.error("Please Enter Customer Name", {
@@ -90,6 +92,7 @@ const AddCustomerModel = (props) => {
       ></div>
       <div style={{ left: "40%" }} className="add-customer-modal-box">
         <h6>Add a New Customer</h6>
+        {/**Button to close the modal box by setting false to setAddCustomer() */}
         <button
           type="button"
           onClick={() => {
@@ -108,6 +111,7 @@ const AddCustomerModel = (props) => {
           ✕
         </button>
         <p className="add-customer-titles">Customer Name</p>
+        {/**Input to take new customer number*/}
         <input
           onChange={(e) => {
             setNewUser(e.target.value);
@@ -117,6 +121,7 @@ const AddCustomerModel = (props) => {
           placeholder="Enter Customer Name"
         />
         <p className="add-customer-titles">Customer Mobile number</p>
+        {/**In put to take phone number*/}
         <PhoneInput
           className="add-customer-input-box"
           placeholder="Enter Phone number"
@@ -124,6 +129,7 @@ const AddCustomerModel = (props) => {
           value={value}
           onChange={setValue}
         />
+        {/**Button call's add user function to make an api call and add a new customer*/}
         <button onClick={addUser} className="add-cutomer-button" type="button">
           Add
         </button>
@@ -158,36 +164,48 @@ const AddCustomerModel = (props) => {
   );
 };
 
+/**Customer component only show's the customer who made atleast one order*/
 const Customers = () => {
-  /**State to show modal box to add customer */
+  /**showAddCustomer state used to show modal box to add customer */
   const [showAddCustomer, setAddCustomer] = useState(false);
-  /**State to show orders of the selected customer */
+
+  /**selectedCustomer state to show allorders made by a particual customer*/
   const [selectedCustomer, setSelectedCustomer] = useState("");
 
+  /**allcustomers state used to store all the customers along with each individual order details*/
   const [allCustomers, setAllCustomers] = useState([]);
 
   const [selectedOrders, setSelectedOrders] = useState([]);
 
+  /**state used to search a particular customer out of all the customers*/
   const [searchedCustomer, setSearchedCustomer] = useState("");
 
   const [userId, setUserId] = useState("");
 
   const [total, setTotal] = useState("");
 
+  /**Making api call before mounting to show all the customers*/
   useEffect(() => {
     getAllCustomers();
   }, []);
 
+  /**Function which makes an api call to get all the orders and convertes the ordes as an array of customer objects and each customer object has array of order objects which were orders by the user*/
   const getAllCustomers = async () => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
     const response = await fetch(url);
     const data = await response.json();
 
+    {
+      /**if condition used to convert the obtained data to array of customer object where each customer object has their array of orderobjects*/
+    }
     if (response.ok) {
       const userArray = [];
       const userIdArray = [];
 
+      {
+        /**Loop which filters the customers and their id's and pushes the objects to userArray and id's(type-number) to userIdArray*/
+      }
       for (let each of data) {
         if (userArray.length > 0) {
           if (!userIdArray.includes(each.userId._id)) {
@@ -214,6 +232,9 @@ const Customers = () => {
         }
       }
 
+      {
+        /**for loop to push the orders as a object into the field named orders(which is an array) present inthe each customerobject in the userArray */
+      }
       for (let e2 of userArray) {
         for (let each2 of data) {
           if (e2._id === each2.userId._id) {
@@ -226,6 +247,9 @@ const Customers = () => {
     }
   };
 
+  {
+    /**Function which filtes the particular customer to show thier orders (basically to navigate form the customers section mainpage to subsection) */
+  }
   const filterCustomer = (e) => {
     let totalOrdersAmount = 0;
     const selectedCustomerOrder = allCustomers.filter(
@@ -259,6 +283,7 @@ const Customers = () => {
     setSelectedOrders(selectedCustomerOrder[0].orders);
   };
 
+  /**Same as filter Customer but is used to rerender the subsection while changing the action of an order*/
   const filterCustomer2 = async (id) => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
@@ -330,10 +355,12 @@ const Customers = () => {
     }
   };
 
+  /**Funtion to search the customers*/
   const filterdAllCustomer = allCustomers.filter((each) =>
     each.name.toLowerCase().startsWith(searchedCustomer.toLowerCase())
   );
 
+  /**Function to change the action a order(only one order at a time) */
   const settingProgress = async (e) => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
 
@@ -365,12 +392,14 @@ const Customers = () => {
 
   return (
     <>
+      {/**Terinary operater to show the addcustomer modal box*/}
       {showAddCustomer && (
         <AddCustomerModel
           setAddCustomer={setAddCustomer}
           getAllCustomers={getAllCustomers}
         />
       )}
+      {/**Ternary operator to switch between main and subsection*/}
       {selectedCustomer === "" ? (
         allCustomers.length > 0 ? (
           <section className="order-body">
