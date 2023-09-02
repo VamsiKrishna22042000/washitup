@@ -264,6 +264,13 @@ const Dashboard = () => {
       
 
       </section>
+      <section style={{backgroundColor:"#e8e6ff",display:"flex", justifyContent:"center", marginBottom:"-90px", padding:"20px 0"}}>
+        <div style={{ width:"300px",height:"300px"}}>
+        <OrderChart data={dashboardData} />
+        </div>
+      
+
+      </section>
       </div>
     </>
 
