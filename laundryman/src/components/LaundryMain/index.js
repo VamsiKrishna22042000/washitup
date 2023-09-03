@@ -25,7 +25,7 @@ const changeComponents = {
   /**Component which is the merge point of all the component's that which are displayed in the main page  and has the call back functions to pass from one component to another component*/
 }
 function LaundryNav() {
-  const [service, setService] = useState(changeComponents.washClothes);
+  const [service, setService] = useState(changeComponents.typeOfWash);
 
   const [time, setTime] = useState(0);
 
@@ -43,13 +43,13 @@ function LaundryNav() {
   };
 
   const washClothes = (selectedtoWash) => {
-    setService(changeComponents.typeOfWash);
+    setService(changeComponents.bookService);
     setItems(selectedtoWash);
   };
 
   const callBackForTypeOfWashing = (type) => {
     console.log(type);
-    setService(changeComponents.bookService);
+    setService(changeComponents.washClothes);
     setTypeofWashing(type);
   };
 
