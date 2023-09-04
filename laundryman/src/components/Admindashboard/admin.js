@@ -14,6 +14,8 @@ import Services from "./services";
 
 import Vendors from "./vendor";
 
+import Coupons from "./coupon";
+
 /**available Section is a variable used to show the section that are present in the dashboard */
 const availableSection = [
   {
@@ -40,6 +42,11 @@ const availableSection = [
     imgUrl1: "/vendor1.png",
     imgUrl2: "/vendor2.png",
     section: "Vendors",
+  },
+  {
+    imgUrl1: "/coupon1.png",
+    imgUrl2: "/coupon2.png",
+    section: "Coupons",
   },
 ];
 
@@ -112,8 +119,10 @@ const AdminDashboard = () => {
           <Services />
         ) : selectedSection === "Customers" ? (
           <Customers />
-        ) : (
+        ) : selectedSection === "Vendors" ? (
           <Vendors />
+        ) : (
+          <Coupons />
         )}
       </div>
     </div>

@@ -81,7 +81,7 @@ const Dashboard = () => {
             >
               {/**Total Sale obtained From the dashboardData state  */}
               {dashboardData.totalSale > 1000 &&
-                dashboardData.totalSale < 100000 ? (
+              dashboardData.totalSale < 100000 ? (
                 <h4 style={{ color: "#6759ff" }}>
                   ₹ {parseInt(dashboardData.totalSale) / 1000} K
                 </h4>
@@ -150,7 +150,7 @@ const Dashboard = () => {
                 }}
               >
                 {dashboardData.totalOrders > 1000 &&
-                  dashboardData.totalOrders < 100000 ? (
+                dashboardData.totalOrders < 100000 ? (
                   <h4 style={{ color: "#6759ff" }}>
                     {parseInt(dashboardData.totalOrders) / 1000} K
                   </h4>
@@ -172,7 +172,7 @@ const Dashboard = () => {
               <div className="active-orders">
                 <p>Active</p>
                 {dashboardData.activeOrdersCount > 1000 &&
-                  dashboardData.activeOrdersCount < 100000 ? (
+                dashboardData.activeOrdersCount < 100000 ? (
                   <p
                     style={{
                       color: "green",
@@ -218,7 +218,7 @@ const Dashboard = () => {
               <div className="active-orders">
                 <p>Completed</p>
                 {dashboardData.completedOrdersCount > 1000 &&
-                  dashboardData.completedOrdersCount < 100000 ? (
+                dashboardData.completedOrdersCount < 100000 ? (
                   <p
                     style={{
                       color: "red",
@@ -276,7 +276,7 @@ const Dashboard = () => {
               }}
             >
               {dashboardData.customers > 1000 &&
-                dashboardData.customers < 100000 ? (
+              dashboardData.customers < 100000 ? (
                 <h4 style={{ color: "#6759ff" }}>
                   {parseInt(dashboardData.customers) / 1000} K
                 </h4>
@@ -307,7 +307,7 @@ const Dashboard = () => {
               }}
             >
               {dashboardData.vendors > 1000 &&
-                dashboardData.vendors < 100000 ? (
+              dashboardData.vendors < 100000 ? (
                 <h4 style={{ color: "#6759ff" }}>
                   {parseInt(dashboardData.vendors) / 1000} K
                 </h4>
@@ -338,9 +338,6 @@ const Dashboard = () => {
         >
           <div style={{ width: "300px", height: "300px" }}>
             <OrderChart data={dashboardData} />
-          </div>
-          <div style={{ width: "300px", height: "300px" }}>
-            <OrderChart data={revenueData} />
           </div>
         </section>
       </div>
