@@ -7,6 +7,10 @@ import { OrderChart } from "./chart";
 const Dashboard = () => {
   /**State used to store the dashboard data obtained for getDashboardData function*/
   const [dashboardData, setDashBoardData] = useState([]);
+  const [revenueData, setRevenueData] = useState({
+    todayRevenue: 0,
+    totalRevenue: 0,
+  });
 
   const [load, setLoad] = useState(true);
 
@@ -16,17 +20,48 @@ const Dashboard = () => {
 
   /**Function to get all the dashboard Data */
   const getDashboardData = async () => {
-    const url = "https://washitup.onrender.com/api/admin/getAllCounts";
 
-    const respone = await fetch(url);
+    try {
 
-    const data = await respone.json();
+      const url = "https://washitup.onrender.com/api/admin/getAllCounts";
 
-    if (respone.ok) {
-      // console.log(data,"dataaa");
-      setDashBoardData(data.data);
-      setLoad(false);
+      const respone = await fetch(url);
+
+      const data = await respone.json();
+
+      if (respone.ok) {
+        // console.log(data,"dataaa");
+        setDashBoardData(data.data);
+        setLoad(false);
+      }
+      const revenueUrl = "https://washitup.onrender.com/api/admin/totalRevenue";
+      const revenueResponse = await fetch(revenueUrl)
+      const revenueData = await revenueResponse.json()
+
+      if (revenueResponse.ok) {
+        // console.log(revenueData.data[0].total,"rev")
+        setRevenueData((prevData) => ({
+          ...prevData,
+          totalRevenue: revenueData.data[0].total,
+        }));
+      }
+      const todayRevenueUrl = "https://washitup.onrender.com/api/admin/todayRevenue";
+      const todayRevenueResponse = await fetch(todayRevenueUrl)
+      const todayRevenueData = await todayRevenueResponse.json()
+
+      if (todayRevenueResponse.ok) {
+        // console.log(todayRevenueData.todaySale, "reve")
+        setRevenueData((prevData) => ({
+          ...prevData,
+          todayRevenue: todayRevenueData.todaySale,
+        }));
+
+      }
+
+    } catch (error) {
+      console.log(error)
     }
+
   };
 
   return !load ? (
