@@ -339,6 +339,9 @@ const Dashboard = () => {
           <div style={{ width: "300px", height: "300px" }}>
             <OrderChart data={dashboardData} />
           </div>
+          <div style={{ width: "300px", height: "300px" }}>
+            <OrderChart data={revenueData} />
+          </div>
         </section>
       </div>
     </>
