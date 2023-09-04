@@ -216,7 +216,7 @@ const AddCoupon = (props) => {
                 margin: 0,
                 height: "1vh",
                 position: "absolute",
-                right: "10%",
+                right: "13.5%",
                 fontWeight: "bold",
               }}
             >
