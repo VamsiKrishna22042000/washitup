@@ -10,6 +10,8 @@ import PhoneInput from "react-phone-number-input";
 
 import { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import CustomModal from "./modal";
+import VendorDetails from "./vendorDetails";
 
 const Vendors = () => {
   /**State to show the addVendor Modal Box*/
@@ -27,10 +29,10 @@ const Vendors = () => {
 
   /**state to navigate from mainsection of vendor to subsection of vendor to show all the orders assigned to the vendor */
   const [showVendorOrders, setVendorOrders] = useState([]);
-
+  const [selectedVendorId, setSelectedVendorId] = useState(null);
   /**state to store all the orders assigned to a particular vendor */
   const [subOrders, setSubOrders] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     getAllVendors();
   }, []);
@@ -487,6 +489,15 @@ const Vendors = () => {
     }
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+const handleVendorDetails = (id) => {
+  setSelectedVendorId(id);
+    setShowModal(true); 
+}
+
   return !load ? (
     <>
       {/**Terinary operator to show addvedor modal box or not */}
@@ -516,8 +527,8 @@ const Vendors = () => {
                 ✕
               </button>
             </div>
-            <div className="order-summary-view">
-              <div style={{ position: "relative" }} className="summary-view">
+            <div  className="order-summary-view">
+              <div style={{ position: "relative",cursor:"pointer" }}  onClick={() => handleVendorDetails(showVendorOrders[0]._id)}  className="summary-view">
                 <div
                   style={{
                     height: "25%",
@@ -527,6 +538,7 @@ const Vendors = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "10px",
+                    
                   }}
                 >
                   <img
@@ -705,6 +717,13 @@ const Vendors = () => {
                 </p>
               </div>
             </div>
+
+            {showModal && (
+              <CustomModal show={showModal} handleClose={handleCloseModal}>
+                {selectedVendorId && <VendorDetails vendorId={selectedVendorId} />}
+              </CustomModal>
+            )}
+
             <div className="order-summary-body">
               <div className="order-body-header1">
                 <p className="order-body-para">Customer Name</p>
@@ -789,31 +808,31 @@ const Vendors = () => {
                     style={
                       each.progress === "Active"
                         ? {
-                            backgroundColor: "#FFA00025",
-                            color: "#FFA000",
-                            borderRadius: "10px",
-                            textTransform: "capitalize",
-                          }
+                          backgroundColor: "#FFA00025",
+                          color: "#FFA000",
+                          borderRadius: "10px",
+                          textTransform: "capitalize",
+                        }
                         : each.progress === "In Progress"
-                        ? {
+                          ? {
                             color: "#6759FF",
                             backgroundColor: "#6759FF25",
                             borderRadius: "10px",
                             textTransform: "capitalize",
                           }
-                        : each.progress === "Completed"
-                        ? {
-                            color: "#519C66",
-                            backgroundColor: "#519C6625",
-                            borderRadius: "10px",
-                            textTransform: "capitalize",
-                          }
-                        : each.progress === "cancel" && {
-                            color: "#FF0000",
-                            backgroundColor: "#FF000025",
-                            borderRadius: "10px",
-                            textTransform: "capitalize",
-                          }
+                          : each.progress === "Completed"
+                            ? {
+                              color: "#519C66",
+                              backgroundColor: "#519C6625",
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                            }
+                            : each.progress === "cancel" && {
+                              color: "#FF0000",
+                              backgroundColor: "#FF000025",
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                            }
                     }
                     className="order-body-para1"
                   >
