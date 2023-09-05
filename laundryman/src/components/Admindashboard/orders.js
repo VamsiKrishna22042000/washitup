@@ -1165,6 +1165,7 @@ const Orders = () => {
                 />
               </div>
               <div className="order-body-header1">
+                <p style={{ width: "1%" }}></p>
                 <p style={{ width: "14%" }} className="order-body-para">
                   Customer Name
                 </p>
@@ -1190,8 +1191,24 @@ const Orders = () => {
                 </p>
               </div>
               {filterdAllOrders.map((each) => (
-                <div key={each._id} className="order-body-header2">
+                <div
+                  style={{ position: "relative" }}
+                  key={each._id}
+                  className="order-body-header2"
+                >
                   {/**all orders booked by the user sorted based on the date */}
+                  <div
+                    className={
+                      each.vendorName === "empty"
+                        ? "vender-assigned-or-not"
+                        : "vender-assigned-or-not1"
+                    }
+                  ></div>
+                  {each.vendorName === "empty" ? (
+                    <p className="vendor-assign-check">Vendor Not Assigned</p>
+                  ) : (
+                    <p className="vendor-assign-check1">Vendor Assigned</p>
+                  )}
                   <p
                     style={{ textTransform: "capitalize", width: "14%" }}
                     id={each._id}
