@@ -42,7 +42,6 @@ const Orders = () => {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data);
       /**This is an array to insert name,mobileNumber,userId of the user into the each order object which were in the array of orders */
       let eachObjInsertedWithNumberName = [];
 
@@ -104,8 +103,6 @@ const Orders = () => {
         cancel: cancelCount,
       });
 
-      console.log(eachObjInsertedWithNumberName);
-
       setAllOrders(eachObjInsertedWithNumberName);
     }
   };
@@ -118,16 +115,25 @@ const Orders = () => {
 
     let itemsObtained = [];
 
+    console.log(selectedCustomerOrder[0].items);
+
     for (let each of selectedCustomerOrder[0].items) {
       itemsObtained.push({
         count: each.itemCount,
         id: each._id,
         itemCategory: each.itemId.category,
         itemName: each.itemId.name,
-        price: each.itemId.price,
+        price:
+          selectedCustomerOrder[0].service === "dry Cleaning"
+            ? each.itemId.drycleaning
+            : selectedCustomerOrder[0].service === "wash & fold"
+            ? each.itemId.washfold
+            : each.itemId.washiron,
         image: each.itemId.image,
       });
     }
+
+    console.log(itemsObtained);
 
     setItems(itemsObtained);
     setSelectedCustomer(selectedCustomerOrder);
@@ -222,7 +228,12 @@ const Orders = () => {
           id: each._id,
           itemCategory: each.itemId.category,
           itemName: each.itemId.name,
-          price: each.itemId.price,
+          price:
+            selectedCustomerOrder[0].service === "dry Cleaning"
+              ? each.drycleaning
+              : selectedCustomerOrder[0].service === "wash & fold"
+              ? each.washfold
+              : each.washiron,
           image: each.itemId.image,
         });
       }
@@ -516,8 +527,6 @@ const Orders = () => {
       </>
     );
   };
-
-  console.log(selectedCustomer);
 
   return allorders.length > 0 ? (
     <>

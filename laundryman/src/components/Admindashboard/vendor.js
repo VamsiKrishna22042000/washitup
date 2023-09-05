@@ -376,7 +376,6 @@ const Vendors = () => {
     const filterdOrder = vendors.filter((each) => each._id === e.target.id);
 
     const sub = filterdOrder[0].orders.map((each) => ({
-      name: "Vamsi",
       userId: each.userId,
       orderId: each._id,
       date: each.date,
@@ -493,10 +492,10 @@ const Vendors = () => {
     setShowModal(false);
   };
 
-const handleVendorDetails = (id) => {
-  setSelectedVendorId(id);
-    setShowModal(true); 
-}
+  const handleVendorDetails = (id) => {
+    setSelectedVendorId(id);
+    setShowModal(true);
+  };
 
   return !load ? (
     <>
@@ -527,8 +526,12 @@ const handleVendorDetails = (id) => {
                 ✕
               </button>
             </div>
-            <div  className="order-summary-view">
-              <div style={{ position: "relative",cursor:"pointer" }}  onClick={() => handleVendorDetails(showVendorOrders[0]._id)}  className="summary-view">
+            <div className="order-summary-view">
+              <div
+                style={{ position: "relative", cursor: "pointer" }}
+                onClick={() => handleVendorDetails(showVendorOrders[0]._id)}
+                className="summary-view"
+              >
                 <div
                   style={{
                     height: "25%",
@@ -538,7 +541,6 @@ const handleVendorDetails = (id) => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "10px",
-                    
                   }}
                 >
                   <img
@@ -720,13 +722,14 @@ const handleVendorDetails = (id) => {
 
             {showModal && (
               <CustomModal show={showModal} handleClose={handleCloseModal}>
-                {selectedVendorId && <VendorDetails vendorId={selectedVendorId} />}
+                {selectedVendorId && (
+                  <VendorDetails vendorId={selectedVendorId} />
+                )}
               </CustomModal>
             )}
 
             <div className="order-summary-body">
               <div className="order-body-header1">
-                <p className="order-body-para">Customer Name</p>
                 <p className="order-body-para">Order Date</p>
                 <p style={{ width: "20%" }} className="order-body-para">
                   Order Id
@@ -748,14 +751,7 @@ const handleVendorDetails = (id) => {
               {subOrders.map((each) => (
                 <div key={each.orderId} className="order-body-header2">
                   {/**all orders booked by the user sorted based on the date */}
-                  <p
-                    style={{ textTransform: "capitalize" }}
-                    userId={each.userId}
-                    id={each.orderId}
-                    className="order-body-para"
-                  >
-                    {each.name}
-                  </p>
+
                   <p
                     userId={each.userId}
                     id={each.orderId}
@@ -808,31 +804,31 @@ const handleVendorDetails = (id) => {
                     style={
                       each.progress === "Active"
                         ? {
-                          backgroundColor: "#FFA00025",
-                          color: "#FFA000",
-                          borderRadius: "10px",
-                          textTransform: "capitalize",
-                        }
+                            backgroundColor: "#FFA00025",
+                            color: "#FFA000",
+                            borderRadius: "10px",
+                            textTransform: "capitalize",
+                          }
                         : each.progress === "In Progress"
-                          ? {
+                        ? {
                             color: "#6759FF",
                             backgroundColor: "#6759FF25",
                             borderRadius: "10px",
                             textTransform: "capitalize",
                           }
-                          : each.progress === "Completed"
-                            ? {
-                              color: "#519C66",
-                              backgroundColor: "#519C6625",
-                              borderRadius: "10px",
-                              textTransform: "capitalize",
-                            }
-                            : each.progress === "cancel" && {
-                              color: "#FF0000",
-                              backgroundColor: "#FF000025",
-                              borderRadius: "10px",
-                              textTransform: "capitalize",
-                            }
+                        : each.progress === "Completed"
+                        ? {
+                            color: "#519C66",
+                            backgroundColor: "#519C6625",
+                            borderRadius: "10px",
+                            textTransform: "capitalize",
+                          }
+                        : each.progress === "cancel" && {
+                            color: "#FF0000",
+                            backgroundColor: "#FF000025",
+                            borderRadius: "10px",
+                            textTransform: "capitalize",
+                          }
                     }
                     className="order-body-para1"
                   >

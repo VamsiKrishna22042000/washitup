@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 
 const AddClothes = (props) => {
+  const { typeOfWashing } = props;
   const [clothes, setClothesStore] = useState([]);
 
   useEffect(() => {
@@ -27,6 +28,12 @@ const AddClothes = (props) => {
       const obtainedData = data.data.map((each) => ({
         ...each,
         count: 0,
+        price:
+          typeOfWashing === "dry Cleaning"
+            ? each.drycleaning
+            : typeOfWashing === "wash & fold"
+            ? each.washfold
+            : each.washiron,
       }));
 
       setClothesStore(obtainedData);

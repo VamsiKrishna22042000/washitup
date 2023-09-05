@@ -54,7 +54,9 @@ const Services = () => {
     const [toAddCategory, setCategory] = useState({
       category: "Select",
       name: "",
-      price: "",
+      drycleaning: "",
+      washfold: "",
+      washiron: "",
       image: "",
     });
 
@@ -64,8 +66,21 @@ const Services = () => {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
       } else if (e.target.id === "item") {
         setCategory((prevData) => ({ ...prevData, name: e.target.value }));
-      } else if (e.target.id === "price") {
-        setCategory((prevData) => ({ ...prevData, price: e.target.value }));
+      } else if (e.target.id === "drycleaning") {
+        setCategory((prevData) => ({
+          ...prevData,
+          drycleaning: e.target.value,
+        }));
+      } else if (e.target.id === "washfold") {
+        setCategory((prevData) => ({
+          ...prevData,
+          washfold: e.target.value,
+        }));
+      } else if (e.target.id === "washiron") {
+        setCategory((prevData) => ({
+          ...prevData,
+          washiron: e.target.value,
+        }));
       } else if (e.target.id === "image") {
         setCategory((prevData) => ({ ...prevData, image: e.target.files[0] }));
       }
@@ -91,8 +106,24 @@ const Services = () => {
           pauseOnHover: true,
           theme: "colored",
         });
-      } else if (toAddCategory.price === "") {
-        toast.error("Plese Enter Price", {
+      } else if (toAddCategory.drycleaning === "") {
+        toast.error("Plese Enter Dry Cleaning Price", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else if (toAddCategory.washfold === "") {
+        toast.error("Plese Enter Wash & Fold Price", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else if (toAddCategory.washiron === "") {
+        toast.error("Plese Enter Wash & Iron Price", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
@@ -175,11 +206,20 @@ const Services = () => {
             >
               ✕
             </button>
-            <p className="add-customer-titles">Select Category</p>
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Select Category
+            </p>
             <select
               id="category"
               onChange={addCategory}
-              style={{ textTransform: "capitalize" }}
+              style={{
+                textTransform: "capitalize",
+                marginTop: "2%",
+                marginBottom: "2%",
+              }}
               className="add-customer-input-box"
             >
               <option>Select</option>
@@ -188,24 +228,73 @@ const Services = () => {
               ))}
             </select>
 
-            <p className="add-customer-titles">Item Name</p>
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Item Name
+            </p>
             <input
+              style={{ marginTop: "2%", marginBottom: "2%" }}
               id="item"
               onChange={addCategory}
               className="add-customer-input-box"
               type="text"
               placeholder="Enter Item Name"
             />
-            <p className="add-customer-titles">Price</p>
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Dry Cleaning Price
+            </p>
             <input
-              id="price"
+              style={{ marginTop: "2%", marginBottom: "2%" }}
+              id="drycleaning"
               onChange={addCategory}
               className="add-customer-input-box"
               type="number"
-              placeholder="Enter Price"
+              placeholder="Enter Dry Cleaning Price"
             />
-            <p className="add-customer-titles">Image</p>
+
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Wash & Fold Price
+            </p>
             <input
+              style={{ marginTop: "2%", marginBottom: "2%" }}
+              id="washfold"
+              onChange={addCategory}
+              className="add-customer-input-box"
+              type="number"
+              placeholder="Enter Wash & Iron Price"
+            />
+
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Wash & Iron Price
+            </p>
+            <input
+              style={{ marginTop: "2%", marginBottom: "2%" }}
+              id="washiron"
+              onChange={addCategory}
+              className="add-customer-input-box"
+              type="number"
+              placeholder="Enter Wash & Iron Price"
+            />
+
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Image
+            </p>
+            <input
+              style={{ marginTop: "2%", marginBottom: "2%" }}
               id="image"
               onChange={addCategory}
               className="add-customer-input-box"
@@ -252,7 +341,9 @@ const Services = () => {
     const [toAddCategory, setCategory] = useState({
       category: filterItemFromArray[0].category,
       name: filterItemFromArray[0].name,
-      price: filterItemFromArray[0].price,
+      drycleaning: filterItemFromArray[0].drycleaning,
+      washfold: filterItemFromArray[0].washfold,
+      washiron: filterItemFromArray[0].washiron,
       image: filterItemFromArray[0].image,
     });
 
@@ -260,7 +351,9 @@ const Services = () => {
     const [toEdit, setEditCategory] = useState({
       category: filterItemFromArray[0].category,
       name: filterItemFromArray[0].name,
-      price: filterItemFromArray[0].price,
+      drycleaning: filterItemFromArray[0].drycleaning,
+      washfold: filterItemFromArray[0].washfold,
+      washiron: filterItemFromArray[0].washiron,
       image: filterItemFromArray[0].image,
     });
 
@@ -272,8 +365,15 @@ const Services = () => {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
       } else if (e.target.id === "item") {
         setCategory((prevData) => ({ ...prevData, name: e.target.value }));
-      } else if (e.target.id === "price") {
-        setCategory((prevData) => ({ ...prevData, price: e.target.value }));
+      } else if (e.target.id === "drycleaning") {
+        setCategory((prevData) => ({
+          ...prevData,
+          drycleaning: e.target.value,
+        }));
+      } else if (e.target.id === "washfold") {
+        setCategory((prevData) => ({ ...prevData, washfold: e.target.value }));
+      } else if (e.target.id === "washiron") {
+        setCategory((prevData) => ({ ...prevData, washiron: e.target.value }));
       } else if (e.target.id === "image") {
         setCategory((prevData) => ({ ...prevData, image: e.target.files[0] }));
       }
@@ -284,7 +384,9 @@ const Services = () => {
       if (
         toAddCategory.category !== toEdit.category ||
         toAddCategory.name !== toEdit.name ||
-        toAddCategory.price !== toEdit.price ||
+        toAddCategory.drycleaning !== toEdit.drycleaning ||
+        toAddCategory.washfold !== toEdit.washfold ||
+        toAddCategory.washiron !== toEdit.washiron ||
         toAddCategory.image !== toEdit.image
       ) {
         setLoad(false);
@@ -297,8 +399,14 @@ const Services = () => {
         if (toAddCategory.name !== toEdit.name) {
           fd.append("name", toAddCategory.name);
         }
-        if (toAddCategory.price !== toEdit.price) {
-          fd.append("price", toAddCategory.price);
+        if (toAddCategory.drycleaning !== toEdit.drycleaning) {
+          fd.append("drycleaning", toAddCategory.drycleaning);
+        }
+        if (toAddCategory.washfold !== toEdit.washfold) {
+          fd.append("washfold", toAddCategory.washfold);
+        }
+        if (toAddCategory.washfold !== toEdit.washfold) {
+          fd.append("washiron", toAddCategory.washfold);
         }
         if (toAddCategory.image !== toEdit.image) {
           fd.append("image", toAddCategory.image);
@@ -353,7 +461,7 @@ const Services = () => {
         ></div>
         {load ? (
           <div style={{ left: "40%" }} className="add-service-modal-box">
-            <h6>Add a New Category</h6>
+            <h6>Edit Category</h6>
             <button
               onClick={() => {
                 setEditModal("");
@@ -371,11 +479,20 @@ const Services = () => {
             >
               ✕
             </button>
-            <p className="add-customer-titles">Select Category</p>
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Select Category
+            </p>
             <select
               id="category"
               onChange={addCategory}
-              style={{ textTransform: "capitalize" }}
+              style={{
+                textTransform: "capitalize",
+                marginTop: "2%",
+                marginBottom: "2%",
+              }}
               className="add-customer-input-box"
               value={toAddCategory.category}
             >
@@ -385,27 +502,85 @@ const Services = () => {
               ))}
             </select>
 
-            <p className="add-customer-titles">Item Name</p>
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Item Name
+            </p>
             <input
-              value={toAddCategory.name}
+              style={{
+                marginTop: "2%",
+                marginBottom: "2%",
+                textTransform: "capitalize",
+              }}
               id="item"
               onChange={addCategory}
               className="add-customer-input-box"
               type="text"
               placeholder="Enter Item Name"
-              style={{ textTransform: "capitalize" }}
+              value={toAddCategory.name}
             />
-            <p className="add-customer-titles">Price</p>
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Dry Cleaning Price
+            </p>
             <input
-              id="price"
+              style={{
+                marginTop: "2%",
+                marginBottom: "2%",
+                textTransform: "capitalize",
+              }}
+              id="drycleaning"
               onChange={addCategory}
               className="add-customer-input-box"
               type="number"
-              placeholder="Enter Price"
-              value={toAddCategory.price}
+              placeholder="Enter Dry Cleaning Price"
+              value={toAddCategory.drycleaning}
             />
-            <p className="add-customer-titles">Image</p>
+
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Wash & Fold Price
+            </p>
             <input
+              style={{ marginTop: "2%", marginBottom: "2%" }}
+              id="washfold"
+              onChange={addCategory}
+              className="add-customer-input-box"
+              type="number"
+              placeholder="Enter Wash & Fold Price"
+              value={toAddCategory.washfold}
+            />
+
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Wash & Iron Price
+            </p>
+            <input
+              style={{ marginTop: "2%", marginBottom: "2%" }}
+              id="washiron"
+              onChange={addCategory}
+              className="add-customer-input-box"
+              type="number"
+              value={toAddCategory.washiron}
+              placeholder="Enter Wash & Iron Price"
+            />
+
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Image
+            </p>
+            <input
+              style={{ marginTop: "2%", marginBottom: "2%" }}
               id="image"
               onChange={addCategory}
               className="add-customer-input-box"
@@ -512,7 +687,9 @@ const Services = () => {
             <div className="order-body-para">Image</div>
             <p className="order-body-para">Item Name</p>
             <p className="order-body-para">Category</p>
-            <p className="order-body-para">Unit Price</p>
+            <p className="order-body-para">Dry Cleaning Price</p>
+            <p className="order-body-para">Wash & Fold Price</p>
+            <p className="order-body-para">Wash & Iron Price</p>
             <p className="order-body-para"></p>
           </div>
           {items.map((each) => (
@@ -537,7 +714,9 @@ const Services = () => {
               >
                 {each.category}
               </p>
-              <p className="order-body-para">₹ {each.price}</p>
+              <p className="order-body-para">₹ {each.drycleaning}</p>
+              <p className="order-body-para">₹ {each.washfold}</p>
+              <p className="order-body-para">₹ {each.washiron}</p>
               <button
                 type="button"
                 style={{ backgroundColor: "transparent" }}

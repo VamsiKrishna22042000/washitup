@@ -125,7 +125,7 @@ function LaundryNav() {
         </p>
       </div>
       {service === changeComponents.washClothes ? (
-        <AddClothes wash={washClothes} />
+        <AddClothes typeOfWashing={typeOfWashing} wash={washClothes} />
       ) : service === changeComponents.typeOfWash ? (
         <TypeOfWashing type={callBackForTypeOfWashing} />
       ) : service === changeComponents.bookService ? (

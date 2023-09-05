@@ -18,6 +18,8 @@ const Coupons = () => {
 
   const [addCoupon, setAddCoupon] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     getAllCoupons();
   }, []);
@@ -32,6 +34,7 @@ const Coupons = () => {
     if (response.ok) {
       console.log(data);
       setCoupons(data.data);
+      setLoading(false);
     }
   };
 
@@ -292,7 +295,44 @@ const Coupons = () => {
     each.discount.toString().startsWith(searchWithDiscount)
   );
 
-  return (
+  const settingProgress = async (e) => {
+    setLoading(true);
+
+    const url = `https://washitup.onrender.com/api/admin/coupon/changeStatus`;
+
+    const reqConfigure = {
+      method: "PUT",
+
+      headers: {
+        "Content-type": "application/json",
+      },
+
+      body: JSON.stringify({
+        id: e.target.id,
+        status: e.target.value,
+      }),
+    };
+
+    const respone = await fetch(url, reqConfigure);
+
+    if (respone.ok) {
+      getAllCoupons();
+      setLoading(false);
+    }
+  };
+
+  return loading ? (
+    <section
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      className="order-body"
+    >
+      <TailSpin color="#6759ff" height={50} width={50} />
+    </section>
+  ) : (
     <>
       <section className="order-body">
         <div className="order-summary-head">
@@ -369,6 +409,7 @@ const Coupons = () => {
             <p className="order-body-para">Coupon Code</p>
             <p className="order-body-para">Discount</p>
             <p className="order-body-para">Coupon Id</p>
+            <p className="order-body-para">Action</p>
             <p className="order-body-para">Status</p>
             <div className="order-body-para"></div>
           </div>
@@ -384,6 +425,21 @@ const Coupons = () => {
               <p className="order-body-para">{each.couponCode}</p>
               <p className="order-body-para">{each.discount}</p>
               <p className="order-body-para">{each._id}</p>
+              <select
+                id={each._id}
+                onChange={settingProgress}
+                className="order-body-para"
+                style={{ textTransform: "capitalize", outline: "none" }}
+              >
+                {each.active.map((e) => (
+                  <option
+                    style={{ textTransform: "capitalize" }}
+                    selected={each.status === e ? true : false}
+                  >
+                    {e}
+                  </option>
+                ))}
+              </select>
               <p
                 style={{
                   textTransform: "capitalize",
