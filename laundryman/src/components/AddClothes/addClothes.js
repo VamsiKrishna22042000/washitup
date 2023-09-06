@@ -25,6 +25,7 @@ const AddClothes = (props) => {
     const data = await response.json();
 
     if (response.ok) {
+      console.log(data);
       const obtainedData = data.data.map((each) => ({
         ...each,
         count: 0,

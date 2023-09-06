@@ -141,36 +141,43 @@ class LaundryBody extends Component {
 
   render() {
     return (
-      <div className="background-2">
-        <h1 className="back2-head">
-          Why To Choose
-          <span className="span2"> WashIt Up </span>?
-        </h1>
-        <h1 className="back2-head2">
-          Why To Choose
-          <br />
-          <span className="span2"> WashIt Up </span>?
-        </h1>
-        <p className="tagline"></p>
+      <>
+        <div className="background22">
+          <h1 className="offer-22-head">Exiting Offers</h1>
+          <img className="offer-22" src="/offer1.png" alt="offer1" />
+          <img className="offer-22" src="/offer2.png" alt="offer2" />
+        </div>
+        <div className="background-2">
+          <h1 className="back2-head">
+            Why To Choose
+            <span className="span2"> WashIt Up </span>?
+          </h1>
+          <h1 className="back2-head2">
+            Why To Choose
+            <br />
+            <span className="span2"> WashIt Up </span>?
+          </h1>
+          <p className="tagline"></p>
 
-        <div className="features">
-          {fearturesOfback2.map((each) => (
-            <FeatureBox each={each} key={each.con1} />
+          <div className="features">
+            {fearturesOfback2.map((each) => (
+              <FeatureBox each={each} key={each.con1} />
+            ))}
+          </div>
+          <div className="dots">
+            <button id="dt1" className="d1" onClick={this.boxchange}></button>
+            <button id="dt2" className="d1" onClick={this.boxchange}></button>
+            <button id="dt3" className="d1" onClick={this.boxchange}></button>
+            <button id="dt4" className="d1" onClick={this.boxchange}></button>
+          </div>
+          {iphones.map((eachi) => (
+            <Iphonecon key={eachi.iurl} eachi={eachi} />
           ))}
+          <TestimonialSlider />
+          <Alliphones />
+          <Lastsetion />
         </div>
-        <div className="dots">
-          <button id="dt1" className="d1" onClick={this.boxchange}></button>
-          <button id="dt2" className="d1" onClick={this.boxchange}></button>
-          <button id="dt3" className="d1" onClick={this.boxchange}></button>
-          <button id="dt4" className="d1" onClick={this.boxchange}></button>
-        </div>
-        {iphones.map((eachi) => (
-          <Iphonecon key={eachi.iurl} eachi={eachi} />
-        ))}
-        <TestimonialSlider />
-        <Alliphones />
-        <Lastsetion />
-      </div>
+      </>
     );
   }
 }
