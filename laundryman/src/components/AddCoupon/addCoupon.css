@@ -1,4 +1,7 @@
 @media screen and (min-width: 992px) {
+  .font-total {
+    font-size: 1.35vw;
+  }
   .login-book-service-coupon {
     position: absolute;
     width: 43vw;
@@ -122,6 +125,9 @@
 }
 
 @media screen and (max-width: 600px) {
+  .font-total {
+    font-size: 3vw;
+  }
   .login-book-service-coupon {
     height: auto;
     position: relative;

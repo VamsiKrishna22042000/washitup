@@ -226,6 +226,7 @@ const AddCoupon = (props) => {
         {discount === 0 ? (
           <>
             <p
+              className="font-total"
               style={{
                 margin: 0,
                 height: "1vh",
@@ -238,6 +239,7 @@ const AddCoupon = (props) => {
               Total
             </p>
             <p
+              className="font-total"
               style={{
                 margin: 0,
                 height: "1vh",
@@ -254,6 +256,7 @@ const AddCoupon = (props) => {
         ) : (
           <>
             <p
+              className="font-total"
               style={{
                 margin: 0,
                 height: "1vh",
@@ -265,6 +268,7 @@ const AddCoupon = (props) => {
               Sub Total
             </p>
             <p
+              className="font-total"
               style={{
                 margin: 0,
                 height: "1vh",
@@ -277,6 +281,7 @@ const AddCoupon = (props) => {
               ₹ {total}
             </p>
             <p
+              className="font-total"
               style={{
                 margin: 0,
                 height: "1vh",
@@ -291,6 +296,7 @@ const AddCoupon = (props) => {
               Total
             </p>
             <p
+              className="font-total"
               style={{
                 margin: 0,
                 height: "1vh",

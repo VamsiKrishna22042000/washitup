@@ -420,6 +420,7 @@ const Coupons = () => {
           <div className="order-body-header1">
             <div className="order-body-para"></div>
             <p className="order-body-para">Coupon Code</p>
+            <p className="order-body-para">Minimum Price</p>
             <p className="order-body-para">Discount</p>
             <p className="order-body-para">Coupon Id</p>
             <p className="order-body-para">Action</p>
@@ -430,11 +431,12 @@ const Coupons = () => {
             <div key={each._id} className="order-body-header2">
               <div className="order-body-para">
                 <img
-                  style={{ height: "100%", width: "15%" }}
+                  style={{ height: "100%", width: "20%" }}
                   src="/coupon2.png"
                   alt="Profile"
                 />
               </div>
+              <p className="order-body-para">₹ {each.minimumPrice}</p>
               <p className="order-body-para">{each.couponCode}</p>
               <p className="order-body-para">{each.discount}</p>
               <p className="order-body-para">{each._id}</p>
