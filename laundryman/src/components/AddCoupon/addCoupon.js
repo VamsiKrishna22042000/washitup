@@ -4,6 +4,8 @@ import "./addCoupon.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { TailSpin } from "react-loader-spinner";
+
 const AddCoupon = (props) => {
   const { typeOfWashing, items, dataTobeSent, success } = props;
 
@@ -24,10 +26,13 @@ const AddCoupon = (props) => {
 
   const [loadCelebration, setCelebration] = useState(false);
 
+  const [loadbutton, setLoadButton] = useState(false);
+
   {
     /**Function used to book the laundry by passing the itemsSelected, typeofWash,userForm */
   }
   const setToWashing = async () => {
+    setLoadButton(true);
     let totalAmount = total - discount;
     const url = `${process.env.REACT_APP_ROOT_URL}/api/user/bookOrder`;
 
@@ -171,25 +176,27 @@ const AddCoupon = (props) => {
               style={{
                 width: "33%",
                 textTransform: "capitalize",
-                textAlign: "center",
+                textAlign: "start",
+                paddingLeft: "15%",
                 padding: "0",
                 textOverflow: "ellipsis",
                 lineClamp: 1,
               }}
             >
-              {each.count}
+              {each.count} x {each.price}
             </p>
             <p
               style={{
                 width: "33%",
                 textTransform: "capitalize",
-                textAlign: "center",
+                textAlign: "start",
+                paddingLeft: "18%",
                 padding: "0",
                 textOverflow: "ellipsis",
                 lineClamp: 1,
               }}
             >
-              ₹ {each.price}
+              ₹ {each.price * each.count}
             </p>
           </div>
         ))}
@@ -207,6 +214,8 @@ const AddCoupon = (props) => {
                 height: "1vh",
                 position: "absolute",
                 fontWeight: "bold",
+                fontFamily: "monospace",
+                color: "green",
               }}
             >
               Total
@@ -216,8 +225,10 @@ const AddCoupon = (props) => {
                 margin: 0,
                 height: "1vh",
                 position: "absolute",
-                right: "13.5%",
+                right: "5%",
                 fontWeight: "bold",
+                color: "green",
+                fontFamily: "Arial",
               }}
             >
               ₹ {total}
@@ -231,6 +242,7 @@ const AddCoupon = (props) => {
                 height: "1vh",
                 position: "absolute",
                 fontWeight: "bold",
+                fontFamily: "monospace",
               }}
             >
               Sub Total
@@ -240,7 +252,8 @@ const AddCoupon = (props) => {
                 margin: 0,
                 height: "1vh",
                 position: "absolute",
-                right: "10%",
+                right: "5%",
+                fontFamily: "Arial",
                 fontWeight: "bold",
               }}
             >
@@ -255,6 +268,7 @@ const AddCoupon = (props) => {
                 fontWeight: "bold",
                 marginTop: "15%",
                 color: "green",
+                fontFamily: "monospace",
               }}
             >
               Total
@@ -264,10 +278,11 @@ const AddCoupon = (props) => {
                 margin: 0,
                 height: "1vh",
                 position: "absolute",
-                right: "10%",
+                right: "5%",
                 fontWeight: "bold",
                 marginTop: "15%",
                 color: "green",
+                fontFamily: "Arial",
               }}
             >
               ₹ {total - discount}
@@ -276,13 +291,23 @@ const AddCoupon = (props) => {
         )}
       </div>
       {/**Button used to book the laundry hits the setToWashing Function*/}
-      <button
-        onClick={setToWashing}
-        className="apply-coupon-button2"
-        type="button"
-      >
-        Book
-      </button>
+      {loadbutton ? (
+        <button
+          onClick={setToWashing}
+          className="apply-coupon-button2"
+          type="button"
+        >
+          <TailSpin color="#ffffff" height={23} width={23} />
+        </button>
+      ) : (
+        <button
+          onClick={setToWashing}
+          className="apply-coupon-button2"
+          type="button"
+        >
+          Book
+        </button>
+      )}
     </div>
   );
 };
