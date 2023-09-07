@@ -37,7 +37,15 @@ const AddClothes = (props) => {
             : each.washiron,
       }));
 
-      setClothesStore(obtainedData);
+      const filterObtainedData = obtainedData.filter((each) => {
+        if (typeOfWashing === "dry Cleaning") {
+          return each.type === "dry";
+        } else {
+          return each.type === "wash";
+        }
+      });
+
+      setClothesStore(filterObtainedData);
     }
   };
 
@@ -157,47 +165,60 @@ const AddClothes = (props) => {
         ))}
       </div>
       <div className="clothes-add">
-        <BiRupee className="set-counter-total-price-icon" />
-        <p id="total-price" className="counter-total-price">
+        <BiRupee className="set-counter-total1" />
+        <p
+          style={{ marginLeft: "2%" }}
+          id="total-price"
+          className="counter-total-price"
+        >
           {total}
         </p>
         {/** Displaying the filterd Items*/}
-        {filterStore.map((each) => (
-          <div className="set-counter">
-            <img src={each.image} className="set-counter-icon" alt={each._id} />
-            <button
-              price={each.price}
-              id={each._id}
-              onClick={decrementCount}
-              className="set-counter-button"
-              type="button"
-            >
-              -
-            </button>
-            <p className="set-counter-para">{each.count}</p>
-            <p
-              style={{ textTransform: "capitalize" }}
-              className="set-counter-name"
-            >
-              {each.name}
-            </p>
-            <p className="set-counter-amount">
-              <BiRupee style={{ marginBottom: "8%" }} />
-              {each.price}
-            </p>
-            <BiRupee className="set-counter-price-icon" />
-            <p className="set-counter-price">{each.count * each.price}</p>
-            <button
-              price={each.price}
-              id={each._id}
-              onClick={updateCount}
-              className="set-counter-button"
-              type="button"
-            >
-              +
-            </button>
-          </div>
-        ))}
+        <div className="items-over">
+          {filterStore.map((each) => (
+            <div className="set-counter">
+              <img
+                src={each.image}
+                className="set-counter-icon"
+                alt={each._id}
+              />
+              <button
+                price={each.price}
+                id={each._id}
+                onClick={decrementCount}
+                className="set-counter-button"
+                type="button"
+              >
+                -
+              </button>
+              <p className="set-counter-para">{each.count}</p>
+              <p
+                style={{ textTransform: "capitalize" }}
+                className="set-counter-name"
+              >
+                {each.name}
+              </p>
+              <p className="set-counter-amount">
+                <BiRupee style={{ marginBottom: "8%" }} />
+                {each.price}
+              </p>
+              <p className="set-counter-price">
+                <BiRupee style={{ marginBottom: "8%" }} />
+                {each.count * each.price}
+              </p>
+              <button
+                price={each.price}
+                id={each._id}
+                onClick={updateCount}
+                className="set-counter-button"
+                type="button"
+              >
+                +
+              </button>
+            </div>
+          ))}
+        </div>
+
         <p
           id="add-clothes-err"
           className="add-clothes-error-msg add-clothes-error-msg-disable"

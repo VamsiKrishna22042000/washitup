@@ -66,6 +66,8 @@ const Services = () => {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
       } else if (e.target.id === "item") {
         setCategory((prevData) => ({ ...prevData, name: e.target.value }));
+      } else if (e.target.id === "type") {
+        setCategory((prevData) => ({ ...prevData, type: e.target.value }));
       } else if (e.target.id === "drycleaning") {
         setCategory((prevData) => ({
           ...prevData,
@@ -100,6 +102,14 @@ const Services = () => {
         });
       } else if (toAddCategory.name === "") {
         toast.error("Plese Enter Item name", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else if (toAddCategory.type === "") {
+        toast.error("Please Enter Type", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
@@ -217,8 +227,8 @@ const Services = () => {
               onChange={addCategory}
               style={{
                 textTransform: "capitalize",
-                marginTop: "2%",
-                marginBottom: "2%",
+                marginTop: "1.5%",
+                marginBottom: "1.5%",
               }}
               className="add-customer-input-box"
             >
@@ -241,6 +251,24 @@ const Services = () => {
               className="add-customer-input-box"
               type="text"
               placeholder="Enter Item Name"
+            />
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Type
+            </p>
+            <input
+              style={{
+                marginTop: "2%",
+                marginBottom: "2%",
+                textTransform: "capitalize",
+              }}
+              id="type"
+              onChange={addCategory}
+              className="add-customer-input-box"
+              type="text"
+              placeholder="Enter Type"
             />
             <p
               style={{ marginTop: "1%", marginBottom: "1%" }}
@@ -337,21 +365,23 @@ const Services = () => {
 
     console.log(filterItemFromArray);
 
-    /**Demo state to check weather there is any change in the data enter and the data that already exists */
+    /**Main state to store the edited Data*/
     const [toAddCategory, setCategory] = useState({
       category: filterItemFromArray[0].category,
       name: filterItemFromArray[0].name,
       drycleaning: filterItemFromArray[0].drycleaning,
+      type: filterItemFromArray[0].type,
       washfold: filterItemFromArray[0].washfold,
       washiron: filterItemFromArray[0].washiron,
       image: filterItemFromArray[0].image,
     });
 
-    /**Main state to store the edited Data*/
+    /**Demo state to check weather there is any change in the data enter and the data that already exists */
     const [toEdit, setEditCategory] = useState({
       category: filterItemFromArray[0].category,
       name: filterItemFromArray[0].name,
       drycleaning: filterItemFromArray[0].drycleaning,
+      type: filterItemFromArray[0].type,
       washfold: filterItemFromArray[0].washfold,
       washiron: filterItemFromArray[0].washiron,
       image: filterItemFromArray[0].image,
@@ -365,15 +395,23 @@ const Services = () => {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
       } else if (e.target.id === "item") {
         setCategory((prevData) => ({ ...prevData, name: e.target.value }));
+      } else if (e.target.id === "type") {
+        setCategory((prevData) => ({ ...prevData, type: e.target.value }));
       } else if (e.target.id === "drycleaning") {
         setCategory((prevData) => ({
           ...prevData,
-          drycleaning: e.target.value,
+          drycleaning: parseInt(e.target.value),
         }));
       } else if (e.target.id === "washfold") {
-        setCategory((prevData) => ({ ...prevData, washfold: e.target.value }));
+        setCategory((prevData) => ({
+          ...prevData,
+          washfold: parseInt(e.target.value),
+        }));
       } else if (e.target.id === "washiron") {
-        setCategory((prevData) => ({ ...prevData, washiron: e.target.value }));
+        setCategory((prevData) => ({
+          ...prevData,
+          washiron: parseInt(e.target.value),
+        }));
       } else if (e.target.id === "image") {
         setCategory((prevData) => ({ ...prevData, image: e.target.files[0] }));
       }
@@ -384,6 +422,7 @@ const Services = () => {
       if (
         toAddCategory.category !== toEdit.category ||
         toAddCategory.name !== toEdit.name ||
+        toAddCategory.type !== toEdit.type ||
         toAddCategory.drycleaning !== toEdit.drycleaning ||
         toAddCategory.washfold !== toEdit.washfold ||
         toAddCategory.washiron !== toEdit.washiron ||
@@ -399,6 +438,11 @@ const Services = () => {
         if (toAddCategory.name !== toEdit.name) {
           fd.append("name", toAddCategory.name);
         }
+
+        if (toAddCategory.type !== toEdit.type) {
+          fd.append("type", toAddCategory.type);
+        }
+
         if (toAddCategory.drycleaning !== toEdit.drycleaning) {
           fd.append("drycleaning", toAddCategory.drycleaning);
         }
@@ -406,8 +450,9 @@ const Services = () => {
           fd.append("washfold", toAddCategory.washfold);
         }
         if (toAddCategory.washfold !== toEdit.washfold) {
-          fd.append("washiron", toAddCategory.washfold);
+          fd.append("washiron", toAddCategory.washiron);
         }
+
         if (toAddCategory.image !== toEdit.image) {
           fd.append("image", toAddCategory.image);
         }
@@ -520,6 +565,25 @@ const Services = () => {
               type="text"
               placeholder="Enter Item Name"
               value={toAddCategory.name}
+            />
+            <p
+              style={{ marginTop: "1%", marginBottom: "1%" }}
+              className="add-customer-titles"
+            >
+              Type
+            </p>
+            <input
+              style={{
+                marginTop: "2%",
+                marginBottom: "2%",
+                textTransform: "capitalize",
+              }}
+              id="type"
+              onChange={addCategory}
+              className="add-customer-input-box"
+              type="text"
+              placeholder="Enter Type"
+              value={toAddCategory.type}
             />
             <p
               style={{ marginTop: "1%", marginBottom: "1%" }}
@@ -684,19 +748,22 @@ const Services = () => {
             <h6 style={{ margin: 0 }}>List Of Items</h6>
           </div>
           <div className="order-body-header1">
-            <div className="order-body-para">Image</div>
+            <div style={{ width: "10%" }} className="order-body-para">
+              Image
+            </div>
             <p className="order-body-para">Item Name</p>
             <p className="order-body-para">Category</p>
+            <p className="order-body-para">Type</p>
             <p className="order-body-para">Dry Cleaning Price</p>
             <p className="order-body-para">Wash & Fold Price</p>
             <p className="order-body-para">Wash & Iron Price</p>
-            <p className="order-body-para"></p>
+            <p style={{ width: "10%" }} className="order-body-para"></p>
           </div>
           {items.map((each) => (
             <div key={each.id} className="order-body-header2">
-              <div className="order-body-para">
+              <div style={{ width: "10%" }} className="order-body-para">
                 <img
-                  style={{ height: "100%", width: "15%" }}
+                  style={{ height: "100%", width: "41%" }}
                   src={each.image}
                   alt={each.name}
                 />
@@ -714,12 +781,18 @@ const Services = () => {
               >
                 {each.category}
               </p>
+              <p
+                style={{ textTransform: "capitalize" }}
+                className="order-body-para"
+              >
+                {each.type}
+              </p>
               <p className="order-body-para">₹ {each.drycleaning}</p>
               <p className="order-body-para">₹ {each.washfold}</p>
               <p className="order-body-para">₹ {each.washiron}</p>
               <button
                 type="button"
-                style={{ backgroundColor: "transparent" }}
+                style={{ backgroundColor: "transparent", width: "10%" }}
                 className="order-body-para"
               >
                 <img
@@ -727,7 +800,7 @@ const Services = () => {
                     setEditModal(e.target.id);
                   }}
                   id={each._id}
-                  style={{ height: "100%", width: "13%" }}
+                  style={{ height: "100%", width: "40%" }}
                   src="/edit-item.png"
                   alt={each.name}
                 />

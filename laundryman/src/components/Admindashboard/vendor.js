@@ -33,6 +33,9 @@ const Vendors = () => {
   /**state to store all the orders assigned to a particular vendor */
   const [subOrders, setSubOrders] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  const [subfilter, setSubfilter] = useState("");
+
   useEffect(() => {
     getAllVendors();
   }, []);
@@ -497,6 +500,10 @@ const Vendors = () => {
     setShowModal(true);
   };
 
+  const suborderFiltered = subOrders.filter((each) =>
+    subfilter === "" ? each : each.progress === subfilter
+  );
+
   return !load ? (
     <>
       {/**Terinary operator to show addvedor modal box or not */}
@@ -729,6 +736,87 @@ const Vendors = () => {
             )}
 
             <div className="order-summary-body">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                }}
+              >
+                <strong>Filter :</strong>
+                <button
+                  style={{
+                    borderRadius: "5px",
+                    marginLeft: "10px",
+                    fontSize: "1vw",
+                    borderColor: "#ffa000",
+                    borderWidth: 1,
+                    backgroundColor:
+                      subfilter === "Active" ? "#ffa000" : "#ffffff",
+                    color: subfilter === "Active" ? "#ffffff" : "#ffa000",
+                  }}
+                  type="button"
+                  onClick={() => {
+                    setSubfilter("Active");
+                  }}
+                >
+                  Active
+                </button>
+                <button
+                  style={{
+                    borderRadius: "5px",
+                    marginLeft: "10px",
+                    fontSize: "1vw",
+                    borderColor: "#6759ff",
+                    borderWidth: 1,
+                    backgroundColor:
+                      subfilter === "In Progress" ? "#6759ff" : "#ffffff",
+                    color: subfilter === "In Progress" ? "#ffffff" : "#6759ff",
+                  }}
+                  type="button"
+                  onClick={() => {
+                    setSubfilter("In Progress");
+                  }}
+                >
+                  In Progress
+                </button>
+                <button
+                  style={{
+                    borderRadius: "5px",
+                    marginLeft: "10px",
+                    fontSize: "1vw",
+                    borderColor: "#519c66",
+                    borderWidth: 1,
+                    backgroundColor:
+                      subfilter === "Completed" ? "#519c66" : "#ffffff",
+                    color: subfilter === "Completed" ? "#ffffff" : "#519c66",
+                  }}
+                  type="button"
+                  onClick={() => {
+                    setSubfilter("Completed");
+                  }}
+                >
+                  Completed
+                </button>
+                <button
+                  style={{
+                    borderRadius: "5px",
+                    marginLeft: "10px",
+                    fontSize: "1vw",
+                    borderColor: "grey",
+                    borderWidth: 1,
+                    backgroundColor: "#ffffff",
+                    color: "grey",
+                    marginRight: "10px",
+                  }}
+                  type="button"
+                  onClick={() => {
+                    setSubfilter("");
+                  }}
+                >
+                  Clear
+                </button>
+              </div>
               <div className="order-body-header1">
                 <p className="order-body-para">Order Date</p>
                 <p style={{ width: "20%" }} className="order-body-para">
@@ -748,7 +836,7 @@ const Vendors = () => {
                   Status
                 </p>
               </div>
-              {subOrders.map((each) => (
+              {suborderFiltered.map((each) => (
                 <div key={each.orderId} className="order-body-header2">
                   {/**all orders booked by the user sorted based on the date */}
 
