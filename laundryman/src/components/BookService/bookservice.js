@@ -2,6 +2,8 @@ import "../LaundryMain/index.css";
 
 import "./bookservice.css";
 
+import { MagnifyingGlass } from "react-loader-spinner";
+
 import { useState } from "react";
 
 import { BiCurrentLocation } from "react-icons/bi";
@@ -49,6 +51,8 @@ const BookService = (props) => {
   });
 
   const [pincode, setPincode] = useState("");
+
+  const [geoLoading, setLoading] = useState(false);
 
   /**Array to store the pincodes that which we provide service for those areas*/
   const availablePincodes = [
@@ -232,6 +236,7 @@ const BookService = (props) => {
       const jsonData = await response.json();
       if (response.ok === true) {
         setGeoLoc(jsonData.results[0].formatted_address);
+        setLoading(false);
         console.log(
           jsonData.results[0].address_components[
             jsonData.results[0].address_components.length - 1
@@ -265,6 +270,7 @@ const BookService = (props) => {
 
   /**Function to generate the coordinates(Latitude and longitude) for reversegeocoding*/
   function getLocation() {
+    setLoading(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
@@ -365,18 +371,49 @@ const BookService = (props) => {
 
           <div style={{ position: "relative", width: "100%" }}>
             <p className="where-titles">Add Location</p>
-            <input
-              id="geoLoc"
-              value={geoLoc}
-              className="name3"
-              type="text"
-              placeholder="Click Here to add you location"
-              style={{ paddingLeft: "10%" }}
-              onChange={(e) => {
-                setGeoLoc(e.target.value);
-              }}
-            />
-            <BiCurrentLocation className="geoLocator" onClick={getLocation} />
+            {geoLoading ? (
+              <div
+                className="name3"
+                style={{
+                  paddingLeft: "10%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "relative",
+                  borderColor: "transparent",
+                }}
+              >
+                <MagnifyingGlass
+                  visible={true}
+                  height="20"
+                  width="20"
+                  ariaLabel="MagnifyingGlass-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="MagnifyingGlass-wrapper"
+                  glassColor="#c0efff"
+                  color="#6759ff"
+                />
+              </div>
+            ) : (
+              <input
+                id="geoLoc"
+                value={geoLoc}
+                className="name3"
+                type="text"
+                placeholder="Click Here to add you location"
+                style={{ paddingLeft: "10%" }}
+                onChange={(e) => {
+                  setGeoLoc(e.target.value);
+                }}
+              />
+            )}
+            {!geoLoading && (
+              <BiCurrentLocation
+                cursor={"pointer"}
+                className="geoLocator"
+                onClick={getLocation}
+              />
+            )}
           </div>
           <p className="where-titles">Address</p>
           <textarea

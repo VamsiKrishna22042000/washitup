@@ -176,9 +176,7 @@ const AddCoupon = (props) => {
               style={{
                 width: "33%",
                 textTransform: "capitalize",
-                textAlign: "start",
-                paddingLeft: "15%",
-                padding: "0",
+                textAlign: "end",
                 textOverflow: "ellipsis",
                 lineClamp: 1,
               }}
@@ -190,8 +188,7 @@ const AddCoupon = (props) => {
                 width: "33%",
                 textTransform: "capitalize",
                 textAlign: "start",
-                paddingLeft: "18%",
-                padding: "0",
+                paddingLeft: "19%",
                 textOverflow: "ellipsis",
                 lineClamp: 1,
               }}
