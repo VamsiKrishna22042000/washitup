@@ -20,10 +20,8 @@ const Dashboard = () => {
 
   /**Function to get all the dashboard Data */
   const getDashboardData = async () => {
-
     try {
-
-      const url = "https://washitup.onrender.com/api/admin/getAllCounts";
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllCounts`;
 
       const respone = await fetch(url);
 
@@ -34,9 +32,9 @@ const Dashboard = () => {
         setDashBoardData(data.data);
         setLoad(false);
       }
-      const revenueUrl = "https://washitup.onrender.com/api/admin/totalRevenue";
-      const revenueResponse = await fetch(revenueUrl)
-      const revenueData = await revenueResponse.json()
+      const revenueUrl = `${process.env.REACT_APP_ROOT_URL}/api/admin/totalRevenue`;
+      const revenueResponse = await fetch(revenueUrl);
+      const revenueData = await revenueResponse.json();
 
       if (revenueResponse.ok) {
         // console.log(revenueData.data[0].total,"rev")
@@ -45,9 +43,9 @@ const Dashboard = () => {
           totalRevenue: revenueData.data[0].total,
         }));
       }
-      const todayRevenueUrl = "https://washitup.onrender.com/api/admin/todayRevenue";
-      const todayRevenueResponse = await fetch(todayRevenueUrl)
-      const todayRevenueData = await todayRevenueResponse.json()
+      const todayRevenueUrl = `${process.env.REACT_APP_ROOT_URL}/api/admin/todayRevenue`;
+      const todayRevenueResponse = await fetch(todayRevenueUrl);
+      const todayRevenueData = await todayRevenueResponse.json();
 
       if (todayRevenueResponse.ok) {
         // console.log(todayRevenueData.todaySale, "reve")
@@ -55,13 +53,10 @@ const Dashboard = () => {
           ...prevData,
           todayRevenue: todayRevenueData.todaySale,
         }));
-
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
   };
 
   return !load ? (

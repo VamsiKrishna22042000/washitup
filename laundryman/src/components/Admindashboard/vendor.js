@@ -42,7 +42,7 @@ const Vendors = () => {
 
   /**Function to get all the vendor and set vendor to allVendors state */
   const getAllVendors = async () => {
-    const url = "https://washitup.onrender.com/api/admin/getAllVendors";
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
     const response = await fetch(url);
 
@@ -156,7 +156,7 @@ const Vendors = () => {
           secondaryMobile: value2.slice(3, value2.length + 1),
         };
 
-        const url = "https://washitup.onrender.com/api/vendor/addVendor";
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/addVendor`;
 
         const reqConfigure = {
           method: "POST",
@@ -415,7 +415,7 @@ const Vendors = () => {
 
   /**Same as filterVendorOrders2 but when we update the progress of a order in the subsection of the vendor*/
   const filterVendorOrders2 = async (vendorId) => {
-    const url = "https://washitup.onrender.com/api/admin/getAllVendors";
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
     const response = await fetch(url);
 

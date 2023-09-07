@@ -4,7 +4,7 @@ import "./addCoupon.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { TailSpin } from "react-loader-spinner";
+import { TailSpin, ThreeDots } from "react-loader-spinner";
 
 const AddCoupon = (props) => {
   const { typeOfWashing, items, dataTobeSent, success } = props;
@@ -27,6 +27,8 @@ const AddCoupon = (props) => {
   const [loadCelebration, setCelebration] = useState(false);
 
   const [loadbutton, setLoadButton] = useState(false);
+
+  const [loadapply, setApply] = useState(false);
 
   {
     /**Function used to book the laundry by passing the itemsSelected, typeofWash,userForm */
@@ -60,7 +62,8 @@ const AddCoupon = (props) => {
     /**Function used to apply the coupon and get the discount of the coupon and update the state of the discount */
   }
   const applyCoupon = async () => {
-    const url = "https://washitup.onrender.com/api/user/applyCoupon";
+    setApply(true);
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/applyCoupon`;
 
     const reqConfigure = {
       method: "POST",
@@ -69,7 +72,11 @@ const AddCoupon = (props) => {
         "Content-Type": "application/json",
       },
 
-      body: JSON.stringify({ couponCode: couponCode }),
+      body: JSON.stringify({
+        couponCode: couponCode,
+        amount: total,
+        mobileNumber: parseInt(dataTobeSent.mobileNumber),
+      }),
     };
 
     const respone = await fetch(url, reqConfigure);
@@ -78,6 +85,7 @@ const AddCoupon = (props) => {
 
     if (respone.ok) {
       setCelebration(true);
+      setApply(false);
       toast.success("Coupon Applied", {
         position: "top-center",
         autoClose: 2000,
@@ -90,7 +98,8 @@ const AddCoupon = (props) => {
         setCelebration(false);
       }, 2000);
     } else {
-      toast.error("Invalid Coupon Code", {
+      setApply(false);
+      toast.error(`${data.message}`, {
         position: "top-center",
         autoClose: 2000,
         closeOnClick: true,
@@ -128,13 +137,24 @@ const AddCoupon = (props) => {
                 setCouponCode(e.target.value);
               }}
             />
-            <button
-              onClick={applyCoupon}
-              className="apply-coupon-button"
-              type="button"
-            >
-              Apply
-            </button>
+            {loadapply ? (
+              <button
+                onClick={applyCoupon}
+                className="apply-coupon-button"
+                type="button"
+                style={{ backgroundColor: "#ffffff" }}
+              >
+                <ThreeDots color="#6759ff" height={"50%"} width={"50%"} />
+              </button>
+            ) : (
+              <button
+                onClick={applyCoupon}
+                className="apply-coupon-button"
+                type="button"
+              >
+                Apply
+              </button>
+            )}
           </div>
         ) : (
           <div className="apply-coupon-box">

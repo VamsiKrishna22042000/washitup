@@ -265,7 +265,7 @@ const Orders = () => {
 
     /**Function to get all the vendors */
     const getAllVendors = async () => {
-      const url = "https://washitup.onrender.com/api/admin/getAllVendors";
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
       const response = await fetch(url);
 
@@ -285,7 +285,7 @@ const Orders = () => {
       let orderId = selectedCustomer[0]._id;
       let vendorId = e.target.id;
 
-      const url = "https://washitup.onrender.com/api/admin/assignNewVendor";
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/assignNewVendor`;
 
       const reqConfigure = {
         method: "POST",
@@ -322,7 +322,7 @@ const Orders = () => {
       let previVendorId = selectedCustomer[0].vendorId._id;
       let previVendorOrderId = selectedCustomer[0]._id;
 
-      const url = "https://washitup.onrender.com/api/vendor/changeVendor";
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/changeVendor`;
 
       const reqConfigure = {
         method: "POST",

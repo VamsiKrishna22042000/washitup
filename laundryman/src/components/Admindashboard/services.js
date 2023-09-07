@@ -26,7 +26,7 @@ const Services = () => {
 
   /** function to get all the category of clothes */
   const getTheCategories = async () => {
-    const url = `https://washitup.onrender.com/api/user/getAllCategories`;
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getAllCategories`;
 
     const response = await fetch(url);
 
@@ -157,7 +157,7 @@ const Services = () => {
           fd.append(`${each}`, toAddCategory[each]);
         }
 
-        const url = "https://washitup.onrender.com/api/admin/addItem";
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/addItem`;
 
         const reqConfigure = {
           method: "POST",
@@ -457,7 +457,7 @@ const Services = () => {
           fd.append("image", toAddCategory.image);
         }
 
-        const url = `https://washitup.onrender.com/api/admin/editItem/${showModalEdit}`;
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/editItem/${showModalEdit}`;
 
         const reqConfigure = {
           method: "PUT",

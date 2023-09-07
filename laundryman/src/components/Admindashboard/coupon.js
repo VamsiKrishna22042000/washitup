@@ -25,7 +25,7 @@ const Coupons = () => {
   }, []);
 
   const getAllCoupons = async () => {
-    const url = "https://washitup.onrender.com/api/admin/coupon/getAllCoupon";
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/getAllCoupon`;
 
     const response = await fetch(url);
 
@@ -44,7 +44,7 @@ const Coupons = () => {
     const deleteCouponFun = async () => {
       setLoad(false);
 
-      const url = `https://washitup.onrender.com/api/admin/coupon/deleteCoupon?couponId=${deleteCoupon}`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/deleteCoupon?couponId=${deleteCoupon}`;
 
       const reqConfigure = {
         method: "DELETE",
@@ -156,11 +156,12 @@ const Coupons = () => {
     const [coupondetails, setCouponDetails] = useState({
       couponCode: "",
       discount: "",
+      minimumPrice: "",
     });
 
     const addCouponFun = async () => {
       setLoad(false);
-      const url = "https://washitup.onrender.com/api/admin/addCoupon";
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/addCoupon`;
 
       const reqConfigure = {
         method: "POST",
@@ -206,8 +207,8 @@ const Coupons = () => {
         ></div>
         {load ? (
           <div
-            style={{ left: "41.5%", width: "30%", height: "35%" }}
-            className="add-customer-modal-box"
+            style={{ left: "41.5%", width: "30%", height: "45%" }}
+            className="coupon-modal-box"
           >
             <h6>Add Coupon Details</h6>
             <p style={{ marginTop: 0, marginBottom: 0 }}>Enter Coupon Code</p>
@@ -233,6 +234,18 @@ const Coupons = () => {
               style={{ marginTop: 3 }}
               type="number"
               placeholder="Enter Discount"
+            />
+            <p style={{ marginTop: 3, marginBottom: 0 }}>Enter Minium Price</p>
+            <input
+              onChange={(e) => {
+                setCouponDetails((prevDe) => ({
+                  ...prevDe,
+                  minimumPrice: e.target.value,
+                }));
+              }}
+              style={{ marginTop: 3 }}
+              type="number"
+              placeholder="Enter Minimum Price"
             />
             <div
               style={{
@@ -277,12 +290,12 @@ const Coupons = () => {
             style={{
               left: "41.5%",
               width: "30%",
-              height: "35%",
+              height: "45%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
-            className="add-customer-modal-box"
+            className="coupon-modal-box"
           >
             <TailSpin color="#6759ff" height={50} width={50} />
           </div>
@@ -298,7 +311,7 @@ const Coupons = () => {
   const settingProgress = async (e) => {
     setLoading(true);
 
-    const url = `https://washitup.onrender.com/api/admin/coupon/changeStatus`;
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/changeStatus`;
 
     const reqConfigure = {
       method: "PUT",

@@ -18,7 +18,7 @@ const AddClothes = (props) => {
 
   /** Getting all the category of clothes */
   const getTheCategories = async () => {
-    const url = `https://washitup.onrender.com/api/user/getAllCategories`;
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getAllCategories`;
 
     const response = await fetch(url);
 
