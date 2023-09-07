@@ -206,6 +206,13 @@ const AddClothes = (props) => {
                 <BiRupee style={{ marginBottom: "8%" }} />
                 {each.count * each.price}
               </p>
+              <BiRupee
+                className="set-couter-price-icon3"
+                style={{ marginBottom: "8%" }}
+              />
+              <p className="set-couter-price-price3">
+                {each.count * each.price}
+              </p>
               <button
                 price={each.price}
                 id={each._id}

@@ -83,14 +83,7 @@
   }
 
   .set-counter-price {
-    font-size: 2vh;
-    color: #6759ff;
-    width: 15%;
-    left: 81.5%;
-    text-align: center;
-    position: absolute;
-    font-weight: bold;
-    top: -1%;
+    display: none;
   }
 
   .set-counter-price-icon {
@@ -101,6 +94,26 @@
     text-align: center;
     position: absolute;
     top: 3.5%;
+  }
+
+  .set-couter-price-icon3 {
+    font-size: 2.2vh;
+    color: #6759ff;
+    width: 15%;
+    left: 65%;
+    text-align: center;
+    position: absolute;
+    top: 3.5%;
+  }
+
+  .set-couter-price-price3 {
+    font-size: 2.2vh;
+    color: #6759ff;
+    width: 15%;
+    left: 76%;
+    text-align: center;
+    position: absolute;
+    top: -1%;
   }
 
   .set-counter-total1 {
@@ -263,6 +276,14 @@
 }
 
 @media screen and (max-width: 767px) {
+  .set-couter-price-icon3 {
+    display: none;
+  }
+
+  .set-couter-price-price3 {
+    display: none;
+  }
+
   .spinner-con {
     position: relative;
     width: 85%;
