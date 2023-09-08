@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 
 const ProtectedRoute = (props) => {
-  <Route {...props} />;
+  return <Route {...props} />;
 };
 
 export default ProtectedRoute;

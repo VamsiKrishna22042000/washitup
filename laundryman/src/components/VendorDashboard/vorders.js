@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./admin.css";
+import "../Admindashboard/admin.css";
 
 import { TailSpin } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
@@ -27,8 +27,6 @@ const Orders = () => {
   const [searchedCustomer, setSearchedCustomer] = useState("");
 
   const [load, setLoad] = useState(false);
-
-  const [subfilter, setSubfilter] = useState("");
 
   /**To get all the order before mounting by an api call*/
   useEffect(() => {
@@ -141,12 +139,8 @@ const Orders = () => {
     setSelectedCustomer(selectedCustomerOrder);
   };
 
-  const allorderFilter = allorders.filter((each) =>
-    subfilter === "" ? each : each.progress === subfilter
-  );
-
   /**Function used to filter all the orders based on the username enterd in the search box */
-  const filterdAllOrders = allorderFilter.filter((each) =>
+  const filterdAllOrders = allorders.filter((each) =>
     each.name.toLowerCase().startsWith(searchedCustomer.toLowerCase())
   );
 
@@ -1169,93 +1163,15 @@ const Orders = () => {
           {selectedCustomer === "" ? (
             <div className="order-summary-body">
               <div className="order-body-header">
+                <h6 style={{ margin: 0 }}>Customer Orders</h6>
                 <input
                   onChange={(e) => {
                     setSearchedCustomer(e.target.value);
                   }}
-                  style={{
-                    outline: "none",
-                    fontSize: "1vw",
-                  }}
+                  style={{ outline: "none", fontSize: "1vw" }}
                   type="search"
                   placeholder="Search Customer"
                 />
-                <div>
-                  <strong>Filter :</strong>
-                  <button
-                    style={{
-                      borderRadius: "5px",
-                      marginLeft: "10px",
-                      fontSize: "1vw",
-                      borderColor: "#ffa000",
-                      borderWidth: 1,
-                      backgroundColor:
-                        subfilter === "Active" ? "#ffa000" : "#ffffff",
-                      color: subfilter === "Active" ? "#ffffff" : "#ffa000",
-                    }}
-                    type="button"
-                    onClick={() => {
-                      setSubfilter("Active");
-                    }}
-                  >
-                    Active
-                  </button>
-                  <button
-                    style={{
-                      borderRadius: "5px",
-                      marginLeft: "10px",
-                      fontSize: "1vw",
-                      borderColor: "#6759ff",
-                      borderWidth: 1,
-                      backgroundColor:
-                        subfilter === "In Progress" ? "#6759ff" : "#ffffff",
-                      color:
-                        subfilter === "In Progress" ? "#ffffff" : "#6759ff",
-                    }}
-                    type="button"
-                    onClick={() => {
-                      setSubfilter("In Progress");
-                    }}
-                  >
-                    In Progress
-                  </button>
-                  <button
-                    style={{
-                      borderRadius: "5px",
-                      marginLeft: "10px",
-                      fontSize: "1vw",
-                      borderColor: "#519c66",
-                      borderWidth: 1,
-                      backgroundColor:
-                        subfilter === "Completed" ? "#519c66" : "#ffffff",
-                      color: subfilter === "Completed" ? "#ffffff" : "#519c66",
-                    }}
-                    type="button"
-                    onClick={() => {
-                      setSubfilter("Completed");
-                    }}
-                  >
-                    Completed
-                  </button>
-                  <button
-                    style={{
-                      borderRadius: "5px",
-                      marginLeft: "10px",
-                      fontSize: "1vw",
-                      borderColor: "grey",
-                      borderWidth: 1,
-                      backgroundColor: "#ffffff",
-                      color: "grey",
-                      marginRight: "10px",
-                    }}
-                    type="button"
-                    onClick={() => {
-                      setSubfilter("");
-                    }}
-                  >
-                    Clear
-                  </button>
-                </div>
               </div>
               <div className="order-body-header1">
                 <p style={{ width: "1%" }}></p>
@@ -1420,7 +1336,7 @@ const Orders = () => {
                   </span>
                 </h6>
                 <p style={{ textTransform: "capitalize" }}>
-                  Type Of Wash :
+                  Type Of Wash :{"   "}
                   <span style={{ color: "#6759FF" }}>
                     {selectedCustomer[0].service}
                   </span>

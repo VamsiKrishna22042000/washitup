@@ -391,7 +391,9 @@ const Vendors = () => {
     let totalOrdersAmount = 0;
 
     sub.map(
-      (each) => (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
+      (each) =>
+        each.progress === "Completed" &&
+        (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
     );
 
     if (
@@ -406,6 +408,8 @@ const Vendors = () => {
       setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
     } else if (parseInt(totalOrdersAmount) > 1000000) {
       setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
+    } else {
+      setTotal(parseInt(totalOrdersAmount));
     }
 
     setSubOrders(sub);
@@ -437,9 +441,10 @@ const Vendors = () => {
 
       let totalOrdersAmount = 0;
 
-      sub.map(
-        (each) => (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
-      );
+      sub.map((each) => {
+        each.progress === "Completed" &&
+          (totalOrdersAmount = totalOrdersAmount + each.totalAmount);
+      });
 
       if (
         parseInt(totalOrdersAmount) > 1000 &&
@@ -453,6 +458,8 @@ const Vendors = () => {
         setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
       } else if (parseInt(totalOrdersAmount) > 1000000) {
         setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
+      } else {
+        setTotal(parseInt(totalOrdersAmount));
       }
 
       setVendors(data);
@@ -818,9 +825,12 @@ const Vendors = () => {
                 </button>
               </div>
               <div className="order-body-header1">
-                <p className="order-body-para">Order Date</p>
-                <p style={{ width: "20%" }} className="order-body-para">
-                  Order Id
+                <p className="order-body-para">Order Id</p>
+                <p
+                  style={{ width: "20%", paddingLeft: "4%" }}
+                  className="order-body-para"
+                >
+                  Order Date
                 </p>
                 <p className="order-body-para">Order Total</p>
                 <p
@@ -841,13 +851,6 @@ const Vendors = () => {
                   {/**all orders booked by the user sorted based on the date */}
 
                   <p
-                    userId={each.userId}
-                    id={each.orderId}
-                    className="order-body-para"
-                  >
-                    {each.date} - {each.time}
-                  </p>
-                  <p
                     i
                     userId={each.userId}
                     id={each.orderId}
@@ -855,6 +858,13 @@ const Vendors = () => {
                     className="order-body-para"
                   >
                     {each.orderId}
+                  </p>
+                  <p
+                    userId={each.userId}
+                    id={each.orderId}
+                    className="order-body-para"
+                  >
+                    {each.date} - {each.time}
                   </p>
                   {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
                     <p className="order-body-para">

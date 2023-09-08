@@ -78,8 +78,9 @@
 
   .set-counter-icon {
     color: #6759ff;
-    height: 50%;
-    width: 20%;
+    height: 60%;
+    width: 23%;
+    margin-top: -5%;
   }
 
   .set-counter-price {
@@ -389,11 +390,12 @@
 
   .set-counter-icon {
     color: #6759ff;
-    height: 40%;
-    width: 17.5%;
+    height: 45%;
+    width: 18.5%;
     position: relative;
-    margin-left: 5%;
-    margin-top: -6%;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: -7%;
   }
 
   .set-counter-price {

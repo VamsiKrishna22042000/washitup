@@ -90,7 +90,7 @@ const AddCustomerModel = (props) => {
           zIndex: 2,
         }}
       ></div>
-      <div style={{ left: "40%" }} className="add-customer-modal-box">
+      <div style={{ left: "40%" }} className="add-customer-modal">
         <h6>Add a New Customer</h6>
         {/**Button to close the modal box by setting false to setAddCustomer() */}
         <button
@@ -256,9 +256,10 @@ const Customers = () => {
       (each) => each._id === e.target.id
     );
     setSelectedCustomer(selectedCustomerOrder);
-    selectedCustomerOrder[0].orders.map(
-      (each) => (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
-    );
+    selectedCustomerOrder[0].orders.map((each) => {
+      each.progress === "Completed" &&
+        (totalOrdersAmount = totalOrdersAmount + each.totalAmount);
+    });
 
     console.log(totalOrdersAmount);
 
@@ -332,7 +333,9 @@ const Customers = () => {
       const selectedCustomerOrder = userArray.filter((each) => each._id === id);
       setSelectedCustomer(selectedCustomerOrder);
       selectedCustomerOrder[0].orders.map(
-        (each) => (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
+        (each) =>
+          each.progress === "Completed" &&
+          (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
       );
       setUserId(selectedCustomerOrder[0]._id);
       if (
@@ -599,7 +602,7 @@ const Customers = () => {
         <section className="order-body">
           <div className="order-summary-head">
             <h6 style={{ color: "#53545c", textTransform: "capitalize" }}>
-              {selectedCustomer[0].name}'s Order Details
+              {selectedCustomer[0].name} Order Details
             </h6>
             <button
               onClick={() => {
@@ -791,7 +794,7 @@ const Customers = () => {
           <div className="order-summary-body">
             <div className="order-body-header">
               <h6 style={{ margin: 0, textTransform: "capitalize" }}>
-                {selectedCustomer[0].name}'s Order's
+                {selectedCustomer[0].name} Order's
               </h6>
             </div>
             <div className="order-body-header1">

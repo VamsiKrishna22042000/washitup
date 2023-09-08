@@ -726,7 +726,7 @@ const Services = () => {
                 fontSize: "0.85vw",
               }}
             >
-              Total Customers
+              Total Items
             </p>
             <p
               style={{

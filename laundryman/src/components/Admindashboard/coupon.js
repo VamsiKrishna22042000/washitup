@@ -438,7 +438,7 @@ const Coupons = () => {
               </div>
               <p className="order-body-para">₹ {each.minimumPrice}</p>
               <p className="order-body-para">{each.couponCode}</p>
-              <p className="order-body-para">{each.discount}</p>
+              <p className="order-body-para">₹{each.discount}</p>
               <p className="order-body-para">{each._id}</p>
               <select
                 id={each._id}
