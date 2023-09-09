@@ -192,7 +192,7 @@ const BookService = (props) => {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
       };
 
-      if (removeTimeFromDate(date) > removeTimeFromDate(new Date())) {
+      if (removeTimeFromDate(date) <= removeTimeFromDate(new Date())) {
         toast.error("Select From Tomorrow", {
           position: "top-center",
           autoClose: 2000,
