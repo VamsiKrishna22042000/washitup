@@ -9,7 +9,7 @@ const ConnectionLost = () => {
       <img
         id="connectionlost"
         className="connection-lost"
-        src="/connectionlost.png"
+        src={imgSrc}
         alt="Connectionlost"
       />
       <h1>Connection Lost !</h1>
