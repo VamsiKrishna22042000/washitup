@@ -1,21 +1,17 @@
-import { useState } from "react";
 import "../LaundryMain/index.css";
 
-import connectionlostimage from "./connectionlost.png";
-
-import fallbackImage from "./connectionlost.png";
-
 const ConnectionLost = () => {
+  const storedDataURL = localStorage.getItem("imageData");
+  const imgElement = document.getElementById("connetionlost");
+  imgElement.src = storedDataURL;
+
   return (
     <div className="error-con">
       <img
         id="connectionlost"
         className="connection-lost"
-        src={connectionlostimage}
+        src="/connectionlost.png"
         alt="Connectionlost"
-        onError={(e) => {
-          e.target.src = fallbackImage;
-        }}
       />
       <h1>Connection Lost !</h1>
       <p>
