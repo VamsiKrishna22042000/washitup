@@ -21,6 +21,9 @@ function App() {
     window.addEventListener("online", handleOnlineStatusChange);
     window.addEventListener("offline", handleOnlineStatusChange);
 
+    const img = new Image();
+    img.src = "./connectionlost.png";
+
     return () => {
       window.removeEventListener("online", handleOnlineStatusChange);
       window.removeEventListener("offline", handleOnlineStatusChange);
