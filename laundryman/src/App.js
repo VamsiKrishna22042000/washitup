@@ -1,15 +1,9 @@
 import "./App.css";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Laundry from "./components/Laundry/laundry";
-
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 import AdminDashboard from "./components/Admindashboard/admin.js";
-
 import ProtectedRoute from "./components/ProtectedRoute/protectedroute";
-
 import Notfound from "./components/Notfound/notfound";
 import VendorDashboard from "./components/VendorDashboard/vendordashboard";
 import UserLogin from "./components/LaundryBody/userlogin";
@@ -33,7 +27,9 @@ function App() {
     };
   }, []);
 
-  return connection ? (
+  return !connection ? ( // Inverted the condition to show "ConnectionLost" when offline
+    <ConnectionLost />
+  ) : (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Laundry} />
@@ -47,8 +43,6 @@ function App() {
         <Route component={Notfound} />
       </Switch>
     </BrowserRouter>
-  ) : (
-    <ConnectionLost />
   );
 }
 
