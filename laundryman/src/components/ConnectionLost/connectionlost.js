@@ -3,6 +3,8 @@ import "../LaundryMain/index.css";
 
 import connectionlostimage from "./connectionlost.png";
 
+import fallbackImage from "./connectionlost.png";
+
 const ConnectionLost = () => {
   return (
     <div className="error-con">
@@ -11,6 +13,9 @@ const ConnectionLost = () => {
         className="connection-lost"
         src={connectionlostimage}
         alt="Connectionlost"
+        onError={(e) => {
+          e.target.src = fallbackImage;
+        }}
       />
       <h1>Connection Lost !</h1>
       <p>
