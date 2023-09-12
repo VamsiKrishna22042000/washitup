@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "../LaundryMain/index.css";
 
-const ConnectionLost = () => {
-  const imgSrc = localStorage.getItem("connectionlostimage");
+import connectionlostimage from "./connectionlost.png";
 
+const ConnectionLost = () => {
   return (
     <div className="error-con">
       <img
         id="connectionlost"
         className="connection-lost"
-        src={imgSrc}
+        src="/connectionlost.png"
         alt="Connectionlost"
       />
       <h1>Connection Lost !</h1>
