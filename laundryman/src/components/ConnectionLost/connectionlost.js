@@ -1,12 +1,20 @@
+import { useState } from "react";
 import "../LaundryMain/index.css";
 
 const ConnectionLost = () => {
+  const [imgSrc, setImg] = useState("/connectionlost.png");
+
+  const handelImg = () => {
+    setImg("/connectionlost.png");
+  };
+
   return (
     <div className="error-con">
       <img
         className="connection-lost"
-        src="/connectionlost.png"
+        src={imgSrc}
         alt="404 Error Page"
+        onError={handelImg}
       />
       <h1>Connection Lost !</h1>
       <p>
