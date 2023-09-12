@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     const handleOnlineStatusChange = () => {
       setIsOnline(navigator.onLine);
+      localStorage.setItem("connectionlostimage", "/connectionlost.png");
     };
 
     window.addEventListener("online", handleOnlineStatusChange);
