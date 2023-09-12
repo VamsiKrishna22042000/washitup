@@ -2,6 +2,8 @@ import "./index.css";
 
 import { useState } from "react";
 
+import UserLogin from "../LaundryBody/userlogin";
+
 import BookService from "../BookService/bookservice.js";
 
 import AddClothes from "../AddClothes/addClothes";
@@ -24,7 +26,7 @@ const changeComponents = {
 {
   /**Component which is the merge point of all the component's that which are displayed in the main page  and has the call back functions to pass from one component to another component*/
 }
-function LaundryNav() {
+function LaundryNav(props) {
   const [service, setService] = useState(changeComponents.typeOfWash);
 
   const [time, setTime] = useState(0);
@@ -94,7 +96,14 @@ function LaundryNav() {
               My Orders
             </div>
             <div href="#pricing">
-              <button className="but">Log In</button>
+              <button
+                onClick={(props) => {
+                  window.location.href = "/userlogin";
+                }}
+                className="but"
+              >
+                Log In
+              </button>
             </div>
           </div>
         </div>

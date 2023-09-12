@@ -429,7 +429,6 @@ const Vendors = () => {
       const filterdOrder = data.filter((each) => each._id === vendorId);
 
       const sub = filterdOrder[0].orders.map((each) => ({
-        name: "Vamsi",
         userId: each.userId,
         orderId: each._id,
         date: each.date,

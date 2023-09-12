@@ -25,7 +25,7 @@ const availableSection = [
   },
 ];
 
-const AdminDashboard = () => {
+const VendorDashboard = () => {
   /**State used to store the section selected and display the component related to the selected section*/
   const [selectedSection, setSection] = useState("Dashboard");
 
@@ -92,4 +92,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default VendorDashboard;

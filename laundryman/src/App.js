@@ -12,9 +12,11 @@ import ProtectedRoute from "./components/ProtectedRoute/protectedroute";
 
 import Notfound from "./components/Notfound/notfound";
 import VendorDashboard from "./components/VendorDashboard/vendordashboard";
+import UserLogin from "./components/LaundryBody/userlogin";
+import ConnectionLost from "./components/ConnectionLost/connectionlost";
 
 function App() {
-  return (
+  return navigator.onLine ? (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Laundry} />
@@ -24,9 +26,12 @@ function App() {
           path="/vendordashboard"
           component={VendorDashboard}
         />
+        <Route exact path="/userlogin" component={UserLogin} />
         <Route component={Notfound} />
       </Switch>
     </BrowserRouter>
+  ) : (
+    <ConnectionLost />
   );
 }
 

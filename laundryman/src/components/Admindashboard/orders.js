@@ -117,10 +117,11 @@ const Orders = () => {
 
     let itemsObtained = [];
 
-    console.log(selectedCustomerOrder[0].items);
+    console.log(selectedCustomerOrder[0]);
 
     for (let each of selectedCustomerOrder[0].items) {
       itemsObtained.push({
+        uniqueId: each.uniqueId,
         count: each.itemCount,
         id: each._id,
         itemCategory: each.itemId.category,
@@ -230,6 +231,7 @@ const Orders = () => {
 
       for (let each of selectedCustomerOrder[0].items) {
         itemsObtained.push({
+          uniqueId: each.uniqueId,
           count: each.itemCount,
           id: each._id,
           itemCategory: each.itemId.category,
@@ -1430,6 +1432,7 @@ const Orders = () => {
                 <div className="order-body-para">Image</div>
                 <p className="order-body-para">Item Type</p>
                 <p className="order-body-para">Category</p>
+                <p className="order-body-para">Unique Id</p>
                 <p className="order-body-para">Unit Price</p>
                 <p className="order-body-para">Quantity</p>
                 <p className="order-body-para">Order Total</p>
@@ -1455,6 +1458,14 @@ const Orders = () => {
                     className="order-body-para"
                   >
                     {each.itemCategory}
+                  </p>
+                  <p
+                    style={{
+                      textTransform: "capitalize",
+                    }}
+                    className="order-body-para"
+                  >
+                    {each.uniqueId}
                   </p>
                   {each.price > 1000 && each.price < 100000 ? (
                     <p className="order-body-para">
@@ -1497,23 +1508,23 @@ const Orders = () => {
               <div className="order-body-header">
                 {selectedCustomer[0].totalAmount > 1000 &&
                 selectedCustomer[0].totalAmount < 100000 ? (
-                  <h6 style={{ marginLeft: "80%" }}>
+                  <h6 style={{ marginLeft: "82%" }}>
                     Total : ₹ {parseInt(selectedCustomer[0].totalAmount) / 1000}{" "}
                     K
                   </h6>
                 ) : selectedCustomer[0].totalAmount > 100000 &&
                   selectedCustomer[0].totalAmount < 1000000 ? (
-                  <h6 style={{ marginLeft: "80%" }}>
-                    Total : ₹{" "}
+                  <h6 style={{ marginLeft: "82%" }}>
+                    Total : ₹
                     {parseInt(selectedCustomer[0].totalAmount) / 100000} L
                   </h6>
                 ) : selectedCustomer[0].totalAmount > 1000000 ? (
-                  <h6 style={{ marginLeft: "80%" }}>
-                    Total : ₹{" "}
+                  <h6 style={{ marginLeft: "82%" }}>
+                    Total : ₹
                     {parseInt(selectedCustomer[0].totalAmount) / 1000000} M
                   </h6>
                 ) : (
-                  <h6 style={{ marginLeft: "80%" }}>
+                  <h6 style={{ marginLeft: "82%" }}>
                     Total : ₹ {selectedCustomer[0].totalAmount}
                   </h6>
                 )}
