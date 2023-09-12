@@ -26,13 +26,26 @@
 }
 
 .error-button {
-  font-size: 1.1vw;
+  font-size: 1.25vw;
   font-family: Arial, Helvetica, sans-serif;
   border-width: 0px;
   background-color: #6759ff;
   padding: 3px 10px 3px 10px;
   border-radius: 8px;
   color: #ffffff;
+}
+
+.connection-lost {
+  height: 50%;
+  width: 35%;
+}
+
+.error-con h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3.8vw;
+  line-height: 3.5vw;
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
 }
 
 @media screen and (min-width: 992px) {
@@ -851,6 +864,19 @@
 }
 
 @media screen and (max-width: 600px) {
+  .connection-lost {
+    height: 30%;
+    width: 70%;
+  }
+
+  .error-con h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8vw;
+    line-height: 8vw;
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+
   .error-con p {
     font-size: 3vw;
     font-family: Arial, Helvetica, sans-serif;

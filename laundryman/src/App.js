@@ -14,9 +14,26 @@ import Notfound from "./components/Notfound/notfound";
 import VendorDashboard from "./components/VendorDashboard/vendordashboard";
 import UserLogin from "./components/LaundryBody/userlogin";
 import ConnectionLost from "./components/ConnectionLost/connectionlost";
+import { useState, useEffect } from "react";
 
 function App() {
-  return navigator.onLine ? (
+  const [connection, setConnection] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setConnection(navigator.onLine);
+    };
+
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
+
+  return connection ? (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Laundry} />

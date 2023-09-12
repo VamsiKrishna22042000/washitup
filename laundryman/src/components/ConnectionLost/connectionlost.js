@@ -4,13 +4,14 @@ const ConnectionLost = () => {
   return (
     <div className="error-con">
       <img
-        className="image-error"
-        src="/404errorpage.png"
+        className="connection-lost"
+        src="/connectionlost.png"
         alt="404 Error Page"
       />
+      <h1>Connection Lost !</h1>
       <p>
-        Sorry! this page your looking for doesn't exist, your URL maybe
-        incorrect or does not exist!
+        Oops! Looks like our connection got lost. Sorry, it looks like you're
+        offline.
       </p>
       <button
         onClick={() => {
