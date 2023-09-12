@@ -29,7 +29,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {false ? (
+      {isOnline ? (
         <Switch>
           <Route exact path="/" component={Laundry} />
           <Route exact path="/admindashboard" component={AdminDashboard} />
