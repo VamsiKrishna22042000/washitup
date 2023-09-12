@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Laundry from "./components/Laundry/laundry";
@@ -8,14 +9,13 @@ import Notfound from "./components/Notfound/notfound";
 import VendorDashboard from "./components/VendorDashboard/vendordashboard";
 import UserLogin from "./components/LaundryBody/userlogin";
 import ConnectionLost from "./components/ConnectionLost/connectionlost";
-import { useState, useEffect } from "react";
 
 function App() {
-  const [connection, setConnection] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
     const handleOnlineStatusChange = () => {
-      setConnection(navigator.onLine);
+      setIsOnline(navigator.onLine);
     };
 
     window.addEventListener("online", handleOnlineStatusChange);
@@ -27,21 +27,23 @@ function App() {
     };
   }, []);
 
-  return !connection ? ( // Inverted the condition to show "ConnectionLost" when offline
-    <ConnectionLost />
-  ) : (
+  return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Laundry} />
-        <Route exact path="/admindashboard" component={AdminDashboard} />
-        <ProtectedRoute
-          exact
-          path="/vendordashboard"
-          component={VendorDashboard}
-        />
-        <Route exact path="/userlogin" component={UserLogin} />
-        <Route component={Notfound} />
-      </Switch>
+      {isOnline ? (
+        <Switch>
+          <Route exact path="/" component={Laundry} />
+          <Route exact path="/admindashboard" component={AdminDashboard} />
+          <ProtectedRoute
+            exact
+            path="/vendordashboard"
+            component={VendorDashboard}
+          />
+          <Route exact path="/userlogin" component={UserLogin} />
+          <Route component={Notfound} />
+        </Switch>
+      ) : (
+        <ConnectionLost />
+      )}
     </BrowserRouter>
   );
 }
