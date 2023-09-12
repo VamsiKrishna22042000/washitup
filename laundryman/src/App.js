@@ -13,6 +13,8 @@ import ConnectionLost from "./components/ConnectionLost/connectionlost";
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
+  const [connectionLostImage, setConnectionLostImage] = useState(null);
+
   useEffect(() => {
     const handleOnlineStatusChange = () => {
       setIsOnline(navigator.onLine);
@@ -23,6 +25,10 @@ function App() {
 
     const img = new Image();
     img.src = "./connectionlost.png";
+
+    img.onload = () => {
+      setConnectionLostImage(img.src);
+    };
 
     return () => {
       window.removeEventListener("online", handleOnlineStatusChange);
@@ -45,7 +51,7 @@ function App() {
           <Route component={Notfound} />
         </Switch>
       ) : (
-        <ConnectionLost />
+        <ConnectionLost connectionLostImage={connectionLostImage} />
       )}
     </BrowserRouter>
   );

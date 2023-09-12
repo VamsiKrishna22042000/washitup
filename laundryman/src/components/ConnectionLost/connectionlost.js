@@ -1,12 +1,12 @@
 import "../LaundryMain/index.css";
 
-const ConnectionLost = () => {
+const ConnectionLost = ({ connectionLostImage }) => {
   return (
     <div className="error-con">
       <img
         id="connectionlost"
         className="connection-lost"
-        src="/connectionlost.png"
+        src={connectionLostImage}
         alt="Connectionlost"
       />
       <h1>Connection Lost !</h1>
