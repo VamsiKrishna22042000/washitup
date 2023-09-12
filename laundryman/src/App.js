@@ -16,20 +16,7 @@ function App() {
   useEffect(() => {
     const handleOnlineStatusChange = () => {
       setIsOnline(navigator.onLine);
-      // Get the image element
-      const imgElement = document.getElementById("connectionlost");
-
-      // Create a canvas element to draw the image
-      const canvas = document.createElement("canvas");
-      canvas.width = imgElement.width;
-      canvas.height = imgElement.height;
-
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(imgElement, 0, 0);
-
-      // Convert the canvas content to a data URL (Base64 encoded)
-      const dataURL = canvas.toDataURL("image/png"); // You can specify the image format (e.g., 'image/jpeg') here
-      localStorage.setItem("imageData", dataURL);
+      localStorage.setItem("connectionlostimage", "./connectionlost.png");
     };
 
     window.addEventListener("online", handleOnlineStatusChange);

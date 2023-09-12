@@ -1,16 +1,15 @@
 import "../LaundryMain/index.css";
 
 const ConnectionLost = () => {
-  const storedDataURL = localStorage.getItem("imageData");
-  const imgElement = document.getElementById("connetionlost");
-  imgElement.src = storedDataURL;
+  const imagePath = localStorage.getItem("connectionlostimage");
+
+  document.getElementById("connectionlost").src = imagePath;
 
   return (
     <div className="error-con">
       <img
         id="connectionlost"
         className="connection-lost"
-        src="/connectionlost.png"
         alt="Connectionlost"
       />
       <h1>Connection Lost !</h1>
