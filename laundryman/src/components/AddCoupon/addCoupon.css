@@ -61,12 +61,14 @@
     border-width: 0;
     background-color: #6759ff;
     color: #ffffff;
-    width: 20%;
-    font-size: 1.4vw;
+    width: 75%;
+    font-size: 1.5vw;
     padding-bottom: 1%;
     border-radius: 5px;
     margin-top: 10%;
     margin-bottom: -3%;
+    margin-left: -1.5%;
+    padding: 1.5vh 1.5vh;
   }
   .apply-coupon-box2 {
     height: 25vh;
@@ -193,7 +195,7 @@
     background-color: #6759ff;
     color: #ffffff;
     width: 20%;
-    font-size: 3vw;
+    font-size: 3.5vw;
     padding-top: 1.5%;
     padding-bottom: 1.5%;
     border-radius: 3px;

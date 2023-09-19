@@ -7,6 +7,9 @@ import { AiOutlineInstagram } from "react-icons/ai";
 
 import { AiFillTwitterCircle } from "react-icons/ai";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const loadStatus = {
   get: "get",
   message: "message",
@@ -16,20 +19,100 @@ const loadStatus = {
 const VendorLogin = () => {
   const [getotp, setgetotp] = useState(false);
 
-  const [verifyOtp, setOTP] = useState(false);
-
   const [load, setLoad] = useState(loadStatus.get);
 
   const [mobileNumber, setMobileNumber] = useState(0);
 
   const [otp, setOtp] = useState(0);
 
-  const getOtpRequest = () => {
-    setLoad(loadStatus.message);
-    setgetotp(true);
-    setTimeout(() => {
-      setLoad(loadStatus.get);
-    }, 2500);
+  const getOtpRequest = async () => {
+    if (mobileNumber !== 0) {
+      setLoad(loadStatus.message);
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/loginVendor`;
+
+      const reqConfigure = {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({ mobileNumber: mobileNumber }),
+      };
+
+      const response = await fetch(url, reqConfigure);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setgetotp(true);
+        setTimeout(() => {
+          setLoad(loadStatus.get);
+        }, 2500);
+      } else {
+        toast.error(`${data.message}`, {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+        setLoad(loadStatus.get);
+        setgetotp(false);
+      }
+    } else {
+      toast.error(`Enter Valid Mobile Number`, {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    }
+  };
+
+  const VerifyOTPRequest = async () => {
+    if (otp !== 0) {
+      setLoad(loadStatus.got);
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/verifyVendor`;
+
+      const reqConfigure = {
+        method: "POST",
+
+        headers: { "Content-Type": "application/json" },
+
+        body: JSON.stringify({
+          otp: parseInt(otp),
+          mobileNumber: parseInt(mobileNumber),
+        }),
+      };
+
+      const response = await fetch(url, reqConfigure);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data);
+        window.location.href = "/vendordashboard";
+      } else {
+        setLoad(loadStatus.get);
+        toast.error(`${data.message}`, {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      }
+    } else {
+      toast.error(`Enter Valid OTP`, {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    }
   };
 
   return load === loadStatus.got ? (
@@ -42,6 +125,7 @@ const VendorLogin = () => {
         alignItems: "center",
       }}
     >
+      <ToastContainer />
       <img
         className="washingloader"
         src="/machineloading.gif"
@@ -61,6 +145,7 @@ const VendorLogin = () => {
         </div>
       ) : (
         <div className="vendor-card2">
+          <ToastContainer />
           <div className="vendor-login-logo-card">
             <img className="login-logo" src="/logosymbol.png" alt="logo" />
             <img className="login-logo3" src="/washituplogo.png" alt="logo" />
@@ -95,17 +180,18 @@ const VendorLogin = () => {
                     Enter Phone Number
                   </p>
                   <input
+                    onChange={(e) => {
+                      setMobileNumber(e.target.value);
+                    }}
                     className="login-input"
-                    type="number"
+                    type="tel"
                     placeholder="Enter Mobile number"
                   />
                 </>
               )}
               {getotp ? (
                 <button
-                  onClick={() => {
-                    setLoad(loadStatus.got);
-                  }}
+                  onClick={VerifyOTPRequest}
                   className="button-login"
                   type="button"
                 >

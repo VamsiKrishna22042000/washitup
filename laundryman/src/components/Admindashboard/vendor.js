@@ -1027,73 +1027,80 @@ const Vendors = () => {
               <p className="order-body-para">Location</p>
               <p className="order-body-para">Pincode</p>
             </div>
-            {filteredVendors.map((each) => (
-              <div key={each._id} className="order-body-header2">
-                <div
-                  onClick={filterVendorOrders}
-                  id={each._id}
-                  style={{ position: "relative" }}
-                  className="order-body-para"
-                >
-                  <img
+            {filteredVendors.length > 0 ? (
+              filteredVendors.map((each) => (
+                <div key={each._id} className="order-body-header2">
+                  <div
                     onClick={filterVendorOrders}
-                    id={each.id}
-                    style={{
-                      height: "105%",
-                      width: "15%",
-                      position: "absolute",
-                      left: "35%",
-                    }}
-                    src="/vendor2.png"
-                    alt={each.name}
-                  />
+                    id={each._id}
+                    style={{ position: "relative" }}
+                    className="order-body-para"
+                  >
+                    <img
+                      onClick={filterVendorOrders}
+                      id={each.id}
+                      style={{
+                        height: "105%",
+                        width: "15%",
+                        position: "absolute",
+                        left: "35%",
+                      }}
+                      src="/vendor2.png"
+                      alt={each.name}
+                    />
+                  </div>
+                  <p
+                    onClick={filterVendorOrders}
+                    id={each._id}
+                    className="order-body-para"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {each.name}
+                  </p>
+                  <p
+                    onClick={filterVendorOrders}
+                    id={each._id}
+                    className="order-body-para"
+                  >
+                    {each.mobileNumber}
+                  </p>
+                  <p
+                    onClick={filterVendorOrders}
+                    id={each._id}
+                    className="order-body-para"
+                  >
+                    {each.email}
+                  </p>
+                  <p
+                    onClick={filterVendorOrders}
+                    id={each._id}
+                    className="order-body-para"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {each.address}
+                  </p>
+                  <p
+                    onClick={filterVendorOrders}
+                    id={each._id}
+                    className="order-body-para"
+                  >
+                    {each.location}
+                  </p>
+                  <p
+                    onClick={filterVendorOrders}
+                    id={each._id}
+                    className="order-body-para"
+                  >
+                    {each.pinCode}
+                  </p>
                 </div>
-                <p
-                  onClick={filterVendorOrders}
-                  id={each._id}
-                  className="order-body-para"
-                  style={{ textTransform: "capitalize" }}
-                >
-                  {each.name}
-                </p>
-                <p
-                  onClick={filterVendorOrders}
-                  id={each._id}
-                  className="order-body-para"
-                >
-                  {each.mobileNumber}
-                </p>
-                <p
-                  onClick={filterVendorOrders}
-                  id={each._id}
-                  className="order-body-para"
-                >
-                  {each.email}
-                </p>
-                <p
-                  onClick={filterVendorOrders}
-                  id={each._id}
-                  className="order-body-para"
-                  style={{ textTransform: "capitalize" }}
-                >
-                  {each.address}
-                </p>
-                <p
-                  onClick={filterVendorOrders}
-                  id={each._id}
-                  className="order-body-para"
-                >
-                  {each.location}
-                </p>
-                <p
-                  onClick={filterVendorOrders}
-                  id={each._id}
-                  className="order-body-para"
-                >
-                  {each.pinCode}
-                </p>
+              ))
+            ) : (
+              <div className="order-body-header4">
+                <img src="/noresult.png" className="noresult" />
+                <h1>No Such Venodor</h1>
               </div>
-            ))}
+            )}
           </div>
         </section>
       )}

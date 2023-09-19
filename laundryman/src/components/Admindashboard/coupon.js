@@ -427,54 +427,61 @@ const Coupons = () => {
             <p className="order-body-para">Status</p>
             <div className="order-body-para"></div>
           </div>
-          {filterdCoupons.map((each) => (
-            <div key={each._id} className="order-body-header2">
-              <div className="order-body-para">
-                <img
-                  style={{ height: "100%", width: "20%" }}
-                  src="/coupon2.png"
-                  alt="Profile"
-                />
-              </div>
-              <p className="order-body-para">₹ {each.minimumPrice}</p>
-              <p className="order-body-para">{each.couponCode}</p>
-              <p className="order-body-para">₹{each.discount}</p>
-              <p className="order-body-para">{each._id}</p>
-              <select
-                id={each._id}
-                onChange={settingProgress}
-                className="order-body-para"
-                style={{ textTransform: "capitalize", outline: "none" }}
-              >
-                {each.active.map((e) => (
-                  <option
-                    style={{ textTransform: "capitalize" }}
-                    selected={each.status === e ? true : false}
-                  >
-                    {e}
-                  </option>
-                ))}
-              </select>
-              <p
-                style={{
-                  textTransform: "capitalize",
-                  color: each.status === "active" ? "green" : "red",
-                }}
-                className="order-body-para"
-              >
-                {each.status}
-              </p>
-              <div id={each._id} className="order-body-para">
-                <MdDelete
-                  onClick={() => {
-                    setDeleteCoupon(each._id);
-                  }}
+          {filterdCoupons.length > 0 ? (
+            filterdCoupons.map((each) => (
+              <div key={each._id} className="order-body-header2">
+                <div className="order-body-para">
+                  <img
+                    style={{ height: "100%", width: "20%" }}
+                    src="/coupon2.png"
+                    alt="Profile"
+                  />
+                </div>
+                <p className="order-body-para">₹ {each.minimumPrice}</p>
+                <p className="order-body-para">{each.couponCode}</p>
+                <p className="order-body-para">₹{each.discount}</p>
+                <p className="order-body-para">{each._id}</p>
+                <select
                   id={each._id}
-                  style={{ fontSize: "1.5vw" }}
-                />
+                  onChange={settingProgress}
+                  className="order-body-para"
+                  style={{ textTransform: "capitalize", outline: "none" }}
+                >
+                  {each.active.map((e) => (
+                    <option
+                      style={{ textTransform: "capitalize" }}
+                      selected={each.status === e ? true : false}
+                    >
+                      {e}
+                    </option>
+                  ))}
+                </select>
+                <p
+                  style={{
+                    textTransform: "capitalize",
+                    color: each.status === "active" ? "green" : "red",
+                  }}
+                  className="order-body-para"
+                >
+                  {each.status}
+                </p>
+                <div id={each._id} className="order-body-para">
+                  <MdDelete
+                    onClick={() => {
+                      setDeleteCoupon(each._id);
+                    }}
+                    id={each._id}
+                    style={{ fontSize: "1.5vw" }}
+                  />
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="order-body-header4">
+              <img src="/noresult.png" className="noresult" />
+              <h1>No Such Coupon</h1>
             </div>
-          ))}
+          )}
         </div>
       </section>
       {deleteCoupon !== "" && <ShowDeleteModalBox />}

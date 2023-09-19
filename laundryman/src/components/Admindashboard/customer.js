@@ -482,107 +482,114 @@ const Customers = () => {
                 <p className="order-body-para">Address</p>
                 <p className="order-body-para">Location</p>
               </div>
-              {filterdAllCustomer.map((each) =>
-                each.orders.length > 0 ? (
-                  <div key={each._id} className="order-body-header2">
-                    <div
-                      id={each._id}
-                      onClick={filterCustomer}
-                      style={{ position: "relative" }}
-                      className="order-body-para"
-                    >
-                      <img
+              {filterdAllCustomer.length > 0 ? (
+                filterdAllCustomer.map((each) =>
+                  each.orders.length > 0 ? (
+                    <div key={each._id} className="order-body-header2">
+                      <div
                         id={each._id}
                         onClick={filterCustomer}
-                        style={{
-                          height: "100%",
-                          width: "15%",
-                          position: "absolute",
-                          left: "35%",
-                        }}
-                        src="/profile2.png"
-                        alt={each.name}
-                      />
-                    </div>
-                    <p
-                      id={each._id}
-                      onClick={filterCustomer}
-                      className="order-body-para"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      {each.name}
-                    </p>
-                    <p
-                      id={each._id}
-                      onClick={filterCustomer}
-                      className="order-body-para"
-                    >
-                      {each.mobileNumber}
-                    </p>
-                    <p
-                      id={each._id}
-                      onClick={filterCustomer}
-                      className="order-body-para"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      {each.orders[each.orders.length - 1].address}
-                    </p>
-                    <p
-                      id={each._id}
-                      onClick={filterCustomer}
-                      className="order-body-para"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      {each.orders[each.orders.length - 1].location}
-                    </p>
-                  </div>
-                ) : (
-                  <div
-                    style={{ backgroundColor: "#80808030" }}
-                    key={each._id}
-                    className="order-body-header2"
-                  >
-                    <div
-                      id={each._id}
-                      style={{ position: "relative" }}
-                      className="order-body-para"
-                    >
-                      <img
+                        style={{ position: "relative" }}
+                        className="order-body-para"
+                      >
+                        <img
+                          id={each._id}
+                          onClick={filterCustomer}
+                          style={{
+                            height: "100%",
+                            width: "15%",
+                            position: "absolute",
+                            left: "35%",
+                          }}
+                          src="/profile2.png"
+                          alt={each.name}
+                        />
+                      </div>
+                      <p
                         id={each._id}
-                        style={{
-                          height: "100%",
-                          width: "15%",
-                          position: "absolute",
-                          left: "35%",
-                        }}
-                        src="/profile2.png"
-                        alt={each.name}
-                      />
+                        onClick={filterCustomer}
+                        className="order-body-para"
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        {each.name}
+                      </p>
+                      <p
+                        id={each._id}
+                        onClick={filterCustomer}
+                        className="order-body-para"
+                      >
+                        {each.mobileNumber}
+                      </p>
+                      <p
+                        id={each._id}
+                        onClick={filterCustomer}
+                        className="order-body-para"
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        {each.orders[each.orders.length - 1].address}
+                      </p>
+                      <p
+                        id={each._id}
+                        onClick={filterCustomer}
+                        className="order-body-para"
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        {each.orders[each.orders.length - 1].location}
+                      </p>
                     </div>
-                    <p
-                      id={each._id}
-                      className="order-body-para"
-                      style={{ textTransform: "capitalize" }}
+                  ) : (
+                    <div
+                      style={{ backgroundColor: "#80808030" }}
+                      key={each._id}
+                      className="order-body-header2"
                     >
-                      {each.name}
-                    </p>
-                    <p id={each._id} className="order-body-para">
-                      {each.mobileNumber}
-                    </p>
-                    <p
-                      id={each._id}
-                      className="order-body-para"
-                      style={{ textTransform: "capitalize" }}
-                    ></p>
-                    <p
-                      id={each._id}
-                      className="order-body-para"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      No Orders Yet
-                    </p>
-                  </div>
+                      <div
+                        id={each._id}
+                        style={{ position: "relative" }}
+                        className="order-body-para"
+                      >
+                        <img
+                          id={each._id}
+                          style={{
+                            height: "100%",
+                            width: "15%",
+                            position: "absolute",
+                            left: "35%",
+                          }}
+                          src="/profile2.png"
+                          alt={each.name}
+                        />
+                      </div>
+                      <p
+                        id={each._id}
+                        className="order-body-para"
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        {each.name}
+                      </p>
+                      <p id={each._id} className="order-body-para">
+                        {each.mobileNumber}
+                      </p>
+                      <p
+                        id={each._id}
+                        className="order-body-para"
+                        style={{ textTransform: "capitalize" }}
+                      ></p>
+                      <p
+                        id={each._id}
+                        className="order-body-para"
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        No Orders Yet
+                      </p>
+                    </div>
+                  )
                 )
+              ) : (
+                <div className="order-body-header4">
+                  <img src="/noresult.png" className="noresult" />
+                  <h1>No Such Customer</h1>
+                </div>
               )}
             </div>
           </section>

@@ -18,6 +18,26 @@
 }
 
 @media screen and (min-width: 992px) {
+  .order-body-header4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+  }
+
+  .order-body-header4 h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vw;
+    line-height: 10vw;
+  }
+
+  .noresult {
+    margin-top: 10%;
+    height: 50%;
+    width: 30%;
+  }
   .total-dashboard-container {
     height: 100vh;
     width: 100vw;
