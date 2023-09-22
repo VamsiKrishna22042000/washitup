@@ -17,7 +17,7 @@ const ProtectedRoute = (props) => {
     return <Route {...props} />;
   } else {
     Cookies.remove("jwt_vendorName");
-    Cookies.remove("jwt_vendorNumner");
+    Cookies.remove("jwt_vendorNumber");
     Cookies.remove("jwt_vendorId");
     return <VendorLogin />;
   }
