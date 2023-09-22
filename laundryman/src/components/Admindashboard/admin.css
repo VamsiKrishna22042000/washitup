@@ -17,6 +17,37 @@
   background: #555;
 }
 
+.filterButton {
+  font-size: 0.8rem;
+  background-color: #fff;
+  margin-left: 1rem;
+  color: #6759ff;
+  border: 0.1rem #6759ff solid;
+  border-radius: 0.3rem;
+}
+
+.filterButton2 {
+  font-size: 0.8rem;
+  background-color: #6759ff;
+  margin-left: 1rem;
+  color: #fff;
+  border: 0.1rem #fff solid;
+  border-radius: 0.3rem;
+}
+
+.calender3 {
+  position: absolute;
+  height: auto;
+  width: 23vw;
+  top: 50vh;
+  background-color: #fff;
+  z-index: 5;
+  border-radius: 1rem;
+  left: 53vw;
+  border-color: #6759ff;
+  border-width: 2px;
+}
+
 @media screen and (min-width: 992px) {
   .order-body-header4 {
     display: flex;

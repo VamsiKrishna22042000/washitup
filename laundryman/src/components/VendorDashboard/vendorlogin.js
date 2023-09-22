@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./vendordashboard.js";
 
+import Cookies from "js-cookie";
+
 import { AiFillFacebook } from "react-icons/ai";
 
 import { AiOutlineInstagram } from "react-icons/ai";
@@ -92,7 +94,11 @@ const VendorLogin = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(data);
+        Cookies.set("jwt_vendorName", data.data[0].name, { expires: 30 });
+        Cookies.set("jwt_vendorNumber", data.data[0].mobileNumber, {
+          expires: 30,
+        });
+        Cookies.set("jwt_vendorId", data.data[0]._id, { expires: 30 });
         window.location.href = "/vendordashboard";
       } else {
         setLoad(loadStatus.get);

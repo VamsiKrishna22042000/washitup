@@ -8,6 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
+import { FaCalendarAlt } from "react-icons/fa";
+
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+
 import { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import CustomModal from "./modal";
@@ -35,6 +40,11 @@ const Vendors = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [subfilter, setSubfilter] = useState("");
+
+  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedData] = useState({ date: "", id: "" });
+
+  const [showDate, setShowDate] = useState(false);
 
   useEffect(() => {
     getAllVendors();
@@ -506,9 +516,47 @@ const Vendors = () => {
     setShowModal(true);
   };
 
-  const suborderFiltered = subOrders.filter((each) =>
+  const filterdSuborder = subOrders.filter((each) =>
     subfilter === "" ? each : each.progress === subfilter
   );
+
+  const suborderFiltered = filterdSuborder.filter((each) =>
+    selectedDate.date === "" ? each : each.date === selectedDate.date
+  );
+
+  const Caland = () => {
+    return (
+      <Calendar
+        className="calender3"
+        onChange={(date) => {
+          setDate(date);
+          const dd = String(date.getDate()).padStart(2, "0");
+          const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
+          const yyyy = date.getFullYear();
+
+          const dateArr = [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+          ];
+
+          let d = dateArr.includes(dd) ? dd[1] : dd;
+
+          // Combine them in the desired format
+          const formattedDate = `${d}-${mm}-${yyyy}`;
+          setSelectedData({ date: formattedDate, id: "" });
+          setShowDate(false);
+        }}
+        value={date}
+      />
+    );
+  };
 
   return !load ? (
     <>
@@ -740,88 +788,198 @@ const Vendors = () => {
                 )}
               </CustomModal>
             )}
-
+            {showDate && <Caland />}
             <div className="order-summary-body">
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-end",
+                  justifyContent: "space-between",
                   alignItems: "center",
                 }}
               >
-                <strong>Filter :</strong>
-                <button
-                  style={{
-                    borderRadius: "5px",
-                    marginLeft: "10px",
-                    fontSize: "1vw",
-                    borderColor: "#ffa000",
-                    borderWidth: 1,
-                    backgroundColor:
-                      subfilter === "Active" ? "#ffa000" : "#ffffff",
-                    color: subfilter === "Active" ? "#ffffff" : "#ffa000",
-                  }}
-                  type="button"
-                  onClick={() => {
-                    setSubfilter("Active");
-                  }}
-                >
-                  Active
-                </button>
-                <button
-                  style={{
-                    borderRadius: "5px",
-                    marginLeft: "10px",
-                    fontSize: "1vw",
-                    borderColor: "#6759ff",
-                    borderWidth: 1,
-                    backgroundColor:
-                      subfilter === "In Progress" ? "#6759ff" : "#ffffff",
-                    color: subfilter === "In Progress" ? "#ffffff" : "#6759ff",
-                  }}
-                  type="button"
-                  onClick={() => {
-                    setSubfilter("In Progress");
-                  }}
-                >
-                  In Progress
-                </button>
-                <button
-                  style={{
-                    borderRadius: "5px",
-                    marginLeft: "10px",
-                    fontSize: "1vw",
-                    borderColor: "#519c66",
-                    borderWidth: 1,
-                    backgroundColor:
-                      subfilter === "Completed" ? "#519c66" : "#ffffff",
-                    color: subfilter === "Completed" ? "#ffffff" : "#519c66",
-                  }}
-                  type="button"
-                  onClick={() => {
-                    setSubfilter("Completed");
-                  }}
-                >
-                  Completed
-                </button>
-                <button
-                  style={{
-                    borderRadius: "5px",
-                    marginLeft: "10px",
-                    fontSize: "1vw",
-                    borderColor: "grey",
-                    borderWidth: 1,
-                    backgroundColor: "#ffffff",
-                    color: "grey",
-                    marginRight: "10px",
-                  }}
-                  type="button"
-                  onClick={() => {
-                    setSubfilter("");
-                  }}
-                >
-                  Clear
-                </button>
+                <div>
+                  <button
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "" });
+                      const today = new Date();
+                      const dd = String(today.getDate()).padStart(2, "0");
+                      const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+                      const yyyy = today.getFullYear();
+
+                      const dateArr = [
+                        "01",
+                        "02",
+                        "03",
+                        "04",
+                        "05",
+                        "06",
+                        "07",
+                        "08",
+                        "09",
+                      ];
+
+                      let d = dateArr.includes(dd) ? dd[1] : dd;
+
+                      const currentDate = `${d}-${mm}-${yyyy}`;
+                      setSelectedData({ date: currentDate, id: e.target.id });
+                    }}
+                    id="today"
+                    className={
+                      selectedDate.id === "today"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    type="button"
+                  >
+                    Today
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "" });
+                      // Get the current date
+                      const today = new Date();
+
+                      // Calculate tomorrow's date
+                      const tomorrow = new Date(today);
+                      tomorrow.setDate(today.getDate() + 1);
+
+                      // Format the date as "dd-mm-yyyy"
+                      const dd = String(tomorrow.getDate()).padStart(2, "0");
+                      const mm = String(tomorrow.getMonth() + 1).padStart(
+                        2,
+                        "0"
+                      ); // January is 0!
+                      const yyyy = tomorrow.getFullYear();
+
+                      const dateArr = [
+                        "01",
+                        "02",
+                        "03",
+                        "04",
+                        "05",
+                        "06",
+                        "07",
+                        "08",
+                        "09",
+                      ];
+
+                      let d = dateArr.includes(dd) ? dd[1] : dd;
+
+                      const tomorrowDate = `${d}-${mm}-${yyyy}`;
+                      setSelectedData({ date: tomorrowDate, id: e.target.id });
+                    }}
+                    className={
+                      selectedDate.id === "tomorrow"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    id="tomorrow"
+                    type="button"
+                  >
+                    Tomorrow
+                  </button>
+                  <button
+                    id="cal"
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "cal" });
+
+                      setShowDate(true);
+                    }}
+                    className={
+                      selectedDate.id === "cal"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    type="button"
+                  >
+                    <FaCalendarAlt />
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedData({ date: "", id: "" });
+                    }}
+                    className="filterButton"
+                    type="button"
+                  >
+                    Clear
+                  </button>
+                </div>
+                <div>
+                  <strong>Filter :</strong>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "#ffa000",
+                      borderWidth: 1,
+                      backgroundColor:
+                        subfilter === "Active" ? "#ffa000" : "#ffffff",
+                      color: subfilter === "Active" ? "#ffffff" : "#ffa000",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("Active");
+                    }}
+                  >
+                    Active
+                  </button>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "#6759ff",
+                      borderWidth: 1,
+                      backgroundColor:
+                        subfilter === "In Progress" ? "#6759ff" : "#ffffff",
+                      color:
+                        subfilter === "In Progress" ? "#ffffff" : "#6759ff",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("In Progress");
+                    }}
+                  >
+                    In Progress
+                  </button>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "#519c66",
+                      borderWidth: 1,
+                      backgroundColor:
+                        subfilter === "Completed" ? "#519c66" : "#ffffff",
+                      color: subfilter === "Completed" ? "#ffffff" : "#519c66",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("Completed");
+                    }}
+                  >
+                    Completed
+                  </button>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "grey",
+                      borderWidth: 1,
+                      backgroundColor: "#ffffff",
+                      color: "grey",
+                      marginRight: "10px",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("");
+                    }}
+                  >
+                    Clear
+                  </button>
+                </div>
               </div>
               <div className="order-body-header1">
                 <p className="order-body-para">Order Id</p>
@@ -850,7 +1008,6 @@ const Vendors = () => {
                   {/**all orders booked by the user sorted based on the date */}
 
                   <p
-                    i
                     userId={each.userId}
                     id={each.orderId}
                     style={{ width: "20%" }}

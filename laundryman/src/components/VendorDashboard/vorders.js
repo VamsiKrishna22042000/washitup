@@ -2,8 +2,15 @@ import { useEffect, useState } from "react";
 import "../Admindashboard/admin.css";
 
 import { TailSpin } from "react-loader-spinner";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+import { FaCalendarAlt } from "react-icons/fa";
+
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+
+import { MdLocalLaundryService } from "react-icons/md";
+
+import Cookies from "js-cookie";
 
 const Orders = () => {
   /**allorders is the state used to get all the orders of all the user's */
@@ -24,59 +31,41 @@ const Orders = () => {
   });
 
   /**search customer is used to filter the allordes array based on the customer name which was searched in the search box */
-  const [searchedCustomer, setSearchedCustomer] = useState("");
 
   const [load, setLoad] = useState(false);
+
+  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedData] = useState({ date: "", id: "" });
+
+  const [showDate, setShowDate] = useState(false);
+
+  const [subfilter, setSubfilter] = useState("");
 
   /**To get all the order before mounting by an api call*/
   useEffect(() => {
     getAllOrders();
   }, []);
 
-  /**getAllOrders is a function to get alltheorders that were booked by all users*/
+  /**getAllOrders is a function to get all the orders of the vendor*/
 
   const getAllOrders = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
+    const url = `${
+      process.env.REACT_APP_ROOT_URL
+    }/api/admin/getVendorById/${Cookies.get("jwt_vendorId")}`;
 
-    const response = await fetch(url);
-    const data = await response.json();
+    const vendorObtained = await fetch(url);
 
-    if (response.ok) {
+    const response = await vendorObtained.json();
+
+    if (vendorObtained.ok) {
       /**This is an array to insert name,mobileNumber,userId of the user into the each order object which were in the array of orders */
       let eachObjInsertedWithNumberName = [];
 
-      let activeCount = 0;
+      console.log(response.data.orders);
 
-      let inprogressCount = 0;
-
-      let completedCount = 0;
-
-      let cancelCount = 0;
-
-      for (let eachorder of data) {
-        if (eachorder.progress === "Active") {
-          activeCount = activeCount + 1;
-        }
-
-        if (eachorder.progress === "In Progress") {
-          inprogressCount = inprogressCount + 1;
-        }
-
-        if (eachorder.progress === "Completed") {
-          completedCount = completedCount + 1;
-        }
-
-        if (eachorder.progress === "cancel") {
-          cancelCount = cancelCount + 1;
-        }
-
+      for (let eachorder of response.data.orders) {
         eachObjInsertedWithNumberName.push({
           ...eachorder,
-          mobileNumber:
-            eachorder.userId
-              .mobileNumber /**mobile number,name,userId were added into each order object which were not obtained out of the object from backend */,
-          name: eachorder.userId.name,
-          userId: eachorder.userId._id,
         });
       }
 
@@ -97,13 +86,19 @@ const Orders = () => {
       });
 
       setCount({
-        active: activeCount,
-        inprogress: inprogressCount,
-        completed: completedCount,
-        cancel: cancelCount,
+        active: response.activeCount,
+        inprogress: response.inProgressCount,
+        completed: response.completeCount,
+        cancel: response.cancelCount,
       });
 
+      console.log(eachObjInsertedWithNumberName);
+
       setAllOrders(eachObjInsertedWithNumberName);
+    } else {
+      Cookies.remove("jwt_vendorName");
+      Cookies.remove("jwt_vendorNumber");
+      Cookies.remove("jwt_vendorId");
     }
   };
 
@@ -114,8 +109,6 @@ const Orders = () => {
     );
 
     let itemsObtained = [];
-
-    console.log(selectedCustomerOrder[0].items);
 
     for (let each of selectedCustomerOrder[0].items) {
       itemsObtained.push({
@@ -140,9 +133,6 @@ const Orders = () => {
   };
 
   /**Function used to filter all the orders based on the username enterd in the search box */
-  const filterdAllOrders = allorders.filter((each) =>
-    each.name.toLowerCase().startsWith(searchedCustomer.toLowerCase())
-  );
 
   /**Function used to set the progress of the particular order(active,inprogress,completed,cancel) */
   const settingProgress = async (e) => {
@@ -151,6 +141,7 @@ const Orders = () => {
     let userId = e.target.getAttribute("userId");
     let orderId = e.target.id;
     let progress = e.target.value;
+    console.log(userId);
 
     const reqConfigure = {
       method: "POST",
@@ -175,6 +166,7 @@ const Orders = () => {
     let userId = e.target.getAttribute("userId");
     let orderId = e.target.id;
     let progress = e.target.value;
+    console.log(userId);
 
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
 
@@ -197,22 +189,19 @@ const Orders = () => {
 
   /**Fuction to update progress in the sub section and*/
   const filterCustomer2 = async (orderId) => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
+    const url = `${
+      process.env.REACT_APP_ROOT_URL
+    }/api/admin/getVendorById/${Cookies.get("jwt_vendorId")}`;
 
-    const response = await fetch(url);
-    const data = await response.json();
+    const vendorObtained = await fetch(url);
 
-    if (response.ok) {
+    const response = await vendorObtained.json();
+    if (vendorObtained.ok) {
       let eachObjInsertedWithNumberName = [];
 
-      for (let eachorder of data) {
+      for (let eachorder of response.data.orders) {
         eachObjInsertedWithNumberName.push({
           ...eachorder,
-          mobileNumber:
-            eachorder.userId
-              .mobileNumber /**mobile number,name,userId were added into each order object which were not obtained out of the object from backend */,
-          name: eachorder.userId.name,
-          userId: eachorder.userId._id,
         });
       }
 
@@ -230,10 +219,10 @@ const Orders = () => {
           itemName: each.itemId.name,
           price:
             selectedCustomerOrder[0].service === "dry Cleaning"
-              ? each.drycleaning
+              ? each.itemId.drycleaning
               : selectedCustomerOrder[0].service === "wash & fold"
-              ? each.washfold
-              : each.washiron,
+              ? each.itemId.washfold
+              : each.itemId.washiron,
           image: each.itemId.image,
         });
       }
@@ -243,294 +232,49 @@ const Orders = () => {
     }
   };
 
-  /**showAddVendor state is used to show the modalbox to assign a vendor */
-  const [showAddVendor, setshowAddVendor] = useState(false);
+  const Caland = () => {
+    return (
+      <Calendar
+        className="calender3"
+        onChange={(date) => {
+          setDate(date);
+          const dd = String(date.getDate()).padStart(2, "0");
+          const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
+          const yyyy = date.getFullYear();
 
-  /**Component to show the modalbox of after clicking assign vendor in the orders section of a particular order */
-  const ModalAssginVendor = () => {
-    /**State to get all the vendors inthe modalbox component */
-    const [load, setLoad] = useState(true);
-    const [vendors, setVendors] = useState([]);
+          const dateArr = [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+          ];
 
-    /**state used to store  the search */
-    const [searchedVendor, setSearchedVendor] = useState("");
+          let d = dateArr.includes(dd) ? dd[1] : dd;
 
-    useEffect(() => {
-      getAllVendors();
-    }, []);
-
-    const filteredVendors = vendors.filter((each) =>
-      each.name.toLowerCase().startsWith(searchedVendor.toLowerCase())
-    );
-
-    /**Function to get all the vendors */
-    const getAllVendors = async () => {
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
-
-      const response = await fetch(url);
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log(data);
-        setLoad(false);
-        setVendors(data);
-      }
-    };
-
-    /**Function to assign an order to particular vendor */
-    const assignVendor = async (e) => {
-      setLoad(true);
-      let userId = selectedCustomer[0].userId;
-      let orderId = selectedCustomer[0]._id;
-      let vendorId = e.target.id;
-
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/assignNewVendor`;
-
-      const reqConfigure = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ vendorId, orderId, userId }),
-      };
-
-      const response = await fetch(url, reqConfigure);
-
-      if (response.ok) {
-        toast.success("Assigned Vendor", {
-          position: "top-center",
-          autoClose: 1000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
-        setTimeout(() => {
-          setshowAddVendor(false);
-          setSelectedCustomer("");
-          setAllOrders([]);
-          getAllOrders();
-        }, 1500);
-      }
-    };
-
-    /**Function to change the assigned vendor */
-    const changeVendor = async (e) => {
-      setLoad(true);
-      let orderId = selectedCustomer[0]._id;
-      let vendorId = e.target.id;
-      let previVendorId = selectedCustomer[0].vendorId._id;
-      let previVendorOrderId = selectedCustomer[0]._id;
-
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/changeVendor`;
-
-      const reqConfigure = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          vendorId,
-          orderId,
-          previVendorId,
-          previVendorOrderId,
-        }),
-      };
-
-      const response = await fetch(url, reqConfigure);
-
-      if (response.ok) {
-        toast.success("Changed Vendor", {
-          position: "top-center",
-          autoClose: 1000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
-        setTimeout(() => {
-          setshowAddVendor(false);
-          setSelectedCustomer("");
-          setAllOrders([]);
-          getAllOrders();
-        }, 1500);
-      }
-    };
-
-    return load ? (
-      <>
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "#53545c99",
-            zIndex: 2,
-          }}
-        ></div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          className="assign-vendor-modal-box"
-        >
-          <ToastContainer />
-          <TailSpin color="#6759ff" height={50} width={50} />
-        </div>
-      </>
-    ) : (
-      <>
-        <ToastContainer />
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "#53545c99",
-            zIndex: 2,
-          }}
-        ></div>
-        {/**Modal box of the assign vendor */}
-        <div className="assign-vendor-modal-box">
-          <div className="order-summary-body">
-            {/**Button use to show the assign vendor modalbox */}
-            <button
-              onClick={() => {
-                setshowAddVendor(false);
-              }}
-              type="button"
-              style={{
-                position: "absolute",
-                backgroundColor: "transparent",
-                borderWidth: 0,
-                color: "#6759FF",
-                fontWeight: "bold",
-                fontSize: "1.5vw",
-                right: 20,
-                top: 10,
-              }}
-            >
-              ✕
-            </button>
-            <div className="order-body-header">
-              <h6 style={{ margin: 0 }}>Vendors</h6>
-              {/**Search box used to search the vendors in the modal box*/}
-              <input
-                onChange={(e) => {
-                  setSearchedVendor(e.target.value);
-                }}
-                style={{ outline: "none", fontSize: "1vw" }}
-                type="search"
-                placeholder="Search Vendors"
-              />
-            </div>
-            <div className="order-body-header1">
-              <p style={{ width: "20%" }} className="order-body-para">
-                Vendor Name
-              </p>
-              <p style={{ width: "20%" }} className="order-body-para">
-                Mobile Number
-              </p>
-
-              <p style={{ width: "20%" }} className="order-body-para">
-                Address
-              </p>
-
-              <p style={{ width: "20%" }} className="order-body-para">
-                Pincode
-              </p>
-              <p style={{ width: "20%" }} className="order-body-para">
-                Assign
-              </p>
-            </div>
-            {/**Available vendor's data*/}
-            {filteredVendors.map((each) => (
-              <div key={each.id} className="order-body-header2">
-                <p
-                  id={each._id}
-                  className="order-body-para"
-                  style={{ textTransform: "capitalize", width: "20%" }}
-                >
-                  {each.name}
-                </p>
-                <p
-                  style={{ width: "20%" }}
-                  id={each.id}
-                  className="order-body-para"
-                >
-                  {each.mobileNumber}
-                </p>
-
-                <p
-                  style={{ width: "20%" }}
-                  id={each.id}
-                  className="order-body-para"
-                >
-                  {each.location}
-                </p>
-                <p
-                  style={{ width: "20%" }}
-                  id={each.id}
-                  className="order-body-para"
-                >
-                  {each.pinCode}
-                </p>
-                {/**buttons to assgin the vendor */}
-                {selectedCustomer[0].vendorName === "empty" ? (
-                  <button
-                    id={each._id}
-                    onClick={assignVendor}
-                    type="button"
-                    style={{
-                      width: "15%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      borderWidth: "0px",
-                      color: "#fff",
-                      backgroundColor: "green",
-                    }}
-                  >
-                    Assign
-                  </button>
-                ) : (
-                  selectedCustomer[0].vendorName !== each.name && (
-                    <button
-                      id={each._id}
-                      onClick={changeVendor}
-                      type="button"
-                      style={{
-                        width: "15%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        borderRadius: "8px",
-                        borderWidth: "0px",
-                        color: "#fff",
-                        backgroundColor: "#F50000",
-                      }}
-                    >
-                      Change
-                    </button>
-                  )
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </>
+          // Combine them in the desired format
+          const formattedDate = `${d}-${mm}-${yyyy}`;
+          setSelectedData({ date: formattedDate, id: "" });
+          setShowDate(false);
+        }}
+        value={date}
+      />
     );
   };
 
+  const filterByProgress = allorders.filter((each) =>
+    subfilter === "" ? each : each.progress === subfilter
+  );
+  const filterByDate = filterByProgress.filter((each) =>
+    selectedDate.date === "" ? each : each.date === selectedDate.date
+  );
+
   return allorders.length > 0 ? (
     <>
-      {showAddVendor && <ModalAssginVendor />}
       {load ? (
         <div
           style={{
@@ -552,7 +296,7 @@ const Orders = () => {
           ) : (
             <div className="order-summary-head">
               {/**After selecting particular order */}
-              <h6 style={{ color: "#53545c" }}>
+              <h6 style={{ color: "#53545c", width: "45%" }}>
                 Orders Id : {selectedCustomer[0]._id}
               </h6>
               <div
@@ -560,8 +304,9 @@ const Orders = () => {
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  width: "20%",
-                  marginLeft: "25%",
+                  width: "25%",
+                  marginLeft: "0%",
+                  marginRight: "15%",
                 }}
               >
                 <select
@@ -569,7 +314,7 @@ const Orders = () => {
                   userId={selectedCustomer[0].userId}
                   id={selectedCustomer[0]._id}
                   value={selectedCustomer[0].progress}
-                  style={{ textTransform: "capitalize" }}
+                  style={{ textTransform: "capitalize", marginRight: "5%" }}
                 >
                   {selectedCustomer[0].action.map((each) => (
                     <option>{each}</option>
@@ -634,29 +379,6 @@ const Orders = () => {
                   width: "25%",
                 }}
               >
-                {/**Button use to show the assign vendor modalbox*/}
-                {selectedCustomer[0].vendorName === "empty" ? (
-                  <button
-                    onClick={() => {
-                      setshowAddVendor(!showAddVendor);
-                    }}
-                    className="assign-vendor"
-                    type="button"
-                  >
-                    Assign Vendor
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      setshowAddVendor(!showAddVendor);
-                    }}
-                    className="assign-vendor"
-                    style={{ backgroundColor: "#F50000" }}
-                    type="button"
-                  >
-                    Change Vendor
-                  </button>
-                )}
                 {/**Button use to notshow details of particular order*/}
                 <button
                   onClick={() => {
@@ -1019,104 +741,6 @@ const Orders = () => {
             )
           ) : (
             <div className="order-summary-view">
-              {/**Details of the user*/}
-              <div style={{ position: "relative" }} className="summary-view">
-                <div
-                  style={{
-                    height: "25%",
-                    width: "12%",
-                    backgroundColor: "#FFCC9169",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "10px",
-                  }}
-                >
-                  <img
-                    style={{ height: "70%", width: "70%" }}
-                    src="/profile2.png"
-                    alt="Profile"
-                  />
-                </div>
-                <p
-                  style={{
-                    position: "absolute",
-                    top: "10%",
-                    left: "18%",
-                    color: "#8B8D97",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {selectedCustomer[0].name}
-                </p>
-                <p
-                  style={{
-                    position: "absolute",
-                    bottom: "40%",
-                    left: "5%",
-                    color: "#8B8D97",
-                    fontSize: "0.85vw",
-                  }}
-                >
-                  Mobile Number
-                </p>
-                <p
-                  style={{
-                    position: "absolute",
-                    bottom: "25%",
-                    left: "5%",
-                    color: "#45464E",
-                    fontSize: "1.1vw",
-                  }}
-                >
-                  {selectedCustomer[0].mobileNumber}
-                </p>
-              </div>
-              <div
-                style={{ position: "relative", overflow: "hidden" }}
-                className="summary-view"
-              >
-                <div
-                  style={{
-                    height: "25%",
-                    width: "12%",
-                    backgroundColor: "#FFCC9169",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "10px",
-                  }}
-                >
-                  <img
-                    style={{ height: "70%", width: "70%" }}
-                    src="/location2.png"
-                    alt="Profile"
-                  />
-                </div>
-                <p
-                  style={{
-                    position: "absolute",
-                    bottom: "40%",
-                    left: "5%",
-                    color: "#8B8D97",
-                    fontSize: "0.85vw",
-                  }}
-                >
-                  Address
-                </p>
-                <p
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "5%",
-                    color: "#45464E",
-                    fontSize: "0.9vw",
-                    width: "90%",
-                  }}
-                >
-                  {selectedCustomer[0].address}
-                </p>
-              </div>
               <div style={{ position: "relative" }} className="summary-view">
                 <div
                   style={{
@@ -1162,22 +786,198 @@ const Orders = () => {
           )}
           {selectedCustomer === "" ? (
             <div className="order-summary-body">
+              {showDate && <Caland />}
               <div className="order-body-header">
-                <h6 style={{ margin: 0 }}>Customer Orders</h6>
-                <input
-                  onChange={(e) => {
-                    setSearchedCustomer(e.target.value);
-                  }}
-                  style={{ outline: "none", fontSize: "1vw" }}
-                  type="search"
-                  placeholder="Search Customer"
-                />
+                <h6 style={{ margin: 0 }}>Your Orders</h6>
+                <div>
+                  <strong>Date Filter :</strong>
+                  <button
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "" });
+                      const dateArr = [
+                        "01",
+                        "02",
+                        "03",
+                        "04",
+                        "05",
+                        "06",
+                        "07",
+                        "08",
+                        "09",
+                      ];
+                      const today = new Date();
+                      const dd = String(today.getDate()).padStart(2, "0");
+                      const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+                      const yyyy = today.getFullYear();
+
+                      let d = dateArr.includes(dd) ? dd[1] : dd;
+
+                      const currentDate = `${d}-${mm}-${yyyy}`;
+
+                      setSelectedData({ date: currentDate, id: e.target.id });
+                    }}
+                    id="today"
+                    className={
+                      selectedDate.id === "today"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    type="button"
+                  >
+                    Today
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "" });
+                      // Get the current date
+                      const today = new Date();
+
+                      // Calculate tomorrow's date
+                      const tomorrow = new Date(today);
+                      tomorrow.setDate(today.getDate() + 1);
+
+                      // Format the date as "dd-mm-yyyy"
+                      const dd = String(tomorrow.getDate()).padStart(2, "0");
+                      const mm = String(tomorrow.getMonth() + 1).padStart(
+                        2,
+                        "0"
+                      ); // January is 0!
+                      const yyyy = tomorrow.getFullYear();
+
+                      const dateArr = [
+                        "01",
+                        "02",
+                        "03",
+                        "04",
+                        "05",
+                        "06",
+                        "07",
+                        "08",
+                        "09",
+                      ];
+
+                      let d = dateArr.includes(dd) ? dd[1] : dd;
+
+                      const tomorrowDate = `${d}-${mm}-${yyyy}`;
+                      setSelectedData({ date: tomorrowDate, id: e.target.id });
+                    }}
+                    className={
+                      selectedDate.id === "tomorrow"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    id="tomorrow"
+                    type="button"
+                  >
+                    Tomorrow
+                  </button>
+                  <button
+                    id="cal"
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "cal" });
+
+                      setShowDate(true);
+                    }}
+                    className={
+                      selectedDate.id === "cal"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    type="button"
+                  >
+                    <FaCalendarAlt />
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedData({ date: "", id: "" });
+                    }}
+                    className="filterButton"
+                    type="button"
+                  >
+                    Clear
+                  </button>
+                </div>
+
+                <div>
+                  <strong>Filter :</strong>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "#ffa000",
+                      borderWidth: 1,
+                      backgroundColor:
+                        subfilter === "Active" ? "#ffa000" : "#ffffff",
+                      color: subfilter === "Active" ? "#ffffff" : "#ffa000",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("Active");
+                    }}
+                  >
+                    Active
+                  </button>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "#6759ff",
+                      borderWidth: 1,
+                      backgroundColor:
+                        subfilter === "In Progress" ? "#6759ff" : "#ffffff",
+                      color:
+                        subfilter === "In Progress" ? "#ffffff" : "#6759ff",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("In Progress");
+                    }}
+                  >
+                    In Progress
+                  </button>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "#519c66",
+                      borderWidth: 1,
+                      backgroundColor:
+                        subfilter === "Completed" ? "#519c66" : "#ffffff",
+                      color: subfilter === "Completed" ? "#ffffff" : "#519c66",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("Completed");
+                    }}
+                  >
+                    Completed
+                  </button>
+                  <button
+                    style={{
+                      borderRadius: "5px",
+                      marginLeft: "10px",
+                      fontSize: "1vw",
+                      borderColor: "grey",
+                      borderWidth: 1,
+                      backgroundColor: "#ffffff",
+                      color: "grey",
+                      marginRight: "10px",
+                    }}
+                    type="button"
+                    onClick={() => {
+                      setSubfilter("");
+                    }}
+                  >
+                    Clear
+                  </button>
+                </div>
               </div>
               <div className="order-body-header1">
                 <p style={{ width: "1%" }}></p>
-                <p style={{ width: "14%" }} className="order-body-para">
-                  Customer Name
-                </p>
+                <p style={{ width: "14%" }} className="order-body-para"></p>
                 <p className="order-body-para">Order Date</p>
                 <p style={{ width: "20%" }} className="order-body-para">
                   Order Id
@@ -1199,32 +999,25 @@ const Orders = () => {
                   Status
                 </p>
               </div>
-              {filterdAllOrders.map((each) => (
+              {filterByDate.map((each) => (
                 <div
                   style={{ position: "relative" }}
                   key={each._id}
                   className="order-body-header2"
                 >
                   {/**all orders booked by the user sorted based on the date */}
-                  <div
-                    className={
-                      each.vendorName === "empty"
-                        ? "vender-assigned-or-not"
-                        : "vender-assigned-or-not1"
-                    }
-                  ></div>
-                  {each.vendorName === "empty" ? (
-                    <p className="vendor-assign-check">Vendor Not Assigned</p>
-                  ) : (
-                    <p className="vendor-assign-check1">Vendor Assigned</p>
-                  )}
+
                   <p
-                    style={{ textTransform: "capitalize", width: "14%" }}
+                    style={{
+                      textTransform: "capitalize",
+                      width: "14%",
+                      paddingLeft: "5%",
+                    }}
                     id={each._id}
                     onClick={filterCustomer}
                     className="order-body-para"
                   >
-                    {each.name}
+                    <MdLocalLaundryService fontSize="1.35rem" color="#6759ff" />
                   </p>
                   <p
                     id={each._id}
@@ -1348,7 +1141,7 @@ const Orders = () => {
                 <p className="order-body-para">Category</p>
                 <p className="order-body-para">Unit Price</p>
                 <p className="order-body-para">Quantity</p>
-                <p className="order-body-para">Order Total</p>
+                <p className="order-body-para">Item Total</p>
               </div>
               {items.map((each) => (
                 <div key={each.id} className="order-body-header2">

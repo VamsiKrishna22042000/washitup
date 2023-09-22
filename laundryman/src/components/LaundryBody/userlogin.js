@@ -2,6 +2,8 @@ import "./userlogin.css";
 
 import { useState } from "react";
 
+import Cookies from "js-cookie";
+
 import { AiFillFacebook } from "react-icons/ai";
 
 import { AiOutlineInstagram } from "react-icons/ai";
@@ -19,8 +21,6 @@ const loadStatus = {
 
 const UserLogin = () => {
   const [getotp, setgetotp] = useState(false);
-
-  const [verifyOtp, setOTP] = useState(false);
 
   const [load, setLoad] = useState(loadStatus.get);
 
@@ -200,6 +200,7 @@ const UserLogin = () => {
       const data = await response.json();
 
       if (response.ok) {
+        Cookies.set("jwt_userId", data.data[0]._id, { expires: 30 });
         window.location.href = "/";
       } else {
         setgetotp(true);
@@ -215,253 +216,265 @@ const UserLogin = () => {
     }
   };
 
-  return load === loadStatus.got ? (
-    <>
-      <ToastContainer />
-      <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <img
-          className="washingloader"
-          src="/machineloading.gif"
-          alt="washingmachine"
-        />
-      </div>
-    </>
-  ) : load === loadStatus.signup ? (
-    <div className="vendorlogincon">
-      <ToastContainer />
-      <div className="vendor-card1">
-        <img className="vendorlogo" src="/vendorlogo.png" alt="vendorlogo" />
-        <img className="washing-gif" src="/washingload.gif" alt="washingload" />
-      </div>
-
-      {load === loadStatus.message ? (
-        <div className="vendor-card2">
-          <img className="messageanimation" src="/messageanimation.gif" />
+  if (Cookies.get("jwt_userId") !== undefined) {
+    window.location.href = "/";
+  } else {
+    return load === loadStatus.got ? (
+      <>
+        <ToastContainer />
+        <div
+          style={{
+            height: "100vh",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            className="washingloader"
+            src="/machineloading.gif"
+            alt="washingmachine"
+          />
         </div>
-      ) : (
-        <div className="vendor-card2">
-          <div className="vendor-login-logo-card">
-            <img className="login-logo" src="/logosymbol.png" alt="logo" />
-            <img className="login-logo3" src="/washituplogo.png" alt="logo" />
-            <h1 className="login-head">Sign Up</h1>
-            <p className="login-text">to create & access your account</p>
-            <div className="login-box">
-              {getotp ? (
-                <input
-                  style={{
-                    textAlign: "center",
-                    borderColor: "transparent",
-                    outline: "transparent",
-                  }}
-                  className="login-input2"
-                  type="tel"
-                  placeholder="Enter OTP"
-                  autoFocus
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  onChange={(e) => {
-                    setOtp(e.target.value);
-                  }}
-                />
-              ) : (
-                <>
-                  <p className="logo-para">Enter Name</p>
-                  <input
-                    className="login-input"
-                    type="text"
-                    placeholder="Enter Name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  />
-                  <p className="logo-para">Enter Phone Number</p>
-                  <input
-                    onChange={(e) => {
-                      setMobileNumber(e.target.value);
-                    }}
-                    className="login-input"
-                    type="number"
-                    placeholder="Enter Mobile number"
-                  />
-                </>
-              )}
-              {getotp ? (
-                <button
-                  onClick={getOtpSignUpVerify}
-                  className="button-login"
-                  type="button"
-                >
-                  Verify
-                </button>
-              ) : (
-                <button
-                  onClick={getOtpRequestSignUp}
-                  className="button-login"
-                  type="button"
-                >
-                  Get Otp
-                </button>
-              )}
-              <div className="social-con">
-                <AiFillFacebook
-                  onClick={() => {
-                    window.open(
-                      "https://www.facebook.com/washitup.in",
-                      "_blank"
-                    );
-                  }}
-                  className="social-icons"
-                />
-                <AiOutlineInstagram
-                  onClick={() => {
-                    window.open(
-                      "https://www.instagram.com/washitup.in/",
-                      "_blank"
-                    );
-                  }}
-                  className="social-icons"
-                />
-                <AiFillTwitterCircle
-                  onClick={() => {
-                    window.open("https://twitter.com/washitup_in", "_blank");
-                  }}
-                  className="social-icons"
-                />
-              </div>
-            </div>
+      </>
+    ) : load === loadStatus.signup ? (
+      <div className="vendorlogincon">
+        <ToastContainer />
+        <div className="vendor-card1">
+          <img className="vendorlogo" src="/vendorlogo.png" alt="vendorlogo" />
+          <img
+            className="washing-gif"
+            src="/washingload.gif"
+            alt="washingload"
+          />
+        </div>
+
+        {load === loadStatus.message ? (
+          <div className="vendor-card2">
+            <img className="messageanimation" src="/messageanimation.gif" />
           </div>
-        </div>
-      )}
-    </div>
-  ) : (
-    <div className="vendorlogincon">
-      <ToastContainer />
-      <div className="vendor-card1">
-        <img className="vendorlogo" src="/vendorlogo.png" alt="vendorlogo" />
-        <img className="washing-gif" src="/washingload.gif" alt="washingload" />
-      </div>
-
-      {load === loadStatus.message ? (
-        <div className="vendor-card2">
-          <img className="messageanimation" src="/messageanimation.gif" />
-        </div>
-      ) : (
-        <div className="vendor-card2">
-          <ToastContainer />
-          <div className="vendor-login-logo-card">
-            <img className="login-logo" src="/logosymbol.png" alt="logo" />
-            <img className="login-logo3" src="/washituplogo.png" alt="logo" />
-            <h1 className="login-head">Login</h1>
-            <p className="login-text">to access you account</p>
-            <div className="login-box">
-              {getotp ? (
-                <input
-                  style={{
-                    textAlign: "center",
-                    borderColor: "transparent",
-                    outline: "transparent",
-                  }}
-                  className="login-input2"
-                  type="tel"
-                  placeholder="Enter OTP"
-                  autoFocus
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  onChange={(e) => {
-                    setOtp(e.target.value);
-                  }}
-                />
-              ) : (
-                <>
-                  <p className="logo-para">Enter Phone Number</p>
+        ) : (
+          <div className="vendor-card2">
+            <div className="vendor-login-logo-card">
+              <img className="login-logo" src="/logosymbol.png" alt="logo" />
+              <img className="login-logo3" src="/washituplogo.png" alt="logo" />
+              <h1 className="login-head">Sign Up</h1>
+              <p className="login-text">to create & access your account</p>
+              <div className="login-box">
+                {getotp ? (
                   <input
+                    style={{
+                      textAlign: "center",
+                      borderColor: "transparent",
+                      outline: "transparent",
+                    }}
+                    className="login-input2"
+                    type="tel"
+                    placeholder="Enter OTP"
+                    autoFocus
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     onChange={(e) => {
-                      setMobileNumber(e.target.value);
+                      setOtp(e.target.value);
                     }}
-                    className="login-input"
-                    type="number"
-                    placeholder="Enter Mobile number"
                   />
-                </>
-              )}
-              {getotp ? (
-                <button
-                  onClick={getOtpLoginVerify}
-                  className="button-login"
-                  type="button"
-                >
-                  Verify
-                </button>
-              ) : (
-                <button
-                  onClick={getOtpRequestLogin}
-                  className="button-login"
-                  type="button"
-                >
-                  Get Otp
-                </button>
-              )}
-              {!getotp && (
-                <p
-                  style={{ marginTop: "5%", alignSelf: "center" }}
-                  className="login-text"
-                >
-                  Don't have and account?
-                  <span
-                    onClick={() => {
-                      setLoad(loadStatus.got);
-                      setTimeout(() => {
-                        setLoad(loadStatus.signup);
-                        setMobileNumber(0);
-                        setOtp(0);
-                      }, 500);
-                    }}
-                    style={{ color: "#6759ff", cursor: "pointer" }}
+                ) : (
+                  <>
+                    <p className="logo-para">Enter Name</p>
+                    <input
+                      className="login-input"
+                      type="text"
+                      placeholder="Enter Name"
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                    />
+                    <p className="logo-para">Enter Phone Number</p>
+                    <input
+                      onChange={(e) => {
+                        setMobileNumber(e.target.value);
+                      }}
+                      className="login-input"
+                      type="number"
+                      placeholder="Enter Mobile number"
+                    />
+                  </>
+                )}
+                {getotp ? (
+                  <button
+                    onClick={getOtpSignUpVerify}
+                    className="button-login"
+                    type="button"
                   >
-                    Sign up
-                  </span>
-                </p>
-              )}
-              <div className="social-con">
-                <AiFillFacebook
-                  onClick={() => {
-                    window.open(
-                      "https://www.facebook.com/washitup.in",
-                      "_blank"
-                    );
-                  }}
-                  className="social-icons"
-                />
-                <AiOutlineInstagram
-                  onClick={() => {
-                    window.open(
-                      "https://www.instagram.com/washitup.in/",
-                      "_blank"
-                    );
-                  }}
-                  className="social-icons"
-                />
-                <AiFillTwitterCircle
-                  onClick={() => {
-                    window.open("https://twitter.com/washitup_in", "_blank");
-                  }}
-                  className="social-icons"
-                />
+                    Verify
+                  </button>
+                ) : (
+                  <button
+                    onClick={getOtpRequestSignUp}
+                    className="button-login"
+                    type="button"
+                  >
+                    Get Otp
+                  </button>
+                )}
+                <div className="social-con">
+                  <AiFillFacebook
+                    onClick={() => {
+                      window.open(
+                        "https://www.facebook.com/washitup.in",
+                        "_blank"
+                      );
+                    }}
+                    className="social-icons"
+                  />
+                  <AiOutlineInstagram
+                    onClick={() => {
+                      window.open(
+                        "https://www.instagram.com/washitup.in/",
+                        "_blank"
+                      );
+                    }}
+                    className="social-icons"
+                  />
+                  <AiFillTwitterCircle
+                    onClick={() => {
+                      window.open("https://twitter.com/washitup_in", "_blank");
+                    }}
+                    className="social-icons"
+                  />
+                </div>
               </div>
             </div>
           </div>
+        )}
+      </div>
+    ) : (
+      <div className="vendorlogincon">
+        <ToastContainer />
+        <div className="vendor-card1">
+          <img className="vendorlogo" src="/vendorlogo.png" alt="vendorlogo" />
+          <img
+            className="washing-gif"
+            src="/washingload.gif"
+            alt="washingload"
+          />
         </div>
-      )}
-    </div>
-  );
+
+        {load === loadStatus.message ? (
+          <div className="vendor-card2">
+            <img className="messageanimation" src="/messageanimation.gif" />
+          </div>
+        ) : (
+          <div className="vendor-card2">
+            <ToastContainer />
+            <div className="vendor-login-logo-card">
+              <img className="login-logo" src="/logosymbol.png" alt="logo" />
+              <img className="login-logo3" src="/washituplogo.png" alt="logo" />
+              <h1 className="login-head">Login</h1>
+              <p className="login-text">to access you account</p>
+              <div className="login-box">
+                {getotp ? (
+                  <input
+                    style={{
+                      textAlign: "center",
+                      borderColor: "transparent",
+                      outline: "transparent",
+                    }}
+                    className="login-input2"
+                    type="tel"
+                    placeholder="Enter OTP"
+                    autoFocus
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    onChange={(e) => {
+                      setOtp(e.target.value);
+                    }}
+                  />
+                ) : (
+                  <>
+                    <p className="logo-para">Enter Phone Number</p>
+                    <input
+                      onChange={(e) => {
+                        setMobileNumber(e.target.value);
+                      }}
+                      className="login-input"
+                      type="number"
+                      placeholder="Enter Mobile number"
+                    />
+                  </>
+                )}
+                {getotp ? (
+                  <button
+                    onClick={getOtpLoginVerify}
+                    className="button-login"
+                    type="button"
+                  >
+                    Verify
+                  </button>
+                ) : (
+                  <button
+                    onClick={getOtpRequestLogin}
+                    className="button-login"
+                    type="button"
+                  >
+                    Get Otp
+                  </button>
+                )}
+                {!getotp && (
+                  <p
+                    style={{ marginTop: "5%", alignSelf: "center" }}
+                    className="login-text"
+                  >
+                    Don't have and account?
+                    <span
+                      onClick={() => {
+                        setLoad(loadStatus.got);
+                        setTimeout(() => {
+                          setLoad(loadStatus.signup);
+                          setMobileNumber(0);
+                          setOtp(0);
+                        }, 500);
+                      }}
+                      style={{ color: "#6759ff", cursor: "pointer" }}
+                    >
+                      Sign up
+                    </span>
+                  </p>
+                )}
+                <div className="social-con">
+                  <AiFillFacebook
+                    onClick={() => {
+                      window.open(
+                        "https://www.facebook.com/washitup.in",
+                        "_blank"
+                      );
+                    }}
+                    className="social-icons"
+                  />
+                  <AiOutlineInstagram
+                    onClick={() => {
+                      window.open(
+                        "https://www.instagram.com/washitup.in/",
+                        "_blank"
+                      );
+                    }}
+                    className="social-icons"
+                  />
+                  <AiFillTwitterCircle
+                    onClick={() => {
+                      window.open("https://twitter.com/washitup_in", "_blank");
+                    }}
+                    className="social-icons"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
 };
 
 export default UserLogin;

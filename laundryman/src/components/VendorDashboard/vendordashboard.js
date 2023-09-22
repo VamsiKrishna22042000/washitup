@@ -4,6 +4,8 @@ import "../Admindashboard/admin.css";
 
 import "../Admindashboard/chart.js";
 
+import Cookies from "js-cookie";
+
 import { CgProfile } from "react-icons/cg";
 
 import Dashboard from "./vdashboard.js";
@@ -78,11 +80,30 @@ const VendorDashboard = () => {
             }}
           >
             <select className="header-select">
-              <option>Vamsi</option>
+              <option>{Cookies.get("jwt_vendorName")}</option>
             </select>
             <h4>
               <CgProfile />
             </h4>
+            <button
+              onClick={() => {
+                Cookies.remove("jwt_vendorName");
+                Cookies.remove("jwt_vendorNumber");
+                Cookies.remove("jwt_vendorId");
+                window.location.href = "/vendordashboard";
+              }}
+              type="button"
+              style={{
+                borderWidth: 0,
+                width: "8vw",
+                marginLeft: "5%",
+                color: "#fff",
+                backgroundColor: "#6759ff",
+                borderRadius: "7px",
+              }}
+            >
+              Log Out
+            </button>
           </div>
         </header>
         {/**Ternary operators used to display the component's based onthe selected section*/}

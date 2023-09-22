@@ -1933,3 +1933,12 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  .navbarcontainer {
+    display: none;
+  }
+  .hamburger {
+    display: none;
+  }
+}

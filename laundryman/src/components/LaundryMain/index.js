@@ -2,8 +2,6 @@ import "./index.css";
 
 import { useState } from "react";
 
-import UserLogin from "../LaundryBody/userlogin";
-
 import BookService from "../BookService/bookservice.js";
 
 import AddClothes from "../AddClothes/addClothes";
@@ -13,6 +11,10 @@ import Success from "../Success/success";
 import Washing from "../Washing/washing";
 import AddCoupon from "../AddCoupon/addCoupon";
 import TypeOfWashing from "../TypeOfWashing/typeOfWashing";
+
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+
+import Cookies from "js-cookie";
 
 const changeComponents = {
   success: "SUCCESS",
@@ -27,6 +29,7 @@ const changeComponents = {
   /**Component which is the merge point of all the component's that which are displayed in the main page  and has the call back functions to pass from one component to another component*/
 }
 function LaundryNav(props) {
+  console.log(props);
   const [service, setService] = useState(changeComponents.typeOfWash);
 
   const [time, setTime] = useState(0);
@@ -92,19 +95,56 @@ function LaundryNav(props) {
             <div className="home">Home</div>
             <div href="#features">About us</div>
             <div href="#pricing">Blog</div>
-            <div href="#pricing" className="blog">
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                Cookies.get("jwt_userId") !== undefined
+                  ? (window.location.href = "/myorders")
+                  : (window.location.href = "/userlogin");
+              }}
+              href="#myorders"
+            >
               My Orders
             </div>
-            <div href="#pricing">
-              <button
-                onClick={(props) => {
+            {Cookies.get("jwt_userId") !== undefined ? (
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  Cookies.remove("jwt_userId");
+                  window.location.href = "/";
+                }}
+                href="#pricing"
+                className="blog"
+              >
+                <button
+                  style={{ cursor: "pointer" }}
+                  type="button"
+                  onClick={() => {
+                    Cookies.remove("jwt_userId");
+                    window.location.href = "/";
+                  }}
+                  className="but"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <div
+                onClick={() => {
                   window.location.href = "/userlogin";
                 }}
-                className="but"
               >
-                Log In
-              </button>
-            </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.href = "/userlogin";
+                  }}
+                  className="but"
+                >
+                  Log In
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="hamburger">
@@ -165,4 +205,4 @@ function LaundryNav(props) {
   );
 }
 
-export default LaundryNav;
+export default withRouter(LaundryNav);

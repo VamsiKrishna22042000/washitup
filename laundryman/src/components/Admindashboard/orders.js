@@ -5,6 +5,11 @@ import { TailSpin } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { FaCalendarAlt } from "react-icons/fa";
+
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+
 const Orders = () => {
   /**allorders is the state used to get all the orders of all the user's */
   const [allorders, setAllOrders] = useState([]);
@@ -29,6 +34,11 @@ const Orders = () => {
   const [load, setLoad] = useState(false);
 
   const [subfilter, setSubfilter] = useState("");
+
+  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedData] = useState({ date: "", id: "" });
+
+  const [showDate, setShowDate] = useState(false);
 
   /**To get all the order before mounting by an api call*/
   useEffect(() => {
@@ -147,10 +157,13 @@ const Orders = () => {
   );
 
   /**Function used to filter all the orders based on the username enterd in the search box */
-  const filterdAllOrders = allorderFilter.filter((each) =>
+  const filterdSearch = allorderFilter.filter((each) =>
     each.name.toLowerCase().startsWith(searchedCustomer.toLowerCase())
   );
 
+  const filterdAllOrders = filterdSearch.filter((each) =>
+    selectedDate.date === "" ? each : each.date === selectedDate.date
+  );
   /**Function used to set the progress of the particular order(active,inprogress,completed,cancel) */
   const settingProgress = async (e) => {
     setAllOrders([]);
@@ -543,8 +556,43 @@ const Orders = () => {
     );
   };
 
+  const Caland = () => {
+    return (
+      <Calendar
+        className="calender3"
+        onChange={(date) => {
+          setDate(date);
+          const dd = String(date.getDate()).padStart(2, "0");
+          const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
+          const yyyy = date.getFullYear();
+
+          const dateArr = [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+          ];
+
+          let d = dateArr.includes(dd) ? dd[1] : dd;
+
+          // Combine them in the desired format
+          const formattedDate = `${d}-${mm}-${yyyy}`;
+          setSelectedData({ date: formattedDate, id: "" });
+          setShowDate(false);
+        }}
+        value={date}
+      />
+    );
+  };
+
   return allorders.length > 0 ? (
     <>
+      {showDate && <Caland />}
       {showAddVendor && <ModalAssginVendor />}
       {load ? (
         <div
@@ -1178,17 +1226,126 @@ const Orders = () => {
           {selectedCustomer === "" ? (
             <div className="order-summary-body">
               <div className="order-body-header">
-                <input
-                  onChange={(e) => {
-                    setSearchedCustomer(e.target.value);
-                  }}
-                  style={{
-                    outline: "none",
-                    fontSize: "1vw",
-                  }}
-                  type="search"
-                  placeholder="Search Customer"
-                />
+                <div>
+                  <input
+                    onChange={(e) => {
+                      setSearchedCustomer(e.target.value);
+                    }}
+                    style={{
+                      outline: "none",
+                      fontSize: "1vw",
+                    }}
+                    type="search"
+                    placeholder="Search Customer"
+                  />
+
+                  <button
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "" });
+                      const dateArr = [
+                        "01",
+                        "02",
+                        "03",
+                        "04",
+                        "05",
+                        "06",
+                        "07",
+                        "08",
+                        "09",
+                      ];
+                      const today = new Date();
+                      const dd = String(today.getDate()).padStart(2, "0");
+                      const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+                      const yyyy = today.getFullYear();
+
+                      let d = dateArr.includes(dd) ? dd[1] : dd;
+
+                      const currentDate = `${d}-${mm}-${yyyy}`;
+
+                      setSelectedData({ date: currentDate, id: e.target.id });
+                    }}
+                    id="today"
+                    className={
+                      selectedDate.id === "today"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    type="button"
+                  >
+                    Today
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "" });
+                      // Get the current date
+                      const today = new Date();
+
+                      // Calculate tomorrow's date
+                      const tomorrow = new Date(today);
+                      tomorrow.setDate(today.getDate() + 1);
+
+                      // Format the date as "dd-mm-yyyy"
+                      const dd = String(tomorrow.getDate()).padStart(2, "0");
+                      const mm = String(tomorrow.getMonth() + 1).padStart(
+                        2,
+                        "0"
+                      ); // January is 0!
+                      const yyyy = tomorrow.getFullYear();
+
+                      const dateArr = [
+                        "01",
+                        "02",
+                        "03",
+                        "04",
+                        "05",
+                        "06",
+                        "07",
+                        "08",
+                        "09",
+                      ];
+
+                      let d = dateArr.includes(dd) ? dd[1] : dd;
+
+                      const tomorrowDate = `${d}-${mm}-${yyyy}`;
+                      setSelectedData({ date: tomorrowDate, id: e.target.id });
+                    }}
+                    className={
+                      selectedDate.id === "tomorrow"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    id="tomorrow"
+                    type="button"
+                  >
+                    Tomorrow
+                  </button>
+                  <button
+                    id="cal"
+                    onClick={(e) => {
+                      setSelectedData({ date: "", id: "cal" });
+
+                      setShowDate(true);
+                    }}
+                    className={
+                      selectedDate.id === "cal"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    type="button"
+                  >
+                    <FaCalendarAlt />
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedData({ date: "", id: "" });
+                    }}
+                    className="filterButton"
+                    type="button"
+                  >
+                    Clear
+                  </button>
+                </div>
+
                 <div>
                   <strong>Filter :</strong>
                   <button
@@ -1449,7 +1606,7 @@ const Orders = () => {
                 <p className="order-body-para">Unique Id</p>
                 <p className="order-body-para">Unit Price</p>
                 <p className="order-body-para">Quantity</p>
-                <p className="order-body-para">Order Total</p>
+                <p className="order-body-para">Item Total</p>
               </div>
               {items.map((each) => (
                 <div key={each.id} className="order-body-header2">

@@ -9,6 +9,7 @@ import Notfound from "./components/Notfound/notfound";
 import VendorDashboard from "./components/VendorDashboard/vendordashboard";
 import UserLogin from "./components/LaundryBody/userlogin";
 import ConnectionLost from "./components/ConnectionLost/connectionlost";
+import MyOrders from "./components/LaundryBody/myorders";
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -48,6 +49,7 @@ function App() {
             component={VendorDashboard}
           />
           <Route exact path="/userlogin" component={UserLogin} />
+          <Route exact path="/myorders" component={MyOrders} />
           <Route component={Notfound} />
         </Switch>
       ) : (
