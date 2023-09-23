@@ -141,6 +141,11 @@
   width: 17%;
 }
 
+.header-6 {
+  width: 15%;
+  margin-right: 2%;
+}
+
 @media screen and (max-width: 600px) {
   .myorder-con {
     height: 90%;
@@ -172,7 +177,7 @@
   }
   .items-modalbox-con {
     position: absolute;
-    height: 90vh;
+    height: 80vh;
     width: 88vw;
     background-color: #ffffff;
     z-index: 5;
@@ -188,6 +193,10 @@
     top: 3%;
   }
 
+  .header-6 {
+    width: 30%;
+    margin-right: 2%;
+  }
   .myorder-body-header h6 {
     padding-left: 3%;
     padding-top: 10%;

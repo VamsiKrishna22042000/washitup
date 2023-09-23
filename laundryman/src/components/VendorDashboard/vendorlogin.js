@@ -153,10 +153,8 @@ const VendorLogin = () => {
         <div className="vendor-card2">
           <ToastContainer />
           <div className="vendor-login-logo-card">
-            <img className="login-logo" src="/logosymbol.png" alt="logo" />
             <img className="login-logo3" src="/washituplogo.png" alt="logo" />
             <h1 className="login-head">Login</h1>
-            <p className="login-text">to get access to you dashboard</p>
             <div className="login-box">
               {getotp ? (
                 <input
@@ -209,7 +207,7 @@ const VendorLogin = () => {
                   className="button-login"
                   type="button"
                 >
-                  Get Otp
+                  Get otp
                 </button>
               )}
               <div className="social-con">

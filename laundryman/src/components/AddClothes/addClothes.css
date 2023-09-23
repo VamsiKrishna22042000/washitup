@@ -198,7 +198,7 @@
     font-family: Arial, Helvetica, sans-serif;
     color: red;
     font-size: 1.1vw;
-    bottom: 1%;
+    bottom: -3%;
   }
 
   .add-clothes-error-msg-disable {
@@ -499,7 +499,7 @@
     color: red;
     font-size: 2.8vw;
     height: 0.5%;
-    bottom: 0.5%;
+    bottom: 1%;
   }
 
   .add-clothes-error-msg-disable {

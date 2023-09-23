@@ -257,10 +257,8 @@ const UserLogin = () => {
         ) : (
           <div className="vendor-card2">
             <div className="vendor-login-logo-card">
-              <img className="login-logo" src="/logosymbol.png" alt="logo" />
               <img className="login-logo3" src="/washituplogo.png" alt="logo" />
-              <h1 className="login-head">Sign Up</h1>
-              <p className="login-text">to create & access your account</p>
+              <h1 className="login-head">Sign up</h1>
               <div className="login-box">
                 {getotp ? (
                   <input
@@ -315,7 +313,7 @@ const UserLogin = () => {
                     className="button-login"
                     type="button"
                   >
-                    Get Otp
+                    Get otp
                   </button>
                 )}
                 <div className="social-con">
@@ -369,10 +367,8 @@ const UserLogin = () => {
           <div className="vendor-card2">
             <ToastContainer />
             <div className="vendor-login-logo-card">
-              <img className="login-logo" src="/logosymbol.png" alt="logo" />
               <img className="login-logo3" src="/washituplogo.png" alt="logo" />
               <h1 className="login-head">Login</h1>
-              <p className="login-text">to access you account</p>
               <div className="login-box">
                 {getotp ? (
                   <input
@@ -418,7 +414,7 @@ const UserLogin = () => {
                     className="button-login"
                     type="button"
                   >
-                    Get Otp
+                    Get otp
                   </button>
                 )}
                 {!getotp && (

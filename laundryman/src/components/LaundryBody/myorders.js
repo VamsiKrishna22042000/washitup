@@ -13,6 +13,8 @@ const MyOrders = () => {
 
   const [filterdItems, setfilterItems] = useState([]);
 
+  const [totalamount, setTotalAmount] = useState(0);
+
   useEffect(() => {
     getMyOrders();
   }, []);
@@ -59,6 +61,18 @@ const MyOrders = () => {
                   }}
                 >
                   {filterdItems.length}
+                </span>
+              </h6>
+              <h6 className="header-6">
+                Total :
+                <span
+                  style={{
+                    color: "#6759FF",
+                    fontWeight: "bold",
+                    marginLeft: "8%",
+                  }}
+                >
+                  {totalamount}
                 </span>
               </h6>
             </div>
@@ -168,6 +182,7 @@ const MyOrders = () => {
     let seperatedOrder = myorders.filter((each) => each._id === e.target.id);
 
     let service = seperatedOrder[0].service;
+    setTotalAmount(seperatedOrder[0].totalAmount);
 
     let sep = seperatedOrder[0].items.map((each) => ({
       ...each,
@@ -448,7 +463,7 @@ const MyOrders = () => {
                   />
                 )}
                 <p id={each._id} onClick={seperateItems} className="amount">
-                  Total :{" "}
+                  Total :
                   <span
                     id={each._id}
                     onClick={seperateItems}

@@ -54,6 +54,18 @@
 }
 
 @media screen and (min-width: 992px) {
+  .vendortotal-dashboard-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .vendortotal-dashboard-container2 {
+    display: none;
+  }
   .login-logo3 {
     display: none;
   }
@@ -94,17 +106,10 @@
     margin-top: -10%;
   }
 
-  .login-logo {
-    height: 28px;
-    width: 30px;
-    margin-bottom: 1vh;
-    margin-top: 10%;
-    animation: moveleft 2s ease-in-out;
-  }
   .login-head {
     font-family: cursive;
     font-size: 2.2vw;
-    font-weight: 500;
+    font-weight: 900;
     color: #6759ff;
     animation: moveright 2s ease-in-out;
   }
@@ -150,6 +155,7 @@
     align-self: center;
     font-size: 1.5vw;
     animation: moveright 2s ease-in-out;
+    width: 100%;
   }
 
   .washing-gif {
@@ -198,8 +204,16 @@
 }
 
 @media screen and (max-width: 600px) {
-  .login-logo {
+  .vendortotal-dashboard-container {
     display: none;
+  }
+  .vendortotal-dashboard-container2 {
+    height: 100vh;
+    width: 100vw;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #6759ff;
   }
   .login-logo3 {
     display: inline;
@@ -220,21 +234,23 @@
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     overflow: hidden;
   }
 
   .vendor-login-logo-card {
+    width: 85%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .login-head {
     font-family: cursive;
     font-size: 10vw;
-    font-weight: 500;
+    font-weight: 900;
     color: #6759ff;
     text-align: center;
     animation: moveright 2s ease-in-out;
@@ -261,20 +277,20 @@
   .logo-para {
     font-family: Arial, Helvetica, sans-serif;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 3vw;
+    font-size: 4vw;
     margin-top: 5%;
     animation: moveright 2s ease-in-out;
   }
 
   .login-input {
+    height: auto;
     border-color: #6759ff80;
-    padding-left: 3%;
     border-radius: 5px;
-    font-size: 3vw;
-    height: 6vh;
+    font-size: 1rem;
     width: 100%;
     animation: moveleft 2s ease-in-out;
-    margin-bottom: 10%;
+    margin-bottom: 8%;
+    padding: 4% 2%;
   }
 
   .button-login {
@@ -287,6 +303,7 @@
     font-size: 6.5vw;
     animation: moveright 2s ease-in-out;
     margin-bottom: 10%;
+    width: 100%;
   }
 
   .washing-gif {
@@ -312,11 +329,13 @@
   }
   .login-input2 {
     color: #6759ff;
-    font-size: 8vw;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6vw;
+    font-family: "Instrument Sans", sans-serif;
     width: 50%;
     align-self: center;
     animation: opacity 2s ease-in-out;
+    padding-top: 5%;
+    padding-bottom: 5%;
   }
 
   .messageanimation {
@@ -328,5 +347,19 @@
   .washingloader {
     height: 20%;
     width: 38%;
+  }
+}
+
+@media screen and (max-width: 1050px) and (orientation: landscape) {
+  .vendortotal-dashboard-container {
+    display: none;
+  }
+  .vendortotal-dashboard-container2 {
+    height: 100vh;
+    width: 100vw;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #6759ff;
   }
 }
