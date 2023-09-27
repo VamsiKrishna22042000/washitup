@@ -146,6 +146,10 @@
     padding-left: 3%;
   }
 
+  .login-input::placeholder {
+    color: #000000;
+  }
+
   .button-login {
     border: solid 2px #6759ff;
     border-radius: 5px;
@@ -187,11 +191,13 @@
   }
   .login-input2 {
     color: #6759ff;
-    font-size: 2vw;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.7vw;
+    font-family: "Instrument Sans", sans-serif;
     width: 50%;
-    align-self: center;
     animation: opacity 2s ease-in-out;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 20%;
   }
   .messageanimation {
     height: 50%;

@@ -98,7 +98,7 @@
 
   .section-in-aside-dashboard {
     height: auto;
-    margin-top: 20%;
+    margin-top: 13%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -116,8 +116,8 @@
     background-color: #6759ff;
     color: #fff;
     cursor: pointer;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 4%;
+    margin-bottom: 4%;
   }
 
   .each-section-2 {
@@ -131,8 +131,8 @@
     background-color: #ffffff;
     color: #53545c;
     cursor: pointer;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 4%;
+    margin-bottom: 4%;
   }
 
   .each-section-logo {
@@ -321,6 +321,12 @@
     padding-left: 2%;
     cursor: pointer;
   }
+
+  .order-body-img {
+    transform: scale(0.6);
+    margin-left: -45%;
+  }
+
   .order-body-para1 {
     height: 4vh;
     width: 10%;
@@ -356,7 +362,7 @@
   }
 
   .order-body-header2 {
-    height: 10%;
+    height: 3rem;
     width: 100%;
     display: flex;
     flex-direction: row;

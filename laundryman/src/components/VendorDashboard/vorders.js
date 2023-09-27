@@ -5,6 +5,8 @@ import { TailSpin } from "react-loader-spinner";
 
 import { FaCalendarAlt } from "react-icons/fa";
 
+import { LuTimerReset } from "react-icons/lu";
+
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -36,6 +38,10 @@ const Orders = () => {
 
   const [date, setDate] = useState(new Date());
   const [selectedDate, setSelectedData] = useState({ date: "", id: "" });
+
+  const [orderdate, setOrderDate] = useState(0);
+  const [enddate, setEndDate] = useState(0);
+  const [daysLeft, setDaysRemained] = useState(0);
 
   const [showDate, setShowDate] = useState(false);
 
@@ -109,6 +115,49 @@ const Orders = () => {
     );
 
     let itemsObtained = [];
+
+    setOrderDate(selectedCustomerOrder[0].date);
+
+    function addDaysToDate(dateString, daysToAdd) {
+      // Split the date string into day, month, and year
+      const dateParts = dateString.split("-");
+      const day = parseInt(dateParts[0], 10);
+      const month = parseInt(dateParts[1], 10) - 1; // Months are 0-based
+      const year = parseInt(dateParts[2], 10);
+
+      // Create a Date object from the parsed parts
+      const date = new Date(year, month, day);
+
+      // Add the specified number of days
+      date.setDate(date.getDate() + daysToAdd);
+
+      // Format the result as dd-mm-yyyy
+      const newDay = String(date.getDate()).padStart(2, "0");
+      const newMonth = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+      const newYear = date.getFullYear();
+
+      // Calculate the time difference in milliseconds
+      const currentDate = new Date();
+      console.log(newYear, newMonth, newDay);
+      const endDate = new Date(newYear, newMonth - 1, newDay);
+      console.log(endDate);
+      const timeDifference = endDate - currentDate;
+
+      // Convert the time difference to days
+      const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+      // Return both the new date and days remaining
+      return {
+        newDate: `${newDay}-${newMonth}-${newYear}`,
+        daysRemaining: daysRemaining,
+      };
+    }
+
+    const daysToAdd = 7;
+    const newDateObj = addDaysToDate(selectedCustomerOrder[0].date, daysToAdd);
+
+    setEndDate(newDateObj.newDate);
+    setDaysRemained(newDateObj.daysRemaining);
 
     for (let each of selectedCustomerOrder[0].items) {
       itemsObtained.push({
@@ -210,6 +259,51 @@ const Orders = () => {
       );
 
       let itemsObtained = [];
+
+      setOrderDate(selectedCustomerOrder[0].date);
+
+      function addDaysToDate(dateString, daysToAdd) {
+        // Split the date string into day, month, and year
+        const dateParts = dateString.split("-");
+        const day = parseInt(dateParts[0], 10);
+        const month = parseInt(dateParts[1], 10) - 1; // Months are 0-based
+        const year = parseInt(dateParts[2], 10);
+
+        // Create a Date object from the parsed parts
+        const date = new Date(year, month, day);
+
+        // Add the specified number of days
+        date.setDate(date.getDate() + daysToAdd);
+
+        // Format the result as dd-mm-yyyy
+        const newDay = String(date.getDate()).padStart(2, "0");
+        const newMonth = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+        const newYear = date.getFullYear();
+
+        // Calculate the time difference in milliseconds
+        const currentDate = new Date();
+        console.log(newYear, newMonth, newDay);
+        const endDate = new Date(newYear, newMonth - 1, newDay);
+        console.log(endDate);
+        const timeDifference = endDate - currentDate;
+        // Convert the time difference to days
+        const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+        // Return both the new date and days remaining
+        return {
+          newDate: `${newDay}-${newMonth}-${newYear}`,
+          daysRemaining: daysRemaining,
+        };
+      }
+
+      const daysToAdd = 7;
+      const newDateObj = addDaysToDate(
+        selectedCustomerOrder[0].date,
+        daysToAdd
+      );
+
+      setEndDate(newDateObj.newDate);
+      setDaysRemained(newDateObj.daysRemaining);
 
       for (let each of selectedCustomerOrder[0].items) {
         itemsObtained.push({
@@ -753,11 +847,7 @@ const Orders = () => {
                     borderRadius: "8px",
                   }}
                 >
-                  <img
-                    style={{ height: "70%", width: "70%" }}
-                    src="/creditcard.png"
-                    alt="Profile"
-                  />
+                  <LuTimerReset style={{ fontSize: "1.5rem" }} />
                 </div>
                 <p
                   style={{
@@ -768,7 +858,18 @@ const Orders = () => {
                     fontSize: "0.85vw",
                   }}
                 >
-                  Payment Method
+                  OrderBooked : {orderdate}
+                </p>
+                <p
+                  style={{
+                    position: "absolute",
+                    bottom: "40%",
+                    right: "5%",
+                    color: "#45464E",
+                    fontSize: "0.85vw",
+                  }}
+                >
+                  EndDate : {enddate}
                 </p>
                 <p
                   style={{
@@ -779,7 +880,19 @@ const Orders = () => {
                     fontSize: "1.1vw",
                   }}
                 >
-                  Cash After Service
+                  Days Left
+                </p>
+                <p
+                  style={{
+                    position: "absolute",
+                    bottom: "0%",
+                    left: "5%",
+                    color: daysLeft >= 4 ? "green" : "red",
+                    fontSize: "1.5rem",
+                    fontWeight: "Bold",
+                  }}
+                >
+                  {daysLeft < 0 ? "Dead Line Ended" : daysLeft}
                 </p>
               </div>
             </div>

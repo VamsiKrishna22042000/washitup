@@ -144,7 +144,9 @@ const UserLogin = () => {
 
         headers: { "Content-Type": "application/json" },
 
-        body: JSON.stringify({ mobileNumber }),
+        body: JSON.stringify({
+          mobileNumber: mobileNumber,
+        }),
       };
 
       const response = await fetch(url, reqConfigure);
@@ -215,6 +217,8 @@ const UserLogin = () => {
       }
     }
   };
+
+  console.log(mobileNumber);
 
   if (Cookies.get("jwt_userId") !== undefined) {
     window.location.href = "/";
@@ -294,8 +298,8 @@ const UserLogin = () => {
                         setMobileNumber(e.target.value);
                       }}
                       className="login-input"
-                      type="number"
-                      placeholder="Enter Mobile number"
+                      type="tel"
+                      placeholder="+91"
                     />
                   </>
                 )}
@@ -395,8 +399,8 @@ const UserLogin = () => {
                         setMobileNumber(e.target.value);
                       }}
                       className="login-input"
-                      type="number"
-                      placeholder="Enter Mobile number"
+                      type="tel"
+                      placeholder="+91"
                     />
                   </>
                 )}

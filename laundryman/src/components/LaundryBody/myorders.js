@@ -87,7 +87,11 @@ const MyOrders = () => {
             {filterdItems.map((each) => (
               <div key={each.id} className="myorder-body-header2">
                 <div className="myorder-body-para">
-                  <img src={each.itemId.image} alt={each.itemId.name} />
+                  <img
+                    id="orderimg"
+                    src={each.itemId.image}
+                    alt={each.itemId.name}
+                  />
                 </div>
 
                 <p
@@ -438,6 +442,7 @@ const MyOrders = () => {
                   <span
                     id={each._id}
                     onClick={seperateItems}
+                    style={{ textTransform: "capitalize" }}
                     className="span-el"
                   >
                     {each.service}
@@ -463,7 +468,7 @@ const MyOrders = () => {
                   />
                 )}
                 <p id={each._id} onClick={seperateItems} className="amount">
-                  Total :
+                  Total - {"  "}
                   <span
                     id={each._id}
                     onClick={seperateItems}

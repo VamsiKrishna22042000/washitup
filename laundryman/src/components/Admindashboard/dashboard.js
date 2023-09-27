@@ -61,8 +61,8 @@ const Dashboard = () => {
 
   return !load ? (
     <>
-      <div>
-        <section className="dashboard-body">
+      <div style={{ overflowY: "scroll" }}>
+        <section style={{ overflowY: "scroll" }} className="dashboard-body">
           <div className="total-orders-card">
             <h5>Total Sales</h5>
             <div

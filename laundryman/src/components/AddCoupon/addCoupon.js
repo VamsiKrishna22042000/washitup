@@ -12,6 +12,8 @@ import { TailSpin, ThreeDots } from "react-loader-spinner";
 const AddCoupon = (props) => {
   const { typeOfWashing, items, dataTobeSent, success } = props;
 
+  console.log(dataTobeSent);
+
   const [siteRecapKey, setSiteRecapKey] = useState(
     `${process.env.REACT_APP_SITE_KEY}`
   );

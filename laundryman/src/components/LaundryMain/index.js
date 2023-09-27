@@ -167,7 +167,13 @@ function LaundryNav(props) {
         <img className="cyancon" src="./cyan.png" alt="cyancon" />
         <p className="head">
           Get The Best <br /> Laundry Service <br /> At Your
-          <span className="sp"> Door Step</span>
+          <span
+            style={{ fontFamily: "Arial", fontWeight: "900" }}
+            className="sp"
+          >
+            {" "}
+            Door Step
+          </span>
         </p>
         <p className="para1123">
           Book laundry service with just few easy steps

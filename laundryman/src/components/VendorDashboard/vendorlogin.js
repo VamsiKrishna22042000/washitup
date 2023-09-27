@@ -189,7 +189,7 @@ const VendorLogin = () => {
                     }}
                     className="login-input"
                     type="tel"
-                    placeholder="Enter Mobile number"
+                    placeholder="+91"
                   />
                 </>
               )}

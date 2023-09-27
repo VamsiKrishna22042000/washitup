@@ -212,7 +212,7 @@ const BookService = (props) => {
           mobileNumber: input.number,
           location: geoLoc,
           address: userAddress,
-          date: `${date.getDate()}-0${
+          date: `${date.getDate()}-${
             date.getMonth() + 1
           }-${date.getFullYear()}`,
           time: input.timeSelected,

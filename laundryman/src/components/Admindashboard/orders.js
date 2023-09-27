@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./admin.css";
 
 import { TailSpin } from "react-loader-spinner";
@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { FaCalendarAlt } from "react-icons/fa";
+
+import { LuImagePlus } from "react-icons/lu";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -115,6 +117,8 @@ const Orders = () => {
         cancel: cancelCount,
       });
 
+      console.log(eachObjInsertedWithNumberName);
+
       setAllOrders(eachObjInsertedWithNumberName);
     }
   };
@@ -130,23 +134,25 @@ const Orders = () => {
     console.log(selectedCustomerOrder[0]);
 
     for (let each of selectedCustomerOrder[0].items) {
-      itemsObtained.push({
-        uniqueId: each.uniqueId.slice(0, 7),
-        count: each.itemCount,
-        id: each._id,
-        itemCategory: each.itemId.category,
-        itemName: each.itemId.name,
-        price:
-          selectedCustomerOrder[0].service === "dry Cleaning"
-            ? each.itemId.drycleaning
-            : selectedCustomerOrder[0].service === "wash & fold"
-            ? each.itemId.washfold
-            : each.itemId.washiron,
-        image: each.itemId.image,
-      });
+      for (let e of each.uniqueId) {
+        itemsObtained.push({
+          uniqueId: e,
+          count: each.itemCount,
+          id: each._id,
+          itemCategory: each.itemId.category,
+          itemName: each.itemId.name,
+          price:
+            selectedCustomerOrder[0].service === "dry Cleaning"
+              ? each.itemId.drycleaning
+              : selectedCustomerOrder[0].service === "wash & fold"
+              ? each.itemId.washfold
+              : each.itemId.washiron,
+          image: each.itemId.image,
+        });
+      }
     }
 
-    console.log(itemsObtained);
+    /**console.log(itemsObtained);*/
 
     setItems(itemsObtained);
     setSelectedCustomer(selectedCustomerOrder);
@@ -243,21 +249,24 @@ const Orders = () => {
       let itemsObtained = [];
 
       for (let each of selectedCustomerOrder[0].items) {
-        itemsObtained.push({
-          uniqueId: each.uniqueId.slice(0, 7),
-          count: each.itemCount,
-          id: each._id,
-          itemCategory: each.itemId.category,
-          itemName: each.itemId.name,
-          price:
-            selectedCustomerOrder[0].service === "dry Cleaning"
-              ? each.drycleaning
-              : selectedCustomerOrder[0].service === "wash & fold"
-              ? each.washfold
-              : each.washiron,
-          image: each.itemId.image,
-        });
+        for (let e of each.uniqueId) {
+          itemsObtained.push({
+            uniqueId: e,
+            count: each.itemCount,
+            id: each._id,
+            itemCategory: each.itemId.category,
+            itemName: each.itemId.name,
+            price:
+              selectedCustomerOrder[0].service === "dry Cleaning"
+                ? each.drycleaning
+                : selectedCustomerOrder[0].service === "wash & fold"
+                ? each.washfold
+                : each.washiron,
+            image: each.itemId.image,
+          });
+        }
       }
+
       setLoad(false);
       setItems(itemsObtained);
       setSelectedCustomer(selectedCustomerOrder);
@@ -266,6 +275,7 @@ const Orders = () => {
 
   /**showAddVendor state is used to show the modalbox to assign a vendor */
   const [showAddVendor, setshowAddVendor] = useState(false);
+  const [showAddDriver, setshowAddDriver] = useState(false);
 
   /**Component to show the modalbox of after clicking assign vendor in the orders section of a particular order */
   const ModalAssginVendor = () => {
@@ -293,7 +303,7 @@ const Orders = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(data);
+        /**console.log(data);*/
         setLoad(false);
         setVendors(data);
       }
@@ -556,6 +566,295 @@ const Orders = () => {
     );
   };
 
+  const ModalAssignDriver = () => {
+    /**State to get all the vendors inthe modalbox component */
+    const [load, setLoad] = useState(true);
+    const [vendors, setVendors] = useState([]);
+
+    /**state used to store  the search */
+    const [searchedVendor, setSearchedVendor] = useState("");
+
+    useEffect(() => {
+      getAllDriver();
+    }, []);
+
+    const filteredVendors = vendors.filter((each) =>
+      each.name.toLowerCase().startsWith(searchedVendor.toLowerCase())
+    );
+
+    /**Function to get all the vendors */
+    const getAllDriver = async () => {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllDrivers`;
+
+      const response = await fetch(url);
+
+      const data = await response.json();
+
+      /**console.log(data);*/
+
+      if (response.ok) {
+        setLoad(false);
+        setVendors(data.data);
+      }
+    };
+
+    /**Function to assign an order to particular vendor */
+    const assignVendor = async (e) => {
+      setLoad(true);
+      let userId = selectedCustomer[0].userId;
+      let orderId = selectedCustomer[0]._id;
+      let vendorId = e.target.id;
+
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/assignNewVendor`;
+
+      const reqConfigure = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ vendorId, orderId, userId }),
+      };
+
+      const response = await fetch(url, reqConfigure);
+
+      if (response.ok) {
+        toast.success("Assigned Vendor", {
+          position: "top-center",
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+        setTimeout(() => {
+          setshowAddVendor(false);
+          setSelectedCustomer("");
+          setAllOrders([]);
+          getAllOrders();
+        }, 1500);
+      }
+    };
+
+    /**Function to change the assigned vendor */
+    const changeVendor = async (e) => {
+      setLoad(true);
+      let orderId = selectedCustomer[0]._id;
+      let vendorId = e.target.id;
+      let previVendorId = selectedCustomer[0].vendorId._id;
+      let previVendorOrderId = selectedCustomer[0]._id;
+
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/changeVendor`;
+
+      const reqConfigure = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          vendorId,
+          orderId,
+          previVendorId,
+          previVendorOrderId,
+        }),
+      };
+
+      const response = await fetch(url, reqConfigure);
+
+      if (response.ok) {
+        toast.success("Changed Vendor", {
+          position: "top-center",
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+        setTimeout(() => {
+          setshowAddVendor(false);
+          setSelectedCustomer("");
+          setAllOrders([]);
+          getAllOrders();
+        }, 1500);
+      }
+    };
+
+    return load ? (
+      <>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#53545c99",
+            zIndex: 2,
+          }}
+        ></div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          className="assign-vendor-modal-box"
+        >
+          <ToastContainer />
+          <TailSpin color="#6759ff" height={50} width={50} />
+        </div>
+      </>
+    ) : (
+      <>
+        <ToastContainer />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#53545c99",
+            zIndex: 2,
+          }}
+        ></div>
+        {/**Modal box of the assign vendor */}
+        <div className="assign-vendor-modal-box">
+          <div className="order-summary-body">
+            {/**Button use to show the assign vendor modalbox */}
+            <button
+              onClick={() => {
+                setshowAddDriver(false);
+              }}
+              type="button"
+              style={{
+                position: "absolute",
+                backgroundColor: "transparent",
+                borderWidth: 0,
+                color: "#6759FF",
+                fontWeight: "bold",
+                fontSize: "1.5vw",
+                right: 20,
+                top: 10,
+              }}
+            >
+              ✕
+            </button>
+            <div className="order-body-header">
+              <h6 style={{ margin: 0 }}>Drivers</h6>
+              {/**Search box used to search the vendors in the modal box*/}
+              <input
+                onChange={(e) => {
+                  setSearchedVendor(e.target.value);
+                }}
+                style={{ outline: "none", fontSize: "1vw" }}
+                type="search"
+                placeholder="Search Drivers"
+              />
+            </div>
+            <div className="order-body-header1">
+              <p style={{ width: "20%" }} className="order-body-para">
+                Driver Name
+              </p>
+              <p style={{ width: "20%" }} className="order-body-para">
+                Mobile Number
+              </p>
+
+              <p style={{ width: "20%" }} className="order-body-para">
+                Address
+              </p>
+
+              <p style={{ width: "20%" }} className="order-body-para">
+                Email
+              </p>
+              <p style={{ width: "20%" }} className="order-body-para">
+                Assign
+              </p>
+            </div>
+            {/**Available vendor's data*/}
+            {filteredVendors.length > 0 ? (
+              filteredVendors.map((each) => (
+                <div key={each.id} className="order-body-header2">
+                  <p
+                    id={each._id}
+                    className="order-body-para"
+                    style={{ textTransform: "capitalize", width: "20%" }}
+                  >
+                    {each.name}
+                  </p>
+                  <p
+                    style={{ width: "20%" }}
+                    id={each.id}
+                    className="order-body-para"
+                  >
+                    {each.mobileNumber}
+                  </p>
+
+                  <p
+                    style={{ width: "20%" }}
+                    id={each._id}
+                    className="order-body-para"
+                  >
+                    {each.address}
+                  </p>
+                  <p
+                    style={{ width: "20%" }}
+                    id={each.id}
+                    className="order-body-para"
+                  >
+                    {each.email}
+                  </p>
+                  {/**buttons to assgin the vendor */}
+                  {selectedCustomer[0].vendorName === "empty" ? (
+                    <button
+                      id={each._id}
+                      onClick={assignVendor}
+                      type="button"
+                      style={{
+                        width: "15%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "8px",
+                        borderWidth: "0px",
+                        color: "#fff",
+                        backgroundColor: "green",
+                      }}
+                    >
+                      Assign
+                    </button>
+                  ) : (
+                    selectedCustomer[0].vendorName !== each.name && (
+                      <button
+                        id={each._id}
+                        onClick={changeVendor}
+                        type="button"
+                        style={{
+                          width: "15%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          borderRadius: "8px",
+                          borderWidth: "0px",
+                          color: "#fff",
+                          backgroundColor: "#F50000",
+                        }}
+                      >
+                        Change
+                      </button>
+                    )
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="order-body-header4">
+                <img src="/noresult.png" className="noresult" />
+                <h1>No Such Driver</h1>
+              </div>
+            )}
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const Caland = () => {
     return (
       <Calendar
@@ -582,7 +881,7 @@ const Orders = () => {
 
           // Combine them in the desired format
           const formattedDate = `${d}-${mm}-${yyyy}`;
-          setSelectedData({ date: formattedDate, id: "" });
+          setSelectedData({ date: formattedDate, id: "cal" });
           setShowDate(false);
         }}
         value={date}
@@ -590,10 +889,51 @@ const Orders = () => {
     );
   };
 
+  const fileInputRef = useRef("");
+
+  const handleFileChange = async (event) => {
+    setLoad(true);
+    let orderId = selectedCustomer[0]._id;
+    let element = document.getElementById("file-upload");
+    let itemId = element.getAttribute("itemId");
+    let uniqueId = element.getAttribute("uniqueId");
+    let image = event.target.files[0];
+
+    let fd = new FormData();
+
+    fd.append("orderId", orderId);
+    fd.append("itemId", itemId);
+    fd.append("uniqueId", uniqueId);
+    fd.append("image", image);
+
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/uploadItemImage`;
+
+    const reqConfigure = {
+      method: "POST",
+      body: fd,
+    };
+
+    const response = await fetch(url, reqConfigure);
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log(data);
+      filterCustomer2(orderId);
+    } else {
+      setLoad(true);
+    }
+  };
+
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+  };
+
   return allorders.length > 0 ? (
     <>
       {showDate && <Caland />}
       {showAddVendor && <ModalAssginVendor />}
+      {showAddDriver && <ModalAssignDriver />}
       {load ? (
         <div
           style={{
@@ -624,7 +964,7 @@ const Orders = () => {
                   justifyContent: "space-around",
                   alignItems: "center",
                   width: "20%",
-                  marginLeft: "25%",
+                  marginLeft: "15%",
                 }}
               >
                 <select
@@ -694,7 +1034,7 @@ const Orders = () => {
                   justifyContent: "space-around",
                   alignItems: "center",
                   height: "100%",
-                  width: "25%",
+                  width: "35%",
                 }}
               >
                 {/**Button use to show the assign vendor modalbox*/}
@@ -720,6 +1060,30 @@ const Orders = () => {
                     Change Vendor
                   </button>
                 )}
+
+                {selectedCustomer[0].driverName === "empty" ? (
+                  <button
+                    onClick={() => {
+                      setshowAddDriver(!showAddDriver);
+                    }}
+                    className="assign-vendor"
+                    type="button"
+                  >
+                    Assign Driver
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setshowAddDriver(!showAddDriver);
+                    }}
+                    className="assign-vendor"
+                    style={{ backgroundColor: "#F50000" }}
+                    type="button"
+                  >
+                    Change Driver
+                  </button>
+                )}
+
                 {/**Button use to notshow details of particular order*/}
                 <button
                   onClick={() => {
@@ -734,7 +1098,7 @@ const Orders = () => {
                     borderWidth: 0,
                     color: "#6759FF",
                     fontWeight: "bold",
-                    fontSize: "1.5vw",
+                    fontSize: "1rem",
                   }}
                 >
                   ✕
@@ -1228,6 +1592,7 @@ const Orders = () => {
               <div className="order-body-header">
                 <div>
                   <input
+                    value={searchedCustomer}
                     onChange={(e) => {
                       setSearchedCustomer(e.target.value);
                     }}
@@ -1604,9 +1969,8 @@ const Orders = () => {
                 <p className="order-body-para">Item Type</p>
                 <p className="order-body-para">Category</p>
                 <p className="order-body-para">Unique Id</p>
+                <p className="order-body-para">Upload Image</p>
                 <p className="order-body-para">Unit Price</p>
-                <p className="order-body-para">Quantity</p>
-                <p className="order-body-para">Item Total</p>
               </div>
               {items.map((each) => (
                 <div key={each.id} className="order-body-header2">
@@ -1636,8 +2000,38 @@ const Orders = () => {
                     }}
                     className="order-body-para"
                   >
-                    {each.uniqueId}
+                    {each.uniqueId.id.slice(0, 7)}
                   </p>
+                  <div
+                    style={{ position: "relative" }}
+                    className="order-body-para"
+                  >
+                    {each.uniqueId?.image === undefined ? (
+                      <>
+                        <LuImagePlus
+                          style={{ fontSize: "1.35rem", marginLeft: "20%" }}
+                          id="file-upload"
+                          itemId={each.id}
+                          uniqueId={each.uniqueId.id}
+                          onClick={handleIconClick}
+                          htmlFor="file-upload"
+                        />
+                        <input
+                          itemId={each.id}
+                          uniqueId={each.uniqueId.id}
+                          type="file"
+                          id="file-upload"
+                          ref={fileInputRef}
+                          onChange={handleFileChange}
+                          style={{ display: "none" }}
+                          className="order-body-img"
+                        />
+                      </>
+                    ) : (
+                      <img src={each.uniqueId.image} />
+                    )}
+                  </div>
+
                   {each.price > 1000 && each.price < 100000 ? (
                     <p className="order-body-para">
                       ₹ {parseInt(each.price) / 1000} K
@@ -1652,27 +2046,6 @@ const Orders = () => {
                     </p>
                   ) : (
                     <p className="order-body-para">₹ {each.price}</p>
-                  )}
-
-                  <p className="order-body-para">{each.count}</p>
-                  {each.price * each.count > 1000 &&
-                  each.price * each.count < 100000 ? (
-                    <p className="order-body-para">
-                      ₹ {parseInt(each.price * each.count) / 1000} K
-                    </p>
-                  ) : each.price * each.count > 100000 &&
-                    each.price * each.count < 1000000 ? (
-                    <p className="order-body-para">
-                      ₹ {parseInt(each.price * each.count) / 100000} L
-                    </p>
-                  ) : each.price * each.count > 1000000 ? (
-                    <p className="order-body-para">
-                      ₹ {parseInt(each.price * each.count) / 1000000} M
-                    </p>
-                  ) : (
-                    <p className="order-body-para">
-                      ₹ {each.price * each.count}
-                    </p>
                   )}
                 </div>
               ))}
