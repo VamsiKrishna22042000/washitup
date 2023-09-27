@@ -58,21 +58,20 @@ const Dashboard = () => {
 
   return !load ? (
     <>
-      <div>
-        <section style={{ height: "auto" }} className="dashboard-body">
-          <div style={{ height: "32vh" }} className="total-orders-card">
-            <h5>Total Sales</h5>
-            <div
-              style={{
-                display: "flex",
-                height: "80%",
-                justifyContent: "space-around",
-                alignItems: "center",
-                flexWrap: "wrap",
-              }}
-            >
-              {/**Total Sale obtained From the dashboardData state  */}
-              {/**{dashboardData.totalSale > 1000 &&
+      <section className="dashboard-body">
+        <div style={{ height: "40%" }} className="total-orders-card">
+          <h5>Total Sales</h5>
+          <div
+            style={{
+              display: "flex",
+              height: "80%",
+              justifyContent: "space-around",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {/**Total Sale obtained From the dashboardData state  */}
+            {/**{dashboardData.totalSale > 1000 &&
               dashboardData.totalSale < 100000 ? (
                 <h4 style={{ color: "#6759ff" }}>
                   ₹ {parseInt(dashboardData.totalSale) / 1000} K
@@ -91,34 +90,32 @@ const Dashboard = () => {
                   ₹ {dashboardData.totalSale}
                 </h4>
               )}*/}
-              <h4 style={{ color: "#6759ff" }}>₹ {dashboardData.totalSale}</h4>
-            </div>
+            <h4 style={{ color: "#6759ff" }}>₹ {dashboardData.totalSale}</h4>
           </div>
+        </div>
 
-          <div
-            style={{
-              height: "40%",
-            }}
-            className="total-orders-card"
-          >
-            {/**Total Orders obtained From the dashboardData state  */}
-            <h5>Total Orders</h5>
+        <div
+          style={{
+            height: "40%",
+          }}
+          className="total-orders-card"
+        >
+          {/**Total Orders obtained From the dashboardData state  */}
+          <h5>Total Orders</h5>
+          <div style={{ display: "flex", height: "80%", position: "relative" }}>
             <div
-              style={{ display: "flex", height: "80%", position: "relative" }}
+              style={{
+                position: "absolute",
+                display: "flex",
+                height: "80%",
+                justifyContent: "space-around",
+                alignItems: "center",
+                flexWrap: "wrap",
+                left: "45%",
+                top: "-25%",
+              }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  display: "flex",
-                  height: "80%",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                  left: "45%",
-                  top: "-25%",
-                }}
-              >
-                {/**{dashboardData.totalOrders > 1000 &&
+              {/**{dashboardData.totalOrders > 1000 &&
                 dashboardData.totalOrders < 100000 ? (
                   <h4 style={{ color: "#6759ff" }}>
                     {parseInt(dashboardData.totalOrders) / 1000} K
@@ -137,251 +134,239 @@ const Dashboard = () => {
                     {dashboardData.totalOrders}
                   </h4>
                 )}*/}
-                <h4 style={{ color: "#6759ff" }}>
-                  {dashboardData.totalOrders}
-                </h4>
+              <h4 style={{ color: "#6759ff" }}>{dashboardData.totalOrders}</h4>
+            </div>
+            <div
+              style={{
+                marginTop: "10%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <div
+                style={{
+                  height: "10%",
+                  width: "40%",
+
+                  display: "felx",
+                  justifyContent: "space-between",
+                }}
+                className="active-orders"
+              >
+                <p>Active</p>
+                {dashboardData.activeOrdersCount > 1000 &&
+                dashboardData.activeOrdersCount < 100000 ? (
+                  <p
+                    style={{
+                      color: "green",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {parseInt(dashboardData.activeOrdersCount) / 1000} K
+                  </p>
+                ) : dashboardData.activeOrdersCount > 100000 &&
+                  dashboardData.activeOrdersCount < 1000000 ? (
+                  <p
+                    style={{
+                      color: "green",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {parseInt(dashboardData.activeOrdersCount) / 100000} L
+                  </p>
+                ) : dashboardData.activeOrdersCount > 1000000 ? (
+                  <p
+                    style={{
+                      color: "green",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {parseInt(dashboardData.activeOrdersCount) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      color: "green",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {dashboardData.activeOrdersCount}
+                  </p>
+                )}
               </div>
               <div
                 style={{
-                  marginTop: "10%",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  flexWrap: "wrap",
+                  height: "10%",
+                  width: "40%",
+
+                  display: "felx",
+                  justifyContent: "space-between",
                 }}
+                v
+                className="active-orders"
               >
-                <div
-                  style={{
-                    height: "10%",
-                    width: "40%",
+                <p>Completed</p>
+                {dashboardData.completedOrdersCount > 1000 &&
+                dashboardData.completedOrdersCount < 100000 ? (
+                  <p
+                    style={{
+                      color: "red",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.completedOrdersCount) / 1000} K
+                  </p>
+                ) : dashboardData.completedOrdersCount > 100000 &&
+                  dashboardData.completedOrdersCount < 1000000 ? (
+                  <p
+                    style={{
+                      color: "red",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.completedOrdersCount) / 100000} L
+                  </p>
+                ) : dashboardData.completedOrdersCount > 1000000 ? (
+                  <p
+                    style={{
+                      color: "red",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.completedOrdersCount) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      color: "red",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {dashboardData.completedOrdersCount}
+                  </p>
+                )}
+              </div>
+              <div
+                style={{
+                  height: "10%",
+                  width: "40%",
 
-                    display: "felx",
-                    justifyContent: "space-between",
-                  }}
-                  className="active-orders"
-                >
-                  <p>Active</p>
-                  {dashboardData.activeOrdersCount > 1000 &&
-                  dashboardData.activeOrdersCount < 100000 ? (
-                    <p
-                      style={{
-                        color: "green",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {parseInt(dashboardData.activeOrdersCount) / 1000} K
-                    </p>
-                  ) : dashboardData.activeOrdersCount > 100000 &&
-                    dashboardData.activeOrdersCount < 1000000 ? (
-                    <p
-                      style={{
-                        color: "green",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {parseInt(dashboardData.activeOrdersCount) / 100000} L
-                    </p>
-                  ) : dashboardData.activeOrdersCount > 1000000 ? (
-                    <p
-                      style={{
-                        color: "green",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {parseInt(dashboardData.activeOrdersCount) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        color: "green",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {dashboardData.activeOrdersCount}
-                    </p>
-                  )}
-                </div>
-                <div
-                  style={{
-                    height: "10%",
-                    width: "40%",
+                  display: "felx",
+                  justifyContent: "space-between",
+                }}
+                className="active-orders"
+              >
+                <p>Inprogress</p>
+                {dashboardData.inProgressCount > 1000 &&
+                dashboardData.inProgressCount < 100000 ? (
+                  <p
+                    style={{
+                      color: "#6759ff",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.inProgressCount) / 1000} K
+                  </p>
+                ) : dashboardData.inProgressCount > 100000 &&
+                  dashboardData.inProgressCount < 1000000 ? (
+                  <p
+                    style={{
+                      color: "#6759ff",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.inProgressCount) / 100000} L
+                  </p>
+                ) : dashboardData.inProgressCount > 1000000 ? (
+                  <p
+                    style={{
+                      color: "#6759ff",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.inProgressCount) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      color: "#6759ff",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {dashboardData.inProgressCount}
+                  </p>
+                )}
+              </div>
+              <div
+                style={{
+                  height: "10%",
+                  width: "40%",
 
-                    display: "felx",
-                    justifyContent: "space-between",
-                  }}
-                  v
-                  className="active-orders"
-                >
-                  <p>Completed</p>
-                  {dashboardData.completedOrdersCount > 1000 &&
-                  dashboardData.completedOrdersCount < 100000 ? (
-                    <p
-                      style={{
-                        color: "red",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.completedOrdersCount) / 1000} K
-                    </p>
-                  ) : dashboardData.completedOrdersCount > 100000 &&
-                    dashboardData.completedOrdersCount < 1000000 ? (
-                    <p
-                      style={{
-                        color: "red",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.completedOrdersCount) / 100000} L
-                    </p>
-                  ) : dashboardData.completedOrdersCount > 1000000 ? (
-                    <p
-                      style={{
-                        color: "red",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.completedOrdersCount) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        color: "red",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {dashboardData.completedOrdersCount}
-                    </p>
-                  )}
-                </div>
-                <div
-                  style={{
-                    height: "10%",
-                    width: "40%",
-
-                    display: "felx",
-                    justifyContent: "space-between",
-                  }}
-                  className="active-orders"
-                >
-                  <p>Inprogress</p>
-                  {dashboardData.inProgressCount > 1000 &&
-                  dashboardData.inProgressCount < 100000 ? (
-                    <p
-                      style={{
-                        color: "#6759ff",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.inProgressCount) / 1000} K
-                    </p>
-                  ) : dashboardData.inProgressCount > 100000 &&
-                    dashboardData.inProgressCount < 1000000 ? (
-                    <p
-                      style={{
-                        color: "#6759ff",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.inProgressCount) / 100000} L
-                    </p>
-                  ) : dashboardData.inProgressCount > 1000000 ? (
-                    <p
-                      style={{
-                        color: "#6759ff",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.inProgressCount) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        color: "#6759ff",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {dashboardData.inProgressCount}
-                    </p>
-                  )}
-                </div>
-                <div
-                  style={{
-                    height: "10%",
-                    width: "40%",
-
-                    display: "felx",
-                    justifyContent: "space-between",
-                  }}
-                  className="active-orders"
-                >
-                  <p>Cancel</p>
-                  {dashboardData.cancelCount > 1000 &&
-                  dashboardData.cancelCount < 100000 ? (
-                    <p
-                      style={{
-                        color: "orange",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.cancelCount) / 1000} K
-                    </p>
-                  ) : dashboardData.cancelCount > 100000 &&
-                    dashboardData.cancelCount < 1000000 ? (
-                    <p
-                      style={{
-                        color: "orange",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.cancelCount) / 100000} L
-                    </p>
-                  ) : dashboardData.cancelCount > 1000000 ? (
-                    <p
-                      style={{
-                        color: "orange",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {parseInt(dashboardData.cancelCount) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        color: "orange",
-                        fontWeight: "bold",
-                        marginLeft: "3%",
-                      }}
-                    >
-                      {dashboardData.cancelCount}
-                    </p>
-                  )}
-                </div>
+                  display: "felx",
+                  justifyContent: "space-between",
+                }}
+                className="active-orders"
+              >
+                <p>Cancel</p>
+                {dashboardData.cancelCount > 1000 &&
+                dashboardData.cancelCount < 100000 ? (
+                  <p
+                    style={{
+                      color: "orange",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.cancelCount) / 1000} K
+                  </p>
+                ) : dashboardData.cancelCount > 100000 &&
+                  dashboardData.cancelCount < 1000000 ? (
+                  <p
+                    style={{
+                      color: "orange",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.cancelCount) / 100000} L
+                  </p>
+                ) : dashboardData.cancelCount > 1000000 ? (
+                  <p
+                    style={{
+                      color: "orange",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {parseInt(dashboardData.cancelCount) / 1000000} M
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      color: "orange",
+                      fontWeight: "bold",
+                      marginLeft: "3%",
+                    }}
+                  >
+                    {dashboardData.cancelCount}
+                  </p>
+                )}
               </div>
             </div>
           </div>
-        </section>
-
-        <section
-          style={{
-            backgroundColor: "#e8e6ff",
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "-90px",
-            padding: "20px 0",
-          }}
-        >
+        </div>
+        <section className="pie-charts">
           <div style={{ width: "300px", height: "300px" }}>
             <OrderChart data={dashboardData} />
           </div>
@@ -389,7 +374,7 @@ const Dashboard = () => {
             <OrderChart data={revenueData} />
           </div>
         </section>
-      </div>
+      </section>
     </>
   ) : (
     <div
