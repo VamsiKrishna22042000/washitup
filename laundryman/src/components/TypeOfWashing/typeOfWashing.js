@@ -23,19 +23,40 @@ const TypeOfWashing = (props) => {
         <button
           onClick={() => {
             setselectedType("dry Cleaning");
+            setTimeout(() => {
+              type("dry Cleaning");
+            }, 10);
           }}
+          style={{ position: "relative" }}
           className={
             selectedType === "dry Cleaning"
               ? "type-of-button1"
               : "type-of-button"
           }
         >
-          <img className="type-of-image" src="/drycleaning.png" />
+          <img className="type-of-image" src="/drycleaning.png" />{" "}
+          {selectedType === "dry Cleaning" && (
+            <img
+              style={{
+                position: "absolute",
+                top: 5,
+                right: 5,
+                height: "15%",
+                width: "15%",
+              }}
+              src="/selected2.gif"
+              alt="seleceted"
+            />
+          )}
           Dry Cleaning
         </button>
         <button
+          style={{ position: "relative" }}
           onClick={() => {
             setselectedType("wash & iron");
+            setTimeout(() => {
+              type("wash & iron");
+            }, 10);
           }}
           className={
             selectedType === "wash & iron"
@@ -43,11 +64,29 @@ const TypeOfWashing = (props) => {
               : "type-of-button"
           }
         >
-          <img className="type-of-image" src="/wash&iron.png" /> Wash & Iron
+          <img className="type-of-image" src="/wash&iron.png" />{" "}
+          {selectedType === "wash & iron" && (
+            <img
+              style={{
+                position: "absolute",
+                top: 5,
+                right: 5,
+                height: "15%",
+                width: "15%",
+              }}
+              src="/selected2.gif"
+              alt="seleceted"
+            />
+          )}
+          Wash & Iron
         </button>
         <button
+          style={{ position: "relative" }}
           onClick={() => {
             setselectedType("wash & fold");
+            setTimeout(() => {
+              type("wash & fold");
+            }, 10);
           }}
           className={
             selectedType === "wash & fold"
@@ -55,7 +94,21 @@ const TypeOfWashing = (props) => {
               : "type-of-button"
           }
         >
-          <img className="type-of-image" src="/wash&fold.png" /> Wash & Fold
+          <img className="type-of-image" src="/wash&fold.png" />{" "}
+          {selectedType === "wash & fold" && (
+            <img
+              style={{
+                position: "absolute",
+                top: 5,
+                right: 5,
+                height: "15%",
+                width: "15%",
+              }}
+              src="/selected2.gif"
+              alt="seleceted"
+            />
+          )}
+          Wash & Fold
         </button>
       </div>
       <button
