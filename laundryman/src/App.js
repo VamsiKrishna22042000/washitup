@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Laundry from "./components/Laundry/laundry";
+
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AdminDashboard from "./components/Admindashboard/admin.js";
 import ProtectedRoute from "./components/ProtectedRoute/protectedroute";
@@ -10,6 +11,8 @@ import VendorDashboard from "./components/VendorDashboard/vendordashboard";
 import UserLogin from "./components/LaundryBody/userlogin";
 import ConnectionLost from "./components/ConnectionLost/connectionlost";
 import MyOrders from "./components/LaundryBody/myorders";
+
+import ProtectedRoute2 from "./components/ProtectedRoute/protectedroute2";
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -42,7 +45,11 @@ function App() {
       {isOnline ? (
         <Switch>
           <Route exact path="/" component={Laundry} />
-          <Route exact path="/admindashboard" component={AdminDashboard} />
+          <ProtectedRoute2
+            exact
+            path="/admindashboard"
+            component={AdminDashboard}
+          />
           <ProtectedRoute
             exact
             path="/vendordashboard"

@@ -389,13 +389,14 @@ const Vendors = () => {
     const filterdOrder = vendors.filter((each) => each._id === e.target.id);
 
     const sub = filterdOrder[0].orders.map((each) => ({
-      userId: each.userId,
-      orderId: each._id,
-      date: each.date,
-      time: each.time,
-      totalAmount: each.totalAmount,
-      action: each.action,
-      progress: each.progress,
+      userId: each.order.userId,
+      orderId: each.order._id,
+      date: each.order.date,
+      time: each.order.time,
+      totalAmount: each.order.totalAmount,
+      action: each.order.action,
+      progress: each.order.progress,
+      activeorinactive: each.status,
     }));
 
     let totalOrdersAmount = 0;
@@ -439,13 +440,14 @@ const Vendors = () => {
       const filterdOrder = data.filter((each) => each._id === vendorId);
 
       const sub = filterdOrder[0].orders.map((each) => ({
-        userId: each.userId,
-        orderId: each._id,
-        date: each.date,
-        time: each.time,
-        totalAmount: each.totalAmount,
-        action: each.action,
-        progress: each.progress,
+        userId: each.order.userId,
+        orderId: each.order._id,
+        date: each.order.date,
+        time: each.order.time,
+        totalAmount: each.order.totalAmount,
+        action: each.order.action,
+        progress: each.order.progress,
+        activeorinactive: each.status,
       }));
 
       let totalOrdersAmount = 0;
@@ -1002,6 +1004,7 @@ const Vendors = () => {
                 >
                   Status
                 </p>
+                <p className="order-body-para">Accept / Reject</p>
               </div>
               {suborderFiltered.map((each) => (
                 <div key={each.orderId} className="order-body-header2">
@@ -1087,6 +1090,16 @@ const Vendors = () => {
                     className="order-body-para1"
                   >
                     {each.progress}
+                  </p>
+                  <p
+                    className="order-body-para"
+                    style={
+                      each.activeorinactive === "Rejected"
+                        ? { color: "red", textTransform: "capitalize" }
+                        : { color: "green", textTransform: "capitalize" }
+                    }
+                  >
+                    {each.activeorinactive}
                   </p>
                 </div>
               ))}

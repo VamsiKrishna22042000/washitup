@@ -308,13 +308,15 @@ const BookService = (props) => {
       <div className="login-book-service">
         <div className="input2">
           <h1 className="where-head">When?</h1>
-          <Calendar
-            className="calender"
-            onChange={(date) => {
-              setDate(date);
-            }}
-            value={date}
-          />
+          <div className="calen-con">
+            <Calendar
+              className="calender"
+              onChange={(date) => {
+                setDate(date);
+              }}
+              value={date}
+            />
+          </div>
           <p style={{ alignSelf: "center" }} className="where-titles">
             Time
           </p>

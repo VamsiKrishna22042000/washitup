@@ -40,7 +40,7 @@ const Dashboard = () => {
         // console.log(revenueData.data[0].total,"rev")
         setRevenueData((prevData) => ({
           ...prevData,
-          totalRevenue: revenueData.data[0].total,
+          totalRevenue: revenueData.data[0]?.total,
         }));
       }
       const todayRevenueUrl = `${process.env.REACT_APP_ROOT_URL}/api/admin/todayRevenue`;

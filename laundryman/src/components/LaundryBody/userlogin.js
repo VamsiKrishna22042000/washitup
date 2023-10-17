@@ -203,6 +203,7 @@ const UserLogin = () => {
 
       if (response.ok) {
         Cookies.set("jwt_userId", data.data[0]._id, { expires: 30 });
+        Cookies.set("jwt_adminLogin", data.data[0].isAdmin, { expires: 30 });
         window.location.href = "/";
       } else {
         setgetotp(true);
@@ -217,8 +218,6 @@ const UserLogin = () => {
       }
     }
   };
-
-  console.log(mobileNumber);
 
   if (Cookies.get("jwt_userId") !== undefined) {
     window.location.href = "/";

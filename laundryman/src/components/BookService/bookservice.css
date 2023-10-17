@@ -78,12 +78,34 @@
     margin-bottom: 3%;
   }
   .calender {
+    position: absolute;
     width: 100%;
-    font-size: 1vw;
+    font-size: 0.9rem;
     align-self: center;
     text-decoration: none;
     border-width: 0px !important;
   }
+
+  .calen-con {
+    height: 70%;
+    width: 100%;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .calen-con::-webkit-scrollbar {
+    width: 0.1em; /* Set the width of the scrollbar (you can adjust this) */
+  }
+
+  .calen-con::-webkit-scrollbar-thumb {
+    background-color: #222222; /* Hide the thumb of the scrollbar */
+  }
+
+  .calen-con::-webkit-scrollbar-track {
+    background-color: transparent; /* Hide the track of the scrollbar */
+  }
+
   .react-calendar__tile {
     font-size: 0.9vw !important;
     border-radius: 10px;
@@ -91,9 +113,17 @@
   .react-calendar__month-view__days__day {
     font-size: 0.9vw !important;
   }
+
+  .react-calendar__navigation__label {
+    font-size: 0.6rem;
+  }
 }
 
 @media screen and (max-width: 576px) {
+  .calen-con {
+    width: 100%;
+  }
+
   .bookservice-time {
     border-style: solid;
     border-color: #6759ff;

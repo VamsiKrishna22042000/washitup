@@ -67,11 +67,10 @@ const Orders = () => {
       /**This is an array to insert name,mobileNumber,userId of the user into the each order object which were in the array of orders */
       let eachObjInsertedWithNumberName = [];
 
-      console.log(response.data.orders);
-
       for (let eachorder of response.data.orders) {
         eachObjInsertedWithNumberName.push({
-          ...eachorder,
+          ...eachorder.order,
+          status: eachorder.status,
         });
       }
 
@@ -102,9 +101,6 @@ const Orders = () => {
 
       setAllOrders(eachObjInsertedWithNumberName);
     } else {
-      Cookies.remove("jwt_vendorName");
-      Cookies.remove("jwt_vendorNumber");
-      Cookies.remove("jwt_vendorId");
     }
   };
 
@@ -190,7 +186,7 @@ const Orders = () => {
     let userId = e.target.getAttribute("userId");
     let orderId = e.target.id;
     let progress = e.target.value;
-    console.log(userId);
+    /**console.log(userId)*/
 
     const reqConfigure = {
       method: "POST",
@@ -366,6 +362,29 @@ const Orders = () => {
   const filterByDate = filterByProgress.filter((each) =>
     selectedDate.date === "" ? each : each.date === selectedDate.date
   );
+
+  const acceptOrReject = async (e) => {
+    setAllOrders([]);
+    const vendorId = Cookies.get("jwt_vendorId");
+    const orderId = e.target.id;
+    const status = e.target.getAttribute("status");
+
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/orderAccepRejectVendor`;
+
+    const reqConfigure = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ vendorId, orderId, status }),
+    };
+
+    const response = await fetch(url, reqConfigure);
+
+    if (response.ok) {
+      getAllOrders();
+    }
+  };
 
   return allorders.length > 0 ? (
     <>
@@ -831,6 +850,110 @@ const Orders = () => {
                     </p>
                   )}
                 </div>
+                <div style={{ position: "relative" }} className="summary-view1">
+                  <p style={{ marginLeft: "2%", marginBottom: 0 }}>
+                    New Orders
+                  </p>
+                  <div
+                    style={{
+                      height: "80%",
+                      overflowY: "scroll",
+                      overflowX: "hidden",
+                    }}
+                  >
+                    {filterByDate.map(
+                      (each) =>
+                        each.status === "in-active" && (
+                          <div
+                            style={{
+                              position: "relative",
+                            }}
+                            key={each._id}
+                            className="summary-view4"
+                          >
+                            {/**all orders booked by the user sorted based on the date */}
+                            <p
+                              style={{
+                                textTransform: "capitalize",
+                                width: "14%",
+                                paddingLeft: "5%",
+                              }}
+                              id={each._id}
+                              className="summary-view2"
+                            >
+                              <MdLocalLaundryService
+                                fontSize="1.35rem"
+                                color="#6759ff"
+                              />
+                            </p>
+                            <p id={each._id} className="summary-view2">
+                              {each.date} - {each.time}
+                            </p>
+                            <p
+                              id={each._id}
+                              className="summary-view2"
+                              style={{
+                                textTransform: "capitalize",
+                                width: "14%",
+                              }}
+                            >
+                              {each.service}
+                            </p>
+                            {each.totalAmount > 1000 &&
+                            each.totalAmount < 100000 ? (
+                              <p className="summary-view2">
+                                ₹ {parseInt(each.totalAmount) / 1000} K
+                              </p>
+                            ) : each.totalAmount > 100000 &&
+                              each.totalAmount < 1000000 ? (
+                              <p className="summary-view2">
+                                ₹ {parseInt(each.totalAmount) / 100000} L
+                              </p>
+                            ) : each.totalAmount > 1000000 ? (
+                              <p className="summary-view2">
+                                ₹ {parseInt(each.totalAmount) / 1000000} M
+                              </p>
+                            ) : (
+                              <p className="summary-view2">
+                                ₹ {each.totalAmount}
+                              </p>
+                            )}
+
+                            <button
+                              id={each._id}
+                              className="summary-view5"
+                              onClick={acceptOrReject}
+                              style={{
+                                textTransform: "capitalize",
+                                width: "14%",
+                                backgroundColor: "green",
+                                color: "white",
+                              }}
+                              type="button"
+                              status="Accepted"
+                            >
+                              Accept
+                            </button>
+                            <button
+                              id={each._id}
+                              className="summary-view5"
+                              onClick={acceptOrReject}
+                              style={{
+                                textTransform: "capitalize",
+                                width: "14%",
+                                backgroundColor: "red",
+                                color: "white",
+                              }}
+                              type="button"
+                              status="Rejected"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        )
+                    )}
+                  </div>
+                </div>
               </div>
             )
           ) : (
@@ -1111,120 +1234,208 @@ const Orders = () => {
                 >
                   Status
                 </p>
-              </div>
-              {filterByDate.map((each) => (
-                <div
-                  style={{ position: "relative" }}
-                  key={each._id}
-                  className="order-body-header2"
-                >
-                  {/**all orders booked by the user sorted based on the date */}
-
-                  <p
+              </div>{" "}
+              {filterByDate.map((each) =>
+                each.status === "Rejected" ? (
+                  <div
                     style={{
-                      textTransform: "capitalize",
-                      width: "14%",
-                      paddingLeft: "5%",
+                      position: "relative",
+                      backgroundColor: "#22222215",
                     }}
-                    id={each._id}
-                    onClick={filterCustomer}
-                    className="order-body-para"
+                    key={each._id}
+                    className="order-body-header2"
                   >
-                    <MdLocalLaundryService fontSize="1.35rem" color="#6759ff" />
-                  </p>
-                  <p
-                    id={each._id}
-                    onClick={filterCustomer}
-                    className="order-body-para"
-                  >
-                    {each.date} - {each.time}
-                  </p>
-                  <p
-                    id={each._id}
-                    onClick={filterCustomer}
-                    style={{ width: "20%" }}
-                    className="order-body-para"
-                  >
-                    {each._id}
-                  </p>
-                  <p
-                    id={each._id}
-                    onClick={filterCustomer}
-                    className="order-body-para"
-                    style={{ textTransform: "capitalize", width: "14%" }}
-                  >
-                    {each.service}
-                  </p>
+                    {/**all orders booked by the user sorted based on the date */}
 
-                  {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
-                    <p className="order-body-para">
-                      ₹ {parseInt(each.totalAmount) / 1000} K
+                    <p
+                      style={{
+                        textTransform: "capitalize",
+                        width: "14%",
+                        paddingLeft: "5%",
+                      }}
+                      id={each._id}
+                      className="order-body-para"
+                    >
+                      <MdLocalLaundryService
+                        fontSize="1.35rem"
+                        color="#6759ff"
+                      />
                     </p>
-                  ) : each.totalAmount > 100000 &&
-                    each.totalAmount < 1000000 ? (
-                    <p className="order-body-para">
-                      ₹ {parseInt(each.totalAmount) / 100000} L
+                    <p id={each._id} className="order-body-para">
+                      {each.date} - {each.time}
                     </p>
-                  ) : each.totalAmount > 1000000 ? (
-                    <p className="order-body-para">
-                      ₹ {parseInt(each.totalAmount) / 1000000} M
+                    <p
+                      id={each._id}
+                      style={{ width: "20%" }}
+                      className="order-body-para"
+                    >
+                      {each._id}
                     </p>
-                  ) : (
-                    <p className="order-body-para">₹ {each.totalAmount}</p>
-                  )}
+                    <p
+                      id={each._id}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize", width: "14%" }}
+                    >
+                      {each.service}
+                    </p>
 
-                  <select
-                    userId={each.userId}
-                    id={each._id}
-                    onChange={settingProgress}
-                    className="order-body-select"
-                    style={{ textTransform: "capitalize" }}
-                  >
-                    {each.action.map((e) => (
-                      <option
-                        style={{ textTransform: "capitalize" }}
-                        selected={each.progress === e ? true : false}
+                    {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
+                      <p className="order-body-para">
+                        ₹ {parseInt(each.totalAmount) / 1000} K
+                      </p>
+                    ) : each.totalAmount > 100000 &&
+                      each.totalAmount < 1000000 ? (
+                      <p className="order-body-para">
+                        ₹ {parseInt(each.totalAmount) / 100000} L
+                      </p>
+                    ) : each.totalAmount > 1000000 ? (
+                      <p className="order-body-para">
+                        ₹ {parseInt(each.totalAmount) / 1000000} M
+                      </p>
+                    ) : (
+                      <p className="order-body-para">₹ {each.totalAmount}</p>
+                    )}
+
+                    <div
+                      userId={each.userId}
+                      id={each._id}
+                      className="order-body-select"
+                      style={{
+                        textTransform: "capitalize",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        border: "0",
+                        color: "red",
+                      }}
+                    >
+                      <p style={{ width: "100%" }} className="order-body-para1">
+                        {each.status}
+                      </p>
+                    </div>
+                    <p style={{ color: "red" }} className="order-body-para1">
+                      {each.status}
+                    </p>
+                  </div>
+                ) : (
+                  each.status === "Accepted" && (
+                    <div
+                      style={{ position: "relative" }}
+                      key={each._id}
+                      className="order-body-header2"
+                    >
+                      {/**all orders booked by the user sorted based on the date */}
+
+                      <p
+                        style={{
+                          textTransform: "capitalize",
+                          width: "14%",
+                          paddingLeft: "5%",
+                        }}
+                        id={each._id}
+                        onClick={filterCustomer}
+                        className="order-body-para"
                       >
-                        {e}
-                      </option>
-                    ))}
-                  </select>
-                  <p
-                    style={
-                      each.progress === "Active"
-                        ? {
-                            backgroundColor: "#FFA00025",
-                            color: "#FFA000",
-                            borderRadius: "10px",
-                            textTransform: "capitalize",
-                          }
-                        : each.progress === "In Progress"
-                        ? {
-                            color: "#6759FF",
-                            backgroundColor: "#6759FF25",
-                            borderRadius: "10px",
-                            textTransform: "capitalize",
-                          }
-                        : each.progress === "Completed"
-                        ? {
-                            color: "#519C66",
-                            backgroundColor: "#519C6625",
-                            borderRadius: "10px",
-                            textTransform: "capitalize",
-                          }
-                        : each.progress === "cancel" && {
-                            color: "#FF0000",
-                            backgroundColor: "#FF000025",
-                            borderRadius: "10px",
-                            textTransform: "capitalize",
-                          }
-                    }
-                    className="order-body-para1"
-                  >
-                    {each.progress}
-                  </p>
-                </div>
-              ))}
+                        <MdLocalLaundryService
+                          fontSize="1.35rem"
+                          color="#6759ff"
+                        />
+                      </p>
+                      <p
+                        id={each._id}
+                        onClick={filterCustomer}
+                        className="order-body-para"
+                      >
+                        {each.date} - {each.time}
+                      </p>
+                      <p
+                        id={each._id}
+                        onClick={filterCustomer}
+                        style={{ width: "20%" }}
+                        className="order-body-para"
+                      >
+                        {each._id}
+                      </p>
+                      <p
+                        id={each._id}
+                        onClick={filterCustomer}
+                        className="order-body-para"
+                        style={{ textTransform: "capitalize", width: "14%" }}
+                      >
+                        {each.service}
+                      </p>
+
+                      {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
+                        <p className="order-body-para">
+                          ₹ {parseInt(each.totalAmount) / 1000} K
+                        </p>
+                      ) : each.totalAmount > 100000 &&
+                        each.totalAmount < 1000000 ? (
+                        <p className="order-body-para">
+                          ₹ {parseInt(each.totalAmount) / 100000} L
+                        </p>
+                      ) : each.totalAmount > 1000000 ? (
+                        <p className="order-body-para">
+                          ₹ {parseInt(each.totalAmount) / 1000000} M
+                        </p>
+                      ) : (
+                        <p className="order-body-para">₹ {each.totalAmount}</p>
+                      )}
+
+                      <select
+                        userId={each.userId}
+                        id={each._id}
+                        onChange={settingProgress}
+                        className="order-body-select"
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        {each.action.map((e) => (
+                          <option
+                            style={{ textTransform: "capitalize" }}
+                            selected={each.progress === e ? true : false}
+                          >
+                            {e}
+                          </option>
+                        ))}
+                      </select>
+                      <p
+                        style={
+                          each.progress === "Active"
+                            ? {
+                                backgroundColor: "#FFA00025",
+                                color: "#FFA000",
+                                borderRadius: "10px",
+                                textTransform: "capitalize",
+                              }
+                            : each.progress === "In Progress"
+                            ? {
+                                color: "#6759FF",
+                                backgroundColor: "#6759FF25",
+                                borderRadius: "10px",
+                                textTransform: "capitalize",
+                              }
+                            : each.progress === "Completed"
+                            ? {
+                                color: "#519C66",
+                                backgroundColor: "#519C6625",
+                                borderRadius: "10px",
+                                textTransform: "capitalize",
+                              }
+                            : each.progress === "cancel" && {
+                                color: "#FF0000",
+                                backgroundColor: "#FF000025",
+                                borderRadius: "10px",
+                                textTransform: "capitalize",
+                              }
+                        }
+                        className="order-body-para1"
+                      >
+                        {each.progress}
+                      </p>
+                    </div>
+                  )
+                )
+              )}
             </div>
           ) : (
             <div className="order-summary-body">

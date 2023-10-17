@@ -15,8 +15,6 @@ import "react-calendar/dist/Calendar.css";
 
 import { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
-import CustomModal from "./modal";
-import VendorDetails from "./vendorDetails";
 
 const Driver = () => {
   /**State to show the addVendor Modal Box*/
@@ -64,92 +62,52 @@ const Driver = () => {
   };
 
   /**Modal Box to add vendor */
-  const AddVendorModel = (props) => {
-    const { setAddVendor } = props;
+  const AddCustomerModel = () => {
+    /**State which stores the user name entered */
+    const [newUser, setNewUser] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
 
-    /** phonenumber state */
-
-    const [val, setValue] = useState(0);
-    const [value2, setValue2] = useState(0);
-
-    const [vendorData, setVendorData] = useState({
-      name: "",
-      email: "",
-      shopName: "",
-      address: "",
-      location: "",
-      pinCode: "",
-    });
-
+    /**State which stores the mobile number entered*/
+    const [value, setValue] = useState();
     const [load, setLoad] = useState(false);
 
+    /**Function to make api call to add a new user*/
     const addUser = async () => {
-      if (vendorData.name === "") {
-        toast.error("Please Enter Vendor Name", {
+      if (newUser === "") {
+        toast.error("Please Enter Driver Name", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
           pauseOnHover: true,
           theme: "colored",
         });
-      } else if (val === 0) {
-        toast.error("Please Enter Valid Number", {
+      } else if (value === "") {
+        toast.error("Please Enter Driver Number", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
           pauseOnHover: true,
           theme: "colored",
         });
-      } else if (vendorData.email === "") {
-        toast.error("Please Enter Vendor Email", {
+      } else if (email === "") {
+        toast.error("Please Enter Driver Email", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
           pauseOnHover: true,
           theme: "colored",
         });
-      } else if (vendorData.shopName === "") {
-        toast.error("Please Enter Vendor Shop Name", {
+      } else if (!email.endsWith("@gmail.com")) {
+        toast.error("Please Enter Valid Email", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
           pauseOnHover: true,
           theme: "colored",
         });
-      } else if (value2 === 0) {
-        toast.error("Please Enter Valid Secondary Number", {
-          position: "top-center",
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
-      } else if (vendorData.address === "") {
+      } else if (address === "") {
         toast.error("Please Enter Address", {
-          position: "top-center",
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
-      } else if (vendorData.location === "") {
-        toast.error("Please Enter Location", {
-          position: "top-center",
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
-      } else if (vendorData.pinCode === "") {
-        toast.error("Please Enter Pincode", {
-          position: "top-center",
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
-      } else if (val === value2) {
-        toast.error("Both Numbers cannot be same", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
@@ -158,13 +116,7 @@ const Driver = () => {
         });
       } else {
         setLoad(true);
-        const dateTobeSent = {
-          ...vendorData,
-          mobileNumber: val.slice(3, val.length + 1),
-          secondaryMobile: value2.slice(3, value2.length + 1),
-        };
-
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/addVendor`;
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/addDriver`;
 
         const reqConfigure = {
           method: "POST",
@@ -173,13 +125,18 @@ const Driver = () => {
             "Content-Type": "application/json",
           },
 
-          body: JSON.stringify(dateTobeSent),
+          body: JSON.stringify({
+            name: newUser,
+            mobileNumber: value,
+            email: email,
+            address: address,
+          }),
         };
 
-        const response = await fetch(url, reqConfigure);
+        const res = await fetch(url, reqConfigure);
 
-        if (response.ok) {
-          toast.success("Vendor Added", {
+        if (res.ok) {
+          toast.success("Added", {
             position: "top-center",
             autoClose: 2000,
             closeOnClick: true,
@@ -190,7 +147,7 @@ const Driver = () => {
             setLoad(false);
             setAddVendor(false);
             getAllDrivers();
-          }, 1500);
+          }, 1000);
         }
       }
     };
@@ -209,145 +166,75 @@ const Driver = () => {
             zIndex: 2,
           }}
         ></div>
-        <div className="add-vendor-modal-box">
-          <ToastContainer />
-          <div style={{ width: "50%" }}>
-            <h6>Add a New Driver</h6>
-            <p style={{ marginTop: "3vh" }} className="add-customer-titles2">
-              Driver Name
-            </p>
-            <input
-              className="add-customer-input-box2"
-              type="text"
-              placeholder="Enter Vendor Name"
-              value={vendorData.name}
-              onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  name: e.target.value,
-                }));
-              }}
-            />
-            <p className="add-customer-titles2">Vendor Mobile number</p>
-            <PhoneInput
-              className="add-customer-input-box2"
-              placeholder="Enter Phone number"
-              defaultCountry="IN"
-              value={val}
-              onChange={setValue}
-            />
-            <p style={{ marginTop: "3vh" }} className="add-customer-titles2">
-              Vendor Email
-            </p>
-            <input
-              className="add-customer-input-box2"
-              type="email"
-              placeholder="Enter Vendor Email"
-              value={vendorData.email}
-              onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  email: e.target.value,
-                }));
-              }}
-            />
-            <p className="add-customer-titles2">Shop Name</p>
-            <input
-              className="add-customer-input-box2"
-              type="text"
-              placeholder="Enter Shop Name"
-              value={vendorData.shopName}
-              onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  shopName: e.target.value,
-                }));
-              }}
-            />
-            <p s className="add-customer-titles2">
-              Shop Address
-            </p>
-            <textarea
-              style={{ height: "20vh" }}
-              className="add-customer-input-box2"
-              type="text"
-              placeholder="Enter Shop Address"
-              value={vendorData.address}
-              onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  address: e.target.value,
-                }));
-              }}
-            ></textarea>
-          </div>
-          <div style={{ width: "50%" }}>
-            <h6 style={{ color: "transparent" }}>Add a New Vendor</h6>
-            <button
-              type="button"
-              onClick={() => {
-                setAddVendor(false);
-              }}
-              style={{
-                position: "absolute",
-                top: "5%",
-                right: "5%",
-                color: "#5570F1",
-                fontWeight: "bold",
-                borderWidth: 0,
-                backgroundColor: "transparent",
-              }}
-            >
-              ✕
-            </button>
-            <p className="add-customer-titles2">Secondary Mobile number</p>
-            <PhoneInput
-              className="add-customer-input-box2"
-              placeholder="Enter Secondary Phone number"
-              defaultCountry="IN"
-              value={value2}
-              onChange={setValue2}
-            />
-            <p className="add-customer-titles2">Location</p>
-            <input
-              className="add-customer-input-box2"
-              type="text"
-              placeholder="Enter Vendor Location"
-              value={vendorData.location}
-              onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  location: e.target.value,
-                }));
-              }}
-            />
-            <p className="add-customer-titles2">Pin Code</p>
-            <input
-              className="add-customer-input-box2"
-              type="text"
-              placeholder="Enter Vendor PINCODE"
-              value={vendorData.pinCode}
-              onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  pinCode: e.target.value,
-                }));
-              }}
-            />
-
-            <button
-              onClick={addUser}
-              className="add-cutomer-button"
-              type="button"
-            >
-              Add
-            </button>
-          </div>
+        <div style={{ left: "40%" }} className="add-driver-modal">
+          <h6>Add a New Driver</h6>
+          {/**Button to close the modal box by setting false to setAddCustomer() */}
+          <button
+            type="button"
+            onClick={() => {
+              setAddVendor(false);
+            }}
+            style={{
+              position: "absolute",
+              top: "5%",
+              right: "5%",
+              color: "#5570F1",
+              fontWeight: "bold",
+              borderWidth: 0,
+              backgroundColor: "transparent",
+            }}
+          >
+            ✕
+          </button>
+          <p className="add-customer-titles">Driver Name</p>
+          {/**Input to take new customer number*/}
+          <input
+            onChange={(e) => {
+              setNewUser(e.target.value);
+            }}
+            className="add-customer-input-box"
+            type="text"
+            placeholder="Enter Driver Name"
+          />
+          <p className="add-customer-titles">Driver Mobile number</p>
+          {/**In put to take phone number*/}
+          <PhoneInput
+            className="add-customer-input-box"
+            placeholder="Enter Phone number"
+            defaultCountry="IN"
+            value={value}
+            onChange={setValue}
+          />
+          <p className="add-customer-titles">Driver Email</p>
+          <input
+            type="email"
+            className="add-customer-input-box"
+            placeholder="Enter Driver Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <p className="add-customer-titles">Driver Address</p>
+          <textarea
+            type="email"
+            className="add-driver-input-box"
+            placeholder="Enter Driver Address"
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
+          ></textarea>
+          {/**Button call's add user function to make an api call and add a new customer*/}
+          <button
+            onClick={addUser}
+            className="add-cutomer-button"
+            type="button"
+          >
+            Add
+          </button>
         </div>
       </>
     ) : (
       <>
-        <ToastContainer />
         <div
           style={{
             position: "absolute",
@@ -361,10 +248,8 @@ const Driver = () => {
         ></div>
         <div
           style={{
-            height: "95vh",
-            width: "70vw",
-            top: "2.5%",
-            left: "18%",
+            left: "40%",
+            height: "30%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -387,20 +272,21 @@ const Driver = () => {
     const filterdOrder = vendors.filter((each) => each._id === e.target.id);
 
     const sub = filterdOrder[0].orders.map((each) => ({
-      userId: each.userId,
-      orderId: each._id,
-      date: each.date,
-      time: each.time,
-      totalAmount: each.totalAmount,
-      action: each.action,
-      progress: each.progress,
+      userId: each.order.userId,
+      orderId: each.order._id,
+      date: each.order.date,
+      time: each.order.time,
+      totalAmount: each.order.totalAmount,
+      action: each.order.action,
+      status: each.order.progress,
+      acceptorreject: each.status,
     }));
 
     let totalOrdersAmount = 0;
 
     sub.map(
       (each) =>
-        each.progress === "Completed" &&
+        each.status === "Completed" &&
         (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
     );
 
@@ -419,6 +305,8 @@ const Driver = () => {
     } else {
       setTotal(parseInt(totalOrdersAmount));
     }
+
+    console.log(filterdOrder);
 
     setSubOrders(sub);
 
@@ -475,7 +363,7 @@ const Driver = () => {
   return !load ? (
     <>
       {/**Terinary operator to show addvedor modal box or not */}
-      {showAddVendor && <AddVendorModel setAddVendor={setAddVendor} />}
+      {showAddVendor && <AddCustomerModel setAddVendor={setAddVendor} />}
       {/**Terinary operator to navigate between the main and subsection*/}
       {showVendorOrders.length > 0 ? (
         subOrders !== "" ? (
@@ -504,7 +392,6 @@ const Driver = () => {
             <div className="order-summary-view">
               <div
                 style={{ position: "relative", cursor: "pointer" }}
-                onClick={() => handleVendorDetails(showVendorOrders[0]._id)}
                 className="summary-view"
               >
                 <div
@@ -695,13 +582,6 @@ const Driver = () => {
               </div>
             </div>
 
-            {showModal && (
-              <CustomModal show={showModal} handleClose={handleCloseModal}>
-                {selectedVendorId && (
-                  <VendorDetails vendorId={selectedVendorId} />
-                )}
-              </CustomModal>
-            )}
             {showDate && <Caland />}
             <div className="order-summary-body">
               <div
@@ -830,15 +710,15 @@ const Driver = () => {
                 <p className="order-body-para">Order Total</p>
                 <p
                   style={{ backgroundColor: "white" }}
-                  className="order-body-select"
-                >
-                  Action
-                </p>
-                <p
-                  style={{ backgroundColor: "white" }}
                   className="order-body-para1"
                 >
                   Status
+                </p>
+                <p
+                  style={{ backgroundColor: "white" }}
+                  className="order-body-para"
+                >
+                  Accept / Reject
                 </p>
               </div>
               {suborderFiltered.map((each) => (
@@ -876,6 +756,51 @@ const Driver = () => {
                   ) : (
                     <p className="order-body-para">₹ {each.totalAmount}</p>
                   )}
+                  <p
+                    style={
+                      each.status === "Active"
+                        ? {
+                            backgroundColor: "#FFA00025",
+                            color: "#FFA000",
+                            borderRadius: "10px",
+                            textTransform: "capitalize",
+                          }
+                        : each.status === "In Progress"
+                        ? {
+                            color: "#6759FF",
+                            backgroundColor: "#6759FF25",
+                            borderRadius: "10px",
+                            textTransform: "capitalize",
+                          }
+                        : each.status === "Completed"
+                        ? {
+                            color: "#519C66",
+                            backgroundColor: "#519C6625",
+                            borderRadius: "10px",
+                            textTransform: "capitalize",
+                          }
+                        : each.status === "cancel" && {
+                            color: "#FF0000",
+                            backgroundColor: "#FF000025",
+                            borderRadius: "10px",
+                            textTransform: "capitalize",
+                          }
+                    }
+                    className="order-body-para1"
+                  >
+                    {each.status}
+                  </p>
+                  <p
+                    style={{
+                      backgroundColor: "white",
+                      textTransform: "capitalize",
+                      color:
+                        each.acceptorreject !== "Rejected" ? "green" : "red",
+                    }}
+                    className="order-body-para1"
+                  >
+                    {each.acceptorreject}
+                  </p>
                 </div>
               ))}
             </div>
@@ -965,12 +890,10 @@ const Driver = () => {
             </div>
             <div className="order-body-header1">
               <div className="order-body-para"></div>
-              <p className="order-body-para">Vendor Name</p>
+              <p className="order-body-para">Driver Name</p>
               <p className="order-body-para">Mobile Number</p>
               <p className="order-body-para">Email</p>
               <p className="order-body-para">Address</p>
-              <p className="order-body-para">Location</p>
-              <p className="order-body-para">Pincode</p>
             </div>
             {filteredVendors.length > 0 ? (
               filteredVendors.map((each) => (
@@ -1023,20 +946,6 @@ const Driver = () => {
                     style={{ textTransform: "capitalize" }}
                   >
                     {each.address}
-                  </p>
-                  <p
-                    onClick={filterVendorOrders}
-                    id={each._id}
-                    className="order-body-para"
-                  >
-                    {each.location}
-                  </p>
-                  <p
-                    onClick={filterVendorOrders}
-                    id={each._id}
-                    className="order-body-para"
-                  >
-                    {each.pinCode}
                   </p>
                 </div>
               ))

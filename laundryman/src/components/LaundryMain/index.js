@@ -111,6 +111,7 @@ function LaundryNav(props) {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   Cookies.remove("jwt_userId");
+                  Cookies.remove("jwt_adminLogin");
                   window.location.href = "/";
                 }}
                 href="#pricing"
@@ -121,6 +122,7 @@ function LaundryNav(props) {
                   type="button"
                   onClick={() => {
                     Cookies.remove("jwt_userId");
+                    Cookies.remove("jwt_adminLogin");
                     window.location.href = "/";
                   }}
                   className="but"

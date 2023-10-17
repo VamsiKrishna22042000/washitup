@@ -131,14 +131,12 @@ const Orders = () => {
 
     let itemsObtained = [];
 
-    console.log(selectedCustomerOrder[0]);
-
     for (let each of selectedCustomerOrder[0].items) {
       for (let e of each.uniqueId) {
         itemsObtained.push({
           uniqueId: e,
           count: each.itemCount,
-          id: each._id,
+          id: each.itemId._id,
           itemCategory: each.itemId.category,
           itemName: each.itemId.name,
           price:
@@ -152,7 +150,9 @@ const Orders = () => {
       }
     }
 
-    /**console.log(itemsObtained);*/
+    /**console.log(itemsObtained)*/
+
+    console.log(selectedCustomerOrder);
 
     setItems(itemsObtained);
     setSelectedCustomer(selectedCustomerOrder);
@@ -253,15 +253,15 @@ const Orders = () => {
           itemsObtained.push({
             uniqueId: e,
             count: each.itemCount,
-            id: each._id,
+            id: each.itemId._id,
             itemCategory: each.itemId.category,
             itemName: each.itemId.name,
             price:
               selectedCustomerOrder[0].service === "dry Cleaning"
-                ? each.drycleaning
+                ? each.itemId.drycleaning
                 : selectedCustomerOrder[0].service === "wash & fold"
-                ? each.washfold
-                : each.washiron,
+                ? each.itemId.washfold
+                : each.itemId.washiron,
             image: each.itemId.image,
           });
         }
@@ -338,9 +338,9 @@ const Orders = () => {
         });
         setTimeout(() => {
           setshowAddVendor(false);
-          setSelectedCustomer("");
           setAllOrders([]);
           getAllOrders();
+          filterCustomer2(orderId);
         }, 1500);
       }
     };
@@ -380,12 +380,14 @@ const Orders = () => {
         });
         setTimeout(() => {
           setshowAddVendor(false);
-          setSelectedCustomer("");
           setAllOrders([]);
           getAllOrders();
+          filterCustomer2(orderId);
         }, 1500);
       }
     };
+
+    console.log(selectedCustomer[0].vendorName);
 
     return load ? (
       <>
@@ -590,7 +592,7 @@ const Orders = () => {
 
       const data = await response.json();
 
-      /**console.log(data);*/
+      console.log(data);
 
       if (response.ok) {
         setLoad(false);
@@ -603,22 +605,22 @@ const Orders = () => {
       setLoad(true);
       let userId = selectedCustomer[0].userId;
       let orderId = selectedCustomer[0]._id;
-      let vendorId = e.target.id;
+      let driverId = e.target.id;
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/assignNewVendor`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/driver/assignOrderToDriver`;
 
       const reqConfigure = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ vendorId, orderId, userId }),
+        body: JSON.stringify({ driverId, orderId, userId }),
       };
 
       const response = await fetch(url, reqConfigure);
 
       if (response.ok) {
-        toast.success("Assigned Vendor", {
+        toast.success("Assigned Driver", {
           position: "top-center",
           autoClose: 1000,
           closeOnClick: true,
@@ -626,10 +628,10 @@ const Orders = () => {
           theme: "colored",
         });
         setTimeout(() => {
-          setshowAddVendor(false);
-          setSelectedCustomer("");
+          setshowAddDriver(false);
           setAllOrders([]);
           getAllOrders();
+          filterCustomer2(orderId);
         }, 1500);
       }
     };
@@ -638,11 +640,13 @@ const Orders = () => {
     const changeVendor = async (e) => {
       setLoad(true);
       let orderId = selectedCustomer[0]._id;
-      let vendorId = e.target.id;
-      let previVendorId = selectedCustomer[0].vendorId._id;
-      let previVendorOrderId = selectedCustomer[0]._id;
+      let newDriverId = e.target.id;
+      let prevDriverId =
+        selectedCustomer[0].driverName2 === "empty"
+          ? selectedCustomer[0].driverName1
+          : selectedCustomer[0].driverName2;
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/changeVendor`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/driver/changeDriver`;
 
       const reqConfigure = {
         method: "POST",
@@ -650,17 +654,16 @@ const Orders = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          vendorId,
+          newDriverId,
           orderId,
-          previVendorId,
-          previVendorOrderId,
+          prevDriverId,
         }),
       };
 
       const response = await fetch(url, reqConfigure);
 
       if (response.ok) {
-        toast.success("Changed Vendor", {
+        toast.success("Changed Driver", {
           position: "top-center",
           autoClose: 1000,
           closeOnClick: true,
@@ -668,10 +671,7 @@ const Orders = () => {
           theme: "colored",
         });
         setTimeout(() => {
-          setshowAddVendor(false);
-          setSelectedCustomer("");
-          setAllOrders([]);
-          getAllOrders();
+          setshowAddDriver(false);
         }, 1500);
       }
     };
@@ -722,6 +722,8 @@ const Orders = () => {
             <button
               onClick={() => {
                 setshowAddDriver(false);
+                setAllOrders([]);
+                getAllOrders();
               }}
               type="button"
               style={{
@@ -802,7 +804,9 @@ const Orders = () => {
                     {each.email}
                   </p>
                   {/**buttons to assgin the vendor */}
-                  {selectedCustomer[0].vendorName === "empty" ? (
+                  {selectedCustomer[0].driverName1 === "empty" &&
+                  selectedCustomer[0].driverName2 === "empty" &&
+                  selectedCustomer[0].progress !== "Completed" ? (
                     <button
                       id={each._id}
                       onClick={assignVendor}
@@ -818,26 +822,84 @@ const Orders = () => {
                         backgroundColor: "green",
                       }}
                     >
-                      Assign
+                      Assign Driver 1
                     </button>
                   ) : (
-                    selectedCustomer[0].vendorName !== each.name && (
+                    selectedCustomer[0].driverName1 !== "empty" &&
+                    selectedCustomer[0].driverName2 === "empty" &&
+                    selectedCustomer[0].progress !== "Completed" && (
                       <button
-                        id={each._id}
                         onClick={changeVendor}
+                        id={each._id}
                         type="button"
-                        style={{
-                          width: "15%",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          borderRadius: "8px",
-                          borderWidth: "0px",
-                          color: "#fff",
-                          backgroundColor: "#F50000",
-                        }}
+                        style={
+                          selectedCustomer[0].driverName1 === each._id
+                            ? {
+                                display: "none",
+                              }
+                            : {
+                                width: "15%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                borderRadius: "8px",
+                                borderWidth: "0px",
+                                color: "#fff",
+                                backgroundColor: "#F50000",
+                              }
+                        }
                       >
-                        Change
+                        Change Driver 1
+                      </button>
+                    )
+                  )}
+
+                  {selectedCustomer[0].driverName1 !== "empty" &&
+                  selectedCustomer[0].driverName2 === "empty" &&
+                  selectedCustomer[0].progress === "Completed" ? (
+                    <button
+                      id={each._id}
+                      onClick={assignVendor}
+                      type="button"
+                      style={{
+                        width: "15%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "8px",
+                        borderWidth: "0px",
+                        color: "#fff",
+                        backgroundColor: "green",
+                      }}
+                    >
+                      Assign Driver 2
+                    </button>
+                  ) : (
+                    selectedCustomer[0].driverName1 !== "empty" &&
+                    selectedCustomer[0].driverName2 !== "empty" &&
+                    selectedCustomer[0].progress === "Completed" && (
+                      <button
+                        onClick={changeVendor}
+                        id={each._id}
+                        type="button"
+                        style={
+                          selectedCustomer[0].driverName2 === each._id
+                            ? {
+                                display: "none",
+                              }
+                            : {
+                                width: "15%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                borderRadius: "8px",
+                                borderWidth: "0px",
+                                color: "#fff",
+                                backgroundColor: "#F50000",
+                              }
+                        }
+                      >
+                        Change Driver 2
                       </button>
                     )
                   )}
@@ -897,16 +959,18 @@ const Orders = () => {
     let element = document.getElementById("file-upload");
     let itemId = element.getAttribute("itemId");
     let uniqueId = element.getAttribute("uniqueId");
-    let image = event.target.files[0];
+    let img = event.target.files[0];
 
     let fd = new FormData();
 
     fd.append("orderId", orderId);
     fd.append("itemId", itemId);
     fd.append("uniqueId", uniqueId);
-    fd.append("image", image);
+    fd.append("image", img);
 
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/uploadItemImage`;
+
+    console.log(Object.fromEntries(fd.entries()));
 
     const reqConfigure = {
       method: "POST",
@@ -1061,28 +1125,65 @@ const Orders = () => {
                   </button>
                 )}
 
-                {selectedCustomer[0].driverName === "empty" ? (
-                  <button
-                    onClick={() => {
-                      setshowAddDriver(!showAddDriver);
-                    }}
-                    className="assign-vendor"
-                    type="button"
-                  >
-                    Assign Driver
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      setshowAddDriver(!showAddDriver);
-                    }}
-                    className="assign-vendor"
-                    style={{ backgroundColor: "#F50000" }}
-                    type="button"
-                  >
-                    Change Driver
-                  </button>
-                )}
+                {selectedCustomer[0].driverName1 === "empty" &&
+                selectedCustomer[0].driverName2 === "empty" &&
+                selectedCustomer[0].progress !== "Completed"
+                  ? selectedCustomer[0].vendorName !== "empty" && (
+                      <button
+                        onClick={() => {
+                          setshowAddDriver(!showAddDriver);
+                        }}
+                        className="assign-vendor"
+                        type="button"
+                      >
+                        Assign Driver 1
+                      </button>
+                    )
+                  : selectedCustomer[0].vendorName !== "empty" &&
+                    selectedCustomer[0].driverName1 !== "empty" &&
+                    selectedCustomer[0].driverName2 === "empty" &&
+                    selectedCustomer[0].progress !== "Completed" && (
+                      <button
+                        onClick={() => {
+                          setshowAddDriver(!showAddDriver);
+                        }}
+                        className="assign-vendor"
+                        style={{ backgroundColor: "#F50000" }}
+                        type="button"
+                      >
+                        Change Driver 1
+                      </button>
+                    )}
+
+                {selectedCustomer[0].driverName2 === "empty" &&
+                selectedCustomer[0].progress === "Completed" &&
+                selectedCustomer[0].driverName1 !== "empty"
+                  ? selectedCustomer[0].vendorName !== "empty" && (
+                      <button
+                        onClick={() => {
+                          setshowAddDriver(!showAddDriver);
+                        }}
+                        className="assign-vendor"
+                        type="button"
+                      >
+                        Assign Driver 2
+                      </button>
+                    )
+                  : selectedCustomer[0].vendorName !== "empty" &&
+                    selectedCustomer[0].driverName1 !== "empty" &&
+                    selectedCustomer[0].driverName2 !== "empty" &&
+                    selectedCustomer[0].progress === "Completed" && (
+                      <button
+                        onClick={() => {
+                          setshowAddDriver(!showAddDriver);
+                        }}
+                        className="assign-vendor"
+                        style={{ backgroundColor: "#F50000" }}
+                        type="button"
+                      >
+                        Change Driver 2
+                      </button>
+                    )}
 
                 {/**Button use to notshow details of particular order*/}
                 <button
@@ -2002,14 +2103,11 @@ const Orders = () => {
                   >
                     {each.uniqueId.id.slice(0, 7)}
                   </p>
-                  <div
-                    style={{ position: "relative" }}
-                    className="order-body-para"
-                  >
+                  <div style={{ position: "relative" }} className="order-para2">
                     {each.uniqueId?.image === undefined ? (
                       <>
                         <LuImagePlus
-                          style={{ fontSize: "1.35rem", marginLeft: "20%" }}
+                          style={{ fontSize: "1.35rem", marginRight: "20%" }}
                           id="file-upload"
                           itemId={each.id}
                           uniqueId={each.uniqueId.id}
@@ -2028,7 +2126,7 @@ const Orders = () => {
                         />
                       </>
                     ) : (
-                      <img src={each.uniqueId.image} />
+                      <img className="user-img" src={each.uniqueId.image} />
                     )}
                   </div>
 

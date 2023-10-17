@@ -49,9 +49,6 @@ const Dashboard = () => {
       });
       setLoad(false);
     } else {
-      Cookies.remove("jwt_vendorName");
-      Cookies.remove("jwt_vendorId");
-      Cookies.remove("jwt_vendorNumber");
       window.location.herf = "/vendordashboard";
     }
   };
