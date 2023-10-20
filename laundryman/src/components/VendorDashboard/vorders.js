@@ -228,7 +228,7 @@ const Orders = () => {
     const response = await fetch(url, reqConfigure);
 
     if (response.ok) {
-      filterCustomer2(orderId);
+      filterCustomer2(e.target.id);
     }
   };
 
@@ -246,7 +246,8 @@ const Orders = () => {
 
       for (let eachorder of response.data.orders) {
         eachObjInsertedWithNumberName.push({
-          ...eachorder,
+          ...eachorder.order,
+          status: eachorder.status,
         });
       }
 
@@ -255,8 +256,6 @@ const Orders = () => {
       );
 
       let itemsObtained = [];
-
-      setOrderDate(selectedCustomerOrder[0].date);
 
       function addDaysToDate(dateString, daysToAdd) {
         // Split the date string into day, month, and year
@@ -282,6 +281,7 @@ const Orders = () => {
         const endDate = new Date(newYear, newMonth - 1, newDay);
         console.log(endDate);
         const timeDifference = endDate - currentDate;
+
         // Convert the time difference to days
         const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
@@ -291,7 +291,6 @@ const Orders = () => {
           daysRemaining: daysRemaining,
         };
       }
-
       const daysToAdd = 7;
       const newDateObj = addDaysToDate(
         selectedCustomerOrder[0].date,
@@ -348,7 +347,7 @@ const Orders = () => {
 
           // Combine them in the desired format
           const formattedDate = `${d}-${mm}-${yyyy}`;
-          setSelectedData({ date: formattedDate, id: "" });
+          setSelectedData({ date: formattedDate, id: "cal" });
           setShowDate(false);
         }}
         value={date}

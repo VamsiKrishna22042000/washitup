@@ -437,8 +437,8 @@ const Coupons = () => {
                     alt="Profile"
                   />
                 </div>
-                <p className="order-body-para">₹ {each.minimumPrice}</p>
                 <p className="order-body-para">{each.couponCode}</p>
+                <p className="order-body-para">₹ {each.minimumPrice}</p>
                 <p className="order-body-para">₹{each.discount}</p>
                 <p className="order-body-para">{each._id}</p>
                 <select
@@ -459,7 +459,7 @@ const Coupons = () => {
                 <p
                   style={{
                     textTransform: "capitalize",
-                    color: each.status === "active" ? "green" : "red",
+                    color: each.status === "Inactive" ? "red" : "green",
                   }}
                   className="order-body-para"
                 >

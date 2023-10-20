@@ -153,7 +153,14 @@ const VendorLogin = () => {
         <div className="vendor-card2">
           <ToastContainer />
           <div className="vendor-login-logo-card">
-            <img className="login-logo3" src="/washituplogo.png" alt="logo" />
+            <img
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              className="login-logo3"
+              src="/washituplogo.png"
+              alt="logo"
+            />
             <h1 className="login-head">Login</h1>
             <div className="login-box">
               {getotp ? (

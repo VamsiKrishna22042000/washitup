@@ -31,7 +31,13 @@ const Lastsetion = () => {
         <div className="background5">
           <div className="contentb5">
             <div className="subscription">
-              <img src="/washituplogo.png" className="subshead" />
+              <img
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+                src="/washituplogo.png"
+                className="subshead"
+              />
               <p className="subspara">
                 Lorem ipsum dolor sit amet, consectetur
                 <br />

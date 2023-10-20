@@ -552,13 +552,16 @@ const Vendors = () => {
 
           // Combine them in the desired format
           const formattedDate = `${d}-${mm}-${yyyy}`;
-          setSelectedData({ date: formattedDate, id: "" });
+          setSelectedData({ date: formattedDate, id: "cal" });
           setShowDate(false);
         }}
         value={date}
       />
     );
   };
+
+  console.log(selectedDate);
+  console.log(subfilter);
 
   return !load ? (
     <>
@@ -782,7 +785,6 @@ const Vendors = () => {
                 </p>
               </div>
             </div>
-
             {showModal && (
               <CustomModal show={showModal} handleClose={handleCloseModal}>
                 {selectedVendorId && (
@@ -1007,10 +1009,19 @@ const Vendors = () => {
                 <p className="order-body-para">Accept / Reject</p>
               </div>
               {suborderFiltered.map((each) => (
-                <div key={each.orderId} className="order-body-header2">
+                <div
+                  style={
+                    each.activeorinactive !== "in-active"
+                      ? { display: "inline-flex" }
+                      : { display: "none" }
+                  }
+                  key={each.orderId}
+                  className="order-body-header2"
+                >
                   {/**all orders booked by the user sorted based on the date */}
 
                   <p
+                    key={each.orderId}
                     userId={each.userId}
                     id={each.orderId}
                     style={{ width: "20%" }}
@@ -1019,6 +1030,7 @@ const Vendors = () => {
                     {each.orderId}
                   </p>
                   <p
+                    key={each.orderId}
                     userId={each.userId}
                     id={each.orderId}
                     className="order-body-para"
@@ -1026,22 +1038,25 @@ const Vendors = () => {
                     {each.date} - {each.time}
                   </p>
                   {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
-                    <p className="order-body-para">
+                    <p key={each.orderId} className="order-body-para">
                       ₹ {parseInt(each.totalAmount) / 1000} K
                     </p>
                   ) : each.totalAmount > 100000 &&
                     each.totalAmount < 1000000 ? (
-                    <p className="order-body-para">
+                    <p key={each.orderId} className="order-body-para">
                       ₹ {parseInt(each.totalAmount) / 100000} L
                     </p>
                   ) : each.totalAmount > 1000000 ? (
-                    <p className="order-body-para">
+                    <p key={each.orderId} className="order-body-para">
                       ₹ {parseInt(each.totalAmount) / 1000000} M
                     </p>
                   ) : (
-                    <p className="order-body-para">₹ {each.totalAmount}</p>
+                    <p key={each.orderId} className="order-body-para">
+                      ₹ {each.totalAmount}
+                    </p>
                   )}
                   <select
+                    key={each.orderId}
                     userId={each.userId}
                     id={each.orderId}
                     onChange={settingProgress}
@@ -1050,6 +1065,7 @@ const Vendors = () => {
                   >
                     {each.action.map((e) => (
                       <option
+                        key={each.orderId}
                         style={{ textTransform: "capitalize" }}
                         selected={each.progress === e ? true : false}
                       >
@@ -1058,6 +1074,7 @@ const Vendors = () => {
                     ))}
                   </select>
                   <p
+                    key={each.orderId}
                     style={
                       each.progress === "Active"
                         ? {
@@ -1092,6 +1109,7 @@ const Vendors = () => {
                     {each.progress}
                   </p>
                   <p
+                    key={each.orderId}
                     className="order-body-para"
                     style={
                       each.activeorinactive === "Rejected"

@@ -66,6 +66,9 @@ const AdminDashboard = () => {
       {/**side box used to display the available sections form the variable available section*/}
       <aside className="aside-board">
         <img
+          onClick={() => {
+            window.location.href = "/";
+          }}
           className="aside-logo"
           src="/washituplogo.png"
           alt="dashboard-logo"
@@ -110,7 +113,7 @@ const AdminDashboard = () => {
             }}
           >
             <select className="header-select">
-              <option>Vamsi</option>
+              <option>Admin</option>
             </select>
             <h4>
               <CgProfile />
