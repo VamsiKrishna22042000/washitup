@@ -20,6 +20,8 @@
 .filterButton {
   font-size: 0.8rem;
   background-color: #fff;
+  padding-top: 0.2rem;
+  padding-bottom: 0.1rem;
   margin-left: 1rem;
   color: #6759ff;
   border: 0.1rem #6759ff solid;
@@ -28,6 +30,8 @@
 
 .filterButton2 {
   font-size: 0.8rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.1rem;
   background-color: #6759ff;
   margin-left: 1rem;
   color: #fff;
@@ -108,6 +112,7 @@
   .each-section-1 {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
     height: 8vh;
     width: 80%;
@@ -118,6 +123,11 @@
     cursor: pointer;
     margin-top: 4%;
     margin-bottom: 4%;
+  }
+
+  .each-section-1 h5 {
+    font-size: 1.3rem;
+    padding-bottom: 4%;
   }
 
   .each-section-2 {
@@ -133,6 +143,10 @@
     cursor: pointer;
     margin-top: 4%;
     margin-bottom: 4%;
+  }
+  .each-section-2 h5 {
+    font-size: 1rem;
+    padding-bottom: 4.25%;
   }
 
   .each-section-logo {
@@ -152,6 +166,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    font-size: 1.5rem;
   }
 
   .header-select {
@@ -244,6 +259,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5%;
+    font-size: 1.5rem;
   }
   .create-new-order {
     font-size: 1.1vw;
@@ -260,6 +276,7 @@
     border-radius: 5px;
   }
   .assign-vendor {
+    padding: 0.2rem 0.3rem;
     font-size: 1.1vw;
     border-width: 0;
     background-color: #6759ff;
@@ -352,6 +369,7 @@
     justify-content: space-between;
     align-items: center;
     color: #53545c;
+    font-size: 1.2rem;
   }
   .order-body-header1 {
     height: 10%;
@@ -372,7 +390,7 @@
     padding-bottom: 0.5%;
   }
   .order-body-para {
-    height: 4vh;
+    height: 3.5vh;
     width: 18%;
     margin: 0;
     border-style: solid;
@@ -384,6 +402,7 @@
     border-color: transparent;
     padding-left: 2%;
     cursor: pointer;
+    text-overflow: ellipsis;
   }
 
   .user-img {
@@ -414,11 +433,12 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     border-color: transparent;
-    cursor: pointer;
+    display: flex;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 1.25%;
   }
 
   .order-para2 {
@@ -436,7 +456,7 @@
 
   .order-body-select {
     height: 4vh;
-    width: 10%;
+    width: 11%;
     margin: 0;
     border-style: solid;
     display: -webkit-box;

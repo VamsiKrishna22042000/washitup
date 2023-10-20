@@ -166,6 +166,7 @@
     width: 100%;
     animation: moveleft 2s ease-in-out;
     padding-left: 3%;
+    margin-top: 5%;
   }
 
   .login-input::placeholder {

@@ -214,7 +214,9 @@ const Vendors = () => {
         <div className="add-vendor-modal-box">
           <ToastContainer />
           <div style={{ width: "50%" }}>
-            <h6>Add a New Vendor</h6>
+            <h6 style={{ fontSize: "1rem", marginBottom: "1%" }}>
+              Add a New Vendor
+            </h6>
             <p style={{ marginTop: "3vh" }} className="add-customer-titles2">
               Vendor Name
             </p>
@@ -629,7 +631,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -640,7 +642,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "1.1vw",
@@ -651,7 +653,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "13%",
+                    bottom: "23%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -662,7 +664,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "0%",
+                    bottom: "10%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "1.1vw",
@@ -696,7 +698,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -707,7 +709,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    top: "50%",
+                    top: "55%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "0.9vw",
@@ -742,7 +744,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -753,7 +755,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     left: "5%",
                     color: "#6759FF",
                     fontSize: "1.1vw",
@@ -764,7 +766,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     right: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -775,7 +777,7 @@ const Vendors = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     right: "5%",
                     color: "#6759FF",
                     fontSize: "1.1vw",
@@ -912,6 +914,7 @@ const Vendors = () => {
                   <strong>Filter :</strong>
                   <button
                     style={{
+                      padding: ".2rem .4rem",
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",
@@ -930,6 +933,7 @@ const Vendors = () => {
                   </button>
                   <button
                     style={{
+                      padding: ".2rem .4rem",
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",
@@ -949,6 +953,7 @@ const Vendors = () => {
                   </button>
                   <button
                     style={{
+                      padding: ".2rem .4rem",
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",
@@ -967,6 +972,7 @@ const Vendors = () => {
                   </button>
                   <button
                     style={{
+                      padding: ".2rem .4rem",
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",

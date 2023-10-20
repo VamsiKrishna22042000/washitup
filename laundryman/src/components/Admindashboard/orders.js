@@ -529,6 +529,7 @@ const Orders = () => {
                         borderWidth: "0px",
                         color: "#fff",
                         backgroundColor: "green",
+                        padding: ".2rem .3rem",
                       }}
                     >
                       Assign
@@ -547,6 +548,7 @@ const Orders = () => {
                           borderRadius: "8px",
                           borderWidth: "0px",
                           color: "#fff",
+                          padding: ".2rem .3rem",
                           backgroundColor: "#F50000",
                         }}
                       >
@@ -820,6 +822,7 @@ const Orders = () => {
                         borderWidth: "0px",
                         color: "#fff",
                         backgroundColor: "green",
+                        padding: ".2rem .3rem",
                       }}
                     >
                       Assign Driver 1
@@ -846,6 +849,7 @@ const Orders = () => {
                                 borderWidth: "0px",
                                 color: "#fff",
                                 backgroundColor: "#F50000",
+                                padding: ".2rem .3rem",
                               }
                         }
                       >
@@ -870,6 +874,7 @@ const Orders = () => {
                         borderWidth: "0px",
                         color: "#fff",
                         backgroundColor: "green",
+                        padding: ".2rem .3rem",
                       }}
                     >
                       Assign Driver 2
@@ -896,6 +901,7 @@ const Orders = () => {
                                 borderWidth: "0px",
                                 color: "#fff",
                                 backgroundColor: "#F50000",
+                                padding: ".2rem .3rem",
                               }
                         }
                       >
@@ -1147,7 +1153,7 @@ const Orders = () => {
           ) : (
             <div className="order-summary-head">
               {/**After selecting particular order */}
-              <h6 style={{ color: "#53545c" }}>
+              <h6 style={{ color: "#53545c", fontSize: ".8rem" }}>
                 Orders Id : {selectedCustomer[0]._id}
               </h6>
               <div
@@ -1174,21 +1180,19 @@ const Orders = () => {
                   style={
                     selectedCustomer[0].progress === "Active"
                       ? {
-                          marginTop: "8%",
-                          paddingLeft: "5%",
                           fontSize: "1vw",
-                          paddingRight: "5%",
+                          padding: ".2rem .4rem",
                           backgroundColor: "#FFA00025",
                           color: "#FFA000",
                           borderRadius: "10px",
                           textTransform: "capitalize",
+                          padding: "5%",
                         }
                       : selectedCustomer[0].progress === "In Progress"
                       ? {
-                          paddingLeft: "5%",
-                          paddingRight: "5%",
+                          padding: ".2rem .4rem",
                           fontSize: "1vw",
-                          marginTop: "8%",
+
                           color: "#6759FF",
                           backgroundColor: "#6759FF25",
                           borderRadius: "10px",
@@ -1196,20 +1200,18 @@ const Orders = () => {
                         }
                       : selectedCustomer[0].progress === "Completed"
                       ? {
-                          paddingLeft: "5%",
-                          paddingRight: "5%",
+                          padding: ".2rem .4rem",
                           fontSize: "1vw",
-                          marginTop: "8%",
+
                           color: "#519C66",
                           backgroundColor: "#519C6625",
                           borderRadius: "10px",
                           textTransform: "capitalize",
                         }
                       : selectedCustomer[0].progress === "cancel" && {
-                          paddingLeft: "5%",
-                          paddingRight: "5%",
+                          padding: ".2rem .4rem",
                           fontSize: "1vw",
-                          marginTop: "8%",
+
                           color: "#FF0000",
                           backgroundColor: "#FF000025",
                           borderRadius: "10px",
@@ -1364,7 +1366,7 @@ const Orders = () => {
                     <p
                       style={{
                         position: "absolute",
-                        bottom: "40%",
+                        bottom: "55%",
                         left: "5%",
                         color: "#8B8D97",
                         fontSize: "0.85vw",
@@ -1377,7 +1379,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "25%",
+                          bottom: "40%",
                           left: "5%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1391,7 +1393,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "25%",
+                          bottom: "40%",
                           left: "5%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1404,7 +1406,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "25%",
+                          bottom: "40%",
                           left: "5%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1417,7 +1419,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "25%",
+                          bottom: "40%",
                           left: "5%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1431,7 +1433,7 @@ const Orders = () => {
                     <p
                       style={{
                         position: "absolute",
-                        bottom: "13%",
+                        bottom: "23%",
                         left: "5%",
                         color: "#8B8D97",
                         fontSize: "0.85vw",
@@ -1444,7 +1446,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "5%",
                           color: "#FFA000",
                           fontSize: "1.2vw",
@@ -1456,7 +1458,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "5%",
                           color: "#FFA000",
                           fontSize: "1.2vw",
@@ -1468,7 +1470,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "5%",
                           color: "#FFA000",
                           fontSize: "1.2vw",
@@ -1480,7 +1482,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "5%",
                           color: "#FFA000",
                           fontSize: "1.2vw",
@@ -1493,7 +1495,7 @@ const Orders = () => {
                     <p
                       style={{
                         position: "absolute",
-                        bottom: "13%",
+                        bottom: "23%",
                         left: "25%",
                         color: "#8B8D97",
                         fontSize: "0.85vw",
@@ -1505,7 +1507,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "25%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1518,7 +1520,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "25%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1530,7 +1532,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "25%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1542,7 +1544,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "25%",
                           color: "#6759FF",
                           fontSize: "1.2vw",
@@ -1554,7 +1556,7 @@ const Orders = () => {
                     <p
                       style={{
                         position: "absolute",
-                        bottom: "13%",
+                        bottom: "23%",
                         left: "52%",
                         color: "#8B8D97",
                         fontSize: "0.85vw",
@@ -1567,7 +1569,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "52%",
                           color: "green",
                           fontSize: "1.2vw",
@@ -1580,7 +1582,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "52%",
                           color: "green",
                           fontSize: "1.2vw",
@@ -1592,7 +1594,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "52%",
                           color: "green",
                           fontSize: "1.2vw",
@@ -1604,7 +1606,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "52%",
                           color: "green",
                           fontSize: "1.2vw",
@@ -1617,7 +1619,7 @@ const Orders = () => {
                     <p
                       style={{
                         position: "absolute",
-                        bottom: "13%",
+                        bottom: "23%",
                         left: "80%",
                         color: "#8B8D97",
                         fontSize: "0.85vw",
@@ -1630,7 +1632,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "80%",
                           color: "#FF0000",
                           fontSize: "1.2vw",
@@ -1642,7 +1644,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "80%",
                           color: "#FF0000",
                           fontSize: "1.2vw",
@@ -1654,7 +1656,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "80%",
                           color: "#FF0000",
                           fontSize: "1.2vw",
@@ -1666,7 +1668,7 @@ const Orders = () => {
                       <p
                         style={{
                           position: "absolute",
-                          bottom: "0%",
+                          bottom: "10%",
                           left: "80%",
                           color: "#FF0000",
                           fontSize: "1.2vw",
@@ -1715,7 +1717,7 @@ const Orders = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -1726,7 +1728,7 @@ const Orders = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "1.1vw",
@@ -1759,7 +1761,7 @@ const Orders = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -1770,7 +1772,7 @@ const Orders = () => {
                 <p
                   style={{
                     position: "absolute",
-                    top: "50%",
+                    top: "52%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "0.9vw",
@@ -1801,7 +1803,7 @@ const Orders = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -1812,7 +1814,7 @@ const Orders = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "1.1vw",
@@ -1954,6 +1956,7 @@ const Orders = () => {
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",
+                      padding: ".2rem .3rem",
                       borderColor: "#ffa000",
                       borderWidth: 1,
                       backgroundColor:
@@ -1969,6 +1972,7 @@ const Orders = () => {
                   </button>
                   <button
                     style={{
+                      padding: ".2rem .3rem",
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",
@@ -1988,6 +1992,7 @@ const Orders = () => {
                   </button>
                   <button
                     style={{
+                      padding: ".2rem .3rem",
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",
@@ -2006,6 +2011,7 @@ const Orders = () => {
                   </button>
                   <button
                     style={{
+                      padding: ".2rem .3rem",
                       borderRadius: "5px",
                       marginLeft: "10px",
                       fontSize: "1vw",
@@ -2062,11 +2068,12 @@ const Orders = () => {
           ) : (
             <div className="order-summary-body">
               <div className="order-body-header">
-                <h6 style={{ margin: 0 }}>
+                <h6 style={{ margin: 0, fontSize: "1rem" }}>
                   Items
                   <span
                     style={{
                       color: "#6759FF",
+
                       fontWeight: "bold",
                       marginLeft: "8%",
                     }}
@@ -2076,7 +2083,7 @@ const Orders = () => {
                 </h6>
                 <p style={{ textTransform: "capitalize" }}>
                   Type Of Wash :
-                  <span style={{ color: "#6759FF" }}>
+                  <span style={{ color: "#6759FF", marginLeft: ".5rem" }}>
                     {selectedCustomer[0].service}
                   </span>
                 </p>
@@ -2182,7 +2189,7 @@ const Orders = () => {
                     {parseInt(selectedCustomer[0].totalAmount) / 1000000} M
                   </h6>
                 ) : (
-                  <h6 style={{ marginLeft: "82%" }}>
+                  <h6 style={{ marginLeft: "81%", fontSize: ".9rem" }}>
                     Total : ₹ {selectedCustomer[0].totalAmount}
                   </h6>
                 )}

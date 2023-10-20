@@ -106,6 +106,7 @@ const VendorDashboard = () => {
                   color: "#fff",
                   backgroundColor: "#6759ff",
                   borderRadius: "7px",
+                  padding: ".3rem .4rem",
                 }}
               >
                 Log Out

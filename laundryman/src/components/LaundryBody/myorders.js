@@ -227,9 +227,6 @@ const MyOrders = () => {
         <div className="bar" bg="#b8dde3" variant="light">
           <div style={{ marginBottom: "-5rem" }} className="navbarcontainer">
             <img
-              onClick={() => {
-                window.location.href = "/";
-              }}
               href="#logo"
               className="main-head"
               src="./washituplogo.png"
@@ -240,14 +237,7 @@ const MyOrders = () => {
               id="contents"
               className="navbar-nav donotshow"
             >
-              <div
-                onClick={() => {
-                  window.location.href = "/";
-                }}
-                className="home"
-              >
-                Home
-              </div>
+              <div className="home">Home</div>
               <div href="#features">About us</div>
               <div href="#pricing">Blog</div>
               <div

@@ -10,7 +10,8 @@ function Map({ address, initialLatitude, initialLongitude, onAddressChange }) {
   useEffect(() => {
     const loadGoogleMapsApi = () => {
       const script = document.createElement("script");
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_SITE_KEY}&callback=initMap`;
+      const Key = "AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ";
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${Key}&callback=initMap`;
       script.async = true;
       script.defer = true;
 
@@ -81,6 +82,27 @@ function Map({ address, initialLatitude, initialLongitude, onAddressChange }) {
         alignItems: "center",
       }}
     >
+      <button
+        onClick={() => {
+          onAddressChange(currentAddress);
+        }}
+        type="button"
+        style={{
+          position: "absolute",
+          padding: ".3rem .6rem",
+          marginTop: "5%",
+          zIndex: 5,
+          bottom: "21%",
+          left: "8%",
+          backgroundColor: "#6759ff",
+          border: 0,
+          color: "#fff",
+          borderRadius: ".2rem",
+          cursor: "pointer",
+        }}
+      >
+        Go Back
+      </button>
       <div
         id="map"
         style={{
@@ -96,6 +118,7 @@ function Map({ address, initialLatitude, initialLongitude, onAddressChange }) {
             onAddressChange(currentAddress);
           }}
           type="button"
+          style={{ padding: ".3rem .4rem", marginTop: "5%", cursor: "pointer" }}
         >
           Select
         </button>

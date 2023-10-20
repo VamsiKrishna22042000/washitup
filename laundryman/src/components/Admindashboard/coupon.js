@@ -207,11 +207,18 @@ const Coupons = () => {
         ></div>
         {load ? (
           <div
-            style={{ left: "41.5%", width: "30%", height: "45%" }}
+            style={{
+              left: "41.5%",
+              width: "30%",
+
+              height: "45%",
+            }}
             className="coupon-modal-box"
           >
-            <h6>Add Coupon Details</h6>
-            <p style={{ marginTop: 0, marginBottom: 0 }}>Enter Coupon Code</p>
+            <h6 style={{ fontSize: "1rem", marginBottom: "1%" }}>
+              Add Coupon Details
+            </h6>
+            <p style={{ marginTop: 5, marginBottom: 3 }}>Enter Coupon Code</p>
             <input
               onChange={(e) => {
                 setCouponDetails((prevDe) => ({
@@ -223,7 +230,7 @@ const Coupons = () => {
               type="text"
               placeholder="Enter Coupon Code"
             />
-            <p style={{ marginTop: 3, marginBottom: 0 }}>Enter Discount</p>
+            <p style={{ marginTop: "5%", marginBottom: 3 }}>Enter Discount</p>
             <input
               onChange={(e) => {
                 setCouponDetails((prevDe) => ({
@@ -235,7 +242,9 @@ const Coupons = () => {
               type="number"
               placeholder="Enter Discount"
             />
-            <p style={{ marginTop: 3, marginBottom: 0 }}>Enter Minium Price</p>
+            <p style={{ marginTop: "5%", marginBottom: 2 }}>
+              Enter Minium Price
+            </p>
             <input
               onChange={(e) => {
                 setCouponDetails((prevDe) => ({

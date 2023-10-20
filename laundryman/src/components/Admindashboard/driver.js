@@ -167,7 +167,9 @@ const Driver = () => {
           }}
         ></div>
         <div style={{ left: "40%" }} className="add-driver-modal">
-          <h6>Add a New Driver</h6>
+          <h6 style={{ fontSize: "1rem", marginBottom: "1%" }}>
+            Add a New Driver
+          </h6>
           {/**Button to close the modal box by setting false to setAddCustomer() */}
           <button
             type="button"
@@ -425,7 +427,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -436,7 +438,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "1.1vw",
@@ -447,7 +449,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "13%",
+                    bottom: "23%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -458,7 +460,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "0%",
+                    bottom: "10%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "1.1vw",
@@ -492,7 +494,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -503,7 +505,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    top: "50%",
+                    top: "55%",
                     left: "5%",
                     color: "#45464E",
                     fontSize: "0.9vw",
@@ -538,7 +540,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     left: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -549,7 +551,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     left: "5%",
                     color: "#6759FF",
                     fontSize: "1.1vw",
@@ -560,7 +562,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "40%",
+                    bottom: "50%",
                     right: "5%",
                     color: "#8B8D97",
                     fontSize: "0.85vw",
@@ -571,7 +573,7 @@ const Driver = () => {
                 <p
                   style={{
                     position: "absolute",
-                    bottom: "25%",
+                    bottom: "35%",
                     right: "5%",
                     color: "#6759FF",
                     fontSize: "1.1vw",

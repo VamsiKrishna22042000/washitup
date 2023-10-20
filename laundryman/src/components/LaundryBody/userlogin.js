@@ -260,14 +260,7 @@ const UserLogin = () => {
         ) : (
           <div className="vendor-card2">
             <div className="vendor-login-logo-card">
-              <img
-                onClick={() => {
-                  window.location.href = "/";
-                }}
-                className="login-logo3"
-                src="/washituplogo.png"
-                alt="logo"
-              />
+              <img className="login-logo3" src="/washituplogo.png" alt="logo" />
               <h1 className="login-head">Sign up</h1>
               <div className="login-box">
                 {getotp ? (
@@ -377,14 +370,7 @@ const UserLogin = () => {
           <div className="vendor-card2">
             <ToastContainer />
             <div className="vendor-login-logo-card">
-              <img
-                onClick={() => {
-                  window.location.href = "/";
-                }}
-                className="login-logo3"
-                src="/washituplogo.png"
-                alt="logo"
-              />
+              <img className="login-logo3" src="/washituplogo.png" alt="logo" />
               <h1 className="login-head">Login</h1>
               <div className="login-box">
                 {getotp ? (

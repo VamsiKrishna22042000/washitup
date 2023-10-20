@@ -45,7 +45,14 @@ const BookService = (props) => {
   const [longitude, setLongitude] = useState("");
   const [userAddress, setAddress] = useState("");
   const [geoLoc, setGeoLoc] = useState("");
-  const [date, setDate] = useState(new Date());
+
+  const min = new Date();
+  min.setDate(min.getDate() + 1);
+
+  const max = new Date();
+  max.setDate(max.getDate() + 7);
+
+  const [date, setDate] = useState(min);
   const [input, setInputs] = useState({
     name: "",
     number: "",
@@ -334,6 +341,8 @@ const BookService = (props) => {
             <h1 className="where-head">When?</h1>
             <div className="calen-con">
               <Calendar
+                minDate={min}
+                maxDate={max}
                 className="calender"
                 onChange={(date) => {
                   setDate(date);

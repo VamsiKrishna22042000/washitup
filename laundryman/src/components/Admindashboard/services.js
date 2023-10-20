@@ -198,7 +198,9 @@ const Services = () => {
         ></div>
         {load ? (
           <div style={{ left: "40%" }} className="add-service-modal-box">
-            <h6>Add a New Category</h6>
+            <h6 style={{ fontSize: "1rem", marginBottom: "2%" }}>
+              Add a New Category
+            </h6>
             <button
               onClick={() => {
                 setAddModal("");

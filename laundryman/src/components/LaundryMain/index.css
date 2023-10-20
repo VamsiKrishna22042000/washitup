@@ -173,6 +173,7 @@
     height: 45vh;
     width: 100%;
     cursor: pointer;
+    position: relative;
   }
 
   .boxshow {
@@ -255,9 +256,9 @@
     font-size: 1vw;
   }
   .ic {
-    height: 2.5vw;
-    width: 2.5vw;
-    margin-bottom: 5%;
+    height: 2.5w;
+    width: 3vw;
+    margin-bottom: 0%;
   }
   .dots {
     display: none;
@@ -269,6 +270,7 @@
     height: 77vh;
     width: 100%;
     margin-bottom: 20vh;
+    position: relative;
   }
   .phone2 {
     padding-left: 5vw;
@@ -279,6 +281,7 @@
     width: 100%;
     margin-bottom: 35vh;
     padding-right: 5vw;
+    position: relative;
   }
   .iphone {
     padding-top: 15vh;
@@ -309,12 +312,15 @@
     width: 50%;
     text-align: start;
     margin-left: 5vw;
+    justify-content: space-evenly;
   }
   .phh2 {
     padding-left: 10vw;
   }
   .fename {
     display: flex;
+    margin-top: 5%;
+    margin-bottom: 2.5%;
   }
 
   .fep1 {
@@ -668,7 +674,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 800;
     font-size: 2.5vw;
-    margin-bottom: 0px;
+    margin-bottom: 2vh;
     text-align: left;
   }
   .b3butt {
@@ -685,6 +691,7 @@
   }
   .b33 {
     display: flex;
+    margin-top: 2.5%;
   }
 
   .background4 {
@@ -769,14 +776,16 @@
   .subspara {
     margin-top: 1vh;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2vw;
+    font-size: 1vw;
     color: gray;
     margin-left: 4%;
+    line-height: 1.5rem;
   }
   .subsnews {
-    margin-top: 1vh;
+    margin-top: 2vh;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.4vw;
+    font-size: 1vw;
+    margin-bottom: 2vh;
     color: #000;
   }
   .subsinput {
@@ -787,6 +796,7 @@
     font-size: 1vw;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 5px;
+    margin-bottom: 10%;
   }
 
   .button-container-5 {
@@ -802,7 +812,7 @@
     color: #fff;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     border-color: #6759ff;
     padding-left: 1vw;
@@ -810,7 +820,7 @@
     padding-top: 1vh;
     padding-bottom: 1vh;
     border-radius: 5px;
-    top: 0.5vh;
+    top: 1.5vh;
     left: 15.5vw;
   }
   .fb {
@@ -824,9 +834,14 @@
     width: 70%;
   }
   .services {
+    height: 25vh;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1vw;
     color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
   }
   .b5head {
     font-family: Arial, Helvetica, sans-serif;
@@ -840,6 +855,7 @@
     color: #000;
     text-align: center;
     background-color: #e1e1e1;
+    margin-top: 2.5%;
   }
 
   .navbar-nav {
@@ -1040,6 +1056,7 @@
     width: 100%;
     padding-bottom: 15%;
     margin-top: 5%;
+    position: relative;
   }
 
   .feature-name {
@@ -1108,7 +1125,7 @@
     font-size: 1vw;
   }
   .ic {
-    height: 5%;
+    height: 5vh;
     width: 12vw;
     align-self: flex-start;
     margin-top: 3vh;
@@ -1509,7 +1526,7 @@
   .b3des {
     margin-top: 2vh;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 4vw;
+    font-size: 3.5vw;
     margin-bottom: 0px;
     text-align: left;
   }
@@ -1526,7 +1543,8 @@
   }
   .b33 {
     display: inline-flex;
-    margin-top: 1%;
+    margin-top: 5%;
+    margin-left: -2%;
   }
 
   .background4 {
@@ -1654,6 +1672,7 @@
     width: 100%;
     margin-top: 7vh;
     overflow: hidden;
+    position: relative;
   }
   .phone2 {
     display: flex;
@@ -1664,6 +1683,7 @@
     margin-top: 7vh;
     overflow: hidden;
     margin-bottom: 7vh;
+    position: relative;
   }
   .phone1-matter {
     display: flex;
@@ -1704,6 +1724,8 @@
 
   .fename {
     display: flex;
+    margin-bottom: 5%;
+    margin-top: 5%;
   }
   .fep4 {
     margin-left: 2vw;
@@ -1854,23 +1876,26 @@
 
   .subspara {
     margin-top: 1vh;
-    font-size: 3vw;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .subsnews {
+    font-family: Arial, Helvetica, sans-serif;
     color: #000000;
-    margin-top: 1vh;
+    margin-top: 5vh;
+    margin-bottom: 1vh;
     font-size: 4vw;
-    font-weight: bold;
   }
   .subsinput {
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 3.5vw;
     padding-left: 2%;
     padding-top: 5%;
     padding-bottom: 5%;
     width: 95%;
     border-width: 0px;
+    margin-bottom: 10%;
   }
 
   .sar {
@@ -1890,9 +1915,17 @@
     font-family: Arial, Helvetica, sans-serif;
     height: 33vh;
     width: 40vw;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    align-items: flex-start;
     font-size: 3vw;
     margin-left: 10%;
+  }
+
+  .services p {
+    margin-top: 10%;
+    margin-bottom: 5%;
   }
   .b5head {
     font-size: 5vw;
@@ -1922,7 +1955,7 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     width: 1vw;
-    top: -80%;
+    top: -55%;
     left: 45%;
   }
   .donotshow {

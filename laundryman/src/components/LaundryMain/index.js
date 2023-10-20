@@ -21,7 +21,6 @@ const changeComponents = {
   addCoupon: "COUPON",
   typeOfWash: "TYPEOFWASHING ",
   bookService: "BOOK_SERVICE",
-  map: "MAP",
   washClothes: "WASH_CLOTHES",
   washing: "WASHING",
 };
@@ -83,9 +82,6 @@ function LaundryNav(props) {
       <div className="bar" bg="#b8dde3" variant="light">
         <div className="navbarcontainer">
           <img
-            onClick={() => {
-              window.location.href = "/";
-            }}
             href="#logo"
             className="main-head"
             src="./washituplogo.png"
@@ -96,14 +92,7 @@ function LaundryNav(props) {
             id="contents"
             className="navbar-nav donotshow"
           >
-            <div
-              onClick={() => {
-                window.location.href = "/";
-              }}
-              className="home"
-            >
-              Home
-            </div>
+            <div className="home">Home</div>
             <div href="#features">About us</div>
             <div href="#pricing">Blog</div>
             <div
@@ -122,7 +111,6 @@ function LaundryNav(props) {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   Cookies.remove("jwt_userId");
-                  Cookies.remove("jwt_adminLogin");
                   window.location.href = "/";
                 }}
                 href="#pricing"
@@ -133,7 +121,6 @@ function LaundryNav(props) {
                   type="button"
                   onClick={() => {
                     Cookies.remove("jwt_userId");
-                    Cookies.remove("jwt_adminLogin");
                     window.location.href = "/";
                   }}
                   className="but"

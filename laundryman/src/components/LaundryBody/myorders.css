@@ -28,6 +28,10 @@
   box-shadow: 2px 2px 8px #33333350;
   cursor: pointer;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .subcon-myorders:hover {
@@ -44,7 +48,7 @@
 
 .amount {
   position: absolute;
-  bottom: 0rem;
+  bottom: 1rem;
   right: 1rem;
   font-size: 1rem;
 }
@@ -208,6 +212,7 @@
 
   .amount {
     font-size: 0.8rem;
+    bottom: 1.3rem;
   }
 
   .amount span {
