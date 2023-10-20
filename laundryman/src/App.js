@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import Laundry from "./components/Laundry/laundry";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";

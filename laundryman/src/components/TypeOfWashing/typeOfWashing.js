@@ -23,9 +23,6 @@ const TypeOfWashing = (props) => {
         <button
           onClick={() => {
             setselectedType("dry Cleaning");
-            setTimeout(() => {
-              type("dry Cleaning");
-            }, 10);
           }}
           style={{ position: "relative" }}
           className={
@@ -54,9 +51,6 @@ const TypeOfWashing = (props) => {
           style={{ position: "relative" }}
           onClick={() => {
             setselectedType("wash & iron");
-            setTimeout(() => {
-              type("wash & iron");
-            }, 10);
           }}
           className={
             selectedType === "wash & iron"
@@ -84,9 +78,6 @@ const TypeOfWashing = (props) => {
           style={{ position: "relative" }}
           onClick={() => {
             setselectedType("wash & fold");
-            setTimeout(() => {
-              type("wash & fold");
-            }, 10);
           }}
           className={
             selectedType === "wash & fold"
@@ -94,7 +85,7 @@ const TypeOfWashing = (props) => {
               : "type-of-button"
           }
         >
-          <img className="type-of-image" src="/wash&fold.png" />{" "}
+          <img className="type-of-image" src="/wash&fold.png" />
           {selectedType === "wash & fold" && (
             <img
               style={{

@@ -37,6 +37,9 @@ const VendorDashboard = () => {
         {/**side box used to display the available sections form the variable available section*/}
         <aside className="aside-board">
           <img
+            onClick={() => {
+              window.location.href = "/";
+            }}
             className="aside-logo"
             src="/washituplogo.png"
             alt="dashboard-logo"

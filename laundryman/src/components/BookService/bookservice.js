@@ -4,7 +4,7 @@ import "./bookservice.css";
 
 import { MagnifyingGlass } from "react-loader-spinner";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { BiCurrentLocation } from "react-icons/bi";
 
@@ -13,6 +13,8 @@ import "react-calendar/dist/Calendar.css";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import Map from "./googlemap";
 
 const timeArray = [
   {
@@ -53,6 +55,8 @@ const BookService = (props) => {
   const [pincode, setPincode] = useState("");
 
   const [geoLoading, setLoading] = useState(false);
+
+  const [showMap, setShowMap] = useState(false);
 
   /**Array to store the pincodes that which we provide service for those areas*/
   const availablePincodes = [
@@ -229,14 +233,14 @@ const BookService = (props) => {
     if (latitude !== "" && longitude !== "") {
       console.log(latitude);
       console.log(longitude);
-      const apikey = "AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ";
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false&key=${apikey}`;
+      const apiKey = "AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ";
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false&key=${apiKey}`;
 
       const response = await fetch(url);
       const jsonData = await response.json();
       if (response.ok === true) {
         setGeoLoc(jsonData.results[0].formatted_address);
-        setLoading(false);
+
         console.log(
           jsonData.results[0].address_components[
             jsonData.results[0].address_components.length - 1
@@ -247,6 +251,10 @@ const BookService = (props) => {
             jsonData.results[0].address_components.length - 1
           ].long_name
         );
+        setTimeout(() => {
+          setLoading(false);
+          setShowMap(true);
+        }, 1000);
       } else {
         toast.error(`${jsonData.error_message}`, {
           position: "top-center",
@@ -283,6 +291,10 @@ const BookService = (props) => {
     setLongitude(position.coords.longitude);
   }
 
+  useEffect(() => {
+    reverseGeoCoding();
+  }, [latitude, longitude]);
+
   function showError(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:
@@ -300,138 +312,154 @@ const BookService = (props) => {
     }
   }
 
-  reverseGeoCoding();
+  const onAddressChange = (value) => {
+    setGeoLoc(value);
+    setShowMap(false);
+  };
 
   return (
     <>
       <ToastContainer />
       <div className="login-book-service">
-        <div className="input2">
-          <h1 className="where-head">When?</h1>
-          <div className="calen-con">
-            <Calendar
-              className="calender"
-              onChange={(date) => {
-                setDate(date);
+        {showMap && !geoLoading && latitude !== "" && longitude !== "" && (
+          <Map
+            address={geoLoc}
+            initialLatitude={latitude}
+            initialLongitude={longitude}
+            onAddressChange={onAddressChange}
+          />
+        )}
+        {!showMap && (
+          <div className="input2">
+            <h1 className="where-head">When?</h1>
+            <div className="calen-con">
+              <Calendar
+                className="calender"
+                onChange={(date) => {
+                  setDate(date);
+                }}
+                value={date}
+              />
+            </div>
+            <p style={{ alignSelf: "center" }} className="where-titles">
+              Time
+            </p>
+            <div id="clothes" className="name2">
+              {timeArray.map((each) => (
+                <button
+                  onClick={() => {
+                    selectedTime(each);
+                  }}
+                  id={each.id}
+                  className={
+                    each.id === time ? "selected-time" : "bookservice-time"
+                  }
+                  key={each.id}
+                >
+                  {each.time}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!showMap && (
+          <div className="input1">
+            <h1 className="where-head">Where ?</h1>
+            <p className="where-titles" htmlFor="name">
+              Name
+            </p>
+            <input
+              onChange={(e) => {
+                setInputs((prevValues) => ({
+                  ...prevValues,
+                  name: e.target.value,
+                }));
               }}
-              value={date}
+              id="name"
+              className="name"
+              type="text"
+              placeholder="Name"
+              value={input.name}
             />
-          </div>
-          <p style={{ alignSelf: "center" }} className="where-titles">
-            Time
-          </p>
-          <div id="clothes" className="name2">
-            {timeArray.map((each) => (
-              <button
-                onClick={() => {
-                  selectedTime(each);
-                }}
-                id={each.id}
-                className={
-                  each.id === time ? "selected-time" : "bookservice-time"
-                }
-                key={each.id}
-              >
-                {each.time}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="input1">
-          <h1 className="where-head">Where ?</h1>
-          <p className="where-titles" htmlFor="name">
-            Name
-          </p>
-          <input
-            onChange={(e) => {
-              setInputs((prevValues) => ({
-                ...prevValues,
-                name: e.target.value,
-              }));
-            }}
-            id="name"
-            className="name"
-            type="text"
-            placeholder="Name"
-            value={input.name}
-          />
 
-          <p className="where-titles">Mobile Number</p>
-          <input
-            id="phone"
-            className="name"
-            type="number"
-            value={input.number}
-            placeholder="Phone Number"
-            onChange={(e) => {
-              setInputs((prevValues) => ({
-                ...prevValues,
-                number: e.target.value,
-              }));
-            }}
-          />
+            <p className="where-titles">Mobile Number</p>
+            <input
+              id="phone"
+              className="name"
+              type="number"
+              value={input.number}
+              placeholder="Phone Number"
+              onChange={(e) => {
+                setInputs((prevValues) => ({
+                  ...prevValues,
+                  number: e.target.value,
+                }));
+              }}
+            />
 
-          <div style={{ position: "relative", width: "100%" }}>
-            <p className="where-titles">Add Location</p>
-            {geoLoading ? (
-              <div
-                className="name3"
-                style={{
-                  paddingLeft: "10%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "relative",
-                  borderColor: "transparent",
-                }}
-              >
-                <MagnifyingGlass
-                  visible={true}
-                  height="20"
-                  width="20"
-                  ariaLabel="MagnifyingGlass-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="MagnifyingGlass-wrapper"
-                  glassColor="#c0efff"
-                  color="#6759ff"
+            <div style={{ position: "relative", width: "100%" }}>
+              <p className="where-titles">Add Location</p>
+              {geoLoading ? (
+                <div
+                  className="name3"
+                  style={{
+                    paddingLeft: "10%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "relative",
+                    borderColor: "transparent",
+                  }}
+                >
+                  <MagnifyingGlass
+                    visible={true}
+                    height="20"
+                    width="20"
+                    ariaLabel="MagnifyingGlass-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="MagnifyingGlass-wrapper"
+                    glassColor="#c0efff"
+                    color="#6759ff"
+                  />
+                </div>
+              ) : (
+                <input
+                  id="geoLoc"
+                  value={geoLoc}
+                  className="name3"
+                  type="text"
+                  placeholder="Click Here to add you location"
+                  style={{ paddingLeft: "10%" }}
+                  onChange={(e) => {
+                    setGeoLoc(e.target.value);
+                  }}
                 />
-              </div>
-            ) : (
-              <input
-                id="geoLoc"
-                value={geoLoc}
-                className="name3"
-                type="text"
-                placeholder="Click Here to add you location"
-                style={{ paddingLeft: "10%" }}
-                onChange={(e) => {
-                  setGeoLoc(e.target.value);
-                }}
-              />
-            )}
-            {!geoLoading && (
-              <BiCurrentLocation
-                cursor={"pointer"}
-                className="geoLocator"
-                onClick={getLocation}
-              />
-            )}
-          </div>
-          <p className="where-titles">Address</p>
-          <textarea
-            id="addres"
-            className="address"
-            placeholder="Address"
-            value={userAddress}
-            onChange={(e) => {
-              setAddress(e.target.value);
-            }}
-          ></textarea>
+              )}
+              {!geoLoading && (
+                <BiCurrentLocation
+                  cursor={"pointer"}
+                  className="geoLocator"
+                  onClick={getLocation}
+                />
+              )}
+            </div>
+            <p className="where-titles">Address</p>
+            <textarea
+              id="addres"
+              className="address"
+              placeholder="Address"
+              value={userAddress}
+              onChange={(e) => {
+                setAddress(e.target.value);
+              }}
+            ></textarea>
 
-          <button id="bookService" onClick={bookNow} className="where-button">
-            Book Service
-          </button>
-        </div>
+            <button id="bookService" onClick={bookNow} className="where-button">
+              Book Service
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

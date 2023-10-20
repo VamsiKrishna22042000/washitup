@@ -993,6 +993,134 @@ const Orders = () => {
     fileInputRef.current.click();
   };
 
+  const handelVendorDriverEmpty = (each) => {
+    if (each.vendorName !== "empty") {
+      if (each.driverName1 !== "empty" && each.driverName2 === "empty")
+        return (
+          <div
+            style={{ position: "relative" }}
+            key={each._id}
+            className="order-body-header2"
+          >
+            {/**all orders booked by the user sorted based on the date */}
+            <div
+              className={
+                each.vendorName === "empty"
+                  ? "vender-assigned-or-not"
+                  : "vender-assigned-or-not1"
+              }
+            ></div>
+            {each.vendorName === "empty" ? (
+              <p className="vendor-assign-check">Vendor Not Assigned</p>
+            ) : (
+              <p className="vendor-assign-check1">Vendor Assigned</p>
+            )}
+            <p
+              style={{ textTransform: "capitalize", width: "14%" }}
+              id={each._id}
+              onClick={filterCustomer}
+              className="order-body-para"
+            >
+              {each.name}
+            </p>
+            <p
+              id={each._id}
+              onClick={filterCustomer}
+              className="order-body-para"
+            >
+              {each.date} - {each.time}
+            </p>
+            <p
+              id={each._id}
+              onClick={filterCustomer}
+              style={{ width: "20%" }}
+              className="order-body-para"
+            >
+              {each._id}
+            </p>
+            <p
+              id={each._id}
+              onClick={filterCustomer}
+              className="order-body-para"
+              style={{ textTransform: "capitalize", width: "14%" }}
+            >
+              {each.service}
+            </p>
+
+            {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
+              <p className="order-body-para">
+                ₹ {parseInt(each.totalAmount) / 1000} K
+              </p>
+            ) : each.totalAmount > 100000 && each.totalAmount < 1000000 ? (
+              <p className="order-body-para">
+                ₹ {parseInt(each.totalAmount) / 100000} L
+              </p>
+            ) : each.totalAmount > 1000000 ? (
+              <p className="order-body-para">
+                ₹ {parseInt(each.totalAmount) / 1000000} M
+              </p>
+            ) : (
+              <p className="order-body-para">₹ {each.totalAmount}</p>
+            )}
+
+            <select
+              userId={each.userId}
+              id={each._id}
+              onChange={settingProgress}
+              className="order-body-select"
+              style={{ textTransform: "capitalize" }}
+            >
+              {each.action.map((e) => (
+                <option
+                  style={{ textTransform: "capitalize" }}
+                  selected={each.progress === e ? true : false}
+                >
+                  {e}
+                </option>
+              ))}
+            </select>
+            <p
+              className="order-body-para1"
+              style={
+                each.progress === "Active"
+                  ? {
+                      backgroundColor: "#FFA00025",
+                      color: "#FFA000",
+                      borderRadius: "10px",
+                      textTransform: "capitalize",
+                    }
+                  : each.progress === "In Progress"
+                  ? {
+                      color: "#6759FF",
+                      backgroundColor: "#6759FF25",
+                      borderRadius: "10px",
+                      textTransform: "capitalize",
+                      textAlign: "start",
+                    }
+                  : each.progress === "Completed"
+                  ? {
+                      color: "#519C66",
+                      backgroundColor: "#519C6625",
+                      borderRadius: "10px",
+                      textTransform: "capitalize",
+                      textAlign: "start",
+                    }
+                  : each.progress === "cancel" && {
+                      color: "#FF0000",
+                      backgroundColor: "#FF000025",
+                      borderRadius: "10px",
+                      textTransform: "capitalize",
+                      textAlign: "start",
+                    }
+              }
+            >
+              {each.progress}
+            </p>
+          </div>
+        );
+    }
+  };
+
   return allorders.length > 0 ? (
     <>
       {showDate && <Caland />}
@@ -1209,341 +1337,348 @@ const Orders = () => {
           )}
           {selectedCustomer === "" ? (
             allorders.length > 0 && (
-              <div className="order-summary-view">
-                {/**Count of active inprogress completed and cancel orders, booked by the users  */}
-                <div style={{ position: "relative" }} className="summary-view">
+              <>
+                <div className="order-summary-view">
+                  {/**Count of active inprogress completed and cancel orders, booked by the users  */}
                   <div
-                    style={{
-                      height: "25%",
-                      width: "12%",
-                      backgroundColor: "#FFCC9169",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                    }}
+                    style={{ position: "relative" }}
+                    className="summary-view"
                   >
-                    <img
-                      style={{ height: "70%", width: "70%" }}
-                      src="/order2.png"
-                      alt="Profile"
-                    />
+                    <div
+                      style={{
+                        height: "25%",
+                        width: "12%",
+                        backgroundColor: "#FFCC9169",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <img
+                        style={{ height: "70%", width: "70%" }}
+                        src="/order2.png"
+                        alt="Profile"
+                      />
+                    </div>
+                    <p
+                      style={{
+                        position: "absolute",
+                        bottom: "40%",
+                        left: "5%",
+                        color: "#8B8D97",
+                        fontSize: "0.85vw",
+                      }}
+                    >
+                      Total Orders
+                    </p>
+
+                    {allorders.length > 1000 && allorders.length < 100000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "25%",
+                          left: "5%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {parseInt(allorders.length) / 1000} K
+                      </p>
+                    ) : allorders.length > 100000 &&
+                      allorders.length < 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "25%",
+                          left: "5%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {parseInt(allorders.length) / 100000} L
+                      </p>
+                    ) : allorders.length > 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "25%",
+                          left: "5%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {parseInt(allorders.length) / 1000000} M
+                      </p>
+                    ) : (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "25%",
+                          left: "5%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {allorders.length}
+                      </p>
+                    )}
+
+                    <p
+                      style={{
+                        position: "absolute",
+                        bottom: "13%",
+                        left: "5%",
+                        color: "#8B8D97",
+                        fontSize: "0.85vw",
+                      }}
+                    >
+                      Active
+                    </p>
+
+                    {count.active > 1000 && count.active < 100000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "5%",
+                          color: "#FFA000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.active) / 1000} K
+                      </p>
+                    ) : count.active > 100000 && count.active < 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "5%",
+                          color: "#FFA000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.active) / 100000} L
+                      </p>
+                    ) : count.active > 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "5%",
+                          color: "#FFA000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.active) / 1000000} M
+                      </p>
+                    ) : (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "5%",
+                          color: "#FFA000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {count.active}
+                      </p>
+                    )}
+
+                    <p
+                      style={{
+                        position: "absolute",
+                        bottom: "13%",
+                        left: "25%",
+                        color: "#8B8D97",
+                        fontSize: "0.85vw",
+                      }}
+                    >
+                      In Progress
+                    </p>
+                    {count.inprogress > 1000 && count.inprogress < 100000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "25%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.inprogress) / 1000} K
+                      </p>
+                    ) : count.inprogress > 100000 &&
+                      count.inprogress < 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "25%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.inprogress) / 100000} L
+                      </p>
+                    ) : count.inprogress > 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "25%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.inprogress) / 1000000} M
+                      </p>
+                    ) : (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "25%",
+                          color: "#6759FF",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {count.inprogress}
+                      </p>
+                    )}
+                    <p
+                      style={{
+                        position: "absolute",
+                        bottom: "13%",
+                        left: "52%",
+                        color: "#8B8D97",
+                        fontSize: "0.85vw",
+                      }}
+                    >
+                      Completed
+                    </p>
+
+                    {count.completed > 1000 && count.completed < 100000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "52%",
+                          color: "green",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.completed) / 1000} K
+                      </p>
+                    ) : count.completed > 100000 &&
+                      count.completed < 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "52%",
+                          color: "green",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.completed) / 100000} L
+                      </p>
+                    ) : count.completed > 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "52%",
+                          color: "green",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.completed) / 1000000} M
+                      </p>
+                    ) : (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "52%",
+                          color: "green",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {count.completed}
+                      </p>
+                    )}
+
+                    <p
+                      style={{
+                        position: "absolute",
+                        bottom: "13%",
+                        left: "80%",
+                        color: "#8B8D97",
+                        fontSize: "0.85vw",
+                      }}
+                    >
+                      Cancel
+                    </p>
+
+                    {count.cancel > 1000 && count.cancel < 100000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "80%",
+                          color: "#FF0000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.cancel) / 1000} K
+                      </p>
+                    ) : count.cancel > 100000 && count.cancel < 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "80%",
+                          color: "#FF0000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.cancel) / 100000} L
+                      </p>
+                    ) : count.cancel > 1000000 ? (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "80%",
+                          color: "#FF0000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {parseInt(count.cancel) / 1000000} M
+                      </p>
+                    ) : (
+                      <p
+                        style={{
+                          position: "absolute",
+                          bottom: "0%",
+                          left: "80%",
+                          color: "#FF0000",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        {count.cancel}
+                      </p>
+                    )}
                   </div>
-                  <p
-                    style={{
-                      position: "absolute",
-                      bottom: "40%",
-                      left: "5%",
-                      color: "#8B8D97",
-                      fontSize: "0.85vw",
-                    }}
-                  >
-                    Total Orders
-                  </p>
-
-                  {allorders.length > 1000 && allorders.length < 100000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "25%",
-                        left: "5%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {parseInt(allorders.length) / 1000} K
-                    </p>
-                  ) : allorders.length > 100000 &&
-                    allorders.length < 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "25%",
-                        left: "5%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {parseInt(allorders.length) / 100000} L
-                    </p>
-                  ) : allorders.length > 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "25%",
-                        left: "5%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {parseInt(allorders.length) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "25%",
-                        left: "5%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {allorders.length}
-                    </p>
-                  )}
-
-                  <p
-                    style={{
-                      position: "absolute",
-                      bottom: "13%",
-                      left: "5%",
-                      color: "#8B8D97",
-                      fontSize: "0.85vw",
-                    }}
-                  >
-                    Active
-                  </p>
-
-                  {count.active > 1000 && count.active < 100000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "5%",
-                        color: "#FFA000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.active) / 1000} K
-                    </p>
-                  ) : count.active > 100000 && count.active < 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "5%",
-                        color: "#FFA000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.active) / 100000} L
-                    </p>
-                  ) : count.active > 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "5%",
-                        color: "#FFA000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.active) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "5%",
-                        color: "#FFA000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {count.active}
-                    </p>
-                  )}
-
-                  <p
-                    style={{
-                      position: "absolute",
-                      bottom: "13%",
-                      left: "25%",
-                      color: "#8B8D97",
-                      fontSize: "0.85vw",
-                    }}
-                  >
-                    In Progress
-                  </p>
-                  {count.inprogress > 1000 && count.inprogress < 100000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "25%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.inprogress) / 1000} K
-                    </p>
-                  ) : count.inprogress > 100000 &&
-                    count.inprogress < 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "25%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.inprogress) / 100000} L
-                    </p>
-                  ) : count.inprogress > 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "25%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.inprogress) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "25%",
-                        color: "#6759FF",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {count.inprogress}
-                    </p>
-                  )}
-                  <p
-                    style={{
-                      position: "absolute",
-                      bottom: "13%",
-                      left: "52%",
-                      color: "#8B8D97",
-                      fontSize: "0.85vw",
-                    }}
-                  >
-                    Completed
-                  </p>
-
-                  {count.completed > 1000 && count.completed < 100000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "52%",
-                        color: "green",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.completed) / 1000} K
-                    </p>
-                  ) : count.completed > 100000 && count.completed < 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "52%",
-                        color: "green",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.completed) / 100000} L
-                    </p>
-                  ) : count.completed > 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "52%",
-                        color: "green",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.completed) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "52%",
-                        color: "green",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {count.completed}
-                    </p>
-                  )}
-
-                  <p
-                    style={{
-                      position: "absolute",
-                      bottom: "13%",
-                      left: "80%",
-                      color: "#8B8D97",
-                      fontSize: "0.85vw",
-                    }}
-                  >
-                    Cancel
-                  </p>
-
-                  {count.cancel > 1000 && count.cancel < 100000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "80%",
-                        color: "#FF0000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.cancel) / 1000} K
-                    </p>
-                  ) : count.cancel > 100000 && count.cancel < 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "80%",
-                        color: "#FF0000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.cancel) / 100000} L
-                    </p>
-                  ) : count.cancel > 1000000 ? (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "80%",
-                        color: "#FF0000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {parseInt(count.cancel) / 1000000} M
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        position: "absolute",
-                        bottom: "0%",
-                        left: "80%",
-                        color: "#FF0000",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      {count.cancel}
-                    </p>
-                  )}
                 </div>
-              </div>
+                <div className="order-summary-view1"></div>
+              </>
             )
           ) : (
             <div className="order-summary-view">
@@ -1916,126 +2051,7 @@ const Orders = () => {
                 </p>
               </div>
               {filterdAllOrders.length > 0 ? (
-                filterdAllOrders.map((each) => (
-                  <div
-                    style={{ position: "relative" }}
-                    key={each._id}
-                    className="order-body-header2"
-                  >
-                    {/**all orders booked by the user sorted based on the date */}
-                    <div
-                      className={
-                        each.vendorName === "empty"
-                          ? "vender-assigned-or-not"
-                          : "vender-assigned-or-not1"
-                      }
-                    ></div>
-                    {each.vendorName === "empty" ? (
-                      <p className="vendor-assign-check">Vendor Not Assigned</p>
-                    ) : (
-                      <p className="vendor-assign-check1">Vendor Assigned</p>
-                    )}
-                    <p
-                      style={{ textTransform: "capitalize", width: "14%" }}
-                      id={each._id}
-                      onClick={filterCustomer}
-                      className="order-body-para"
-                    >
-                      {each.name}
-                    </p>
-                    <p
-                      id={each._id}
-                      onClick={filterCustomer}
-                      className="order-body-para"
-                    >
-                      {each.date} - {each.time}
-                    </p>
-                    <p
-                      id={each._id}
-                      onClick={filterCustomer}
-                      style={{ width: "20%" }}
-                      className="order-body-para"
-                    >
-                      {each._id}
-                    </p>
-                    <p
-                      id={each._id}
-                      onClick={filterCustomer}
-                      className="order-body-para"
-                      style={{ textTransform: "capitalize", width: "14%" }}
-                    >
-                      {each.service}
-                    </p>
-
-                    {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
-                      <p className="order-body-para">
-                        ₹ {parseInt(each.totalAmount) / 1000} K
-                      </p>
-                    ) : each.totalAmount > 100000 &&
-                      each.totalAmount < 1000000 ? (
-                      <p className="order-body-para">
-                        ₹ {parseInt(each.totalAmount) / 100000} L
-                      </p>
-                    ) : each.totalAmount > 1000000 ? (
-                      <p className="order-body-para">
-                        ₹ {parseInt(each.totalAmount) / 1000000} M
-                      </p>
-                    ) : (
-                      <p className="order-body-para">₹ {each.totalAmount}</p>
-                    )}
-
-                    <select
-                      userId={each.userId}
-                      id={each._id}
-                      onChange={settingProgress}
-                      className="order-body-select"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      {each.action.map((e) => (
-                        <option
-                          style={{ textTransform: "capitalize" }}
-                          selected={each.progress === e ? true : false}
-                        >
-                          {e}
-                        </option>
-                      ))}
-                    </select>
-                    <p
-                      style={
-                        each.progress === "Active"
-                          ? {
-                              backgroundColor: "#FFA00025",
-                              color: "#FFA000",
-                              borderRadius: "10px",
-                              textTransform: "capitalize",
-                            }
-                          : each.progress === "In Progress"
-                          ? {
-                              color: "#6759FF",
-                              backgroundColor: "#6759FF25",
-                              borderRadius: "10px",
-                              textTransform: "capitalize",
-                            }
-                          : each.progress === "Completed"
-                          ? {
-                              color: "#519C66",
-                              backgroundColor: "#519C6625",
-                              borderRadius: "10px",
-                              textTransform: "capitalize",
-                            }
-                          : each.progress === "cancel" && {
-                              color: "#FF0000",
-                              backgroundColor: "#FF000025",
-                              borderRadius: "10px",
-                              textTransform: "capitalize",
-                            }
-                      }
-                      className="order-body-para1"
-                    >
-                      {each.progress}
-                    </p>
-                  </div>
-                ))
+                filterdAllOrders.map((each) => handelVendorDriverEmpty(each))
               ) : (
                 <div className="order-body-header4">
                   <img src="/noresult.png" className="noresult" />
