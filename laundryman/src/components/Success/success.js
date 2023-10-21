@@ -10,8 +10,14 @@ const Success = (props) => {
   useEffect(() => {
     let audio = new Audio("/success.mp3");
     audio.play();
-    const { washing } = props;
-    washing();
+    setTimeout(() => {
+      const { washing } = props;
+      washing();
+    }, 1000);
+
+    return () => {
+      audio.pause();
+    };
   }, []);
 
   return (

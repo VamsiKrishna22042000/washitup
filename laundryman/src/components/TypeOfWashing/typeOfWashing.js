@@ -119,9 +119,6 @@ const TypeOfWashing = (props) => {
         className="type-of-wash-continue"
       >
         Click To Continue
-        <span style={{ marginLeft: "3%" }}>
-          <BsArrowRight />
-        </span>
       </button>
     </div>
   );

@@ -268,9 +268,7 @@ const Vendors = () => {
                 }));
               }}
             />
-            <p s className="add-customer-titles2">
-              Shop Address
-            </p>
+            <p className="add-customer-titles2">Shop Address</p>
             <textarea
               style={{ height: "20vh" }}
               className="add-customer-input-box2"
@@ -562,8 +560,7 @@ const Vendors = () => {
     );
   };
 
-  console.log(selectedDate);
-  console.log(subfilter);
+  console.log(suborderFiltered);
 
   return !load ? (
     <>

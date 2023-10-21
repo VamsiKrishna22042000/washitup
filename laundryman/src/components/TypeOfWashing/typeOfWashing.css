@@ -125,11 +125,11 @@
     align-items: center;
     width: 25%;
     border-radius: 10px;
-    height: 9.5vh;
+    height: 11vh;
     background-color: #ffffff;
     color: #6759ff;
     font-weight: bold;
-    font-size: 2.5vw;
+    font-size: 0.6rem;
   }
 
   .type-of-image {
@@ -145,10 +145,11 @@
     align-items: center;
     width: 25%;
     border-radius: 9.5px;
-    height: 9.5vh;
+    height: 11vh;
     color: #6759ff;
     font-weight: bold;
     font-size: 2.5vw;
+    background-color: #ffffff;
   }
   .type-of-wash-continue {
     position: absolute;
