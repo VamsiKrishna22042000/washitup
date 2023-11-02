@@ -34,7 +34,7 @@
   }
 
   .set-counter {
-    height: 4.5rem;
+    height: 40%;
     width: 12vw;
     background-color: transparent;
     border-color: #6759ff;
@@ -346,7 +346,7 @@
     margin-top: 5%;
     margin-bottom: 2%;
     padding-top: 2%;
-    height: 20%;
+    height: 21%;
   }
 
   .set-counter-button {
