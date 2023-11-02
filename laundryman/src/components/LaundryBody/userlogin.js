@@ -260,7 +260,14 @@ const UserLogin = () => {
         ) : (
           <div className="vendor-card2">
             <div className="vendor-login-logo-card">
-              <img className="login-logo3" src="/washituplogo.png" alt="logo" />
+              <img
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+                className="login-logo3"
+                src="/washituplogo.png"
+                alt="logo"
+              />
               <h1 className="login-head">Sign up</h1>
               <div className="login-box">
                 {getotp ? (
@@ -292,14 +299,23 @@ const UserLogin = () => {
                       }}
                     />
                     <p className="logo-para">Enter Phone Number</p>
-                    <input
-                      onChange={(e) => {
-                        setMobileNumber(e.target.value);
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-end",
+                        width: "100%",
                       }}
-                      className="login-input"
-                      type="tel"
-                      placeholder="+91"
-                    />
+                    >
+                      <span style={{ height: "67%" }}>+91 &nbsp; &nbsp;</span>
+                      <input
+                        onChange={(e) => {
+                          setMobileNumber(e.target.value);
+                        }}
+                        className="login-input"
+                        type="tel"
+                        placeholder="Enter Mobile Number"
+                      />
+                    </div>
                   </>
                 )}
                 {getotp ? (
@@ -370,7 +386,14 @@ const UserLogin = () => {
           <div className="vendor-card2">
             <ToastContainer />
             <div className="vendor-login-logo-card">
-              <img className="login-logo3" src="/washituplogo.png" alt="logo" />
+              <img
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+                className="login-logo3"
+                src="/washituplogo.png"
+                alt="logo"
+              />
               <h1 className="login-head">Login</h1>
               <div className="login-box">
                 {getotp ? (
@@ -393,14 +416,23 @@ const UserLogin = () => {
                 ) : (
                   <>
                     <p className="logo-para">Enter Phone Number</p>
-                    <input
-                      onChange={(e) => {
-                        setMobileNumber(e.target.value);
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-end",
+                        width: "100%",
                       }}
-                      className="login-input"
-                      type="tel"
-                      placeholder="+91"
-                    />
+                    >
+                      <span style={{ height: "67%" }}>+91 &nbsp;&nbsp;</span>
+                      <input
+                        onChange={(e) => {
+                          setMobileNumber(e.target.value);
+                        }}
+                        className="login-input"
+                        type="tel"
+                        placeholder="Enter Mobile Number"
+                      />
+                    </div>
                   </>
                 )}
                 {getotp ? (

@@ -21,6 +21,13 @@
   border-radius: 0.5rem;
 }
 
+.move-pin {
+  font-size: 0.9rem;
+  margin-top: -2%;
+  margin-bottom: 1%;
+  color: #6759ff;
+}
+
 @media screen and (min-width: 992px) {
   .bookservice-time {
     border-style: solid;

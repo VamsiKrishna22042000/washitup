@@ -2,10 +2,17 @@ import React, { useState, useEffect } from "react";
 
 import "./bookservice.css";
 
-function Map({ address, initialLatitude, initialLongitude, onAddressChange }) {
+function Map({
+  address,
+  pincode,
+  initialLatitude,
+  initialLongitude,
+  onAddressChange,
+}) {
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState(null);
   const [currentAddress, setCurrentAddress] = useState(address);
+  const [currentPinCode, setCurrentPincode] = useState(pincode);
 
   useEffect(() => {
     const loadGoogleMapsApi = () => {
@@ -65,7 +72,14 @@ function Map({ address, initialLatitude, initialLongitude, onAddressChange }) {
     geocoder.geocode({ location: location }, (results, status) => {
       if (status === "OK" && results[0]) {
         const formattedAddress = results[0].formatted_address;
+        const pincode =
+          results[0].address_components[
+            results[0].address_components.length - 1
+          ].long_name;
+
         setCurrentAddress(formattedAddress);
+
+        setCurrentPincode(pincode);
       }
     });
   };
@@ -84,25 +98,26 @@ function Map({ address, initialLatitude, initialLongitude, onAddressChange }) {
     >
       <button
         onClick={() => {
-          onAddressChange(currentAddress);
+          onAddressChange({ currentAddress, currentPinCode });
         }}
         type="button"
         style={{
           position: "absolute",
           padding: ".3rem .6rem",
-          marginTop: "5%",
           zIndex: 5,
-          bottom: "21%",
-          left: "8%",
+          bottom: "20.8%",
+          left: "7.8%",
           backgroundColor: "#6759ff",
           border: 0,
           color: "#fff",
           borderRadius: ".2rem",
           cursor: "pointer",
+          bottom: "19%",
         }}
       >
         Go Back
       </button>
+      <p className="move-pin">Move Pin To Your Address</p>
       <div
         id="map"
         style={{
@@ -115,7 +130,7 @@ function Map({ address, initialLatitude, initialLongitude, onAddressChange }) {
         <p>{currentAddress}</p>
         <button
           onClick={() => {
-            onAddressChange(currentAddress);
+            onAddressChange({ currentAddress, currentPinCode });
           }}
           type="button"
           style={{ padding: ".3rem .4rem", marginTop: "5%", cursor: "pointer" }}

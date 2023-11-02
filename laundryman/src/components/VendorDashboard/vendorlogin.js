@@ -190,14 +190,23 @@ const VendorLogin = () => {
                   >
                     Enter Phone Number
                   </p>
-                  <input
-                    onChange={(e) => {
-                      setMobileNumber(e.target.value);
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-end",
+                      width: "100%",
                     }}
-                    className="login-input"
-                    type="tel"
-                    placeholder="+91"
-                  />
+                  >
+                    <span style={{ height: "67%" }}>+91</span> &nbsp;&nbsp;
+                    <input
+                      onChange={(e) => {
+                        setMobileNumber(e.target.value);
+                      }}
+                      className="login-input"
+                      type="tel"
+                      placeholder="Enter Mobile Number"
+                    />
+                  </div>
                 </>
               )}
               {getotp ? (

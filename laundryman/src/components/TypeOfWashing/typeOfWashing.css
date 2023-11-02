@@ -1,3 +1,31 @@
+@keyframes animate-reorder {
+  0% {
+    color: green;
+  }
+  100% {
+    color: green;
+    transform: translate(-5%);
+  }
+}
+
+.reorder-animate {
+  position: absolute;
+  right: 38px;
+  top: 12px;
+  overflow: visible;
+  font-size: 0.8rem;
+  animation: animate-reorder 0.5s infinite alternate;
+}
+
+.reorder-button {
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  height: 25px;
+  width: 25px;
+  z-index: 5;
+}
+
 @media screen and (min-width: 992px) {
   .type-of-wash {
     position: absolute;
@@ -96,7 +124,7 @@
   }
   .type-of-wash {
     position: relative;
-    height: 39vh;
+    height: 40vh;
     width: 85%;
     margin-top: 5%;
     margin-left: 8%;
@@ -125,7 +153,7 @@
     align-items: center;
     width: 25%;
     border-radius: 10px;
-    height: 11vh;
+    height: 9.8vh;
     background-color: #ffffff;
     color: #6759ff;
     font-weight: bold;
@@ -145,7 +173,7 @@
     align-items: center;
     width: 25%;
     border-radius: 9.5px;
-    height: 11vh;
+    height: 9.8vh;
     color: #6759ff;
     font-weight: bold;
     font-size: 2.5vw;
@@ -176,5 +204,13 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+  }
+  .reorder-animate {
+    position: absolute;
+    right: 38px;
+    top: 11px;
+    overflow: visible;
+    font-size: 0.7rem;
+    animation: animate-reorder 0.5s infinite alternate;
   }
 }

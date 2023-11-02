@@ -11,7 +11,7 @@ import { BsArrowRight } from "react-icons/bs";
 }
 
 const TypeOfWashing = (props) => {
-  const { type } = props;
+  const { type, toReorder } = props;
 
   const [selectedType, setselectedType] = useState("");
 
@@ -19,6 +19,19 @@ const TypeOfWashing = (props) => {
     <div className="type-of-wash">
       <ToastContainer />
       <h1 className="type-of-head">Select Type of Wash</h1>
+
+      <p className="reorder-animate">Repeat Previous Order ❯</p>
+
+      <img
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          toReorder();
+        }}
+        className="reorder-button"
+        src="/reorder.png"
+        alt="reorder"
+      />
+
       <div className="type-of-wash-con">
         <button
           onClick={() => {

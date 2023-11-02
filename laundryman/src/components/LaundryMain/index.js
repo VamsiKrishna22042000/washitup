@@ -16,6 +16,8 @@ import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 import Cookies from "js-cookie";
 
+import Reorder from "../Reordercomponent/Rorder";
+
 const changeComponents = {
   success: "SUCCESS",
   addCoupon: "COUPON",
@@ -23,6 +25,7 @@ const changeComponents = {
   bookService: "BOOK_SERVICE",
   washClothes: "WASH_CLOTHES",
   washing: "WASHING",
+  reorder: "REORDER",
 };
 
 {
@@ -77,11 +80,22 @@ function LaundryNav(props) {
     navcontents.classList.toggle("donotshow");
   };
 
+  const toReorder = () => {
+    setService(changeComponents.reorder);
+  };
+
+  const fromReroder = () => {
+    setService(changeComponents.typeOfWash);
+  };
+
   return (
     <div id="home" className="background1-con">
       <div className="bar" bg="#b8dde3" variant="light">
         <div className="navbarcontainer">
           <img
+            onClick={() => {
+              window.location.href = "/";
+            }}
             href="#logo"
             className="main-head"
             src="./washituplogo.png"
@@ -92,7 +106,14 @@ function LaundryNav(props) {
             id="contents"
             className="navbar-nav donotshow"
           >
-            <div className="home">Home</div>
+            <div
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              className="home"
+            >
+              Home
+            </div>
             <div href="#features">About us</div>
             <div href="#pricing">Blog</div>
             <div
@@ -182,7 +203,7 @@ function LaundryNav(props) {
       {service === changeComponents.washClothes ? (
         <AddClothes typeOfWashing={typeOfWashing} wash={washClothes} />
       ) : service === changeComponents.typeOfWash ? (
-        <TypeOfWashing type={callBackForTypeOfWashing} />
+        <TypeOfWashing type={callBackForTypeOfWashing} toReorder={toReorder} />
       ) : service === changeComponents.bookService ? (
         <BookService
           items={items}
@@ -199,8 +220,10 @@ function LaundryNav(props) {
         />
       ) : service === changeComponents.success ? (
         <Success washing={washing} />
-      ) : (
+      ) : service === changeComponents.washing ? (
         <Washing selectedTime={selectedTime} />
+      ) : (
+        <Reorder fromReroder={fromReroder} />
       )}
       <img className="impink" src="./pinkcon.png" alt="pinkcon" />
       <div

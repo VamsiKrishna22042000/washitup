@@ -202,7 +202,7 @@
     font-family: Arial, Helvetica, sans-serif;
     color: red;
     font-size: 1.1vw;
-    bottom: -3%;
+    bottom: 4%;
   }
 
   .add-clothes-error-msg-disable {
@@ -226,7 +226,8 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
     overflow-y: scroll;
     height: 30vh;
@@ -512,7 +513,7 @@
     color: red;
     font-size: 2.8vw;
     height: 0.5%;
-    bottom: 1%;
+    bottom: 4%;
   }
 
   .add-clothes-error-msg-disable {
@@ -541,8 +542,9 @@
   }
   .items-over {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
     width: 100%;
     height: 40vh;

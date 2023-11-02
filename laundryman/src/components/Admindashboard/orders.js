@@ -1684,7 +1684,6 @@ const Orders = () => {
                       ? {
                           padding: ".2rem .4rem",
                           fontSize: "1vw",
-
                           color: "#519C66",
                           backgroundColor: "#519C6625",
                           borderRadius: "10px",
@@ -1693,7 +1692,6 @@ const Orders = () => {
                       : selectedCustomer[0].progress === "cancel" && {
                           padding: ".2rem .4rem",
                           fontSize: "1vw",
-
                           color: "#FF0000",
                           backgroundColor: "#FF000025",
                           borderRadius: "10px",
@@ -2179,7 +2177,7 @@ const Orders = () => {
                       ) : (
                         <div className="order-body-header4">
                           <img src="/noresult.png" className="noresult" />
-                          <h1>No Such Customer</h1>
+                          <h1>No Orders</h1>
                         </div>
                       )}
                     </div>

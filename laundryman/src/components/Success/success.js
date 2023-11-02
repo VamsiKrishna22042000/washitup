@@ -14,10 +14,6 @@ const Success = (props) => {
       const { washing } = props;
       washing();
     }, 1000);
-
-    return () => {
-      audio.pause();
-    };
   }, []);
 
   return (
