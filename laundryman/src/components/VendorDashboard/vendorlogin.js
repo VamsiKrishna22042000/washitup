@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./vendordashboard.js";
+import "./vendordashboard.css";
 
 import Cookies from "js-cookie";
 
@@ -197,7 +197,7 @@ const VendorLogin = () => {
                       width: "100%",
                     }}
                   >
-                    <span style={{ height: "67%" }}>+91</span> &nbsp;&nbsp;
+                    <span className="nine-one">+91</span> &nbsp;&nbsp;
                     <input
                       onChange={(e) => {
                         setMobileNumber(e.target.value);

@@ -306,7 +306,7 @@ const UserLogin = () => {
                         width: "100%",
                       }}
                     >
-                      <span style={{ height: "67%" }}>+91 &nbsp; &nbsp;</span>
+                      <span className="nine-one">+91 &nbsp; &nbsp;</span>
                       <input
                         onChange={(e) => {
                           setMobileNumber(e.target.value);
@@ -423,7 +423,7 @@ const UserLogin = () => {
                         width: "100%",
                       }}
                     >
-                      <span style={{ height: "67%" }}>+91 &nbsp;&nbsp;</span>
+                      <span className="nine-one">+91 &nbsp;&nbsp;</span>
                       <input
                         onChange={(e) => {
                           setMobileNumber(e.target.value);

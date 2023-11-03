@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+.nine-one {
+  height: 55%;
+}
+
+@media screen and (max-width: 600px) {
+  .nine-one {
+    height: 67%;
+  }
+}
+
 @keyframes moveright {
   0% {
     transform: translateX(-500px);
@@ -152,6 +162,7 @@
     font-size: 1.5vw;
     animation: moveright 2s ease-in-out;
     width: 100%;
+    padding: 2% 3%;
   }
 
   .washing-gif {
@@ -292,6 +303,7 @@
     animation: moveright 2s ease-in-out;
     margin-bottom: 10%;
     width: 100%;
+    padding: 2% 3%;
   }
 
   .washing-gif {
