@@ -1,3 +1,56 @@
+#datePicker {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#datePicker .unavailable {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.type-of-reorder {
+  position: absolute;
+  width: 43vw;
+  height: 65vh;
+  margin-left: 50%;
+  margin-top: 13%;
+  background: #ffffff;
+  border-radius: 15px;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  min-height: 65vh;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 1%;
+  color: #6759ff;
+}
+
+.type-of-reorder-watch {
+  position: absolute;
+  width: 43vw;
+  height: 65vh;
+  margin-left: 50%;
+  margin-top: 13%;
+  background: #ffffff;
+  border-radius: 15px;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  min-height: 65vh;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 1%;
+  color: #6759ff;
+}
+
 .userAddress {
   height: 100%;
   width: 50%;
@@ -5,24 +58,40 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-  border: 2px solid red;
   margin-top: 2.5%;
   font-size: 0.8rem;
   flex-wrap: wrap;
+  padding-left: 5%;
 }
 
-.userAddress:last-child {
+.userAddress2 {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin-top: 2.5%;
+  font-size: 0.8rem;
   padding-left: 5%;
+  padding-right: 2.5%;
+
+  border: 2px solid #22222250;
+  border-left: hidden;
+  border-bottom: hidden;
+  border-top: hidden;
 }
 
 .userAddress input {
   padding: 1% 0%;
   outline: none;
+  width: 80%;
 }
 
 .userAddress textarea {
   padding-bottom: 12%;
   outline: none;
+  width: 80%;
 }
 
 .userAddress textarea::-webkit-scrollbar {
@@ -36,7 +105,6 @@
   align-items: flex-start;
   height: 30%;
   width: 100%;
-  border: 2px solid red;
 }
 
 .select-option input {
@@ -59,6 +127,7 @@
   padding: 1%;
   border-radius: 0.25rem;
   font-size: 0.7rem;
+  cursor: pointer;
 }
 
 .button-style2 {
@@ -69,4 +138,187 @@
   padding: 1%;
   border-radius: 0.25rem;
   font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.repeat-order {
+  color: #ffffff;
+  background-color: #6759ff;
+  border: 0;
+  padding: 2% 1rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.repeat-order:active {
+  color: #ffffff;
+  background-color: #2f24aa;
+}
+
+.previous-items {
+  height: 70%;
+  width: 100%;
+}
+
+.items-con1 {
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.items-con2 {
+  height: 90%;
+  overflow-y: scroll;
+}
+
+.item-con3 {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-transform: capitalize;
+  margin: 5% 0%;
+}
+
+.items-image {
+  height: 100%;
+  width: 8%;
+}
+
+@media only screen and (max-width: 600px) {
+  .userAddress input {
+    margin: 5% 0%;
+    border: none;
+  }
+
+  .userAddress textarea {
+    padding-bottom: 12%;
+    outline: none;
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 8%;
+    border: none;
+  }
+
+  .userAddress {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    padding-left: 10%;
+    margin-top: 10%;
+  }
+
+  .userAddress2 {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-top: 2.5%;
+    font-size: 0.8rem;
+    padding-left: 5%;
+    padding-right: 2.5%;
+    border: 0.1rem dashed #22222250;
+    border-left: hidden;
+    border-top: hidden;
+    border-right: hidden;
+    padding-bottom: 8%;
+  }
+
+  .userAddress2 input {
+    margin-bottom: 8%;
+    padding: 1% 3%;
+    font-size: 0.9rem;
+  }
+
+  .type-of-reorder {
+    position: relative;
+    height: auto;
+    width: 85%;
+    margin-top: 5%;
+    margin-left: 8%;
+    background: #ffffff;
+    border-radius: 15px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 4%;
+    padding-bottom: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    color: #9359ff;
+  }
+
+  .previous-items {
+    height: auto;
+    width: 100%;
+  }
+
+  .items-con1 {
+    padding: 2% 0%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .items-con2 {
+    height: 40vh;
+    overflow-y: scroll;
+    margin-bottom: 5%;
+    margin-top: 2%;
+  }
+
+  .item-con3 {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-transform: capitalize;
+    margin: 5% 0%;
+  }
+
+  .items-image {
+    height: 100%;
+    width: 8%;
+  }
+
+  .repeat-order {
+    align-self: flex-end;
+    margin-right: 10%;
+  }
+
+  .type-of-reorder-watch {
+    position: relative;
+    height: 30vh;
+    width: 85%;
+    margin-top: 5%;
+    margin-left: 8%;
+    background: #ffffff;
+    border-radius: 15px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 4%;
+    padding-bottom: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    color: #9359ff;
+  }
 }

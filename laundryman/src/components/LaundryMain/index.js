@@ -88,6 +88,13 @@ function LaundryNav(props) {
     setService(changeComponents.typeOfWash);
   };
 
+  const getReorder = (reorderData) => {
+    setTypeofWashing(reorderData.typeofWash);
+    setItems(reorderData.item);
+    setDataTobeSent(reorderData.data);
+    setService(changeComponents.addCoupon);
+  };
+
   return (
     <div id="home" className="background1-con">
       <div className="bar" bg="#b8dde3" variant="light">
@@ -223,7 +230,7 @@ function LaundryNav(props) {
       ) : service === changeComponents.washing ? (
         <Washing selectedTime={selectedTime} />
       ) : (
-        <Reorder fromReroder={fromReroder} />
+        <Reorder fromReroder={fromReroder} getReorder={getReorder} />
       )}
       <img className="impink" src="./pinkcon.png" alt="pinkcon" />
       <div
