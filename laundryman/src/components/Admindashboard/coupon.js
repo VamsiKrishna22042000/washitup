@@ -93,7 +93,7 @@ const Coupons = () => {
             style={{ left: "45%", width: "30%", height: "25%" }}
             className="add-customer-modal-box"
           >
-            <h5>Are You Sure You Want To Delete Coupon ?</h5>
+            <h2>Are You Sure You Want To Delete Coupon ?</h2>
             <div
               style={{
                 width: "100%",

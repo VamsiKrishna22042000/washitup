@@ -194,6 +194,8 @@
   }
 
   .calen-con {
+    height: auto;
+    padding: 3% 0%;
     width: 100%;
   }
 

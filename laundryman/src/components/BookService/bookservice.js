@@ -165,6 +165,14 @@ const BookService = (props) => {
         pauseOnHover: true,
         theme: "colored",
       });
+    } else if (input.number.length !== 10) {
+      toast.error("Please Enter Valid Number", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
     } else if (geoLoc === "") {
       toast.error("Please click on geo locater", {
         position: "top-center",

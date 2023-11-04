@@ -85,6 +85,8 @@ const Orders = () => {
           cancelCount = cancelCount + 1;
         }
 
+        console.log(eachorder);
+
         eachObjInsertedWithNumberName.push({
           ...eachorder,
           mobileNumber:
@@ -313,7 +315,7 @@ const Orders = () => {
     /**Function to assign an order to particular vendor */
     const assignVendor = async (e) => {
       setLoad(true);
-      let userId = selectedCustomer[0].userId;
+      /*let userId = selectedCustomer[0].userId;*/
       let orderId = selectedCustomer[0]._id;
       let vendorId = e.target.id;
 
@@ -324,7 +326,7 @@ const Orders = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ vendorId, orderId, userId }),
+        body: JSON.stringify({ vendorId, orderId }),
       };
 
       const response = await fetch(url, reqConfigure);
@@ -958,14 +960,17 @@ const Orders = () => {
     );
   };
 
+  const [item, setItem] = useState("");
+  const [unique, setUnique] = useState("");
+
   const fileInputRef = useRef("");
 
   const handleFileChange = async (event) => {
     setLoad(true);
     let orderId = selectedCustomer[0]._id;
     let element = document.getElementById("file-upload");
-    let itemId = element.getAttribute("itemId");
-    let uniqueId = element.getAttribute("uniqueId");
+    let itemId = item;
+    let uniqueId = unique;
     let img = event.target.files[0];
 
     let fd = new FormData();
@@ -2634,10 +2639,14 @@ const Orders = () => {
                       <>
                         <LuImagePlus
                           style={{ fontSize: "1.35rem", marginRight: "20%" }}
-                          id="file-upload"
+                          id="file"
                           itemId={each.id}
                           uniqueId={each.uniqueId.id}
-                          onClick={handleIconClick}
+                          onClick={() => {
+                            handleIconClick();
+                            setItem(each.id);
+                            setUnique(each.uniqueId.id);
+                          }}
                           htmlFor="file-upload"
                         />
                         <input

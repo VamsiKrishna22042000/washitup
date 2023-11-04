@@ -15,6 +15,8 @@ const MyOrders = () => {
 
   const [totalamount, setTotalAmount] = useState(0);
 
+  const [showSupport, setShowSupport] = useState(false);
+
   useEffect(() => {
     getMyOrders();
   }, []);
@@ -63,6 +65,16 @@ const MyOrders = () => {
                   {filterdItems.length}
                 </span>
               </h6>
+              <button
+                onClick={() => {
+                  setShowSupport(true);
+                  setfilterItems([]);
+                }}
+                className="support-button"
+                type="button"
+              >
+                Customer Support
+              </button>
               <h6 className="header-6">
                 Total :
                 <span
@@ -150,6 +162,52 @@ const MyOrders = () => {
     );
   };
 
+  const SupportBox = () => {
+    return (
+      <>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "#33333350",
+          }}
+        ></div>
+        <div className="modal">
+          <div className="support-modalbox-con">
+            <div>
+              <h3>No Issues Yet</h3>
+            </div>
+            <div>
+              <h4>Customer Support </h4>
+              <p>Select Issue</p>
+              <select>
+                <option>Cancel Order</option>
+                <option>Issue Related To Order</option>
+                <option>Other</option>
+              </select>
+              <p>Please describe about the issue</p>
+              <textarea></textarea>
+              <div>
+                <button
+                  onClick={() => {
+                    setShowSupport(false);
+                  }}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button type="button">Create</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const getMyOrders = async () => {
     const url = `${
       process.env.REACT_APP_ROOT_URL
@@ -160,6 +218,7 @@ const MyOrders = () => {
     const data = await response.json();
 
     if (response.ok) {
+      /*console.log(data.Orders.orders);*/
       setLoad(false);
       let orders = data.Orders.orders.sort(function (a, b) {
         var datePartsA = a.date.split("-").map(Number); // Convert date strings to arrays of numbers
@@ -224,6 +283,7 @@ const MyOrders = () => {
     ) : (
       <>
         {filterdItems.length > 0 && <ModalBoxItems />}
+        {showSupport && <SupportBox />}
         <div className="bar" bg="#b8dde3" variant="light">
           <div style={{ marginBottom: "-5rem" }} className="navbarcontainer">
             <img
@@ -448,6 +508,17 @@ const MyOrders = () => {
                   </span>
                 </p>
                 <p id={each._id} onClick={seperateItems}>
+                  Delivery Date :{" "}
+                  <span
+                    id={each._id}
+                    onClick={seperateItems}
+                    style={{ textTransform: "capitalize" }}
+                    className="span-el"
+                  >
+                    {each.deliveryDate}
+                  </span>
+                </p>
+                <p id={each._id} onClick={seperateItems}>
                   Service Type :{" "}
                   <span
                     id={each._id}
@@ -460,18 +531,24 @@ const MyOrders = () => {
                 </p>
                 {each.service === "dry Cleaning" ? (
                   <img
+                    id={each._id}
+                    onClick={seperateItems}
                     className="service-image"
                     src="/drycleaning.png"
                     alt="Dry Cleaning"
                   />
                 ) : each.service === "wash & iron" ? (
                   <img
+                    id={each._id}
+                    onClick={seperateItems}
                     className="service-image"
                     src="/wash&iron.png"
                     alt="wash & iron"
                   />
                 ) : (
                   <img
+                    id={each._id}
+                    onClick={seperateItems}
                     className="service-image"
                     src="/wash&fold.png"
                     alt="wash&fold"
