@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
 import { TailSpin } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 const MyOrders = () => {
   const [myorders, setMyOrders] = useState([]);
@@ -17,8 +18,66 @@ const MyOrders = () => {
 
   const [showSupport, setShowSupport] = useState(false);
 
+  const [showChangePickUpDate, setChangePickUpDate] = useState(true);
+
+  const [showDate, setShowDate] = useState(false);
+
   useEffect(() => {
     getMyOrders();
+  }, []);
+
+  const timeArray = [
+    {
+      id: 1,
+      time: "10 am",
+    },
+    {
+      id: 2,
+      time: "12 pm",
+    },
+    {
+      id: 3,
+      time: "2 pm",
+    },
+    {
+      id: 4,
+      time: "4 pm",
+    },
+    {
+      id: 5,
+      time: "6 pm",
+    },
+  ];
+
+  const [selectedData, setSelectedData] = useState("");
+
+  const [min, setMin] = useState("");
+  const [max, setMax] = useState("");
+
+  useEffect(() => {
+    const min = new Date();
+    min.setDate(min.getDate() + 1);
+
+    const max = new Date();
+    max.setDate(max.getDate() + 7);
+
+    const minFormatted =
+      min.getFullYear() +
+      "-" +
+      (min.getMonth() + 1).toString().padStart(2, "0") +
+      "-" +
+      min.getDate().toString().padStart(2, "0");
+
+    const maxFormatted =
+      max.getFullYear() +
+      "-" +
+      (max.getMonth() + 1).toString().padStart(2, "0") +
+      "-" +
+      max.getDate().toString().padStart(2, "0");
+
+    setMin(minFormatted);
+    setMax(maxFormatted);
+    setSelectedData(minFormatted);
   }, []);
 
   const ModalBoxItems = () => {
@@ -36,6 +95,18 @@ const MyOrders = () => {
         ></div>
         <div className="modal">
           <div className="items-modalbox-con">
+            {!showDate && (
+              <button
+                onClick={() => {
+                  setShowSupport(true);
+                  setfilterItems([]);
+                }}
+                className="support-button"
+                type="button"
+              >
+                Customer Support
+              </button>
+            )}
             <button
               onClick={() => {
                 setfilterItems([]);
@@ -53,7 +124,7 @@ const MyOrders = () => {
               ✕
             </button>
             <div className="myorder-body-header">
-              <h6 style={{ margin: 0 }}>
+              <h4 style={{ margin: 0 }}>
                 Items
                 <span
                   style={{
@@ -64,18 +135,41 @@ const MyOrders = () => {
                 >
                   {filterdItems.length}
                 </span>
-              </h6>
-              <button
-                onClick={() => {
-                  setShowSupport(true);
-                  setfilterItems([]);
-                }}
-                className="support-button"
-                type="button"
-              >
-                Customer Support
-              </button>
-              <h6 className="header-6">
+              </h4>
+
+              {showChangePickUpDate &&
+                (!showDate ? (
+                  <button
+                    onClick={() => {
+                      setShowDate(true);
+                    }}
+                    className="pick-up-time"
+                    type="button"
+                  >
+                    Change Pick Up
+                  </button>
+                ) : (
+                  <div className="date-time-pickup">
+                    <input
+                      value={selectedData}
+                      onChange={(e) => {
+                        setSelectedData(e.target.value);
+                      }}
+                      type="date"
+                      min={min}
+                      max={max}
+                    />
+                    <select>
+                      <option>Select</option>
+                      {timeArray.map((each) => (
+                        <option id={each.id}>{each.time}</option>
+                      ))}
+                    </select>
+                    <button type="button">Conform</button>
+                  </div>
+                ))}
+
+              <h4 className="header-6">
                 Total :
                 <span
                   style={{
@@ -86,7 +180,7 @@ const MyOrders = () => {
                 >
                   {totalamount}
                 </span>
-              </h6>
+              </h4>
             </div>
             <div className="myorder-body-header1">
               <div className="myorder-body-para">Image</div>
@@ -97,7 +191,7 @@ const MyOrders = () => {
               <p className="myorder-body-para">Item Total</p>
             </div>
             {filterdItems.map((each) => (
-              <div key={each.id} className="myorder-body-header2">
+              <li key={each.id} className="myorder-body-header2">
                 <div className="myorder-body-para">
                   <img
                     id="orderimg"
@@ -154,7 +248,7 @@ const MyOrders = () => {
                     ₹ {each.price * each.itemCount}
                   </p>
                 )}
-              </div>
+              </li>
             ))}
           </div>
         </div>
@@ -178,6 +272,7 @@ const MyOrders = () => {
         <div className="modal">
           <div className="support-modalbox-con">
             <div>
+              <img src="./no-orders.gif" />
               <h3>No Issues Yet</h3>
             </div>
             <div>
@@ -192,6 +287,7 @@ const MyOrders = () => {
               <textarea></textarea>
               <div>
                 <button
+                  style={{ backgroundColor: "#22222250" }}
                   onClick={() => {
                     setShowSupport(false);
                   }}
@@ -199,7 +295,9 @@ const MyOrders = () => {
                 >
                   Cancel
                 </button>
-                <button type="button">Create</button>
+                <button style={{ backgroundColor: "green" }} type="button">
+                  Create
+                </button>
               </div>
             </div>
           </div>
@@ -237,7 +335,6 @@ const MyOrders = () => {
       setMyOrders(orders);
     } else {
       setLoad(false);
-      window.location.href = "/myorders";
     }
   };
 
@@ -256,7 +353,36 @@ const MyOrders = () => {
           ? each.itemId.washfold
           : each.itemId.washiron,
     }));
+
+    const today = new Date();
+
+    const orderData = new Date(
+      seperatedOrder[0].date.split("-").reverse().join("-")
+    );
+
+    const time =
+      seperatedOrder[0].time === "10 am"
+        ? 10
+        : seperatedOrder[0].time === "12 pm"
+        ? 12
+        : seperatedOrder[0].time === "2 pm"
+        ? 14
+        : seperatedOrder[0].time === "4 pm"
+        ? 16
+        : seperatedOrder[0].time === "6 pm" && 18;
+
+    const todayhour = today.getHours();
+
+    today <= orderData
+      ? today < orderData
+        ? setChangePickUpDate(true)
+        : todayhour > time
+        ? setChangePickUpDate(false)
+        : setChangePickUpDate(true)
+      : setChangePickUpDate(false);
+
     setfilterItems(sep);
+    setShowDate(false);
   };
 
   const navcontentshamberger = () => {
@@ -378,196 +504,211 @@ const MyOrders = () => {
             </svg>
           </div>
         </div>
-        <div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "1.3rem",
-            margin: 0,
-          }}
-        >
-          <div className="myorder-con">
-            {myorders.map((each) => (
-              <div
-                id={each._id}
-                onClick={seperateItems}
-                key={each._id}
-                className="subcon-myorders"
-              >
-                {each.progress === "Active" ? (
-                  <div
-                    style={{
-                      width: "105%",
-                      height: "2.5%",
-                      backgroundColor: "green",
-                      position: "absolute",
-                      left: "-2.5%",
-                      top: 0,
-                      borderRadius: "1rem",
-                    }}
-                  ></div>
-                ) : each.progress === "Completed" ? (
-                  <div
-                    style={{
-                      width: "105%",
-                      height: "2.5%",
-                      backgroundColor: "orange",
-                      position: "absolute",
-                      left: "-2.5%",
-                      top: 0,
-                      borderRadius: "1rem",
-                    }}
-                  ></div>
-                ) : each.progress === "cancel" ? (
-                  <div
-                    style={{
-                      width: "105%",
-                      height: "2.5%",
-                      backgroundColor: "red",
-                      position: "absolute",
-                      left: "-2.5%",
-                      top: 0,
-                      borderRadius: "1rem",
-                    }}
-                  ></div>
-                ) : (
-                  <div
-                    style={{
-                      width: "105%",
-                      height: "2.5%",
-                      backgroundColor: "#6759ff",
-                      position: "absolute",
-                      left: "-2.5%",
-                      top: 0,
-                      borderRadius: "1rem",
-                    }}
-                  ></div>
-                )}
-                <p id={each._id} onClick={seperateItems}>
-                  Id : {each._id}
-                </p>
-                {each.progress === "Active" ? (
-                  <p
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="status"
-                    style={{ color: "green" }}
-                  >
-                    Order Placed
+        {myorders.length > 0 ? (
+          <div
+            style={{
+              width: "100vw",
+              height: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "1.3rem",
+              margin: 0,
+            }}
+          >
+            <div className="myorder-con">
+              {myorders.map((each) => (
+                <div
+                  id={each._id}
+                  onClick={seperateItems}
+                  key={each._id}
+                  className="subcon-myorders"
+                >
+                  {each.progress === "Active" ? (
+                    <div
+                      style={{
+                        width: "105%",
+                        height: "2.5%",
+                        backgroundColor: "green",
+                        position: "absolute",
+                        left: "-2.5%",
+                        top: 0,
+                        borderRadius: "1rem",
+                      }}
+                    ></div>
+                  ) : each.progress === "Completed" ? (
+                    <div
+                      style={{
+                        width: "105%",
+                        height: "2.5%",
+                        backgroundColor: "orange",
+                        position: "absolute",
+                        left: "-2.5%",
+                        top: 0,
+                        borderRadius: "1rem",
+                      }}
+                    ></div>
+                  ) : each.progress === "cancel" ? (
+                    <div
+                      style={{
+                        width: "105%",
+                        height: "2.5%",
+                        backgroundColor: "red",
+                        position: "absolute",
+                        left: "-2.5%",
+                        top: 0,
+                        borderRadius: "1rem",
+                      }}
+                    ></div>
+                  ) : (
+                    <div
+                      style={{
+                        width: "105%",
+                        height: "2.5%",
+                        backgroundColor: "#6759ff",
+                        position: "absolute",
+                        left: "-2.5%",
+                        top: 0,
+                        borderRadius: "1rem",
+                      }}
+                    ></div>
+                  )}
+                  <p id={each._id} onClick={seperateItems}>
+                    Id : {each._id}
                   </p>
-                ) : each.progress === "Completed" ? (
-                  <p
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="status"
-                    style={{ color: "orange" }}
-                  >
-                    Washing Completed
+                  {each.progress === "Active" ? (
+                    <p
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="status"
+                      style={{ color: "green" }}
+                    >
+                      Order Placed
+                    </p>
+                  ) : each.progress === "Completed" ? (
+                    <p
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="status"
+                      style={{ color: "orange" }}
+                    >
+                      Washing Completed
+                    </p>
+                  ) : each.progress === "cancel" ? (
+                    <p
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="status"
+                      style={{ color: "red" }}
+                    >
+                      Order Canceled
+                    </p>
+                  ) : (
+                    <p
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="status"
+                      style={{ color: "#6759ff" }}
+                    >
+                      Washing In Progress
+                    </p>
+                  )}
+                  <p id={each._id} onClick={seperateItems}>
+                    Items :{" "}
+                    <span
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="span-el"
+                    >
+                      {each.items.length}
+                    </span>
                   </p>
-                ) : each.progress === "cancel" ? (
-                  <p
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="status"
-                    style={{ color: "red" }}
-                  >
-                    Order Canceled
+                  <p id={each._id} onClick={seperateItems}>
+                    Date & Time :{" "}
+                    <span
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="span-el"
+                    >
+                      {each.date} - {each.time}
+                    </span>
                   </p>
-                ) : (
-                  <p
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="status"
-                    style={{ color: "#6759ff" }}
-                  >
-                    Washing In Progress
+                  <p id={each._id} onClick={seperateItems}>
+                    Delivery Date :{" "}
+                    <span
+                      id={each._id}
+                      onClick={seperateItems}
+                      style={{ textTransform: "capitalize" }}
+                      className="span-el"
+                    >
+                      {each.deliveryDate}
+                    </span>
                   </p>
-                )}
-                <p id={each._id} onClick={seperateItems}>
-                  Items :{" "}
-                  <span
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="span-el"
-                  >
-                    {each.items.length}
-                  </span>
-                </p>
-                <p id={each._id} onClick={seperateItems}>
-                  Date & Time :{" "}
-                  <span
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="span-el"
-                  >
-                    {each.date} - {each.time}
-                  </span>
-                </p>
-                <p id={each._id} onClick={seperateItems}>
-                  Delivery Date :{" "}
-                  <span
-                    id={each._id}
-                    onClick={seperateItems}
-                    style={{ textTransform: "capitalize" }}
-                    className="span-el"
-                  >
-                    {each.deliveryDate}
-                  </span>
-                </p>
-                <p id={each._id} onClick={seperateItems}>
-                  Service Type :{" "}
-                  <span
-                    id={each._id}
-                    onClick={seperateItems}
-                    style={{ textTransform: "capitalize" }}
-                    className="span-el"
-                  >
-                    {each.service}
-                  </span>
-                </p>
-                {each.service === "dry Cleaning" ? (
-                  <img
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="service-image"
-                    src="/drycleaning.png"
-                    alt="Dry Cleaning"
-                  />
-                ) : each.service === "wash & iron" ? (
-                  <img
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="service-image"
-                    src="/wash&iron.png"
-                    alt="wash & iron"
-                  />
-                ) : (
-                  <img
-                    id={each._id}
-                    onClick={seperateItems}
-                    className="service-image"
-                    src="/wash&fold.png"
-                    alt="wash&fold"
-                  />
-                )}
-                <p id={each._id} onClick={seperateItems} className="amount">
-                  Total - {"  "}
-                  <span
-                    id={each._id}
-                    onClick={seperateItems}
-                    style={{ color: "green" }}
-                  >
-                    {each.totalAmount}
-                  </span>
-                </p>
-              </div>
-            ))}
+                  <p id={each._id} onClick={seperateItems}>
+                    Service Type :{" "}
+                    <span
+                      id={each._id}
+                      onClick={seperateItems}
+                      style={{ textTransform: "capitalize" }}
+                      className="span-el"
+                    >
+                      {each.service}
+                    </span>
+                  </p>
+                  {each.service === "dry Cleaning" ? (
+                    <img
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="service-image"
+                      src="/drycleaning.png"
+                      alt="Dry Cleaning"
+                    />
+                  ) : each.service === "wash & iron" ? (
+                    <img
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="service-image"
+                      src="/wash&iron.png"
+                      alt="wash & iron"
+                    />
+                  ) : (
+                    <img
+                      id={each._id}
+                      onClick={seperateItems}
+                      className="service-image"
+                      src="/wash&fold.png"
+                      alt="wash&fold"
+                    />
+                  )}
+                  <p id={each._id} onClick={seperateItems} className="amount">
+                    Total - {"  "}
+                    <span
+                      id={each._id}
+                      onClick={seperateItems}
+                      style={{ color: "green" }}
+                    >
+                      {each.totalAmount}
+                    </span>
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="no-orders">
+            <img src="./no-orders.gif" />
+            <h3>No Orders Booked Yet</h3>
+            <button
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              type="button"
+            >
+              Back To HomePage
+            </button>
+          </div>
+        )}
       </>
     );
   }

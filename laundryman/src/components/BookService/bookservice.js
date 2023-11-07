@@ -43,7 +43,7 @@ const BookService = (props) => {
   const { book, time, getTime, items } = props;
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [userAddress, setAddress] = useState("");
+  const [userAddress, setAddress] = useState({ dono: "", landmark: "" });
   const [geoLoc, setGeoLoc] = useState("");
 
   const min = new Date();
@@ -181,8 +181,16 @@ const BookService = (props) => {
         pauseOnHover: true,
         theme: "colored",
       });
-    } else if (userAddress === "") {
-      toast.error("Please Type Address", {
+    } else if (userAddress.dono === "") {
+      toast.error("Please Enter Do / Flat No", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    } else if (userAddress.landmark === "") {
+      toast.error("Please Enter Landmark", {
         position: "top-center",
         autoClose: 2000,
         closeOnClick: true,
@@ -465,16 +473,27 @@ const BookService = (props) => {
                 />
               )}
             </div>
-            <p className="where-titles">Address</p>
-            <textarea
+            <p className="where-titles">Door / Flat No</p>
+            <input
               id="addres"
-              className="address"
-              placeholder="Address"
-              value={userAddress}
+              className="name"
+              placeholder="Do / Flat No"
+              value={userAddress.dono}
               onChange={(e) => {
-                setAddress(e.target.value);
+                setAddress({ ...userAddress, dono: e.target.value });
               }}
-            ></textarea>
+            />
+
+            <p className="where-titles">LandMark</p>
+            <input
+              id="addres"
+              className="name"
+              placeholder="LandMark"
+              value={userAddress.landmark}
+              onChange={(e) => {
+                setAddress({ ...userAddress, landmark: e.target.value });
+              }}
+            />
 
             <button id="bookService" onClick={bookNow} className="where-button">
               Book Service

@@ -866,6 +866,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: transparent;
+    border: 0;
   }
 
   .donotshow {
@@ -1244,13 +1246,26 @@
     margin-left: 9.5%;
     margin-top: 5%;
     height: 33vh;
-    width: 100vw;
+    width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 0px;
+    background-color: transparent !important;
+    border: 0;
+    outline: none !important;
+  }
+
+  .navbar-nav:focus {
+    outline: none, im !important;
+    background-color: transparent !important;
+  }
+
+  .navbar-nav:focus-visible {
+    outline: none;
+    background-color: transparent;
   }
 
   .home {

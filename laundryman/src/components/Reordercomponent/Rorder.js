@@ -269,11 +269,12 @@ const Reorder = ({ fromReroder, getReorder }) => {
         <input value={reorderData.userId.name} type="text" readOnly />
         <p>MobileNumber</p>
         <input value={reorderData.userId.mobileNumber} type="text" readOnly />
+        <p>Do No / Flat No</p>
+        <input value={reorderData.address} readOnly />
+        <p>LandMark</p>
+        <input value={reorderData.address} readOnly />
         <p>Location</p>
         <textarea value={reorderData.location} readOnly></textarea>
-        <p>Address</p>
-        <textarea value={reorderData.address} readOnly></textarea>
-
         <button onClick={handleReorder} className="repeat-order" type="button">
           Repeat Order
         </button>

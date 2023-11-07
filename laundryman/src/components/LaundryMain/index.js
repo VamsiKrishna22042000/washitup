@@ -108,22 +108,22 @@ function LaundryNav(props) {
             src="./washituplogo.png"
             alt="Main Logo"
           />
-          <div
+          <button
             style={{ cursor: "pointer" }}
             id="contents"
             className="navbar-nav donotshow"
           >
-            <div
+            <p
               onClick={() => {
                 window.location.href = "/";
               }}
               className="home"
             >
               Home
-            </div>
-            <div href="#features">About us</div>
-            <div href="#pricing">Blog</div>
-            <div
+            </p>
+            <p href="#features">About Us</p>
+            <p href="#pricing">Blog</p>
+            <p
               style={{ cursor: "pointer" }}
               onClick={() => {
                 Cookies.get("jwt_userId") !== undefined
@@ -133,7 +133,7 @@ function LaundryNav(props) {
               href="#myorders"
             >
               My Orders
-            </div>
+            </p>
             {Cookies.get("jwt_userId") !== undefined ? (
               <div
                 style={{ cursor: "pointer" }}
@@ -173,7 +173,7 @@ function LaundryNav(props) {
                 </button>
               </div>
             )}
-          </div>
+          </button>
         </div>
         <div className="hamburger">
           <svg

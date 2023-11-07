@@ -74,11 +74,12 @@
     height: 25vh;
     width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-self: flex-start;
     align-items: flex-start;
     overflow-y: scroll;
+    align-content: flex-start;
   }
   .applied-box {
     height: 5vh;
@@ -208,12 +209,13 @@
     height: 25vh;
     width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-self: flex-start;
     align-items: flex-start;
     margin-bottom: 5%;
     overflow-y: scroll;
+    align-content: flex-start;
   }
   .applied-box {
     width: 35%;
