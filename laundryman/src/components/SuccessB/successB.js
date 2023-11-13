@@ -1,6 +1,6 @@
 import "./successB.css";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 {
   /**Component that show's booked animation and automatically redirects to washing that show's delivery boy animation */
@@ -15,6 +15,21 @@ const SuccessB = (props) => {
       washing();
     }, 1000);
   }, []);
+
+  const [hasScrolledIntoView, setHasScrolledIntoView] = useState(false);
+
+  useEffect(() => {
+    // Check if the component has not scrolled into view yet
+    if (!hasScrolledIntoView) {
+      // Scroll into view
+      const homeElement = document.getElementById("home");
+      if (homeElement) {
+        homeElement.scrollIntoView({ behavior: "smooth" });
+        // Update state to indicate that scrolling has been performed
+        setHasScrolledIntoView(true);
+      }
+    }
+  }, [hasScrolledIntoView]);
 
   return (
     <>

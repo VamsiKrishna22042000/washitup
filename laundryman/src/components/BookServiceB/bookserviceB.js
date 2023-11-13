@@ -379,7 +379,7 @@ const BookServiceB = (props) => {
                   }}
                   id={each.id}
                   className={
-                    each.id === time ? "selected-time" : "bookservice-time"
+                    each.id === time ? "selected-time" : "bookservice-time-B"
                   }
                   key={each.id}
                 >

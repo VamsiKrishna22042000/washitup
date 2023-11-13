@@ -55,7 +55,7 @@
 }
 
 @media screen and (min-width: 992px) {
-  .bookservice-time {
+  .bookservice-time-B {
     border-style: solid;
     border-color: #6759ff;
     border-width: 1px;
@@ -68,7 +68,7 @@
     height: 60%;
     cursor: pointer;
   }
-  .bookservice-time:hover {
+  .bookservice-time-B:hover {
     border-style: solid;
     border-color: #6759ff;
     border-width: 1px;
@@ -232,7 +232,7 @@
     width: 100%;
   }
 
-  .bookservice-time {
+  .bookservice-time-B {
     border-style: solid;
     border-color: #6759ff;
     border-width: 1px;

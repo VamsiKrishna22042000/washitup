@@ -136,6 +136,21 @@ const AddCoupon = (props) => {
     setTotal(totalPrice);
   }, []);
 
+  const [hasScrolledIntoView, setHasScrolledIntoView] = useState(false);
+
+  useEffect(() => {
+    // Check if the component has not scrolled into view yet
+    if (!hasScrolledIntoView) {
+      // Scroll into view
+      const homeElement = document.getElementById("home");
+      if (homeElement) {
+        homeElement.scrollIntoView({ behavior: "smooth" });
+        // Update state to indicate that scrolling has been performed
+        setHasScrolledIntoView(true);
+      }
+    }
+  }, [hasScrolledIntoView]);
+
   return (
     <>
       <ReCAPTCHA ref={recapRef} size="invisible" sitekey={siteRecapKey} />

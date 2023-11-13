@@ -1,9 +1,26 @@
 import "./washingB.css";
 
+import { useState, useEffect } from "react";
+
 {
   /**Final component in the main box that show's delivery boy animation in the main page */
 }
 const WashingBC = () => {
+  const [hasScrolledIntoView, setHasScrolledIntoView] = useState(false);
+
+  useEffect(() => {
+    // Check if the component has not scrolled into view yet
+    if (!hasScrolledIntoView) {
+      // Scroll into view
+      const homeElement = document.getElementById("home");
+      if (homeElement) {
+        homeElement.scrollIntoView({ behavior: "smooth" });
+        // Update state to indicate that scrolling has been performed
+        setHasScrolledIntoView(true);
+      }
+    }
+  }, [hasScrolledIntoView]);
+
   return (
     <div className="washing-total-con-B">
       <div className="washing-note-B">
