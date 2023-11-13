@@ -16,7 +16,7 @@ import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 import Cookies from "js-cookie";
 
-import Reorder from "../Reordercomponent/Rorder";
+import ReorderB from "../ReordercomponentB/RorderB.js";
 
 const changeComponents = {
   success: "SUCCESS",
@@ -77,6 +77,21 @@ function LaundryNavB() {
 
   const washing = () => {
     setSection(changeComponents.washing);
+  };
+
+  const toReorder = () => {
+    setSection(changeComponents.reorder);
+  };
+
+  const fromReroder = () => {
+    setSection(changeComponents.typeOfWash);
+  };
+
+  const getReorder = (reorderData) => {
+    setTypeofWashing(reorderData.typeofWash);
+    setItemToWash(reorderData.item);
+    setDataTobeSent(reorderData.data);
+    setSection(changeComponents.addCoupon);
   };
 
   return (
@@ -198,6 +213,7 @@ function LaundryNavB() {
         <WashingB
           typing={typing}
           callBackForTypeOfWashing={callBackForTypeOfWashing}
+          toReorder={toReorder}
         />
       ) : section === changeComponents.bookService ? (
         <BookServiceB
@@ -215,8 +231,10 @@ function LaundryNavB() {
         />
       ) : section === changeComponents.success ? (
         <SuccessB washing={washing} />
-      ) : (
+      ) : section === changeComponents.washing ? (
         <WashingBC />
+      ) : (
+        <ReorderB fromReroder={fromReroder} getReorder={getReorder} />
       )}
 
       <img className="impink" src="./pinkcon.png" alt="pinkcon" />

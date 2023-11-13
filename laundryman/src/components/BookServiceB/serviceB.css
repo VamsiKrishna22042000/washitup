@@ -1,3 +1,7 @@
+.map-desktop {
+  display: flex !important;
+}
+
 .react-calendar__navigation {
   margin-top: 5%;
   height: 12% !important;
@@ -121,7 +125,7 @@
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
-    font-size: 1vw;
+    font-size: 1rem;
     width: 30%;
     border-width: 0px;
     background-color: #6759ff;
@@ -129,7 +133,7 @@
     border-radius: 5px;
     right: 11%;
     padding: 0.8% 0%;
-    bottom: 3.5%;
+    bottom: 4.5%;
     cursor: pointer;
   }
   .calender {
@@ -180,6 +184,32 @@
 }
 
 @media screen and (max-width: 600px) {
+  .where-buttonB {
+    position: absolute;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 1rem;
+    width: 80%;
+    border-width: 0px;
+    background-color: #6759ff;
+    color: #fff;
+    border-radius: 5px;
+    right: 10%;
+    padding: 2% 0%;
+    bottom: 1%;
+    cursor: pointer;
+  }
+  .map-desktop {
+    margin-top: 5% !important;
+    display: flex !important;
+    width: 100% !important;
+    margin-bottom: 5% !important;
+  }
+
   .address-box > p {
     font-size: 0.7rem;
     margin-top: 5%;

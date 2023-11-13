@@ -225,12 +225,6 @@ const AddClothesBSec = (props) => {
             </div>
           ))}
         </div>
-        <p
-          id="add-clothes-err"
-          className="add-clothes-error-msg add-clothes-error-msg-disable"
-        >
-          *Add atleast one item to wash
-        </p>
         {/*<button onClick={washthem} className="wash-button">
           Wash Clothes <AiOutlineArrowRight className="wash-clothes-icon" />
         </button>*/}

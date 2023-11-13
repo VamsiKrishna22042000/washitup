@@ -90,31 +90,34 @@ function MapB({
   };
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "30vw",
-        height: "45vh",
-        display: "flex",
-        justifyContent: "flex-start",
-        flexDirection: "column",
-        alignItems: "center",
-        marginTop: "1%",
-      }}
-    >
-      <p className="move-pin">Move Pin To Your Address</p>
+    <>
       <div
-        id="map"
+        className="map-desktop"
         style={{
           position: "relative",
-          width: "90%",
-          height: "75%",
+          width: "30vw",
+          height: "45vh",
+          display: "flex",
+          justifyContent: "flex-start",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: "1%",
         }}
-      ></div>
-      <div className="address-boxB">
-        <p>{currentAddress}</p>
+      >
+        <p className="move-pin">Move Pin To Your Address</p>
+        <div
+          id="map"
+          style={{
+            position: "relative",
+            width: "90%",
+            height: "75%",
+          }}
+        ></div>
+        <div className="address-boxB">
+          <p>{currentAddress}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

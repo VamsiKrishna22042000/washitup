@@ -132,6 +132,76 @@
 }
 
 @media screen and (max-width: 600px) {
+  .typeof-clothes-toadd {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .type-of-button-addClothes1 {
+    height: 10vh;
+    width: 100vw;
+    font-size: 0.65rem;
+    border-radius: 0.5rem;
+  }
+
+  .type-of-button-addClothes {
+    height: 10vh;
+    width: 100vw;
+    font-size: 0.65rem;
+    border-radius: 0.5rem;
+  }
+
+  .type-of-button-addClothes1 > img {
+    height: 35%;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: -20%;
+  }
+
+  .type-of-button-addClothes > img {
+    height: 35%;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: -20%;
+  }
+
+  .type-of-wash-con-addClothes {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .addCloths-con {
+    height: auto;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .type-of-wash-continue-andAddItems {
+    position: relative;
+    width: 90vw;
+    height: auto;
+    margin-left: 5%;
+    margin-top: 6.5%;
+    background: #ffffff;
+    border-radius: 15px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
   .type-of-head {
     color: #6759ff;
     font-size: 5vw;

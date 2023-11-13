@@ -890,6 +890,87 @@
 }
 
 @media screen and (max-width: 600px) {
+  .input1-B > h1 {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .input1-B > input {
+    margin-left: 5%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+  }
+
+  .input1-B {
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  .selected-time {
+    font-size: 0.9rem !important;
+    padding: 2% 2%;
+  }
+
+  .bookservice-time {
+    font-size: 0.9rem !important;
+    border: 2px solid red;
+    padding: 2% 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #clothes {
+    width: auto;
+    margin-top: -3%;
+  }
+
+  .react-calendar__month-view__days button {
+    height: 5vh;
+    margin: 1% 0%;
+    font-size: 0.8rem !important;
+  }
+
+  .react-calendar__navigation button {
+    height: 2.5vh;
+  }
+
+  .react-calendar__month-view__weekdays__weekday {
+    margin-top: 5%;
+    height: 3vh;
+  }
+
+  .input2-B > h1 {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .input2-B {
+    width: 100%;
+    height: auto;
+    margin-top: 5%;
+    align-items: center;
+  }
+
+  .addService-con {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-book-serviceB {
+    position: relative;
+    width: 90vw;
+    height: auto;
+    margin-left: 5%;
+    margin-top: 6.5%;
+    background: #ffffff;
+    border-radius: 15px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
   .connection-lost {
     height: 25%;
     width: 75%;

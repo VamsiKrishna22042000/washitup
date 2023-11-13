@@ -388,7 +388,6 @@ const BookServiceB = (props) => {
               ))}
             </div>
           </div>
-
           <div className="input1-B">
             <h1 className="where-head">Where ?</h1>
             <p className="where-titles" htmlFor="name">
@@ -482,23 +481,24 @@ const BookServiceB = (props) => {
                 setAddress({ ...userAddress, landmark: e.target.value });
               }}
             />
-
-            <button
-              id="bookService"
-              onClick={bookNow}
-              className="where-buttonB"
-            >
-              Book Service
-            </button>
           </div>
           {showMap && !geoLoading && latitude !== "" && longitude !== "" ? (
-            <MapB
-              pincode={pincode}
-              address={geoLoc}
-              initialLatitude={latitude}
-              initialLongitude={longitude}
-              onAddressChange={onAddressChange}
-            />
+            <>
+              <MapB
+                pincode={pincode}
+                address={geoLoc}
+                initialLatitude={latitude}
+                initialLongitude={longitude}
+                onAddressChange={onAddressChange}
+              />
+              <button
+                id="bookService"
+                onClick={bookNow}
+                className="where-buttonB"
+              >
+                Book Service
+              </button>
+            </>
           ) : (
             <div
               style={{
