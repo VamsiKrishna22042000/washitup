@@ -38,7 +38,7 @@ function LaundryNavB() {
     navcontents.classList.toggle("donotshow");
   };
 
-  const [section, setSection] = useState(changeComponents.success);
+  const [section, setSection] = useState(changeComponents.typeOfWash);
 
   const [typeofWash, setTypeofWashing] = useState("");
 
