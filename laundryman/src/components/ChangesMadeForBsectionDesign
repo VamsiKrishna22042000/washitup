@@ -1,0 +1,29 @@
+Changes Made for Making Design-B.
+
+> src>components
+
+Createad LaundryB Folder with laundryb.js file which has different LaundryNavB component which is in the index.js file in LaundryMainB File.
+
+> App.js
+
+Imported the LaundryB Component In App.js and and gave /b route for this LaundryB component.
+
+> components >Laundry & LaundryB
+
+Created typeAB state in both the laundryb.js and laundry.js files where if b is present in url the typeAB is true that is passed into the LaundryBody Component if there no b in the url the typeAB is false which is passed into the LaundryBody.
+
+> LaundryBody > index.js
+
+Imported the props typeAb if Its false Exiting Offers will be Visible and if typeAB is true Exiting offer will be hidden.
+
+> src > componets
+
+Created TypeOfWashingB Folder With typofWashingB.css and typeofWashingB.js
+
+Created AddClothesB Folder With addClothesB.js and addclothesB.css
+
+> LaundryB Component
+> Now created two state variables in the typeofwash and itemstowash and a callbackfunction - callBackForTypeOfWashing in the indexb.js
+> and passed them to TypeOfWashingB > TypeOfWashingB in this now create another 2 state variable in this component selectedType, items and a callback in getItems and default state of selectedType is wash & fold and passed these state variables and getItems Call back function to AddClothesBSec component > AddClothesBSec In this component I took the selectedType variable to call the items of that type and after each and every time an item we add or dec the item will be filterd and passed back to >TypeOfWashingB by getItems and items state is updated and then if we click continue then it items and selectedType will be passed to LaundryB component and their respective states get updated.
+
+> LaundryB

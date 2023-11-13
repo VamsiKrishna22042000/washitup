@@ -528,7 +528,8 @@ const Customers = () => {
                         className="order-body-para"
                         style={{ textTransform: "capitalize" }}
                       >
-                        {each.orders[each.orders.length - 1].address}
+                        {each.orders[each.orders.length - 1].address.dono -
+                          each.orders[each.orders.length - 1].address.landmark}
                       </p>
                       <p
                         id={each._id}
@@ -729,7 +730,13 @@ const Customers = () => {
                 {
                   selectedCustomer[0].orders[
                     selectedCustomer[0].orders.length - 1
-                  ].address
+                  ].address.dono
+                }
+                -
+                {
+                  selectedCustomer[0].orders[
+                    selectedCustomer[0].orders.length - 1
+                  ].address.landmark
                 }
               </p>
             </div>

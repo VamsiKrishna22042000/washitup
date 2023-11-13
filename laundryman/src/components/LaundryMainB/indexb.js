@@ -1,16 +1,16 @@
-import "./index.css";
+import "./indexb.css";
 
 import { useState } from "react";
 
-import BookService from "../BookService/bookservice.js";
+import BookServiceB from "../BookServiceB/bookserviceB.js";
 
-import AddClothes from "../AddClothes/addClothes";
+import SuccessB from "../SuccessB/successB.js";
 
-import Success from "../Success/success";
+import WashingB from "../TypeOfWashingB/typeOfWashingb.js";
 
-import Washing from "../Washing/washing";
-import AddCoupon from "../AddCoupon/addCoupon";
-import TypeOfWashing from "../TypeOfWashing/typeOfWashing";
+import WashingBC from "../WashingB/washingB.js";
+
+import AddCouponB from "../AddCouponB/addCouponB.js";
 
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -21,7 +21,7 @@ import Reorder from "../Reordercomponent/Rorder";
 const changeComponents = {
   success: "SUCCESS",
   addCoupon: "COUPON",
-  typeOfWash: "TYPEOFWASHING ",
+  typeOfWash: "TYPEOFWASHING",
   bookService: "BOOK_SERVICE",
   washClothes: "WASH_CLOTHES",
   washing: "WASHING",
@@ -31,37 +31,34 @@ const changeComponents = {
 {
   /**Component which is the merge point of all the component's that which are displayed in the main page  and has the call back functions to pass from one component to another component*/
 }
-function LaundryNav() {
-  const [service, setService] = useState(changeComponents.typeOfWash);
+function LaundryNavB() {
+  const navcontentshamberger = () => {
+    const navcontents = document.getElementById("contents");
+    console.log(navcontents);
+    navcontents.classList.toggle("donotshow");
+  };
+
+  const [section, setSection] = useState(changeComponents.success);
+
+  const [typeofWash, setTypeofWashing] = useState("");
+
+  const [itemsToWash, setItemToWash] = useState([]);
 
   const [time, setTime] = useState(0);
 
-  const [typeOfWashing, setTypeofWashing] = useState("");
-
   const [selectedTime, setSelectedTime] = useState("");
-
-  const [items, setItems] = useState([]);
-
   const [dataTobeSent, setDataTobeSent] = useState("");
 
-  const bookService = (data) => {
-    setService(changeComponents.addCoupon);
-    setDataTobeSent(data);
+  const callBackForTypeOfWashing = (typeAndItems) => {
+    setTypeofWashing(typeAndItems.typeofWash);
+    setItemToWash(typeAndItems.items);
+    setSection(changeComponents.bookService);
   };
 
-  const washClothes = (selectedtoWash) => {
-    setService(changeComponents.bookService);
-    setItems(selectedtoWash);
-  };
-
-  const callBackForTypeOfWashing = (type) => {
+  const typing = (type) => {
     console.log(type);
-    setService(changeComponents.washClothes);
     setTypeofWashing(type);
-  };
-
-  const washing = () => {
-    setService(changeComponents.washing);
+    setItemToWash([]);
   };
 
   const getTime = (e) => {
@@ -69,29 +66,17 @@ function LaundryNav() {
     setSelectedTime(e.time);
   };
 
+  const bookService = (data) => {
+    setSection(changeComponents.addCoupon);
+    setDataTobeSent(data);
+  };
+
   const setSuccess = () => {
-    setService(changeComponents.success);
+    setSection(changeComponents.success);
   };
 
-  const navcontentshamberger = () => {
-    const navcontents = document.getElementById("contents");
-    console.log(navcontents);
-    navcontents.classList.toggle("donotshow");
-  };
-
-  const toReorder = () => {
-    setService(changeComponents.reorder);
-  };
-
-  const fromReroder = () => {
-    setService(changeComponents.typeOfWash);
-  };
-
-  const getReorder = (reorderData) => {
-    setTypeofWashing(reorderData.typeofWash);
-    setItems(reorderData.item);
-    setDataTobeSent(reorderData.data);
-    setService(changeComponents.addCoupon);
+  const washing = () => {
+    setSection(changeComponents.washing);
   };
 
   return (
@@ -190,8 +175,10 @@ function LaundryNav() {
           </svg>
         </div>
       </div>
-      <div className="content122">
+      <img className="cyancon" src="./cyan.png" alt="cyancon" />
+      {/*<div className="content122">
         <img className="cyancon" src="./cyan.png" alt="cyancon" />
+       
         <p className="head">
           Get The Best <br /> Laundry Service <br /> At Your
           <span
@@ -205,32 +192,33 @@ function LaundryNav() {
         <p className="para1123">
           Book laundry service with just few easy steps
         </p>
-      </div>
-      {service === changeComponents.washClothes ? (
-        <AddClothes typeOfWashing={typeOfWashing} wash={washClothes} />
-      ) : service === changeComponents.typeOfWash ? (
-        <TypeOfWashing type={callBackForTypeOfWashing} toReorder={toReorder} />
-      ) : service === changeComponents.bookService ? (
-        <BookService
-          items={items}
+      </div>*/}
+
+      {section === changeComponents.typeOfWash ? (
+        <WashingB
+          typing={typing}
+          callBackForTypeOfWashing={callBackForTypeOfWashing}
+        />
+      ) : section === changeComponents.bookService ? (
+        <BookServiceB
+          items={itemsToWash}
           book={bookService}
           time={time}
           getTime={getTime}
         />
-      ) : service === changeComponents.addCoupon ? (
-        <AddCoupon
-          items={items}
+      ) : section === changeComponents.addCoupon ? (
+        <AddCouponB
+          items={itemsToWash}
           dataTobeSent={dataTobeSent}
           success={setSuccess}
-          typeOfWashing={typeOfWashing}
+          typeOfWashing={typeofWash}
         />
-      ) : service === changeComponents.success ? (
-        <Success washing={washing} />
-      ) : service === changeComponents.washing ? (
-        <Washing selectedTime={selectedTime} />
+      ) : section === changeComponents.success ? (
+        <SuccessB washing={washing} />
       ) : (
-        <Reorder fromReroder={fromReroder} getReorder={getReorder} />
+        <WashingBC />
       )}
+
       <img className="impink" src="./pinkcon.png" alt="pinkcon" />
       <div
         style={{ position: "absolute" }}
@@ -240,4 +228,4 @@ function LaundryNav() {
   );
 }
 
-export default withRouter(LaundryNav);
+export default withRouter(LaundryNavB);

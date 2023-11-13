@@ -2,10 +2,16 @@ import "./myorders.css";
 
 import Cookies from "js-cookie";
 
+import axios from "axios";
+
 import { useState, useEffect } from "react";
 
+import { IoMdAlert } from "react-icons/io";
+
 import { TailSpin } from "react-loader-spinner";
-import { toast } from "react-toastify";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyOrders = () => {
   const [myorders, setMyOrders] = useState([]);
@@ -21,6 +27,8 @@ const MyOrders = () => {
   const [showChangePickUpDate, setChangePickUpDate] = useState(true);
 
   const [showDate, setShowDate] = useState(false);
+
+  const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
     getMyOrders();
@@ -50,9 +58,13 @@ const MyOrders = () => {
   ];
 
   const [selectedData, setSelectedData] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [count, setCount] = useState(0);
 
   const [min, setMin] = useState("");
   const [max, setMax] = useState("");
+
+  const [loadingFilter, setfilterloadingItems] = useState(true);
 
   useEffect(() => {
     const min = new Date();
@@ -81,8 +93,77 @@ const MyOrders = () => {
   }, []);
 
   const ModalBoxItems = () => {
+    const handlePickUpChange = async () => {
+      if (selectedData === "") {
+        toast.error("Select Date", {
+          position: "top-center",
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else if (selectedTime === "") {
+        toast.error("Select Time", {
+          position: "top-center",
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else if (selectedData !== "" && count === 0) {
+        toast.info("Check Selected Date", {
+          position: "top-center",
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+        setCount(1);
+      } else {
+        setfilterloadingItems(false);
+        setChangePickUpDate(false);
+
+        let dateArray = selectedData.split("-");
+        let dateString = dateArray.reverse().join("-");
+        console.log(dateString);
+
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/user/changeOrderDate`;
+
+        const reqConfigure = {
+          method: "PUT",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            orderId,
+            date: dateString,
+            time: selectedTime,
+          }),
+        };
+
+        const res = await fetch(url, reqConfigure);
+
+        if (res.ok === 200) {
+          toast.error(`Changed Pick Up Date`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setTimeout(() => {
+            setSelectedTime("");
+            setChangePickUpDate(true);
+            setfilterItems([]);
+          }, 1000);
+        }
+      }
+    };
+
     return (
       <>
+        <ToastContainer />
         <div
           style={{
             position: "fixed",
@@ -95,6 +176,7 @@ const MyOrders = () => {
         ></div>
         <div className="modal">
           <div className="items-modalbox-con">
+            <ToastContainer />
             {!showDate && (
               <button
                 onClick={() => {
@@ -159,13 +241,20 @@ const MyOrders = () => {
                       min={min}
                       max={max}
                     />
-                    <select>
+                    <select
+                      value={selectedTime}
+                      onChange={(e) => {
+                        setSelectedTime(e.target.value);
+                      }}
+                    >
                       <option>Select</option>
                       {timeArray.map((each) => (
                         <option id={each.id}>{each.time}</option>
                       ))}
                     </select>
-                    <button type="button">Conform</button>
+                    <button onClick={handlePickUpChange} type="button">
+                      Conform
+                    </button>
                   </div>
                 ))}
 
@@ -190,66 +279,80 @@ const MyOrders = () => {
               <p className="myorder-body-para">Quantity</p>
               <p className="myorder-body-para">Item Total</p>
             </div>
-            {filterdItems.map((each) => (
-              <li key={each.id} className="myorder-body-header2">
-                <div className="myorder-body-para">
-                  <img
-                    id="orderimg"
-                    src={each.itemId.image}
-                    alt={each.itemId.name}
-                  />
-                </div>
+            {loadingFilter ? (
+              filterdItems.map((each) => (
+                <li key={each.id} className="myorder-body-header2">
+                  <div className="myorder-body-para">
+                    <img
+                      id="orderimg"
+                      src={each.itemId.image}
+                      alt={each.itemId.name}
+                    />
+                  </div>
 
-                <p
-                  style={{ textTransform: "capitalize" }}
-                  className="myorder-body-para"
-                >
-                  {each.itemId.name}
-                </p>
-                <p
-                  style={{ textTransform: "capitalize" }}
-                  className="myorder-body-para"
-                >
-                  {each.itemId.category}
-                </p>
-                {each.price > 1000 && each.price < 100000 ? (
-                  <p className="myorder-body-para">
-                    ₹ {parseInt(each.price) / 1000} K
+                  <p
+                    style={{ textTransform: "capitalize" }}
+                    className="myorder-body-para"
+                  >
+                    {each.itemId.name}
                   </p>
-                ) : each.price > 100000 && each.price < 1000000 ? (
-                  <p className="myorder-body-para">
-                    ₹ {parseInt(each.price) / 100000} L
+                  <p
+                    style={{ textTransform: "capitalize" }}
+                    className="myorder-body-para"
+                  >
+                    {each.itemId.category}
                   </p>
-                ) : each.price > 1000000 ? (
-                  <p className="myorder-body-para">
-                    ₹ {parseInt(each.price) / 1000000} M
-                  </p>
-                ) : (
-                  <p className="myorder-body-para">₹ {each.price}</p>
-                )}
+                  {each.price > 1000 && each.price < 100000 ? (
+                    <p className="myorder-body-para">
+                      ₹ {parseInt(each.price) / 1000} K
+                    </p>
+                  ) : each.price > 100000 && each.price < 1000000 ? (
+                    <p className="myorder-body-para">
+                      ₹ {parseInt(each.price) / 100000} L
+                    </p>
+                  ) : each.price > 1000000 ? (
+                    <p className="myorder-body-para">
+                      ₹ {parseInt(each.price) / 1000000} M
+                    </p>
+                  ) : (
+                    <p className="myorder-body-para">₹ {each.price}</p>
+                  )}
 
-                <p className="myorder-body-para">{each.itemCount}</p>
-                {each.price * each.itemCount > 1000 &&
-                each.price * each.itemCount < 100000 ? (
-                  <p className="myorder-body-para">
-                    ₹ {parseInt(each.price * each.itemCount) / 1000} K
-                  </p>
-                ) : each.price * each.itemCount > 100000 &&
-                  each.price * each.itemCount < 1000000 ? (
-                  <p className="myorder-body-para">
-                    ₹ {parseInt(each.price * each.itemCount) / 100000} L
-                  </p>
-                ) : each.price * each.itemCount > 1000000 ? (
-                  <p className="myorder-body-para">
-                    ₹ {parseInt(each.price * each.itemCount) / 1000000} M
-                  </p>
-                ) : (
-                  <p className="myorder-body-para">
-                    ₹ {each.price * each.itemCount}
-                  </p>
-                )}
-              </li>
-            ))}
+                  <p className="myorder-body-para">{each.itemCount}</p>
+                  {each.price * each.itemCount > 1000 &&
+                  each.price * each.itemCount < 100000 ? (
+                    <p className="myorder-body-para">
+                      ₹ {parseInt(each.price * each.itemCount) / 1000} K
+                    </p>
+                  ) : each.price * each.itemCount > 100000 &&
+                    each.price * each.itemCount < 1000000 ? (
+                    <p className="myorder-body-para">
+                      ₹ {parseInt(each.price * each.itemCount) / 100000} L
+                    </p>
+                  ) : each.price * each.itemCount > 1000000 ? (
+                    <p className="myorder-body-para">
+                      ₹ {parseInt(each.price * each.itemCount) / 1000000} M
+                    </p>
+                  ) : (
+                    <p className="myorder-body-para">
+                      ₹ {each.price * each.itemCount}
+                    </p>
+                  )}
+                </li>
+              ))
+            ) : (
+              <div
+                style={{
+                  height: "55%",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <TailSpin height={50} width={50} color={"#6759ff"} />
+              </div>
+            )}
           </div>
         </div>
       </>
@@ -257,6 +360,78 @@ const MyOrders = () => {
   };
 
   const SupportBox = () => {
+    const [load, setLoad] = useState(false);
+
+    const [issues, setIssues] = useState(() => {
+      return [];
+    });
+
+    const [issueCreate, setIssueCreate] = useState({
+      selectedIssue: "",
+      describedIssue: "",
+    });
+
+    useEffect(() => {
+      getIssues();
+    }, []);
+
+    const getIssues = async () => {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getIssueByOrderId/${orderId}`;
+
+      const res = await axios.get(url);
+
+      if (res.status === 200) {
+        setIssues(res.data.data);
+      }
+      setLoad(true);
+    };
+
+    const createIssuesUpload = async () => {
+      setLoad(false);
+      try {
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/orderIssue`;
+
+        const reqConfigure = {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            orderId: orderId,
+            issueType: issueCreate.selectedIssue,
+            describeIssue: issueCreate.describedIssue,
+          }),
+        };
+        const res = await fetch(url, reqConfigure);
+
+        if (res.ok) {
+          toast.success("Issue Created", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setIssueCreate({
+            selectedIssue: "",
+            describedIssue: "",
+          });
+          setTimeout(() => {
+            setShowSupport(false);
+          }, 1000);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      }
+    };
+
     return (
       <>
         <div
@@ -270,37 +445,78 @@ const MyOrders = () => {
           }}
         ></div>
         <div className="modal">
-          <div className="support-modalbox-con">
-            <div>
-              <img src="./no-orders.gif" />
-              <h3>No Issues Yet</h3>
-            </div>
-            <div>
-              <h4>Customer Support </h4>
-              <p>Select Issue</p>
-              <select>
-                <option>Cancel Order</option>
-                <option>Issue Related To Order</option>
-                <option>Other</option>
-              </select>
-              <p>Please describe about the issue</p>
-              <textarea></textarea>
+          {load ? (
+            <div className="support-modalbox-con">
+              {issues.length === 0 ? (
+                <div>
+                  <img src="./no-orders.gif" />
+                  <h3>No Issues Yet</h3>
+                </div>
+              ) : (
+                <div id="issues">
+                  {issues.length > 0 &&
+                    issues.map((each) => (
+                      <div className="issue-box">
+                        <IoMdAlert color="red" />
+                        <p>Issue Type : {each.issueType}</p>
+                        <p>Described Issue : {each.describeIssue}</p>
+                      </div>
+                    ))}
+                </div>
+              )}
               <div>
-                <button
-                  style={{ backgroundColor: "#22222250" }}
-                  onClick={() => {
-                    setShowSupport(false);
+                <h4>Customer Support </h4>
+                <p>Select Issue</p>
+                <select
+                  onChange={(e) => {
+                    setIssueCreate({
+                      ...issueCreate,
+                      selectedIssue: e.target.value,
+                    });
                   }}
-                  type="button"
+                  value={issueCreate.selectedIssue}
                 >
-                  Cancel
-                </button>
-                <button style={{ backgroundColor: "green" }} type="button">
-                  Create
-                </button>
+                  <option>Select</option>
+                  <option>Cancel Order</option>
+                  <option>Issue Related To Order</option>
+                  <option>Other</option>
+                </select>
+                <p>Please describe about the issue</p>
+                <textarea
+                  onChange={(e) => {
+                    setIssueCreate({
+                      ...issueCreate,
+                      describedIssue: e.target.value,
+                    });
+                  }}
+                  value={issueCreate.describedIssue}
+                ></textarea>
+                <div>
+                  <button
+                    style={{ backgroundColor: "#22222250" }}
+                    onClick={() => {
+                      setShowSupport(false);
+                    }}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={createIssuesUpload}
+                    style={{ backgroundColor: "green" }}
+                    type="button"
+                  >
+                    Create
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="support-modalbox-loader">
+              <ToastContainer />
+              <TailSpin height={50} width={50} color="#6759ff" />
+            </div>
+          )}
         </div>
       </>
     );
@@ -343,6 +559,8 @@ const MyOrders = () => {
 
     let service = seperatedOrder[0].service;
     setTotalAmount(seperatedOrder[0].totalAmount);
+
+    setOrderId(seperatedOrder[0]._id);
 
     let sep = seperatedOrder[0].items.map((each) => ({
       ...each,

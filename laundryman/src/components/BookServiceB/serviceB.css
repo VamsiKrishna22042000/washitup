@@ -1,0 +1,296 @@
+.react-calendar__navigation {
+  margin-top: 5%;
+  height: 12% !important;
+}
+.react-calendar__viewContainer {
+  height: 80% !important;
+}
+.react-calendar__month-view {
+  height: 100%;
+}
+.react-calendar__month-view > div {
+  height: 150%;
+  margin-top: -7%;
+}
+.react-calendar__month-view > div > div {
+  height: 100%;
+}
+.react-calendar__month-view__weekdays {
+  height: 10%;
+}
+.react-calendar__month-view__days {
+  height: 60%;
+}
+
+.address-boxB {
+  width: 93%;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  margin-left: 5%;
+}
+.address-boxB > p {
+  font-size: 0.6rem;
+  font-family: "Instrument Sans", sans-serif;
+  width: 100%;
+}
+
+.address-box button {
+  border-width: 0;
+  background-color: #6759ff;
+  color: #fff;
+  padding: 1% 2%;
+  border-radius: 0.5rem;
+}
+
+.move-pin {
+  font-size: 0.9rem;
+  margin-top: -2%;
+  margin-bottom: 1%;
+  color: #6759ff;
+}
+
+@media screen and (min-width: 992px) {
+  .bookservice-time {
+    border-style: solid;
+    border-color: #6759ff;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #6759ff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.7rem;
+    font-weight: bolder;
+    height: 60%;
+    cursor: pointer;
+  }
+  .bookservice-time:hover {
+    border-style: solid;
+    border-color: #6759ff;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: #6759ff;
+    color: #ffffff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.7rem;
+    font-weight: bolder;
+    height: 60%;
+  }
+  .selected-time {
+    border-style: solid;
+    border-color: #6759ff;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: #6759ff;
+    color: #ffffff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.7rem;
+    font-weight: bolder;
+    height: 60%;
+    cursor: pointer;
+  }
+  .bookservice-pickup {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9vw;
+    position: absolute;
+    color: #6759ff;
+    font-weight: bold;
+    margin: 0px;
+    left: 7.5%;
+    top: 67%;
+  }
+  .where-head {
+    font-family: sans-serif;
+    font-size: 1.8vw;
+    align-self: center;
+    font-weight: bold;
+    color: #6759ff;
+    margin-bottom: 0;
+  }
+  .where-titles {
+    font-size: 1vw;
+    font-family: sans-serif;
+    margin-bottom: 0.5%;
+    margin-top: 2%;
+  }
+  .where-buttonB {
+    position: absolute;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 1vw;
+    width: 30%;
+    border-width: 0px;
+    background-color: #6759ff;
+    color: #fff;
+    border-radius: 5px;
+    right: 11%;
+    padding: 0.8% 0%;
+    bottom: 3.5%;
+    cursor: pointer;
+  }
+  .calender {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-size: 0.9rem;
+    align-self: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-width: 0px !important;
+  }
+
+  .calen-con {
+    height: 70%;
+    width: 100%;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .calen-con::-webkit-scrollbar {
+    width: 0.1em; /* Set the width of the scrollbar (you can adjust this) */
+  }
+
+  .calen-con::-webkit-scrollbar-thumb {
+    background-color: #222222; /* Hide the thumb of the scrollbar */
+  }
+
+  .calen-con::-webkit-scrollbar-track {
+    background-color: transparent; /* Hide the track of the scrollbar */
+  }
+
+  .react-calendar__tile {
+    font-size: 0.9rem !important;
+    border-radius: 10px;
+  }
+  .react-calendar__month-view__days__day {
+    font-size: 0.9vw !important;
+  }
+
+  .react-calendar__navigation__label {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .address-box > p {
+    font-size: 0.7rem;
+    margin-top: 5%;
+    font-family: "Instrument Sans", sans-serif;
+    width: 80%;
+  }
+
+  .address-box button {
+    border-width: 0;
+    background-color: #6759ff;
+    color: #fff;
+    padding: 1% 2%;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+  }
+
+  .calen-con {
+    height: auto;
+    padding: 3% 0%;
+    width: 100%;
+  }
+
+  .bookservice-time {
+    border-style: solid;
+    border-color: #6759ff;
+    border-width: 1px;
+    border-radius: 2px;
+    background-color: transparent;
+    color: #6759ff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 3.2vw;
+    font-weight: bold;
+    height: 60%;
+    margin-top: 2.5%;
+    padding-top: 1%;
+  }
+
+  .selected-time {
+    border-style: solid;
+    border-color: #6759ff;
+    border-width: 1px;
+    border-radius: 2px;
+    background-color: #6759ff;
+    color: #fff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 3.2vw;
+    font-weight: bold;
+    height: 60%;
+    margin-top: 2.5%;
+    padding-top: 1%;
+  }
+
+  .bookservice-pickup {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 2vw;
+    position: absolute;
+    color: #6759ff;
+    font-weight: bold;
+    margin: 0px;
+    left: 3.5%;
+    top: 79%;
+  }
+
+  .where-head {
+    font-family: sans-serif;
+    font-size: 4vw;
+    align-self: center;
+    font-weight: bold;
+    color: #6759ff;
+    margin-bottom: 0;
+  }
+  .where-titles {
+    font-size: 3vw;
+    font-family: sans-serif;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    align-self: flex-start;
+    margin-left: 6%;
+  }
+  .where-button {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 4vw;
+    width: 80%;
+    border-width: 0px;
+    background-color: #6759ff;
+    color: #fff;
+    border-radius: 5px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+  .calender {
+    height: 100%;
+    width: 100%;
+    font-size: 3vw;
+    align-self: center;
+    text-decoration: none;
+    border-width: 0px !important;
+  }
+  .react-calendar__tile {
+    font-size: 2.5vw !important;
+    border-radius: 10px;
+  }
+  .react-calendar__month-view__days__day {
+    height: 100%;
+    font-size: 2.5vw !important;
+  }
+}

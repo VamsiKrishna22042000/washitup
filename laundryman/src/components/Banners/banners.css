@@ -1,0 +1,24 @@
+.banner-con {
+  height: 30%;
+  width: 85%;
+  align-self: center;
+  margin-top: -3.5%;
+  margin-bottom: -2.5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.slick-slider {
+  height: 100% !important;
+}
+
+.slick-slider img {
+  height: 80% !important;
+  margin-top: -0.8%;
+  border: 2.5px solid #ffffff;
+  width: 50px;
+  /**border-top-right-radius: 0.8rem;
+  border-top-left-radius: 0.8rem;
+  border-bottom-right-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;**/
+}

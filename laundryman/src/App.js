@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Laundry from "./components/Laundry/laundry";
+import LaundryB from "./components/LaundryB/laundryb.js";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AdminDashboard from "./components/Admindashboard/admin.js";
@@ -57,6 +58,7 @@ function App() {
       {isOnline ? (
         <Switch>
           <Route exact path="/" component={Laundry} />
+          <Route exact path="/b" component={LaundryB} />
           <ProtectedRoute2
             exact
             path="/admindashboard"

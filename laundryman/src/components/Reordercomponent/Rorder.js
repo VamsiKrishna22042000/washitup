@@ -142,7 +142,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
       });
     } else if (selectedTime !== "" && count === 0) {
       setCount(1);
-      toast.error(`Check the Date Selected`, {
+      toast.info(`Check the Date Selected`, {
         position: "top-center",
         autoClose: 2000,
         closeOnClick: true,
@@ -270,9 +270,9 @@ const Reorder = ({ fromReroder, getReorder }) => {
         <p>MobileNumber</p>
         <input value={reorderData.userId.mobileNumber} type="text" readOnly />
         <p>Do No / Flat No</p>
-        <input value={reorderData.address} readOnly />
+        <input value={reorderData.address.dono} readOnly />
         <p>LandMark</p>
-        <input value={reorderData.address} readOnly />
+        <input value={reorderData.address.landmark} readOnly />
         <p>Location</p>
         <textarea value={reorderData.location} readOnly></textarea>
         <button onClick={handleReorder} className="repeat-order" type="button">

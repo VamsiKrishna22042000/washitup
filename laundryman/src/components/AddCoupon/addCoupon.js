@@ -215,6 +215,11 @@ const AddCoupon = (props) => {
                   WebkitBoxOrient: "vertical", // Display vertically
                 }}
               >
+                <img
+                  className="images-addCoupon"
+                  src={each.image}
+                  alt={each.name}
+                />
                 {each.category} - {each.name}
               </p>
               <p

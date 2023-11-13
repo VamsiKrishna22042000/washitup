@@ -1,10 +1,10 @@
-import LaundryNav from "../LaundryMain/index";
+import LaundryNavB from "../LaundryMainB/indexb.js";
 
 import LaundryBody from "../LaundryBody/index";
 
 import { useEffect, useState } from "react";
 
-const Laundry = () => {
+const LaundryB = () => {
   const [typeAB, setAB] = useState(false);
 
   useEffect(() => {
@@ -16,10 +16,10 @@ const Laundry = () => {
 
   return (
     <>
-      <LaundryNav />
+      <LaundryNavB />
       <LaundryBody typeAB={typeAB} />
     </>
   );
 };
 
-export default Laundry;
+export default LaundryB;
