@@ -555,7 +555,7 @@
     margin-top: 0%;
   }
 
-  .name2 {
+  .name2-B {
     height: 3vw;
     width: 100%;
     border-color: grey;
@@ -904,11 +904,6 @@
   .input1-B {
     width: 100%;
     margin-top: 5%;
-  }
-
-  .selected-time {
-    font-size: 0.9rem !important;
-    padding: 2% 2%;
   }
 
   #clothes {
@@ -1472,9 +1467,8 @@
     margin-left: 6%;
   }
 
-  .name2 {
-    padding-left: 8vw;
-    width: 76vw;
+  .name2-B {
+    width: 100% !important;
     font-size: 3vw;
     display: flex;
     flex-direction: row;
@@ -1482,7 +1476,6 @@
     align-items: center;
     padding-bottom: 2.5%;
     padding-top: 2%;
-    margin-left: -10%;
   }
 
   .geoLocator {

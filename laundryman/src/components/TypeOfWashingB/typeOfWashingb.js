@@ -34,12 +34,16 @@ const WashingB = (props) => {
     <div className="type-of-wash-continue-andAddItems">
       <ToastContainer />
       {userLogged !== undefined && (
+        <p className="reorder-animate-B">Repeat Previous Order ❯</p>
+      )}
+
+      {userLogged !== undefined && (
         <img
           style={{ cursor: "pointer" }}
           onClick={() => {
             toReorder();
           }}
-          className="reorder-button"
+          className="reorder-button-B"
           src="/reorder.png"
           alt="reorder"
         />

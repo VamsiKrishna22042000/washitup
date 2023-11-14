@@ -1393,8 +1393,7 @@
   }
 
   .name2 {
-    padding-left: 8vw;
-    width: 76vw;
+    width: 100% !important;
     font-size: 3vw;
     display: flex;
     flex-direction: row;
@@ -1402,7 +1401,7 @@
     align-items: center;
     padding-bottom: 2.5%;
     padding-top: 2%;
-    margin-left: -10%;
+    padding-left: 0;
   }
 
   .geoLocator {

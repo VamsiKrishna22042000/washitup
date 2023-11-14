@@ -371,7 +371,7 @@ const BookServiceB = (props) => {
             <p style={{ alignSelf: "center" }} className="where-titles">
               Time
             </p>
-            <div id="clothes" className="name2">
+            <div id="clothes" className="name2-B">
               {timeArray.map((each) => (
                 <button
                   onClick={() => {
@@ -379,7 +379,7 @@ const BookServiceB = (props) => {
                   }}
                   id={each.id}
                   className={
-                    each.id === time ? "selected-time" : "bookservice-time-B"
+                    each.id === time ? "selected-time-B" : "bookservice-time-B"
                   }
                   key={each.id}
                 >

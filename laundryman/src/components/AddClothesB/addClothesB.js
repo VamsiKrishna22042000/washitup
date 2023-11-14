@@ -237,7 +237,7 @@ const AddClothesBSec = (props) => {
         justifyContent: "center",
         alignItems: "center",
       }}
-      className="add-Clothes-containerB"
+      className="add-Clothes-container-D"
     >
       <TailSpin color="#6759ff" height={50} width={50} />
     </div>

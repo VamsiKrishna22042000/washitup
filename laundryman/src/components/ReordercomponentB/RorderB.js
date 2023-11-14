@@ -8,6 +8,8 @@ import { Watch } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Banners from "../Banners/banners.js";
+
 const timeArray = [
   {
     id: 1,
@@ -182,10 +184,11 @@ const ReorderB = ({ fromReroder, getReorder }) => {
   ) : (
     <div className="type-of-reorder-B">
       <ToastContainer />
+      <Banners />
       <div className="type-b-rorder">
-        <div className="userAddress2">
-          <div className="previous-items">
-            <div className="items-con1">
+        <div className="userAddress2-D">
+          <div className="previous-items-B">
+            <div className="items-con1-B">
               <p style={{ textTransform: "capitalize" }}>
                 Service : {reorderData.service}
               </p>
@@ -193,11 +196,11 @@ const ReorderB = ({ fromReroder, getReorder }) => {
                 Total : ₹ {totalPrice}
               </p>
             </div>
-            <div className="items-con2">
+            <div className="items-con2-B">
               {reorderData.items.map((each) => (
-                <div className="item-con3">
+                <div className="item-con3-B">
                   <img
-                    className="items-image"
+                    className="items-image-B"
                     src={each.itemId.image}
                     alt={each.itemId.name}
                   />
@@ -215,40 +218,8 @@ const ReorderB = ({ fromReroder, getReorder }) => {
               ))}
             </div>
           </div>
-          <div className="select-option">
-            <p>Select Date</p>
-            <input
-              value={selectedData}
-              onChange={(e) => {
-                setSelectedData(e.target.value);
-              }}
-              type="date"
-              min={min}
-              max={max}
-            />
-            <p>Select Time</p>
-            <div className="select-time">
-              {timeArray.map((each) => (
-                <button
-                  onClick={() => {
-                    setSelectedTime(each.time);
-                  }}
-                  value={selectedData}
-                  type="button"
-                  id={each.id}
-                  className={
-                    selectedTime === each.time
-                      ? "button-style2"
-                      : "button-style1"
-                  }
-                >
-                  {each.time}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
-        <div className="userAddress">
+        <div className="userAddress-B">
           <button
             style={{
               position: "absolute",
@@ -276,8 +247,42 @@ const ReorderB = ({ fromReroder, getReorder }) => {
           <input value={reorderData.address.dono} readOnly />
           <p>LandMark</p>
           <input value={reorderData.address.landmark} readOnly />
+        </div>
+        <div className="userAddress-B">
           <p>Location</p>
           <textarea value={reorderData.location} readOnly></textarea>
+          <div className="select-option-B">
+            <p>Select Date</p>
+            <input
+              value={selectedData}
+              onChange={(e) => {
+                setSelectedData(e.target.value);
+              }}
+              type="date"
+              min={min}
+              max={max}
+            />
+            <p>Select Time</p>
+            <div className="select-time-B">
+              {timeArray.map((each) => (
+                <button
+                  onClick={() => {
+                    setSelectedTime(each.time);
+                  }}
+                  value={selectedData}
+                  type="button"
+                  id={each.id}
+                  className={
+                    selectedTime === each.time
+                      ? "button-style2"
+                      : "button-style1"
+                  }
+                >
+                  {each.time}
+                </button>
+              ))}
+            </div>
+          </div>
           <button
             onClick={handleReorder}
             className="repeat-order"

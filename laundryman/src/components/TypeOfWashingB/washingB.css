@@ -8,22 +8,23 @@
   }
 }
 
-.reorder-animate {
+.reorder-animate-B {
   position: absolute;
   right: 38px;
-  top: 12px;
+  top: 4px;
   overflow: visible;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   animation: animate-reorder 0.5s infinite alternate;
 }
 
-.reorder-button {
+.reorder-button-B {
   position: absolute;
-  right: 8px;
-  top: 10px;
-  height: 25px;
-  width: 25px;
+  right: 15px;
+  top: 5px;
+  height: 20px;
+  width: 20px;
   z-index: 5;
+  cursor: pointer;
 }
 
 .type-of-wash-continue-andAddItems {
@@ -132,6 +133,16 @@
 }
 
 @media screen and (max-width: 600px) {
+  .reorder-button-B {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    height: 25px;
+    width: 25px;
+    z-index: 5;
+    cursor: pointer;
+  }
+
   .typeof-clothes-toadd {
     width: 100%;
     display: flex;
@@ -294,7 +305,7 @@
     justify-content: space-evenly;
     align-items: center;
   }
-  .reorder-animate {
+  .reorder-animate-B {
     position: absolute;
     right: 38px;
     top: 11px;

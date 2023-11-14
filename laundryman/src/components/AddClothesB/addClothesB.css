@@ -22,6 +22,14 @@
     width: 100%;
   }
 
+  .add-Clothes-container-D {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+  }
+
   .set-counter-b {
     height: 40%;
     width: 12vw;
@@ -271,6 +279,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  .add-Clothes-container-D {
+    margin-top: 5%;
+    height: 40vh;
+  }
+
   .add-Clothes-containerB {
     margin-top: 5%;
     height: 40vh;

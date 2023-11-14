@@ -80,7 +80,7 @@
     font-weight: bolder;
     height: 60%;
   }
-  .selected-time {
+  .selected-time-B {
     border-style: solid;
     border-color: #6759ff;
     border-width: 1px;
@@ -244,10 +244,10 @@
     font-weight: bold;
     height: 60%;
     margin-top: 2.5%;
-    padding-top: 1%;
+    padding: 1% 2%;
   }
 
-  .selected-time {
+  .selected-time-B {
     border-style: solid;
     border-color: #6759ff;
     border-width: 1px;
@@ -259,7 +259,7 @@
     font-weight: bold;
     height: 60%;
     margin-top: 2.5%;
-    padding-top: 1%;
+    padding: 1% 2%;
   }
 
   .bookservice-pickup {
