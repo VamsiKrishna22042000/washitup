@@ -144,7 +144,7 @@ const AddCouponB = (props) => {
     // Check if the component has not scrolled into view yet
     if (!hasScrolledIntoView) {
       // Scroll into view
-      const homeElement = document.getElementById("home");
+      const homeElement = document.getElementById("home2");
       if (homeElement) {
         homeElement.scrollIntoView({ behavior: "smooth" });
         // Update state to indicate that scrolling has been performed
@@ -155,6 +155,7 @@ const AddCouponB = (props) => {
 
   return (
     <>
+      <div style={{ position: "absolute", top: 0 }} id="home2"></div>
       <ReCAPTCHA ref={recapRef} size="invisible" sitekey={siteRecapKey} />
 
       <div className="login-book-service-coupon-B">

@@ -12,7 +12,7 @@ const Washing = () => {
     // Check if the component has not scrolled into view yet
     if (!hasScrolledIntoView) {
       // Scroll into view
-      const homeElement = document.getElementById("home");
+      const homeElement = document.getElementById("done1");
       if (homeElement) {
         homeElement.scrollIntoView({ behavior: "smooth" });
         // Update state to indicate that scrolling has been performed
@@ -22,15 +22,18 @@ const Washing = () => {
   }, [hasScrolledIntoView]);
 
   return (
-    <div className="washing-total-con">
-      <div className="washing-note">
-        <p>
-          Note : Our WashIt Executive will reach you out at your preferred
-          timing Relax !
-        </p>
+    <>
+      <div style={{ position: "absolute", top: 0 }} id="done1"></div>
+      <div className="washing-total-con">
+        <div className="washing-note">
+          <p>
+            Note : Our WashIt Executive will reach you out at your preferred
+            timing Relax !
+          </p>
+        </div>
+        <img className="washing-anime" src="./deliveryboy.gif" alt="Washing" />
       </div>
-      <img className="washing-anime" src="./deliveryboy.gif" alt="Washing" />
-    </div>
+    </>
   );
 };
 

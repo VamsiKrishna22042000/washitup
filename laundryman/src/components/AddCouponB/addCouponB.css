@@ -435,7 +435,7 @@
     margin-top: 8%;
     margin-bottom: 5%;
   }
-  .apply-coupon-box2 {
+  /*.apply-coupon-box2 {
     height: 25vh;
     width: 80%;
     display: flex;
@@ -446,7 +446,7 @@
     margin-bottom: 5%;
     overflow-y: scroll;
     align-content: flex-start;
-  }
+  }*/
   .applied-box {
     width: 35%;
     font-size: 2vw;

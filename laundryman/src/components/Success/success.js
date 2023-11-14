@@ -22,7 +22,7 @@ const Success = (props) => {
     // Check if the component has not scrolled into view yet
     if (!hasScrolledIntoView) {
       // Scroll into view
-      const homeElement = document.getElementById("home");
+      const homeElement = document.getElementById("success1");
       if (homeElement) {
         homeElement.scrollIntoView({ behavior: "smooth" });
         // Update state to indicate that scrolling has been performed
@@ -33,6 +33,7 @@ const Success = (props) => {
 
   return (
     <>
+      <div style={{ position: "absolute", top: 0 }} id="success1"></div>
       <div className="success-total-con">
         <img
           className="success-anime"
