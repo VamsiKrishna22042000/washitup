@@ -148,6 +148,7 @@ const MyOrders = () => {
             setChangePickUpDate(true);
             setfilterItems([]);
           }, 1000);
+          getMyOrders();
         }
       }
     };
@@ -410,6 +411,7 @@ const MyOrders = () => {
           setTimeout(() => {
             setShowSupport(false);
           }, 1000);
+          getMyOrders();
         }
       } catch (error) {
         toast.error(`${error}`, {

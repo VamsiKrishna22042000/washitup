@@ -12,10 +12,10 @@ import { TailSpin, ThreeDots } from "react-loader-spinner";
 const AddCoupon = (props) => {
   const { typeOfWashing, items, dataTobeSent, success } = props;
 
-  console.log(typeOfWashing);
+  /**console.log(typeOfWashing);
   console.log(items);
   console.log(dataTobeSent);
-  console.log(success);
+  console.log(success);*/
 
   const [siteRecapKey, setSiteRecapKey] = useState(
     `${process.env.REACT_APP_SITE_KEY}`
@@ -23,7 +23,7 @@ const AddCoupon = (props) => {
 
   const recapRef = useRef("");
 
-  const [total, setTotal] = useState("");
+  const [total, setTotal] = useState(dataTobeSent.total);
   {
     /**state to store total of all the items*/
   }
@@ -130,11 +130,6 @@ const AddCoupon = (props) => {
   {
     /**useEffect used to get the total price of all the items selected by the user before mounting */
   }
-  useEffect(() => {
-    let totalPrice = 0;
-    items.map((each) => (totalPrice = totalPrice + each.price * each.count));
-    setTotal(totalPrice);
-  }, []);
 
   const [hasScrolledIntoView, setHasScrolledIntoView] = useState(false);
 

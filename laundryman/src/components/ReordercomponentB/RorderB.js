@@ -162,6 +162,7 @@ const ReorderB = ({ fromReroder, getReorder }) => {
         name: dataReceived.userId.name,
         date: dateString,
         time: selectedTime,
+        total: totalPrice,
       };
       getReorder({
         typeofWash: reorderData.service,

@@ -160,6 +160,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
         name: dataReceived.userId.name,
         date: dateString,
         time: selectedTime,
+        total: totalPrice,
       };
 
       console.log(item);
