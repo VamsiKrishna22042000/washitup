@@ -500,7 +500,7 @@ const Customers = () => {
                           style={{
                             height: "100%",
                             width: "15%",
-                            position: "absolute",
+                            position: "relative",
                             left: "35%",
                           }}
                           src="/profile2.png"
@@ -528,8 +528,8 @@ const Customers = () => {
                         className="order-body-para"
                         style={{ textTransform: "capitalize" }}
                       >
-                        {each.orders[each.orders.length - 1].address.dono -
-                          each.orders[each.orders.length - 1].address.landmark}
+                        {each.orders[each.orders.length - 1].address.dono} -
+                        {each.orders[each.orders.length - 1].address.landmark}
                       </p>
                       <p
                         id={each._id}

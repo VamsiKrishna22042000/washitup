@@ -127,7 +127,7 @@ const Driver = () => {
 
           body: JSON.stringify({
             name: newUser,
-            mobileNumber: value,
+            mobileNumber: value.substring(3),
             email: email,
             address: address,
           }),

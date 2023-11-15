@@ -294,8 +294,7 @@ const AddCouponB = (props) => {
               {/**Total price before discount and after discount */}
               {discount === 0 ? (
                 <>
-                  <p className="font-total-B">Total</p>
-                  <p className="font-total-B">₹ {total}</p>
+                  <p className="font-total-B">Total ₹ {total}</p>
                 </>
               ) : (
                 <>

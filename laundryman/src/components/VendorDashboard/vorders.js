@@ -343,7 +343,9 @@ const Orders = () => {
             "09",
           ];
 
-          let d = dateArr.includes(dd) ? dd[1] : dd;
+          /**let d = dateArr.includes(dd) ? dd[1] : dd;**/
+
+          let d = dd;
 
           // Combine them in the desired format
           const formattedDate = `${d}-${mm}-${yyyy}`;
@@ -356,7 +358,9 @@ const Orders = () => {
   };
 
   const filterByProgress = allorders.filter((each) =>
-    subfilter === "" ? each : each.progress === subfilter
+    subfilter === ""
+      ? each
+      : each.progress === subfilter && each.status === "Accepted"
   );
   const filterByDate = filterByProgress.filter((each) =>
     selectedDate.date === "" ? each : each.date === selectedDate.date
@@ -1374,22 +1378,36 @@ const Orders = () => {
                         <p className="order-body-para">₹ {each.totalAmount}</p>
                       )}
 
-                      <select
-                        userId={each.userId}
-                        id={each._id}
-                        onChange={settingProgress}
-                        className="order-body-select"
-                        style={{ textTransform: "capitalize" }}
-                      >
-                        {each.action.map((e) => (
-                          <option
-                            style={{ textTransform: "capitalize" }}
-                            selected={each.progress === e ? true : false}
-                          >
-                            {e}
+                      {each.driverName1 === "empty" ? (
+                        <select
+                          userId={each.userId}
+                          id={each._id}
+                          onChange={settingProgress}
+                          className="order-body-select"
+                          style={{ textTransform: "capitalize" }}
+                        >
+                          <option style={{ textTransform: "capitalize" }}>
+                            {each.progress}
                           </option>
-                        ))}
-                      </select>
+                        </select>
+                      ) : (
+                        <select
+                          userId={each.userId}
+                          id={each._id}
+                          onChange={settingProgress}
+                          className="order-body-select"
+                          style={{ textTransform: "capitalize" }}
+                        >
+                          {each.action.map((e) => (
+                            <option
+                              style={{ textTransform: "capitalize" }}
+                              selected={each.progress === e ? true : false}
+                            >
+                              {e}
+                            </option>
+                          ))}
+                        </select>
+                      )}
                       <p
                         style={
                           each.progress === "Active"

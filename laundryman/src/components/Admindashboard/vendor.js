@@ -548,7 +548,8 @@ const Vendors = () => {
             "09",
           ];
 
-          let d = dateArr.includes(dd) ? dd[1] : dd;
+          /**let d = dateArr.includes(dd) ? dd[1] : dd;*/
+          let d = dd;
 
           // Combine them in the desired format
           const formattedDate = `${d}-${mm}-${yyyy}`;

@@ -948,7 +948,11 @@ const Orders = () => {
             "09",
           ];
 
-          let d = dateArr.includes(dd) ? dd[1] : dd;
+          /**let d = dateArr.includes(dd) ? dd[1] : dd;**/
+
+          let d = dd;
+
+          console.log(d);
 
           // Combine them in the desired format
           const formattedDate = `${d}-${mm}-${yyyy}`;

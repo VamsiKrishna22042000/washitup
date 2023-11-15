@@ -390,7 +390,7 @@
     padding-bottom: 0.5%;
   }
   .order-body-para {
-    height: 3.5vh;
+    height: auto;
     width: 18%;
     margin: 0;
     border-style: solid;

@@ -74,8 +74,8 @@
 
 .support-button {
   position: absolute;
-  bottom: 0.8rem;
-  right: 1rem;
+  top: 2.4rem;
+  left: 7rem;
   font-size: 0.8rem;
   color: #ffffff;
   background-color: #6759ff;
@@ -408,7 +408,7 @@
     z-index: 5;
     border-radius: 2rem;
     padding: 2rem 1.5rem;
-    margin-top: 5%;
+    margin-top: 0%;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -515,7 +515,8 @@
 
   .support-button {
     position: relative;
-    height: 3%;
+    height: 3.5%;
+    width: 40%;
     left: 5%;
     right: 60%;
     font-size: 0.7rem;
@@ -545,6 +546,7 @@
     overflow-y: scroll;
     padding-left: 2%;
     padding-right: 0%;
+    margin-top: -5%;
   }
 
   .items-modalbox-con button {

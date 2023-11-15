@@ -956,6 +956,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
+    padding-bottom: 5%;
   }
   .connection-lost {
     height: 25%;

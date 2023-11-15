@@ -110,15 +110,6 @@ const MyOrders = () => {
           pauseOnHover: true,
           theme: "colored",
         });
-      } else if (selectedData !== "" && count === 0) {
-        toast.info("Check Selected Date", {
-          position: "top-center",
-          autoClose: 1000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
-        setCount(1);
       } else {
         setfilterloadingItems(false);
         setChangePickUpDate(false);
@@ -144,8 +135,8 @@ const MyOrders = () => {
 
         const res = await fetch(url, reqConfigure);
 
-        if (res.ok === 200) {
-          toast.error(`Changed Pick Up Date`, {
+        if (res.ok) {
+          toast.success(`Changed Pick Up Date`, {
             position: "top-center",
             autoClose: 2000,
             closeOnClick: true,
@@ -176,7 +167,6 @@ const MyOrders = () => {
         ></div>
         <div className="modal">
           <div className="items-modalbox-con">
-            <ToastContainer />
             {!showDate && (
               <button
                 onClick={() => {
