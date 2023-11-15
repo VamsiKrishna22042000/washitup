@@ -177,8 +177,7 @@ const VendorLogin = () => {
                   inputMode="numeric"
                   onChange={(e) => {
                     const isValidInput = /^[0-9]*$/.test(e.target.value);
-                    isValidInput && setOtp(e.target.value);
-                    setOtp(e.target.value);
+                    isValidInput === true && setOtp(e.target.value);
                   }}
                 />
               ) : (
@@ -202,7 +201,8 @@ const VendorLogin = () => {
                     <input
                       onChange={(e) => {
                         const isValidInput = /^[0-9]*$/.test(e.target.value);
-                        isValidInput && setMobileNumber(e.target.value);
+                        isValidInput === true &&
+                          setMobileNumber(e.target.value);
                       }}
                       className="login-input"
                       type="tel"

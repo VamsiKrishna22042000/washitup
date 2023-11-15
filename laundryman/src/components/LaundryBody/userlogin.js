@@ -285,7 +285,7 @@ const UserLogin = () => {
                     pattern="[0-9]*"
                     onChange={(e) => {
                       const isValidInput = /^[0-9]*$/.test(e.target.value);
-                      isValidInput && setOtp(e.target.value);
+                      isValidInput === true && setOtp(e.target.value);
                     }}
                   />
                 ) : (
@@ -297,7 +297,7 @@ const UserLogin = () => {
                       placeholder="Enter Name"
                       onChange={(e) => {
                         const isValidInput = /^[a-zA-Z]*$/.test(e.target.value);
-                        isValidInput && setName(e.target.value);
+                        isValidInput === true && setName(e.target.value);
                       }}
                     />
                     <p className="logo-para">Enter Phone Number</p>
@@ -312,7 +312,8 @@ const UserLogin = () => {
                       <input
                         onChange={(e) => {
                           const isValidInput = /^[0-9]*$/.test(e.target.value);
-                          isValidInput && setMobileNumber(e.target.value);
+                          isValidInput === true &&
+                            setMobileNumber(e.target.value);
                         }}
                         className="login-input"
                         type="tel"
@@ -414,7 +415,7 @@ const UserLogin = () => {
                     pattern="[0-9]*"
                     onChange={(e) => {
                       const isValidInput = /^[0-9]*$/.test(e.target.value);
-                      isValidInput && setOtp(e.target.value);
+                      isValidInput === true && setOtp(e.target.value);
                       setOtp(e.target.value);
                     }}
                   />
@@ -432,7 +433,8 @@ const UserLogin = () => {
                       <input
                         onChange={(e) => {
                           const isValidInput = /^[0-9]*$/.test(e.target.value);
-                          isValidInput && setMobileNumber(e.target.value);
+                          isValidInput === true &&
+                            setMobileNumber(e.target.value);
                         }}
                         className="login-input"
                         type="tel"
