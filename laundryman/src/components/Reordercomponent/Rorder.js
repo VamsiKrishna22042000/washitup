@@ -108,7 +108,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
             items.push({
               count: parseInt(each.itemCount),
               ...each.itemId,
-              price: parseInt(each.itemCount * each.itemId.washfold),
+              price: parseInt(each.itemCount * each.itemId.washiron),
             });
           }
         } else {
@@ -117,7 +117,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
             items.push({
               count: parseInt(each.itemCount),
               ...each.itemId,
-              price: parseInt(each.itemCount * each.itemId.washfold),
+              price: parseInt(each.itemCount * each.itemId.drycleaning),
             });
           }
         }
@@ -161,6 +161,9 @@ const Reorder = ({ fromReroder, getReorder }) => {
         date: dateString,
         time: selectedTime,
       };
+
+      console.log(item);
+
       getReorder({
         typeofWash: reorderData.service,
         item: item,

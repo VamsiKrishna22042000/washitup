@@ -284,7 +284,8 @@ const UserLogin = () => {
                     inputMode="numeric"
                     pattern="[0-9]*"
                     onChange={(e) => {
-                      setOtp(e.target.value);
+                      const isValidInput = /^[0-9]*$/.test(e.target.value);
+                      isValidInput && setOtp(e.target.value);
                     }}
                   />
                 ) : (
@@ -295,7 +296,8 @@ const UserLogin = () => {
                       type="text"
                       placeholder="Enter Name"
                       onChange={(e) => {
-                        setName(e.target.value);
+                        const isValidInput = /^[a-zA-Z]*$/.test(e.target.value);
+                        isValidInput && setName(e.target.value);
                       }}
                     />
                     <p className="logo-para">Enter Phone Number</p>
@@ -309,7 +311,8 @@ const UserLogin = () => {
                       <span className="nine-one">+91 &nbsp; &nbsp;</span>
                       <input
                         onChange={(e) => {
-                          setMobileNumber(e.target.value);
+                          const isValidInput = /^[0-9]*$/.test(e.target.value);
+                          isValidInput && setMobileNumber(e.target.value);
                         }}
                         className="login-input"
                         type="tel"
@@ -410,6 +413,8 @@ const UserLogin = () => {
                     inputMode="numeric"
                     pattern="[0-9]*"
                     onChange={(e) => {
+                      const isValidInput = /^[0-9]*$/.test(e.target.value);
+                      isValidInput && setOtp(e.target.value);
                       setOtp(e.target.value);
                     }}
                   />
@@ -426,7 +431,8 @@ const UserLogin = () => {
                       <span className="nine-one">+91 &nbsp;&nbsp;</span>
                       <input
                         onChange={(e) => {
-                          setMobileNumber(e.target.value);
+                          const isValidInput = /^[0-9]*$/.test(e.target.value);
+                          isValidInput && setMobileNumber(e.target.value);
                         }}
                         className="login-input"
                         type="tel"

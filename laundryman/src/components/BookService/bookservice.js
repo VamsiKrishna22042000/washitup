@@ -400,10 +400,12 @@ const BookService = (props) => {
             </p>
             <input
               onChange={(e) => {
-                setInputs((prevValues) => ({
-                  ...prevValues,
-                  name: e.target.value,
-                }));
+                const isValidInput = /^[a-zA-Z]*$/.test(e.target.value);
+                isValidInput &&
+                  setInputs((prevValues) => ({
+                    ...prevValues,
+                    name: e.target.value,
+                  }));
               }}
               id="name"
               className="name"
@@ -420,10 +422,12 @@ const BookService = (props) => {
               value={input.number}
               placeholder="Phone Number"
               onChange={(e) => {
-                setInputs((prevValues) => ({
-                  ...prevValues,
-                  number: e.target.value,
-                }));
+                const isValidInput = /^[0-9]*$/.test(e.target.value);
+                isValidInput &&
+                  setInputs((prevValues) => ({
+                    ...prevValues,
+                    number: e.target.value,
+                  }));
               }}
             />
 
@@ -454,6 +458,7 @@ const BookService = (props) => {
                 </div>
               ) : (
                 <input
+                  readOnly
                   id="geoLoc"
                   value={geoLoc}
                   className="name3"
@@ -480,7 +485,9 @@ const BookService = (props) => {
               placeholder="Do / Flat No"
               value={userAddress.dono}
               onChange={(e) => {
-                setAddress({ ...userAddress, dono: e.target.value });
+                const isValidInput = /^[0-9!@#$%^&*/()]*$/.test(e.target.value);
+                isValidInput &&
+                  setAddress({ ...userAddress, dono: e.target.value });
               }}
             />
 
@@ -491,7 +498,9 @@ const BookService = (props) => {
               placeholder="LandMark"
               value={userAddress.landmark}
               onChange={(e) => {
-                setAddress({ ...userAddress, landmark: e.target.value });
+                const isValidInput = /^[a-zA-Z]*$/.test(e.target.value);
+                isValidInput &&
+                  setAddress({ ...userAddress, landmark: e.target.value });
               }}
             />
 

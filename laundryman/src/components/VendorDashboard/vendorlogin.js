@@ -175,8 +175,9 @@ const VendorLogin = () => {
                   placeholder="Enter OTP"
                   autoFocus
                   inputMode="numeric"
-                  pattern="[0-9]*"
                   onChange={(e) => {
+                    const isValidInput = /^[0-9]*$/.test(e.target.value);
+                    isValidInput && setOtp(e.target.value);
                     setOtp(e.target.value);
                   }}
                 />
@@ -200,7 +201,8 @@ const VendorLogin = () => {
                     <span className="nine-one">+91</span> &nbsp;&nbsp;
                     <input
                       onChange={(e) => {
-                        setMobileNumber(e.target.value);
+                        const isValidInput = /^[0-9]*$/.test(e.target.value);
+                        isValidInput && setMobileNumber(e.target.value);
                       }}
                       className="login-input"
                       type="tel"

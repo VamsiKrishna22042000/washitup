@@ -110,7 +110,7 @@ const ReorderB = ({ fromReroder, getReorder }) => {
             items.push({
               count: parseInt(each.itemCount),
               ...each.itemId,
-              price: parseInt(each.itemCount * each.itemId.washfold),
+              price: parseInt(each.itemCount * each.itemId.washiron),
             });
           }
         } else {
@@ -119,7 +119,7 @@ const ReorderB = ({ fromReroder, getReorder }) => {
             items.push({
               count: parseInt(each.itemCount),
               ...each.itemId,
-              price: parseInt(each.itemCount * each.itemId.washfold),
+              price: parseInt(each.itemCount * each.itemId.drycleaning),
             });
           }
         }
