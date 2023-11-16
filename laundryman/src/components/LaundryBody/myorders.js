@@ -379,48 +379,67 @@ const MyOrders = () => {
 
     const createIssuesUpload = async () => {
       setLoad(false);
-      try {
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/orderIssue`;
 
-        const reqConfigure = {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            orderId: orderId,
-            issueType: issueCreate.selectedIssue,
-            describeIssue: issueCreate.describedIssue,
-          }),
-        };
-        const res = await fetch(url, reqConfigure);
-
-        if (res.ok) {
-          toast.success("Issue Created", {
-            position: "top-center",
-            autoClose: 2000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            theme: "colored",
-          });
-          setIssueCreate({
-            selectedIssue: "",
-            describedIssue: "",
-          });
-          setTimeout(() => {
-            setShowSupport(false);
-          }, 1000);
-          getMyOrders();
-        }
-      } catch (error) {
-        toast.error(`${error}`, {
+      if (issueCreate.selectedIssue === "") {
+        toast.error(`Select Issue`, {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,
           pauseOnHover: true,
           theme: "colored",
         });
+      } else if (issueCreate.describedIssue === "") {
+        toast.error(`Describe Issue`, {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else {
+        try {
+          const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/orderIssue`;
+
+          const reqConfigure = {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              orderId: orderId,
+              issueType: issueCreate.selectedIssue,
+              describeIssue: issueCreate.describedIssue,
+            }),
+          };
+          const res = await fetch(url, reqConfigure);
+
+          if (res.ok) {
+            toast.success("Issue Created", {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+            setIssueCreate({
+              selectedIssue: "",
+              describedIssue: "",
+            });
+            setTimeout(() => {
+              setShowSupport(false);
+            }, 1000);
+            getMyOrders();
+          }
+        } catch (error) {
+          toast.error(`${error}`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        }
       }
     };
 
@@ -672,6 +691,9 @@ const MyOrders = () => {
                     type="button"
                     onClick={() => {
                       Cookies.remove("jwt_userId");
+                      Cookies.remove("jwt_userName");
+                      Cookies.remove("jwt_mobileNumber");
+                      Cookies.remove("jwt_adminLogin");
                       window.location.href = "/";
                     }}
                     className="but"

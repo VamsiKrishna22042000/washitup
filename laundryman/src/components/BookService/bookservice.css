@@ -1,3 +1,23 @@
+@keyframes clickanimation {
+  0% {
+    transform: translateX(8%);
+  }
+  100% {
+    transform: translateX(-1%);
+  }
+}
+
+.click-here {
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: green;
+  font-weight: 900;
+  animation: clickanimation 1s ease-in-out infinite alternate;
+}
+
 .react-calendar__navigation {
   height: 10% !important;
 }
@@ -28,11 +48,15 @@
   justify-content: space-around;
   align-items: center;
 }
+
 .address-box > p {
+  height: 7vh;
   font-size: 0.8rem;
-  margin-top: 5%;
   font-family: "Instrument Sans", sans-serif;
   width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5%;
 }
 
 .address-box button {
@@ -48,6 +72,27 @@
   margin-top: -2%;
   margin-bottom: 1%;
   color: #6759ff;
+}
+
+.otp-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.otp-button {
+  position: absolute;
+  border: 0;
+  right: 2%;
+  color: #ffffff;
+  font-size: 0.75rem;
+  padding: 2% 3%;
+  background-color: var(--def-color);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  height: 80%;
 }
 
 @media screen and (min-width: 992px) {
@@ -177,11 +222,31 @@
 }
 
 @media screen and (max-width: 600px) {
+  @keyframes click {
+    0% {
+      transform: translateX(8%);
+    }
+    100% {
+      transform: translateX(2%);
+    }
+  }
+
+  .click-here {
+    justify-content: flex-start;
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    font-weight: bolder;
+    animation: click 1s ease-in-out infinite alternate;
+  }
   .address-box > p {
+    height: 7vh;
     font-size: 0.7rem;
-    margin-top: 5%;
     font-family: "Instrument Sans", sans-serif;
     width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 5%;
   }
 
   .address-box button {

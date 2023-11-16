@@ -34,9 +34,12 @@
   margin-left: 5%;
 }
 .address-boxB > p {
+  height: 5vh;
   font-size: 0.6rem;
   font-family: "Instrument Sans", sans-serif;
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .address-box button {

@@ -9,10 +9,16 @@ const ProtectedRoute2 = (props) => {
   const isAdmin = Cookies.get("jwt_adminLogin");
 
   if (isUser !== undefined && isAdmin !== undefined) {
-    return <Route {...props} />;
+    if (isAdmin) {
+      return <Route {...props} />;
+    } else {
+      window.location.href = "/";
+    }
   } else {
     Cookies.remove("jwt_userId");
     Cookies.remove("jwt_adminLogin");
+    Cookies.remove("jwt_userName");
+    Cookies.remove("jwt_mobileNumber");
     return <UserLogin />;
   }
 };

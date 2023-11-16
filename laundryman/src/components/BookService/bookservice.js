@@ -2,7 +2,9 @@ import "../LaundryMain/index.css";
 
 import "./bookservice.css";
 
-import { MagnifyingGlass } from "react-loader-spinner";
+import { IoIosArrowBack } from "react-icons/io";
+
+import { MagnifyingGlass, TailSpin } from "react-loader-spinner";
 
 import { useEffect, useState, version } from "react";
 
@@ -15,6 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Map from "./googlemap";
+import Cookies from "js-cookie";
 
 const timeArray = [
   {
@@ -53,10 +56,24 @@ const BookService = (props) => {
   max.setDate(max.getDate() + 7);
 
   const [date, setDate] = useState(min);
+
+  const userName = Cookies.get("jwt_userName");
+  const userMobileNumber = Cookies.get("jwt_mobileNumber");
+
   const [input, setInputs] = useState({
-    name: "",
-    number: "",
+    name: userName !== undefined ? userName : "",
+    number: userMobileNumber !== undefined ? userMobileNumber : "",
     timeSelected: "",
+  });
+
+  const [otp, setOtp] = useState(
+    userName !== undefined && userMobileNumber !== undefined ? true : false
+  );
+
+  const [otpVerification, setOtpVerification] = useState({
+    otpNumber: "",
+    otpSent: false,
+    otpLoad: false,
   });
 
   const [pincode, setPincode] = useState("");
@@ -214,6 +231,15 @@ const BookService = (props) => {
         alignSelf: "center",
         theme: "colored",
       });
+    } else if (otp !== true) {
+      toast.error("Complete OTP Authentication", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        alignSelf: "center",
+        theme: "colored",
+      });
     } else {
       const removeTimeFromDate = (date) => {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -229,6 +255,11 @@ const BookService = (props) => {
           theme: "colored",
         });
       } else {
+        let totalPrice = 0;
+        items.map(
+          (each) => (totalPrice = totalPrice + each.price * each.count)
+        );
+
         const itemsTobeSent = items.map((each) => ({
           itemId: each._id,
           itemCount: each.count,
@@ -244,6 +275,7 @@ const BookService = (props) => {
           }-${date.getFullYear()}`,
           time: input.timeSelected,
           items: itemsTobeSent,
+          total: totalPrice,
         };
 
         book(dataTobeSent);
@@ -343,6 +375,118 @@ const BookService = (props) => {
     setShowMap(false);
   };
 
+  const handleOtp = async () => {
+    if (input.number === "" || input.number.length !== 10) {
+      toast.error("Enter Valid Mobile Number", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    } else {
+      setOtpVerification({ ...otpVerification, otpLoad: true });
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/otpBook`;
+
+      const reqConfigure = {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({ mobileNumber: input.number }),
+      };
+
+      const response = await fetch(url, reqConfigure);
+      if (response.ok) {
+        setOtpVerification({
+          ...otpVerification,
+          otpSent: true,
+          otpLoad: false,
+        });
+        toast.success("OTP Sent", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else {
+        setOtpVerification({
+          ...otpVerification,
+          otpLoad: false,
+        });
+        toast.error("Check Mobile Number", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      }
+    }
+  };
+
+  const verifyOtp = async () => {
+    if (otpVerification.otpNumber === "") {
+      toast.error("Enter Valid OTP", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    } else {
+      setOtpVerification({ ...otpVerification, otpLoad: true });
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/otpBookVerify`;
+
+      const reqConfigure = {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          mobileNumber: input.number,
+          name: input.name,
+          otp: otpVerification.otpNumber,
+        }),
+      };
+
+      const response = await fetch(url, reqConfigure);
+      if (response.ok) {
+        setOtpVerification({
+          ...otpVerification,
+          otpSent: false,
+          otpLoad: false,
+        });
+        setOtp(true);
+        toast.success("Verified", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else {
+        setOtpVerification({
+          ...otpVerification,
+          otpNumber: "",
+          otpLoad: false,
+        });
+        toast.error("Enter Valid OTP", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      }
+    }
+  };
+
   return (
     <>
       <ToastContainer />
@@ -391,16 +535,93 @@ const BookService = (props) => {
             </div>
           </div>
         )}
-
         {!showMap && (
           <div className="input1">
             <h1 className="where-head">Where ?</h1>
+
+            {otpVerification.otpSent ? (
+              <p className="where-titles">Enter OTP</p>
+            ) : (
+              <p className="where-titles">Mobile Number</p>
+            )}
+
+            {otpVerification.otpSent ? (
+              <div className="otp-box">
+                {otpVerification.otpLoad ? (
+                  <div style={{ marginRight: "45%" }}>
+                    <TailSpin height={30} width={30} />
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      id="phone"
+                      className="name"
+                      type="number"
+                      value={otpVerification.otpNumber}
+                      placeholder="Enter OTP"
+                      onChange={(e) => {
+                        const isValidInput = /^[0-9]*$/.test(e.target.value);
+                        isValidInput &&
+                          setOtpVerification({
+                            ...otpVerification,
+                            otpNumber: e.target.value,
+                          });
+                      }}
+                    />
+                    <button
+                      onClick={verifyOtp}
+                      className="otp-button"
+                      type="button"
+                    >
+                      Verify
+                    </button>
+                  </>
+                )}
+              </div>
+            ) : (
+              <div className="otp-box">
+                {otpVerification.otpLoad ? (
+                  <div style={{ marginRight: "45%" }}>
+                    <TailSpin height={30} width={30} />
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      id="phone"
+                      className="name"
+                      type="number"
+                      value={input.number}
+                      placeholder="Phone Number"
+                      onChange={(e) => {
+                        const isValidInput = /^[0-9]*$/.test(e.target.value);
+                        isValidInput &&
+                          setInputs((prevValues) => ({
+                            ...prevValues,
+                            number: e.target.value,
+                          }));
+                      }}
+                    />
+                    {userMobileNumber === undefined &&
+                      input.number.length === 10 &&
+                      input.name !== "" && (
+                        <button
+                          onClick={handleOtp}
+                          className="otp-button"
+                          type="button"
+                        >
+                          Send OTP
+                        </button>
+                      )}
+                  </>
+                )}
+              </div>
+            )}
             <p className="where-titles" htmlFor="name">
               Name
             </p>
             <input
               onChange={(e) => {
-                const isValidInput = /^[a-zA-Z]*$/.test(e.target.value);
+                const isValidInput = /^[a-zA-Z ]*$/.test(e.target.value);
                 isValidInput &&
                   setInputs((prevValues) => ({
                     ...prevValues,
@@ -412,23 +633,6 @@ const BookService = (props) => {
               type="text"
               placeholder="Name"
               value={input.name}
-            />
-
-            <p className="where-titles">Mobile Number</p>
-            <input
-              id="phone"
-              className="name"
-              type="number"
-              value={input.number}
-              placeholder="Phone Number"
-              onChange={(e) => {
-                const isValidInput = /^[0-9]*$/.test(e.target.value);
-                isValidInput &&
-                  setInputs((prevValues) => ({
-                    ...prevValues,
-                    number: e.target.value,
-                  }));
-              }}
             />
 
             <div style={{ position: "relative", width: "100%" }}>
@@ -456,6 +660,13 @@ const BookService = (props) => {
                     color="#6759ff"
                   />
                 </div>
+              ) : geoLoc === "" ? (
+                <div className="name3">
+                  <p className="click-here">
+                    <IoIosArrowBack />
+                    Click Here
+                  </p>
+                </div>
               ) : (
                 <input
                   readOnly
@@ -470,9 +681,16 @@ const BookService = (props) => {
                   }}
                 />
               )}
-              {!geoLoading && (
+              {!geoLoading && geoLoc === "" ? (
                 <BiCurrentLocation
                   cursor={"pointer"}
+                  className="geoLocator"
+                  onClick={getLocation}
+                />
+              ) : (
+                <BiCurrentLocation
+                  cursor={"pointer"}
+                  color="green"
                   className="geoLocator"
                   onClick={getLocation}
                 />
@@ -498,7 +716,7 @@ const BookService = (props) => {
               placeholder="LandMark"
               value={userAddress.landmark}
               onChange={(e) => {
-                const isValidInput = /^[a-zA-Z]*$/.test(e.target.value);
+                const isValidInput = /^[a-zA-Z ]*$/.test(e.target.value);
                 isValidInput &&
                   setAddress({ ...userAddress, landmark: e.target.value });
               }}

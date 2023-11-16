@@ -204,6 +204,10 @@ const UserLogin = () => {
       if (response.ok) {
         Cookies.set("jwt_userId", data.data[0]._id, { expires: 30 });
         Cookies.set("jwt_adminLogin", data.data[0].isAdmin, { expires: 30 });
+        Cookies.set("jwt_userName", data.data[0].name, { expires: 30 });
+        Cookies.set("jwt_mobileNumber", data.data[0].mobileNumber, {
+          expires: 30,
+        });
         window.location.href = "/";
       } else {
         setgetotp(true);
@@ -293,11 +297,16 @@ const UserLogin = () => {
                     <p className="logo-para">Enter Name</p>
                     <input
                       className="login-input"
-                      type="text"
                       placeholder="Enter Name"
                       onChange={(e) => {
-                        const isValidInput = /^[a-zA-Z]*$/.test(e.target.value);
-                        isValidInput === true && setName(e.target.value);
+                        const validInput = /^[a-z]*$/.test(e.target.value);
+                        if (validInput) {
+                          setName(e.target.value);
+                        }
+                        const valid = /^[A-Z]*$/.test(e.target.value);
+                        if (valid) {
+                          setName(e.target.value);
+                        }
                       }}
                     />
                     <p className="logo-para">Enter Phone Number</p>
@@ -316,7 +325,7 @@ const UserLogin = () => {
                             setMobileNumber(e.target.value);
                         }}
                         className="login-input"
-                        type="tel"
+                        type="number"
                         placeholder="Enter Mobile Number"
                       />
                     </div>
