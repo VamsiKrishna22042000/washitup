@@ -165,15 +165,7 @@ const BookServiceB = (props) => {
 
   /**Function to navigate from the where & who section to coupon section of the main component */
   const bookNow = async () => {
-    if (input.name === "") {
-      toast.error("Please Enter Name", {
-        position: "top-center",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        theme: "colored",
-      });
-    } else if (input.number === "") {
+    if (input.number === "") {
       toast.error("Please Enter Number", {
         position: "top-center",
         autoClose: 2000,
@@ -183,6 +175,14 @@ const BookServiceB = (props) => {
       });
     } else if (input.number.length !== 10) {
       toast.error("Please Enter Valid Number", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    } else if (input.name === "") {
+      toast.error("Please Enter Name", {
         position: "top-center",
         autoClose: 2000,
         closeOnClick: true,
@@ -346,10 +346,6 @@ const BookServiceB = (props) => {
     setLongitude(position.coords.longitude);
   }
 
-  useEffect(() => {
-    reverseGeoCoding();
-  }, [latitude, longitude]);
-
   function showError(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:
@@ -366,6 +362,9 @@ const BookServiceB = (props) => {
         break;
     }
   }
+  useEffect(() => {
+    reverseGeoCoding();
+  }, [latitude, longitude]);
 
   const onAddressChange = (data) => {
     console.log(data.formattedAddress);
@@ -385,7 +384,7 @@ const BookServiceB = (props) => {
       });
     } else {
       setOtpVerification({ ...otpVerification, otpLoad: true });
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/otpBook`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpSignup`;
 
       const reqConfigure = {
         method: "POST",
@@ -429,6 +428,12 @@ const BookServiceB = (props) => {
 
   const verifyOtp = async () => {
     if (otpVerification.otpNumber === "") {
+      setOtpVerification({
+        otpNumber: "",
+        otpSent: false,
+        otpLoad: false,
+      });
+      setOtp(true);
       toast.error("Enter Valid OTP", {
         position: "top-center",
         autoClose: 2000,
@@ -438,7 +443,7 @@ const BookServiceB = (props) => {
       });
     } else {
       setOtpVerification({ ...otpVerification, otpLoad: true });
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/otpBookVerify`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifySignup`;
 
       const reqConfigure = {
         method: "POST",
@@ -448,9 +453,9 @@ const BookServiceB = (props) => {
         },
 
         body: JSON.stringify({
-          mobileNumber: input.number,
+          mobileNumber: parseInt(input.number),
           name: input.name,
-          otp: otpVerification.otpNumber,
+          otp: parseInt(otpVerification.otpNumber),
         }),
       };
 
@@ -596,7 +601,8 @@ const BookServiceB = (props) => {
                     />
                     {userMobileNumber === undefined &&
                       input.number.length === 10 &&
-                      input.name !== "" && (
+                      input.name !== "" &&
+                      !otp && (
                         <button
                           onClick={handleOtp}
                           className="otp-button"
@@ -673,9 +679,7 @@ const BookServiceB = (props) => {
               placeholder="Do / Flat No"
               value={userAddress.dono}
               onChange={(e) => {
-                const isValidInput = /^[0-9!@#$%^&*/()]*$/.test(e.target.value);
-                isValidInput &&
-                  setAddress({ ...userAddress, dono: e.target.value });
+                setAddress({ ...userAddress, dono: e.target.value });
               }}
             />
 

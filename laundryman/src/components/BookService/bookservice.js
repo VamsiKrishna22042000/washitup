@@ -43,11 +43,21 @@ const timeArray = [
 ];
 
 const BookService = (props) => {
+  const userName = Cookies.get("jwt_userName");
+  const userMobileNumber = Cookies.get("jwt_mobileNumber");
+  const userAddres = Cookies.get("jwt_address");
+  const userLoaction = Cookies.get("jwt_location");
+
   const { book, time, getTime, items } = props;
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [userAddress, setAddress] = useState({ dono: "", landmark: "" });
-  const [geoLoc, setGeoLoc] = useState("");
+  const [userAddress, setAddress] = useState({
+    dono: userAddres !== undefined ? userAddres.dono : "",
+    landmark: userAddres !== undefined ? userAddres.landmark : "",
+  });
+  const [geoLoc, setGeoLoc] = useState(
+    userLoaction !== undefined ? userLoaction : ""
+  );
 
   const min = new Date();
   min.setDate(min.getDate() + 1);
@@ -56,9 +66,6 @@ const BookService = (props) => {
   max.setDate(max.getDate() + 7);
 
   const [date, setDate] = useState(min);
-
-  const userName = Cookies.get("jwt_userName");
-  const userMobileNumber = Cookies.get("jwt_mobileNumber");
 
   const [input, setInputs] = useState({
     name: userName !== undefined ? userName : "",
@@ -166,15 +173,7 @@ const BookService = (props) => {
 
   /**Function to navigate from the where & who section to coupon section of the main component */
   const bookNow = async () => {
-    if (input.name === "") {
-      toast.error("Please Enter Name", {
-        position: "top-center",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        theme: "colored",
-      });
-    } else if (input.number === "") {
+    if (input.number === "") {
       toast.error("Please Enter Number", {
         position: "top-center",
         autoClose: 2000,
@@ -184,6 +183,14 @@ const BookService = (props) => {
       });
     } else if (input.number.length !== 10) {
       toast.error("Please Enter Valid Number", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    } else if (input.name === "") {
+      toast.error("Please Enter Name", {
         position: "top-center",
         autoClose: 2000,
         closeOnClick: true,
@@ -386,7 +393,7 @@ const BookService = (props) => {
       });
     } else {
       setOtpVerification({ ...otpVerification, otpLoad: true });
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/otpBook`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpSignup`;
 
       const reqConfigure = {
         method: "POST",
@@ -430,6 +437,12 @@ const BookService = (props) => {
 
   const verifyOtp = async () => {
     if (otpVerification.otpNumber === "") {
+      setOtpVerification({
+        otpNumber: "",
+        otpSent: false,
+        otpLoad: false,
+      });
+      setOtp(true);
       toast.error("Enter Valid OTP", {
         position: "top-center",
         autoClose: 2000,
@@ -439,7 +452,7 @@ const BookService = (props) => {
       });
     } else {
       setOtpVerification({ ...otpVerification, otpLoad: true });
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/otpBookVerify`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifySignup`;
 
       const reqConfigure = {
         method: "POST",
@@ -449,9 +462,9 @@ const BookService = (props) => {
         },
 
         body: JSON.stringify({
-          mobileNumber: input.number,
+          mobileNumber: parseInt(input.number),
           name: input.name,
-          otp: otpVerification.otpNumber,
+          otp: parseInt(otpVerification.otpNumber),
         }),
       };
 
@@ -603,7 +616,8 @@ const BookService = (props) => {
                     />
                     {userMobileNumber === undefined &&
                       input.number.length === 10 &&
-                      input.name !== "" && (
+                      input.name !== "" &&
+                      !otp && (
                         <button
                           onClick={handleOtp}
                           className="otp-button"
@@ -703,9 +717,7 @@ const BookService = (props) => {
               placeholder="Do / Flat No"
               value={userAddress.dono}
               onChange={(e) => {
-                const isValidInput = /^[0-9!@#$%^&*/()]*$/.test(e.target.value);
-                isValidInput &&
-                  setAddress({ ...userAddress, dono: e.target.value });
+                setAddress({ ...userAddress, dono: e.target.value });
               }}
             />
 

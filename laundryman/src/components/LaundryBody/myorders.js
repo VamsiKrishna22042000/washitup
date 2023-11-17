@@ -694,6 +694,8 @@ const MyOrders = () => {
                       Cookies.remove("jwt_userName");
                       Cookies.remove("jwt_mobileNumber");
                       Cookies.remove("jwt_adminLogin");
+                      Cookies.remove("jwt_address");
+                      Cookies.remove("jwt_location");
                       window.location.href = "/";
                     }}
                     className="but"

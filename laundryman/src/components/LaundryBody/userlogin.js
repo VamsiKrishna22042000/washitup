@@ -208,6 +208,12 @@ const UserLogin = () => {
         Cookies.set("jwt_mobileNumber", data.data[0].mobileNumber, {
           expires: 30,
         });
+        Cookies.set("jwt_location", data.data[0].location, {
+          expires: 30,
+        });
+        Cookies.set("jwt_address", data.data[0].address, {
+          expires: 30,
+        });
         window.location.href = "/";
       } else {
         setgetotp(true);
@@ -299,12 +305,8 @@ const UserLogin = () => {
                       className="login-input"
                       placeholder="Enter Name"
                       onChange={(e) => {
-                        const validInput = /^[a-z]*$/.test(e.target.value);
+                        const validInput = /^[a-zA-Z ]*$/.test(e.target.value);
                         if (validInput) {
-                          setName(e.target.value);
-                        }
-                        const valid = /^[A-Z]*$/.test(e.target.value);
-                        if (valid) {
                           setName(e.target.value);
                         }
                       }}
