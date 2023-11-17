@@ -406,6 +406,8 @@ const BookService = (props) => {
       };
 
       const response = await fetch(url, reqConfigure);
+
+      const data = await response.json();
       if (response.ok) {
         setOtpVerification({
           ...otpVerification,
@@ -424,13 +426,25 @@ const BookService = (props) => {
           ...otpVerification,
           otpLoad: false,
         });
-        toast.error("Check Mobile Number", {
-          position: "top-center",
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "colored",
-        });
+
+        if (data.message === "User already registered!") {
+          toast.success(`Verified You are already registerd`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setOtp(true);
+        } else {
+          toast.error(`${data.message}`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        }
       }
     }
   };

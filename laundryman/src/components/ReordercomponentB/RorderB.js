@@ -127,6 +127,17 @@ const ReorderB = ({ fromReroder, getReorder }) => {
         setTotal(total);
         setItems(items);
         setData({ ...data.data, date: "", time: "" });
+      } else if (data.message === "Order Not Find") {
+        setTimeout(() => {
+          fromReroder();
+          toast.error("Please Make Your First Order", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        }, 2000);
       }
     } catch (error) {
       console.log(error);

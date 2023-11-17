@@ -378,8 +378,6 @@ const MyOrders = () => {
     };
 
     const createIssuesUpload = async () => {
-      setLoad(false);
-
       if (issueCreate.selectedIssue === "") {
         toast.error(`Select Issue`, {
           position: "top-center",
@@ -398,6 +396,7 @@ const MyOrders = () => {
         });
       } else {
         try {
+          setLoad(false);
           const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/orderIssue`;
 
           const reqConfigure = {
@@ -458,6 +457,7 @@ const MyOrders = () => {
         <div className="modal">
           {load ? (
             <div className="support-modalbox-con">
+              <ToastContainer />
               {issues.length === 0 ? (
                 <div>
                   <img src="./no-orders.gif" />
