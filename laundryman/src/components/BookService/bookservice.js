@@ -451,12 +451,6 @@ const BookService = (props) => {
 
   const verifyOtp = async () => {
     if (otpVerification.otpNumber === "") {
-      setOtpVerification({
-        otpNumber: "",
-        otpSent: false,
-        otpLoad: false,
-      });
-      setOtp(true);
       toast.error("Enter Valid OTP", {
         position: "top-center",
         autoClose: 2000,
