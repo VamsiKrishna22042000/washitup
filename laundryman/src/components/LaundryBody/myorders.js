@@ -456,72 +456,81 @@ const MyOrders = () => {
         ></div>
         <div className="modal">
           {load ? (
-            <div className="support-modalbox-con">
+            <>
               <ToastContainer />
-              {issues.length === 0 ? (
+              <div className="support-modalbox-con">
+                {issues.length === 0 ? (
+                  <div>
+                    <img src="./no-orders.gif" />
+                    <h3>No Issues Yet</h3>
+                  </div>
+                ) : (
+                  <div id="issues">
+                    {issues.length > 0 &&
+                      issues.map((each) => (
+                        <div className="issue-box">
+                          <IoMdAlert color="red" />
+                          <p>Issue Type : {each.issueType}</p>
+                          <p>Described Issue : {each.describeIssue}</p>
+                        </div>
+                      ))}
+                  </div>
+                )}
                 <div>
-                  <img src="./no-orders.gif" />
-                  <h3>No Issues Yet</h3>
-                </div>
-              ) : (
-                <div id="issues">
-                  {issues.length > 0 &&
-                    issues.map((each) => (
-                      <div className="issue-box">
-                        <IoMdAlert color="red" />
-                        <p>Issue Type : {each.issueType}</p>
-                        <p>Described Issue : {each.describeIssue}</p>
-                      </div>
-                    ))}
-                </div>
-              )}
-              <div>
-                <h4>Customer Support </h4>
-                <p>Select Issue</p>
-                <select
-                  onChange={(e) => {
-                    setIssueCreate({
-                      ...issueCreate,
-                      selectedIssue: e.target.value,
-                    });
-                  }}
-                  value={issueCreate.selectedIssue}
-                >
-                  <option>Select</option>
-                  <option>Cancel Order</option>
-                  <option>Issue Related To Order</option>
-                  <option>Other</option>
-                </select>
-                <p>Please describe about the issue</p>
-                <textarea
-                  onChange={(e) => {
-                    setIssueCreate({
-                      ...issueCreate,
-                      describedIssue: e.target.value,
-                    });
-                  }}
-                  value={issueCreate.describedIssue}
-                ></textarea>
-                <div>
-                  <button
-                    style={{ backgroundColor: "#22222250" }}
-                    onClick={() => {
-                      setShowSupport(false);
+                  <h4>Customer Support </h4>
+                  <p>Select Issue</p>
+                  <select
+                    onChange={(e) => {
+                      if (e.target.value === "Select") {
+                        setIssueCreate({
+                          ...issueCreate,
+                          selectedIssue: "",
+                        });
+                      } else {
+                        setIssueCreate({
+                          ...issueCreate,
+                          selectedIssue: e.target.value,
+                        });
+                      }
                     }}
-                    type="button"
+                    value={issueCreate.selectedIssue}
                   >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={createIssuesUpload}
-                    style={{ backgroundColor: "green" }}
-                    type="button"
-                  >
-                    Create
-                  </button>
+                    <option>Select</option>
+                    <option>Cancel Order</option>
+                    <option>Issue Related To Order</option>
+                    <option>Other</option>
+                  </select>
+                  <p>Please describe about the issue</p>
+                  <textarea
+                    onChange={(e) => {
+                      setIssueCreate({
+                        ...issueCreate,
+                        describedIssue: e.target.value,
+                      });
+                    }}
+                    value={issueCreate.describedIssue}
+                  ></textarea>
+                  <div>
+                    <button
+                      style={{ backgroundColor: "#22222250" }}
+                      onClick={() => {
+                        setShowSupport(false);
+                      }}
+                      type="button"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={createIssuesUpload}
+                      style={{ backgroundColor: "green" }}
+                      type="button"
+                    >
+                      Create
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           ) : (
             <div className="support-modalbox-loader">
               <ToastContainer />

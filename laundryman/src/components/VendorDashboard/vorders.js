@@ -1570,12 +1570,15 @@ const Orders = () => {
     <div
       style={{
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
         alignItems: "center",
+        backgroundColor: "#F6FAFC",
       }}
       className="order-body"
     >
-      <TailSpin color="#6759ff" height={50} width={50} />
+      <img style={{ width: "20rem" }} src="no-orders.gif" alt="No Orders" />
+      <h3>You have No Orders Assigned Yet</h3>
     </div>
   );
 };
