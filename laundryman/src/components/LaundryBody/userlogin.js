@@ -208,12 +208,14 @@ const UserLogin = () => {
         Cookies.set("jwt_mobileNumber", data.data[0].mobileNumber, {
           expires: 30,
         });
-        Cookies.set("jwt_location", data.data[0].location, {
-          expires: 30,
-        });
-        Cookies.set("jwt_address", data.data[0].address, {
-          expires: 30,
-        });
+        data.data[0].location !== undefined &&
+          Cookies.set("jwt_location", data.data[0].location, {
+            expires: 30,
+          });
+        data.data[0].address !== undefined &&
+          Cookies.set("jwt_address", data.data[0].address, {
+            expires: 30,
+          });
         window.location.href = "/";
       } else {
         setgetotp(true);

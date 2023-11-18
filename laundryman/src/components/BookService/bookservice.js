@@ -673,8 +673,8 @@ const BookService = (props) => {
                 >
                   <MagnifyingGlass
                     visible={true}
-                    height="20"
-                    width="20"
+                    height="18.5"
+                    width="18.5"
                     ariaLabel="MagnifyingGlass-loading"
                     wrapperStyle={{}}
                     wrapperClass="MagnifyingGlass-wrapper"
@@ -709,12 +709,20 @@ const BookService = (props) => {
                   className="geoLocator"
                   onClick={getLocation}
                 />
+              ) : userLoaction === undefined ? (
+                <BiCurrentLocation
+                  cursor={"pointer"}
+                  color="green"
+                  className="geoLocator"
+                  onClick={() => {
+                    setShowMap(true);
+                  }}
+                />
               ) : (
                 <BiCurrentLocation
                   cursor={"pointer"}
                   color="green"
                   className="geoLocator"
-                  onClick={getLocation}
                 />
               )}
             </div>

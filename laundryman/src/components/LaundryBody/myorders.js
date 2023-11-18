@@ -30,6 +30,8 @@ const MyOrders = () => {
 
   const [orderId, setOrderId] = useState("");
 
+  const [status, setStatus] = useState("");
+
   useEffect(() => {
     getMyOrders();
   }, []);
@@ -59,7 +61,6 @@ const MyOrders = () => {
 
   const [selectedData, setSelectedData] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
-  const [count, setCount] = useState(0);
 
   const [min, setMin] = useState("");
   const [max, setMax] = useState("");
@@ -116,7 +117,6 @@ const MyOrders = () => {
 
         let dateArray = selectedData.split("-");
         let dateString = dateArray.reverse().join("-");
-        console.log(dateString);
 
         const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/user/changeOrderDate`;
 
@@ -147,8 +147,8 @@ const MyOrders = () => {
             setSelectedTime("");
             setChangePickUpDate(true);
             setfilterItems([]);
-          }, 1000);
-          getMyOrders();
+            window.location.reload();
+          }, 2000);
         }
       }
     };
@@ -211,6 +211,7 @@ const MyOrders = () => {
               </h4>
 
               {showChangePickUpDate &&
+                status === "Active" &&
                 (!showDate ? (
                   <button
                     onClick={() => {
@@ -427,8 +428,9 @@ const MyOrders = () => {
             });
             setTimeout(() => {
               setShowSupport(false);
+              setLoad(true);
+              getMyOrders();
             }, 1000);
-            getMyOrders();
           }
         } catch (error) {
           toast.error(`${error}`, {
@@ -455,9 +457,9 @@ const MyOrders = () => {
           }}
         ></div>
         <div className="modal">
+          <ToastContainer />
           {load ? (
             <>
-              <ToastContainer />
               <div className="support-modalbox-con">
                 {issues.length === 0 ? (
                   <div>
@@ -533,7 +535,6 @@ const MyOrders = () => {
             </>
           ) : (
             <div className="support-modalbox-loader">
-              <ToastContainer />
               <TailSpin height={50} width={50} color="#6759ff" />
             </div>
           )}
@@ -581,6 +582,8 @@ const MyOrders = () => {
     setTotalAmount(seperatedOrder[0].totalAmount);
 
     setOrderId(seperatedOrder[0]._id);
+
+    setStatus(seperatedOrder[0].progress);
 
     let sep = seperatedOrder[0].items.map((each) => ({
       ...each,
