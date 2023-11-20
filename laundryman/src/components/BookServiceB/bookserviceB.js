@@ -43,10 +43,20 @@ const timeArray = [
 
 const BookServiceB = (props) => {
   const { book, time, getTime, items } = props;
+
+  const userDono = Cookies.get("jwt_dono");
+  const userLandmark = Cookies.get("jwt_landmark");
+  const userLoaction = Cookies.get("jwt_location");
+
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [userAddress, setAddress] = useState({ dono: "", landmark: "" });
-  const [geoLoc, setGeoLoc] = useState("");
+  const [userAddress, setAddress] = useState({
+    dono: userDono !== undefined ? userDono : "",
+    landmark: userLandmark !== undefined ? userLandmark : "",
+  });
+  const [geoLoc, setGeoLoc] = useState(
+    userLoaction !== undefined ? userLoaction : ""
+  );
 
   const min = new Date();
   min.setDate(min.getDate() + 1);
@@ -285,6 +295,7 @@ const BookServiceB = (props) => {
 
   /**Function to get the precise location of a use by converting latitude and logitude to address*/
   const reverseGeoCoding = async () => {
+    console.log("reverseGeoCoding");
     if (latitude !== "" && longitude !== "") {
       console.log(latitude);
       console.log(longitude);
@@ -362,8 +373,9 @@ const BookServiceB = (props) => {
         break;
     }
   }
+
   useEffect(() => {
-    reverseGeoCoding();
+    userLoaction === undefined && reverseGeoCoding();
   }, [latitude, longitude]);
 
   const onAddressChange = (data) => {
@@ -499,9 +511,57 @@ const BookServiceB = (props) => {
     }
   };
 
+  const geoCoding = async () => {
+    console.log("geoCoding");
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+          geoLoc
+        )}&key=AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`
+      );
+
+      if (!response.ok) {
+        throw new Error("Geocoding failed");
+      }
+
+      const data = await response.json();
+
+      if (data.status === "OK") {
+        const location = data.results[0].geometry.location;
+        setLatitude(location.lat);
+        setLongitude(location.lng);
+
+        const pincodeMatch = geoLoc.match(/\b\d{6}\b/);
+
+        if (pincodeMatch) {
+          const pincode = pincodeMatch[0];
+
+          console.log("Pin Code:", pincode);
+          setPincode(pincode);
+        } else {
+          console.log("Pin Code not found in the address.");
+        }
+
+        setTimeout(() => {
+          setLoading(false);
+          setShowMap(true);
+        }, 1000);
+      } else {
+        console.error(`Geocoding failed. Status: ${data.status}`);
+      }
+    } catch (error) {
+      console.error("Error during geocoding:", error.message);
+    }
+  };
+
   useEffect(() => {
-    getLocation();
+    userLoaction === undefined ? getLocation() : geoCoding();
   }, []);
+
+  const handleChangeAddress = () => {
+    setGeoLoc("");
+    setAddress({ dono: "", landmark: "" });
+  };
 
   return (
     <>
@@ -626,6 +686,7 @@ const BookServiceB = (props) => {
                 )}
               </div>
             )}
+
             <p className="where-titles" htmlFor="name">
               Name
             </p>
@@ -645,6 +706,23 @@ const BookServiceB = (props) => {
               value={input.name}
             />
             <div style={{ position: "relative", width: "100%" }}>
+              {userLoaction !== undefined && (
+                <p
+                  onClick={handleChangeAddress}
+                  className="where-titles"
+                  style={{
+                    position: "absolute",
+                    right: "5%",
+                    top: 0,
+                    color: "#6759ff",
+                    fontWeight: "bolder",
+                    fontSize: ".6rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  Change Address
+                </p>
+              )}
               <p className="where-titles">Add Location</p>
               {geoLoading ? (
                 <div
@@ -676,7 +754,7 @@ const BookServiceB = (props) => {
                   value={geoLoc}
                   className="name3"
                   type="text"
-                  placeholder="Click Here to add you location"
+                  placeholder="Change the Pin to your address"
                   onChange={(e) => {
                     setGeoLoc(e.target.value);
                   }}

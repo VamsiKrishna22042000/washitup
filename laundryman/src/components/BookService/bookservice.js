@@ -45,15 +45,16 @@ const timeArray = [
 const BookService = (props) => {
   const userName = Cookies.get("jwt_userName");
   const userMobileNumber = Cookies.get("jwt_mobileNumber");
-  const userAddres = Cookies.get("jwt_address");
+  const userDono = Cookies.get("jwt_dono");
+  const userLandmark = Cookies.get("jwt_landmark");
   const userLoaction = Cookies.get("jwt_location");
 
   const { book, time, getTime, items } = props;
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [userAddress, setAddress] = useState({
-    dono: userAddres !== undefined ? userAddres.dono : "",
-    landmark: userAddres !== undefined ? userAddres.landmark : "",
+    dono: userDono !== undefined ? userDono : "",
+    landmark: userLandmark !== undefined ? userLandmark : "",
   });
   const [geoLoc, setGeoLoc] = useState(
     userLoaction !== undefined ? userLoaction : ""
@@ -510,6 +511,11 @@ const BookService = (props) => {
     }
   };
 
+  const handleChangeAddress = () => {
+    setGeoLoc("");
+    setAddress({ dono: "", landmark: "" });
+  };
+
   return (
     <>
       <ToastContainer />
@@ -664,6 +670,23 @@ const BookService = (props) => {
 
             <div style={{ position: "relative", width: "100%" }}>
               <p className="where-titles">Add Location</p>
+              {userLoaction !== undefined && (
+                <p
+                  onClick={handleChangeAddress}
+                  className="where-titles"
+                  style={{
+                    position: "absolute",
+                    right: "5%",
+                    top: 0,
+                    color: "#6759ff",
+                    fontWeight: "bolder",
+                    fontSize: ".6rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  Change Address
+                </p>
+              )}
               {geoLoading ? (
                 <div
                   className="name3"
@@ -722,6 +745,12 @@ const BookService = (props) => {
                   onClick={() => {
                     setShowMap(true);
                   }}
+                />
+              ) : userLoaction === "" ? (
+                <BiCurrentLocation
+                  cursor={"pointer"}
+                  className="geoLocator"
+                  onClick={getLocation}
                 />
               ) : (
                 <BiCurrentLocation

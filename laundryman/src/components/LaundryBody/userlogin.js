@@ -213,9 +213,14 @@ const UserLogin = () => {
             expires: 30,
           });
         data.data[0].address !== undefined &&
-          Cookies.set("jwt_address", data.data[0].address, {
+          Cookies.set("jwt_dono", data.data[0].address.dono, {
             expires: 30,
           });
+        data.data[0].address !== undefined &&
+          Cookies.set("jwt_landmark", data.data[0].address.landmark, {
+            expires: 30,
+          });
+
         window.location.href = "/";
       } else {
         setgetotp(true);
