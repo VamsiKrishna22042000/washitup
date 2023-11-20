@@ -610,6 +610,9 @@ const BookServiceB = (props) => {
                     {userMobileNumber === undefined &&
                       input.number.length === 10 &&
                       input.name !== "" &&
+                      geoLoc !== "" &&
+                      userAddress.dono !== "" &&
+                      userAddress.landmark !== "" &&
                       !otp && (
                         <button
                           onClick={handleOtp}

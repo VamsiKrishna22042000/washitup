@@ -438,9 +438,9 @@ const Orders = () => {
                     value={selectedCustomer[0].progress}
                     style={{ textTransform: "capitalize", marginRight: "5%" }}
                   >
-                    {selectedCustomer[0].action.map((each) => (
-                      <option>{each}</option>
-                    ))}
+                    <option>Active</option>
+                    <option>In Progress</option>
+                    <option>Cancel</option>
                   </select>
                 )}
 
@@ -1520,14 +1520,26 @@ const Orders = () => {
                         className="order-body-select"
                         style={{ textTransform: "capitalize" }}
                       >
-                        {each.action.map((e) => (
-                          <option
-                            style={{ textTransform: "capitalize" }}
-                            selected={each.progress === e ? true : false}
-                          >
-                            {e}
-                          </option>
-                        ))}
+                        <option
+                          style={{ textTransform: "capitalize" }}
+                          selected={each.progress === "Active" ? true : false}
+                        >
+                          Active
+                        </option>
+                        <option
+                          style={{ textTransform: "capitalize" }}
+                          selected={
+                            each.progress === "In Progress" ? true : false
+                          }
+                        >
+                          In Progress
+                        </option>
+                        <option
+                          style={{ textTransform: "capitalize" }}
+                          selected={each.progress === "cancle" ? true : false}
+                        >
+                          Cancel
+                        </option>
                       </select>
                     )}
 

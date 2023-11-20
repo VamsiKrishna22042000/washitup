@@ -472,6 +472,8 @@ const BookService = (props) => {
         body: JSON.stringify({
           mobileNumber: parseInt(input.number),
           name: input.name,
+          address: userAddress,
+          location: geoLoc,
           otp: parseInt(otpVerification.otpNumber),
         }),
       };
@@ -625,6 +627,9 @@ const BookService = (props) => {
                     {userMobileNumber === undefined &&
                       input.number.length === 10 &&
                       input.name !== "" &&
+                      geoLoc !== "" &&
+                      userAddress.dono !== "" &&
+                      userAddress.landmark !== "" &&
                       !otp && (
                         <button
                           onClick={handleOtp}
