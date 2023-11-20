@@ -52,6 +52,11 @@ const BookService = (props) => {
   const { book, time, getTime, items } = props;
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+
+  const [initialLatitude, setInitalLatitude] = useState("");
+
+  const [initialLongitude, setInitalLongitude] = useState("");
+
   const [userAddress, setAddress] = useState({
     dono: userDono !== undefined ? userDono : "",
     landmark: userLandmark !== undefined ? userLandmark : "",
@@ -89,6 +94,8 @@ const BookService = (props) => {
   const [geoLoading, setLoading] = useState(false);
 
   const [showMap, setShowMap] = useState(false);
+
+  const [count, setCount] = useState(-1);
 
   /**Array to store the pincodes that which we provide service for those areas*/
   const availablePincodes = [
@@ -294,8 +301,7 @@ const BookService = (props) => {
   /**Function to get the precise location of a use by converting latitude and logitude to address*/
   const reverseGeoCoding = async () => {
     if (latitude !== "" && longitude !== "") {
-      console.log(latitude);
-      console.log(longitude);
+      console.log("reversegeocoding");
       const apiKey = "AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ";
       const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false&key=${apiKey}`;
 
@@ -352,7 +358,39 @@ const BookService = (props) => {
   function showPosition(position) {
     setLatitude(position.coords.latitude);
     setLongitude(position.coords.longitude);
+    setInitalLatitude(position.coords.latitude);
+    setInitalLongitude(position.coords.longitude);
   }
+
+  const geoCoding = async (changedAddress) => {
+    console.log("geoCoding");
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+          changedAddress
+        )}&key=AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`
+      );
+
+      if (!response.ok) {
+        throw new Error("Geocoding failed");
+      }
+
+      const data = await response.json();
+
+      if (data.status === "OK") {
+        const location = data.results[0].geometry.location;
+        console.log(location.lat);
+        console.log(location.lng);
+
+        setInitalLatitude(location.lat);
+        setInitalLongitude(location.lng);
+      } else {
+        console.error(`Geocoding failed. Status: ${data.status}`);
+      }
+    } catch (error) {
+      console.error("Error during geocoding:", error.message);
+    }
+  };
 
   useEffect(() => {
     reverseGeoCoding();
@@ -375,11 +413,12 @@ const BookService = (props) => {
     }
   }
 
-  const onAddressChange = (data) => {
+  const onAddressChange = async (data) => {
     console.log(data.currentAddress);
     console.log(data.currentPinCode);
     setGeoLoc(data.currentAddress);
     setPincode(data.currentPinCode);
+    geoCoding(data.currentAddress);
     setShowMap(false);
   };
 
@@ -512,23 +551,34 @@ const BookService = (props) => {
   };
 
   const handleChangeAddress = () => {
-    setGeoLoc("");
-    setAddress({ dono: "", landmark: "" });
+    if (count === -1) {
+      setCount(count + 1);
+      setGeoLoc("");
+      setAddress({ dono: "", landmark: "" });
+    }
+    if (count > -1) {
+      setCount(count + 1);
+      setAddress({ dono: "", landmark: "" });
+      setShowMap(true);
+    }
   };
 
   return (
     <>
       <ToastContainer />
       <div className="login-book-service">
-        {showMap && !geoLoading && latitude !== "" && longitude !== "" && (
-          <Map
-            pincode={pincode}
-            address={geoLoc}
-            initialLatitude={latitude}
-            initialLongitude={longitude}
-            onAddressChange={onAddressChange}
-          />
-        )}
+        {showMap &&
+          !geoLoading &&
+          initialLatitude !== "" &&
+          initialLongitude !== "" && (
+            <Map
+              pincode={pincode}
+              address={geoLoc}
+              initialLatitude={initialLatitude}
+              initialLongitude={initialLongitude}
+              onAddressChange={onAddressChange}
+            />
+          )}
         {!showMap && (
           <div className="input2">
             <h1 className="where-head">When?</h1>
@@ -732,11 +782,22 @@ const BookService = (props) => {
                 />
               )}
               {!geoLoading && geoLoc === "" ? (
-                <BiCurrentLocation
-                  cursor={"pointer"}
-                  className="geoLocator"
-                  onClick={getLocation}
-                />
+                count > 0 ? (
+                  <BiCurrentLocation
+                    cursor={"pointer"}
+                    color="green"
+                    className="geoLocator"
+                    onClick={() => {
+                      setShowMap(true);
+                    }}
+                  />
+                ) : (
+                  <BiCurrentLocation
+                    cursor={"pointer"}
+                    className="geoLocator"
+                    onClick={getLocation}
+                  />
+                )
               ) : userLoaction === undefined ? (
                 <BiCurrentLocation
                   cursor={"pointer"}
@@ -746,7 +807,7 @@ const BookService = (props) => {
                     setShowMap(true);
                   }}
                 />
-              ) : userLoaction === "" ? (
+              ) : geoLoc === "" ? (
                 <BiCurrentLocation
                   cursor={"pointer"}
                   className="geoLocator"
@@ -754,8 +815,8 @@ const BookService = (props) => {
                 />
               ) : (
                 <BiCurrentLocation
-                  cursor={"pointer"}
                   color="green"
+                  cursor={"pointer"}
                   className="geoLocator"
                 />
               )}
