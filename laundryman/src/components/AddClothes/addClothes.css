@@ -359,7 +359,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1vh;
-    border-color: #6759ff;
+    border-color: #ffffff;
     border-style: solid;
     border-width: 1px;
     border-radius: 50%;
@@ -369,16 +369,16 @@
   }
 
   .set-counter-button:hover {
-    background-color: #6759ff;
+    background-color: #ffffff;
     border-width: 0px;
-    color: #fff;
+    color: #6759ff;
     font-size: 2.5vh;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1vh;
-    border-color: #6759ff;
+    border-color: #ffffff;
     border-style: solid;
     border-width: 1px;
     border-radius: 50%;
