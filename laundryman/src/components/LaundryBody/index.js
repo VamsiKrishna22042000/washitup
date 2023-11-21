@@ -53,7 +53,7 @@ const fearturesOfback2 = [
 const iphones = [
   {
     class: "women1",
-    iurl: "/womenwashituppic1.png",
+    iurl: "/womenwashituppic1.webp",
     fep1: "FEATURES",
     lan: "WashIt Up Features",
     phonecon: "phone1",
@@ -69,7 +69,7 @@ const iphones = [
   },
   {
     class: "women2",
-    iurl: "/womenwashituppic2.png",
+    iurl: "/womenwashituppic2.webp",
     fep1: "FEATURES",
     lan: "WashIt Up Features",
     phonecon: "phone2",

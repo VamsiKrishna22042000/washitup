@@ -1,6 +1,9 @@
 /* TestimonialSlider.css */
 
 .testimonial {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   text-align: center;
   padding: 20px;
   position: relative; /* Needed for customer images */
