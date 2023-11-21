@@ -95,7 +95,7 @@ function LaundryNav() {
   };
 
   return (
-    <div id="home" className="background1-con">
+    <div style={{ overflow: "hidden" }} id="home" className="background1-con">
       <div className="bar" bg="#b8dde3" variant="light">
         <div className="navbarcontainer">
           <img

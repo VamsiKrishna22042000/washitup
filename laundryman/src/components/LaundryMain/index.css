@@ -928,7 +928,7 @@
     align-items: center;
     margin-bottom: 3vh;
     position: relative;
-    overflow: hidden;
+    overflow: hidden !important;
   }
 
   .offer-22 {
@@ -996,7 +996,7 @@
     width: 100vw;
     background-color: #b8dde3;
     background-size: cover;
-    overflow: hidden;
+    overflow: hidden !important;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1023,6 +1023,7 @@
     height: auto;
     width: 100vw;
     background-color: #fff;
+    overflow: hidden !important;
   }
 
   .back2-head {
