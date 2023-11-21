@@ -563,6 +563,20 @@ const BookService = (props) => {
     }
   };
 
+  /**  for safari browser  zoom**/
+  // Get all input and textarea elements
+  var inputFields = document.querySelectorAll("input, textarea");
+
+  // Add an event listener to each input field
+  inputFields.forEach(function (inputField) {
+    inputField.addEventListener("focus", function () {
+      // Set the zoom level to 1
+      document.body.style.zoom = 1;
+    });
+  });
+
+  /**For safari browser zoom */
+
   return (
     <>
       <ToastContainer />
