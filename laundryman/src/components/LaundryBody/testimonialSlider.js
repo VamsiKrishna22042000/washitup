@@ -22,22 +22,16 @@ const testimonialData = [
     image: "/customer4.jpg",
     bgColor: "#0cae74",
   },
+
   {
     id: 3,
-    name: "David Brown",
-    text: "I've been using WashIt Up for a while now, and I'm impressed every time. The platform is user-friendly, and the range of services they offer is fantastic. Whether it's a delicate item that needs dry cleaning or a pile of laundry for wash and fold, WashIt Up has me covered. The best part is the reliability and quick turnaround time!",
-    image: "/customer3.jpg",
-    bgColor: "#dd246e",
-  },
-  {
-    id: 4,
     name: "Lisa Johnson",
     text: "WashIt Up has simplified my laundry routine, and I couldn't be happier! The convenience of scheduling a laundry pickup and drop-off is a game-changer. Plus, the quality of the wash and iron service is outstanding. My clothes look and feel amazing. I'm a loyal customer, and I highly recommend them.",
     image: "/customer-review2.jpeg",
     bgColor: "#6759ff",
   },
   {
-    id: 5,
+    id: 4,
     name: "Michael Wilson",
     text: "WashIt Up is the ultimate laundry solution. I used to dread doing laundry, but not anymore! Their platform is intuitive, and the options for different types of washes suit all my needs. Whether it's my business attire or casual clothes, they handle it all with care. It's a time-saver and a quality service rolled into one.",
     image: "/customer5.jpg",
