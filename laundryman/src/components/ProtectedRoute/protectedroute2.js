@@ -9,9 +9,9 @@ const ProtectedRoute2 = (props) => {
   const isAdmin = Cookies.get("jwt_adminLogin");
 
   if (isUser !== undefined && isAdmin !== undefined) {
-    if (isAdmin === true) {
+    if (isAdmin === "true") {
       return <Route {...props} />;
-    } else if (isAdmin === false) {
+    } else {
       window.location.href = "/";
     }
   } else {

@@ -226,7 +226,11 @@ const Coupons = () => {
                   couponCode: e.target.value,
                 }));
               }}
-              style={{ marginTop: 3, marginBottom: 5 }}
+              style={{
+                marginTop: 3,
+                marginBottom: 5,
+                textTransform: "uppercase",
+              }}
               type="text"
               placeholder="Enter Coupon Code"
             />

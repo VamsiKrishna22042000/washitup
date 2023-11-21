@@ -197,6 +197,14 @@
   width: 20%;
 }
 
+.item-con-para-B-D {
+  height: 3.25vh !important;
+  width: 65% !important;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 @media only screen and (max-width: 600px) {
   .select-option-B input {
     width: 35% !important;
@@ -237,6 +245,14 @@
 
   .item-con3-B {
     height: 10vh;
+  }
+
+  .item-con-para-B-D {
+    height: 2vh !important;
+    width: 90% !important;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .item-con3-B img {

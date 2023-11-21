@@ -411,6 +411,7 @@ const MyOrders = () => {
               orderId: orderId,
               issueType: issueCreate.selectedIssue,
               describeIssue: issueCreate.describedIssue,
+              status: "Active",
             }),
           };
           const res = await fetch(url, reqConfigure);
@@ -535,7 +536,7 @@ const MyOrders = () => {
               </div>
             </>
           ) : (
-            <div className="support-modalbox-loader">
+            <div className="issues">
               <TailSpin height={50} width={50} color="#6759ff" />
             </div>
           )}

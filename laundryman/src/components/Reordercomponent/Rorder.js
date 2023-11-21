@@ -215,7 +215,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
                   src={each.itemId.image}
                   alt={each.itemId.name}
                 />
-                <p>
+                <p className="item-con-para">
                   {each.itemId.name} x {each.itemCount}
                 </p>
                 <p>
