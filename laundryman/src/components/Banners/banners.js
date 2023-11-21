@@ -30,32 +30,32 @@ const Banners = () => {
   return (
     <div className="banner-con">
       <Slider className="banner-desk" {...settings}>
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
       </Slider>
       <Slider className="banner-mobile" {...settings2}>
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
-        <img src="/offer1.png" alt="offer1" />
-        <img src="/offer2.png" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
+        <img src="/offer1.webp" alt="offer1" />
+        <img src="/offer2.webp" alt="offer2" />
       </Slider>
     </div>
   );
