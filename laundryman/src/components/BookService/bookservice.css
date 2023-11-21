@@ -272,11 +272,11 @@
     background-color: transparent;
     color: #6759ff;
     font-family: "Courier New", Courier, monospace;
-    font-size: 3.2vw;
+    font-size: 0.7rem;
     font-weight: bold;
     height: 60%;
     margin-top: 2.5%;
-    padding-top: 1%;
+    padding: 1%;
   }
 
   .selected-time {
@@ -287,11 +287,11 @@
     background-color: #6759ff;
     color: #fff;
     font-family: "Courier New", Courier, monospace;
-    font-size: 3.2vw;
+    font-size: 0.7rem;
     font-weight: bold;
     height: 80%;
     margin-top: 2.5%;
-    padding-top: 1%;
+    padding: 1%;
   }
 
   .bookservice-pickup {
