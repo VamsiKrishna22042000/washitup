@@ -211,7 +211,7 @@ const AddCouponB = (props) => {
                     placeholder="Coupon Code"
                     style={{ textTransform: "uppercase" }}
                     onChange={(e) => {
-                      setCouponCode(e.target.value);
+                      setCouponCode(e.target.value.toUpperCase());
                     }}
                   />
                   {loadapply ? (

@@ -239,7 +239,7 @@ const Coupons = () => {
               onChange={(e) => {
                 setCouponDetails((prevDe) => ({
                   ...prevDe,
-                  discount: e.target.value,
+                  discount: e.target.value.toUpperCase(),
                 }));
               }}
               style={{ marginTop: 3 }}
