@@ -182,6 +182,7 @@ const AddCoupon = (props) => {
               <input
                 className="apply-coupon-input1"
                 type="text"
+                style={{ textTransform: "uppercase" }}
                 placeholder="Coupon Code"
                 onChange={(e) => {
                   setCouponCode(e.target.value);

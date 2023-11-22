@@ -409,9 +409,10 @@ const MyOrders = () => {
             },
             body: JSON.stringify({
               orderId: orderId,
-              issueType: issueCreate.selectedIssue,
-              describeIssue: issueCreate.describedIssue,
-              status: "Active",
+              issue: {
+                issueType: issueCreate.selectedIssue,
+                describeIssue: issueCreate.describedIssue,
+              },
             }),
           };
           const res = await fetch(url, reqConfigure);
