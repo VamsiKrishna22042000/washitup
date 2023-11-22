@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500&display=swap");
+
 @keyframes animate-reorder {
   0% {
     color: green;
@@ -83,28 +85,60 @@
   font-weight: bold;
   margin: 0.25rem 5%;
 }
-.type-of-wash-continue-addClothes {
+
+.type-of-wash-continue-addClothes1 {
   position: relative;
   background-color: #6759ff;
-
   border-radius: 0.25rem;
   color: #fff;
-  padding: 1% 1%;
+  padding-top: 1%;
+  padding-bottom: 1.25%;
+  padding-right: 1.25%;
+  padding-left: 1.25%;
   border-width: 0px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4vw;
+  font-family: "Instument Sans", sans-serif;
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   align-self: flex-end;
-  font-weight: 600;
+  font-weight: bold;
   margin-right: 5%;
 }
 
-.type-of-wash-continue-addClothes > span {
+.type-of-wash-continue-addClothes1 > span {
+  font-family: "Instument Sans", sans-serif;
   font-weight: normal;
   font-size: 0.65rem;
+}
+
+.type-of-wash-continue-addClothes2 {
+  position: relative;
+  background-color: #6759ff;
+  border-radius: 0.25rem;
+  color: #fff;
+  padding: 1.25% 1.25%;
+  border-width: 0px;
+  font-family: "Instument Sans", sans-serif;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+  font-weight: bold;
+  margin-right: 5%;
+  width: 28%;
+}
+
+.type-of-wash-continue-addClothes2 > span {
+  width: 50%;
+  font-family: "Instument Sans", sans-serif;
+  font-weight: normal;
+  font-size: 0.65rem;
+  margin-top: 2%;
+  text-align: start;
 }
 
 .type-of-wash-con-addClothes {

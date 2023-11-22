@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500&display=swap");
+
 @media screen and (min-width: 992px) {
   .spinner-con {
     position: absolute;
@@ -290,14 +292,45 @@
     overflow-y: scroll;
   }
 
-  .type-of-wash-continue-addClothes {
-    padding: 2% 5%;
-    font-size: 0.9rem;
-    margin-top: 2.5%;
-    margin-bottom: 5%;
+  .type-of-wash-continue-addClothes1 {
+    position: relative;
+    background-color: #6759ff;
     border-radius: 0.25rem;
+    color: #fff;
+    padding-top: 1%;
+    padding-bottom: 1.25%;
+    padding-right: 1.25%;
+    padding-left: 1.25%;
+    border-width: 0px;
+    font-family: "Instument Sans", sans-serif;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    font-weight: bold;
+    margin-right: 5%;
   }
 
+  .type-of-wash-continue-addClothes2 {
+    position: relative;
+    background-color: #6759ff;
+    border-radius: 0.25rem;
+    color: #fff;
+    padding: 1.25% 1.25%;
+    border-width: 0px;
+    font-family: "Instument Sans", sans-serif;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-self: flex-end;
+    font-weight: bold;
+    margin-right: 5%;
+    width: 28%;
+  }
   .set-counter-b > button:hover {
     color: #6759ff;
     background-color: #ffffff;

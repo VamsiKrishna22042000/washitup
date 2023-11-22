@@ -60,7 +60,7 @@ const TypeOfWashing = (props) => {
                 height: "15%",
                 width: "15%",
               }}
-              src="/selected2.gif"
+              src="/selected.png"
               alt="seleceted"
             />
           )}
@@ -87,7 +87,7 @@ const TypeOfWashing = (props) => {
                 height: "15%",
                 width: "15%",
               }}
-              src="/selected2.gif"
+              src="/selected.png"
               alt="seleceted"
             />
           )}
@@ -114,7 +114,7 @@ const TypeOfWashing = (props) => {
                 height: "15%",
                 width: "15%",
               }}
-              src="/selected2.gif"
+              src="/selected.png"
               alt="seleceted"
             />
           )}

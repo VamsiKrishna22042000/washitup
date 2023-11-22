@@ -74,7 +74,7 @@ const WashingB = (props) => {
                   height: "15%",
                   width: "15%",
                 }}
-                src="/selected2.gif"
+                src="/selected.png"
                 alt="seleceted"
               />
             )}
@@ -103,7 +103,7 @@ const WashingB = (props) => {
                   height: "15%",
                   width: "15%",
                 }}
-                src="/selected2.gif"
+                src="/selected.png"
                 alt="seleceted"
               />
             )}
@@ -132,7 +132,7 @@ const WashingB = (props) => {
                   height: "15%",
                   width: "15%",
                 }}
-                src="/selected2.gif"
+                src="/selected.png"
                 alt="seleceted"
               />
             )}
@@ -156,12 +156,12 @@ const WashingB = (props) => {
                   callBackForTypeOfWashing({ typeofWash: selectedType, items });
                 }
               }}
-              className="type-of-wash-continue-addClothes"
+              className="type-of-wash-continue-addClothes2"
             >
               <span>
                 {items.length} - Items | ₹ {total} - Total
               </span>
-              &nbsp; Continue ➜
+              &nbsp;&nbsp; Continue ❯
             </button>
           ) : (
             <button
@@ -178,9 +178,9 @@ const WashingB = (props) => {
                   callBackForTypeOfWashing({ typeofWash: selectedType, items });
                 }
               }}
-              className="type-of-wash-continue-addClothes"
+              className="type-of-wash-continue-addClothes1"
             >
-              Continue ➜
+              Continue ❯
             </button>
           )}
         </div>
