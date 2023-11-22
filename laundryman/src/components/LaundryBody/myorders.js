@@ -373,8 +373,13 @@ const MyOrders = () => {
       const res = await axios.get(url);
 
       if (res.status === 200) {
-        console.log(res.data.data.issue);
-        setIssues(res.data.data.issue);
+        /*console.log(JSON.stringify(res.data.data));*/
+
+        if (JSON.stringify(res.data.data) === "null") {
+          setIssues([]);
+        } else {
+          setIssues(res.data.data.issue);
+        }
       }
       setLoad(true);
     };
