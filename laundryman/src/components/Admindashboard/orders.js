@@ -1732,7 +1732,6 @@ const Orders = () => {
                 : each.progress === "cancel" && {
                     width: "6.5vw",
                     color: "#FF0000",
-
                     borderRadius: "10px",
                     textTransform: "capitalize",
                     textAlign: "center",

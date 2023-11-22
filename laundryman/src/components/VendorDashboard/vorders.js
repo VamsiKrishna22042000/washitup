@@ -190,7 +190,8 @@ const Orders = () => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
     let userId = e.target.getAttribute("userId");
     let orderId = e.target.id;
-    let progress = e.target.value;
+
+    let progress = e.target.value === "Cancle" ? "cancle" : e.target.value;
     /**console.log(userId)*/
 
     const reqConfigure = {
@@ -215,7 +216,7 @@ const Orders = () => {
     setLoad(true);
     let userId = e.target.getAttribute("userId");
     let orderId = e.target.id;
-    let progress = e.target.value;
+    let progress = e.target.value === "Cancle" ? "cancle" : e.target.value;
     console.log(userId);
 
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
