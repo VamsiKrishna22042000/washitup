@@ -348,3 +348,16 @@
     animation: animate-reorder 0.5s infinite alternate;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .type-of-wash-continue-addClothes1 {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+  }
+
+  .type-of-wash-continue-addClothes2 {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    width: 70% !important;
+  }
+}
