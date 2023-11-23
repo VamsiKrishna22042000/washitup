@@ -314,6 +314,37 @@ const Dashboard = () => {
             )}
           </div>
         </div>
+        <div className="total-orders-card">
+          {/**Total Vendors obtained From the dashboardData state  */}
+          <h5>Total Drivers</h5>
+          <div
+            style={{
+              display: "flex",
+              height: "80%",
+              justifyContent: "space-around",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {dashboardData.totalDriver > 1000 &&
+            dashboardData.totalDriver < 100000 ? (
+              <h4 style={{ color: "#6759ff" }}>
+                {parseInt(dashboardData.totalDriver) / 1000} K
+              </h4>
+            ) : dashboardData.totalDriver > 100000 &&
+              dashboardData.totalDriver < 1000000 ? (
+              <h4 style={{ color: "#6759ff" }}>
+                {parseInt(dashboardData.totalDriver) / 100000} L
+              </h4>
+            ) : dashboardData.totalDriver > 1000000 ? (
+              <h4 style={{ color: "#6759ff" }}>
+                {parseInt(dashboardData.totalDriver) / 1000000} M
+              </h4>
+            ) : (
+              <h4 style={{ color: "#6759ff" }}>{dashboardData.totalDriver}</h4>
+            )}
+          </div>
+        </div>
         <section className="pie-charts">
           <div style={{ width: "300px", height: "300px" }}>
             <OrderChart data={dashboardData} />
