@@ -186,6 +186,8 @@ const Customers = () => {
 
   const [total, setTotal] = useState("");
 
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
+
   /**Making api call before mounting to show all the customers*/
   useEffect(() => {
     getAllCustomers();
@@ -246,6 +248,7 @@ const Customers = () => {
       }
 
       setAllCustomers(userArray);
+      setLoadingSpinner(true);
     }
   };
 
@@ -596,6 +599,20 @@ const Customers = () => {
               )}
             </div>
           </section>
+        ) : loadingSpinner ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#F8F9FC",
+            }}
+            className="order-body"
+          >
+            <img src="/no-orders.gif" width={250} />
+            <h2>No Customers</h2>
+          </div>
         ) : (
           <div
             style={{

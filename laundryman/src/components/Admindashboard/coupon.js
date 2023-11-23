@@ -170,7 +170,10 @@ const Coupons = () => {
           "Content-Type": "application/json",
         },
 
-        body: JSON.stringify(coupondetails),
+        body: JSON.stringify({
+          ...coupondetails,
+          couponCode: coupondetails.couponCode.toUpperCase(),
+        }),
       };
 
       const respone = await fetch(url, reqConfigure);

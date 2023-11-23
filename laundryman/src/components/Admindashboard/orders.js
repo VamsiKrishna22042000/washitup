@@ -41,6 +41,8 @@ const Orders = () => {
   const [date, setDate] = useState(new Date());
   const [selectedDate, setSelectedData] = useState({ date: "", id: "" });
 
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
+
   const [showDate, setShowDate] = useState(false);
 
   /**To get all the order before mounting by an api call*/
@@ -123,6 +125,7 @@ const Orders = () => {
       console.log(eachObjInsertedWithNumberName);
 
       setAllOrders(eachObjInsertedWithNumberName);
+      setLoadingSpinner(true);
     }
   };
 
@@ -3204,6 +3207,20 @@ const Orders = () => {
         </section>
       )}
     </>
+  ) : loadingSpinner ? (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#F8F9FC",
+      }}
+      className="order-body"
+    >
+      <img src="/no-orders.gif" width={250} />
+      <h2>No Orders Yet</h2>
+    </div>
   ) : (
     <div
       style={{

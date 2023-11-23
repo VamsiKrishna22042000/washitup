@@ -93,7 +93,7 @@ const AddCouponB = (props) => {
       },
 
       body: JSON.stringify({
-        couponCode: couponCode,
+        couponCode: couponCode.toUpperCase(),
         amount: total,
         mobileNumber: parseInt(dataTobeSent.mobileNumber),
       }),
