@@ -90,7 +90,7 @@ const ReorderB = ({ fromReroder, getReorder }) => {
 
       const items = [];
 
-      if (response.status === 200) {
+      if (response.ok) {
         console.log(data.data);
         setReorderData(data.data);
         let total = 0;
@@ -127,7 +127,11 @@ const ReorderB = ({ fromReroder, getReorder }) => {
         setTotal(total);
         setItems(items);
         setData({ ...data.data, date: "", time: "" });
-      } else if (data.message === "Order Not Find") {
+      } else if (
+        data.message === "Order Not Find" ||
+        data.message ===
+          'Cast to ObjectId failed for value "{ _id: undefined }" (type Object) at path "_id" for model "order"'
+      ) {
         setTimeout(() => {
           fromReroder();
           toast.error("Please Make Your First Order", {

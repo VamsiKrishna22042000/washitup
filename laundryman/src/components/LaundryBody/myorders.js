@@ -7,6 +7,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 import { IoMdAlert } from "react-icons/io";
+import { VscCheckAll } from "react-icons/vsc";
 
 import { TailSpin } from "react-loader-spinner";
 
@@ -479,7 +480,11 @@ const MyOrders = () => {
                     {issues.length > 0 &&
                       issues.map((each) => (
                         <div className="issue-box">
-                          <IoMdAlert color="red" />
+                          {each.status === "Active" ? (
+                            <IoMdAlert color="red" />
+                          ) : (
+                            <VscCheckAll color="green" />
+                          )}
                           <p>Issue Type : {each.issueType}</p>
                           <p>Described Issue : {each.describeIssue}</p>
                         </div>
@@ -542,7 +547,10 @@ const MyOrders = () => {
               </div>
             </>
           ) : (
-            <div className="issues">
+            <div
+              style={{ paddingLeft: "22.5%" }}
+              className="support-modalbox-con"
+            >
               <TailSpin height={50} width={50} color="#6759ff" />
             </div>
           )}

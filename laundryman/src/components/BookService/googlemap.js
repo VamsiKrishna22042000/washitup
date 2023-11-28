@@ -14,6 +14,11 @@ function Map({
   const [currentAddress, setCurrentAddress] = useState(address);
   const [currentPinCode, setCurrentPincode] = useState(pincode);
 
+  const [searchedAddress, setSearchedAddress] = useState("");
+  const [obtainedAddress, setObtainedAddress] = useState(() => {
+    return [];
+  });
+
   useEffect(() => {
     const loadGoogleMapsApi = () => {
       const script = document.createElement("script");
@@ -99,6 +104,33 @@ function Map({
     }
   }, [hasScrolledIntoView]);
 
+  useEffect(() => {
+    if (searchedAddress !== "") {
+      getPlaces();
+    }
+  }, [searchedAddress]);
+
+  const getPlaces = async () => {
+    const apiKey = `${process.env.REACT_APP_SITE_KEY}`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchedAddress}&key=${apiKey}`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (data.status === "OK") {
+        console.log(data.results);
+        setObtainedAddress(data.results);
+      } else {
+        console.error("Error:", data.status);
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+  };
+
   return (
     <div
       style={{
@@ -132,7 +164,24 @@ function Map({
       >
         Go Back
       </button>
+      <input
+        onChange={(e) => {
+          setSearchedAddress(e.target.value);
+        }}
+        className="search-box"
+        type="search"
+        placeholder=" Search Location 🔍"
+      />
+      {searchedAddress.length >= 1 && (
+        <div className="search-sug">
+          {obtainedAddress.map((each) => (
+            <p>{each}</p>
+          ))}
+        </div>
+      )}
+
       <p className="move-pin">Move Pin To Your Address</p>
+
       <div
         id="map"
         style={{

@@ -1,0 +1,250 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500&display=swap");
+
+.issue-body {
+  height: 87%;
+  width: 100%;
+  background-color: #e8e6ff;
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.header-issues {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Instrument Sans", sans-serif;
+  margin-bottom: 3.5%;
+}
+
+.header-issues > h6 {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #53545c;
+}
+
+.total-issue-con {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-issue-con-sub {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.total-isses {
+  background-color: #ffffff;
+  height: auto;
+  width: 25%;
+  padding: 1%;
+  border-radius: 0.5rem;
+  justify-self: center;
+}
+
+.total-isses img {
+  width: 15%;
+  background-color: #ffead2;
+  padding: 1.5%;
+  border-radius: 0.5rem;
+  margin-bottom: 5%;
+}
+
+.total-isses-sub {
+  background-color: #ffffff;
+  height: 20vh;
+  width: 25%;
+  padding: 1%;
+  border-radius: 0.5rem;
+  justify-self: center;
+}
+
+.total-isses-sub2 {
+  background-color: #ffffff;
+  height: 20vh;
+  width: 25%;
+  padding: 1%;
+  border-radius: 0.5rem;
+  justify-self: center;
+}
+
+.total-isses-sub img {
+  width: 15%;
+  background-color: #ffead2;
+  padding: 1.5%;
+  border-radius: 0.5rem;
+}
+
+.total-isses-sub2 img {
+  width: 15%;
+  background-color: #ffead2;
+  padding: 1.5%;
+  border-radius: 0.5rem;
+}
+
+.total-isses-sub2 p {
+  font-family: "Instrument Sans", sans-serif;
+  color: #22222295;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  height: 58%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.total-isses-sub p {
+  font-family: "Instrument Sans", sans-serif;
+  color: #22222295;
+  font-size: 0.8rem;
+  font-weight: bolder;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+
+.total-isses p {
+  font-family: "Instrument Sans", sans-serif;
+  color: #22222295;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  margin-top: 5%;
+}
+
+.total-isses h4 {
+  font-family: "Instrument Sans", sans-serif;
+  color: #6759ff;
+  font-size: 1rem;
+  font-weight: bolders;
+  margin-top: 1%;
+  margin-bottom: 8%;
+}
+
+.total-isses-sub2 h4 {
+  font-family: "Instrument Sans", sans-serif;
+  color: #6759ff;
+  font-size: 1rem;
+  font-weight: bolders;
+  margin-top: 1%;
+  margin-bottom: 8%;
+}
+
+.issues {
+  margin-top: 5%;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1%;
+}
+
+.issues > div {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.issues h5 {
+  color: #53545c;
+  font-size: 0.8rem;
+  padding: 0.8% 0%;
+}
+
+#list-of-issues {
+  border: 1px solid #22222290;
+  margin-top: 1%;
+  border-left: hidden;
+  border-right: hidden;
+  padding: 0.8% 1%;
+}
+
+#list-of-issues p {
+  border: 2px solid transparent;
+  height: 3vh;
+  width: 17%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  padding-right: 0.5%;
+}
+
+#list-of-issues {
+  border: 1px solid #22222295;
+  margin-top: 1%;
+  border-left: hidden;
+  border-right: hidden;
+  padding: 0.8% 1%;
+}
+
+#list-of-issues p {
+  border: 2px solid transparent;
+  height: 3vh;
+  width: 17%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  padding-right: 0.5%;
+}
+
+#issues-unlisted {
+  height: auto;
+  width: 100%;
+  padding: 0;
+}
+
+#issues-listed {
+  border: 1px solid transparent;
+  margin-top: 1%;
+  border-left: hidden;
+  border-right: hidden;
+  padding: 0.8% 1%;
+  list-style-type: none;
+  display: flex;
+  cursor: pointer;
+}
+
+#issues-listed p {
+  border: 2px solid transparent;
+  height: 3vh;
+  width: 17%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  padding-left: 0.25%;
+  padding-right: 0.5%;
+  cursor: pointer;
+}
+
+#issues-listed select {
+  border: 2px solid transparent;
+  height: 3vh;
+  width: 10%;
+  margin-right: 7%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  padding-left: 0.25%;
+  padding-right: 0.5%;
+  border: 1.5px solid;
+  border-radius: 0.25rem;
+}

@@ -583,7 +583,6 @@ const Driver = () => {
                 </p>
               </div>
             </div>
-
             {showDate && <Caland />}
             <div className="order-summary-body">
               <div
@@ -849,7 +848,7 @@ const Driver = () => {
               >
                 <img
                   style={{ height: "70%", width: "70%" }}
-                  src="/driver2.png"
+                  src="./driver2.png"
                   alt="Profile"
                 />
               </div>
@@ -907,16 +906,9 @@ const Driver = () => {
                     className="order-body-para"
                   >
                     <img
-                      onClick={filterVendorOrders}
-                      id={each.id}
-                      style={{
-                        height: "105%",
-                        width: "15%",
-                        position: "absolute",
-                        left: "35%",
-                      }}
+                      style={{ height: "100%", width: "20%" }}
                       src="/driver2.png"
-                      alt={each.name}
+                      alt="Profile"
                     />
                   </div>
                   <p

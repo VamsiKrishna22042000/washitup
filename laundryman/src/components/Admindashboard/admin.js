@@ -18,6 +18,8 @@ import Coupons from "./coupon";
 
 import Driver from "./driver";
 
+import Issues from "./issues.js";
+
 /**available Section is a variable used to show the section that are present in the dashboard */
 const availableSection = [
   {
@@ -54,6 +56,11 @@ const availableSection = [
     imgUrl1: "/driver1.png",
     imgUrl2: "/driver2.png",
     section: "Driver",
+  },
+  {
+    imgUrl1: "/issues1.png",
+    imgUrl2: "/issues2.png",
+    section: "Issues",
   },
 ];
 
@@ -133,8 +140,10 @@ const AdminDashboard = () => {
           <Vendors />
         ) : selectedSection === "Coupons" ? (
           <Coupons />
-        ) : (
+        ) : selectedSection === "Driver" ? (
           <Driver />
+        ) : (
+          <Issues />
         )}
       </div>
     </div>

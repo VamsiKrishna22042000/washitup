@@ -7,6 +7,40 @@
   }
 }
 
+.search-box {
+  position: absolute;
+  font-size: 0.9rem;
+  color: #6759ff;
+  top: 8%;
+  width: 28%;
+  left: 7%;
+  height: 10%;
+  z-index: 1;
+  border: 1px solid #222222;
+  border-radius: 0.25rem;
+}
+
+.search-sug {
+  position: absolute;
+  height: 80%;
+  width: 85%;
+  z-index: 5;
+  background-color: white;
+  border: 1px solid #222222;
+  bottom: 0;
+  border-radius: 0.25rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.gmnoprint {
+  display: none !important;
+}
+
+.gm-style-mtc-bbw {
+  display: none !important;
+}
+
 .click-here {
   margin-left: 5%;
   display: flex;
@@ -68,10 +102,11 @@
 }
 
 .move-pin {
+  position: relative;
   font-size: 0.9rem;
-  margin-top: -2%;
-  margin-bottom: 1%;
   color: #6759ff;
+  margin-top: -2%;
+  margin-bottom: 0.8%;
 }
 
 .otp-box {
@@ -354,5 +389,27 @@
   .react-calendar__month-view__days__day {
     height: 100%;
     font-size: 2.5vw !important;
+  }
+  .search-box {
+    position: absolute;
+    z-index: 1;
+    top: 5%;
+    height: 8.5%;
+    width: 45%;
+    left: 10%;
+    border: 1px solid #222222;
+    border-radius: 0.25rem;
+  }
+  .search-sug {
+    position: absolute;
+    height: 85%;
+    width: 80%;
+    z-index: 5;
+    background-color: white;
+    border: 1px solid #222222;
+    bottom: 0;
+    border-radius: 0.25rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
