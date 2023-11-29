@@ -87,8 +87,10 @@
   }
   .testimonial {
     display: flex;
-    padding-left: 10%;
-    padding-right: 10;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-left: 7%;
+    padding-right: 13%;
   }
   .testimonial p {
     margin-top: 10%;

@@ -1100,6 +1100,7 @@
     width: 100vw;
     background-color: #fff;
     overflow: hidden !important;
+    padding-bottom: 25%;
   }
 
   .back2-head {

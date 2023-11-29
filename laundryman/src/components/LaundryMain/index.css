@@ -1024,6 +1024,7 @@
     width: 100vw;
     background-color: #fff;
     overflow: hidden !important;
+    padding-bottom: 25%;
   }
 
   .back2-head {
@@ -1683,7 +1684,7 @@
     font-size: 2vw;
     color: #000;
     position: absolute;
-    top: 170%;
+    top: 167%;
     left: 30%;
   }
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import "./serviceB.css";
 
+import axios from "axios";
+
 function MapB({
   address,
   pincode,
@@ -13,11 +15,15 @@ function MapB({
   const [marker, setMarker] = useState(null);
   const [currentAddress, setCurrentAddress] = useState(address);
   const [currentPinCode, setCurrentPincode] = useState(pincode);
+  const [searchedAddress, setSearchedAddress] = useState("");
+  const [obtainedAddress, setObtainedAddress] = useState(() => {
+    return [];
+  });
 
   useEffect(() => {
     const loadGoogleMapsApi = () => {
       const script = document.createElement("script");
-      const Key = "AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ";
+      const Key = `AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`;
       script.src = `https://maps.googleapis.com/maps/api/js?key=${Key}&callback=initMap`;
       script.async = true;
       script.defer = true;
@@ -89,6 +95,40 @@ function MapB({
     });
   };
 
+  useEffect(() => {
+    if (searchedAddress !== "") {
+      getPlaces();
+    }
+  }, [searchedAddress]);
+
+  const getPlaces = async () => {
+    const apiKey = `AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchedAddress}&key=${apiKey}`;
+
+    try {
+      const source = axios.CancelToken.source();
+      const response = await axios.get(apiUrl, { cancelToken: source.token });
+      const data = await response.json();
+
+      if (response.status === 200) {
+        console.log(response.data.results);
+        setObtainedAddress(response.data.results);
+      } else {
+        console.error("Error:", data.status);
+        return [];
+      }
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        // Request was canceled
+        console.log("Request Cancled");
+      } else {
+        // Handle other errors
+        console.error("Error fetching data:", error);
+      }
+      return [];
+    }
+  };
+
   return (
     <>
       <div
@@ -104,6 +144,22 @@ function MapB({
           marginTop: "1%",
         }}
       >
+        <input
+          onChange={(e) => {
+            setSearchedAddress(e.target.value);
+          }}
+          className="search-box2"
+          type="search"
+          placeholder=" Search Location 🔍"
+        />
+        {searchedAddress.length >= 1 && (
+          <div className="search-sug2">
+            {obtainedAddress.map((each) => (
+              <p>{each}</p>
+            ))}
+          </div>
+        )}
+
         <p className="move-pin">Move Pin To Your Address</p>
         <div
           id="map"

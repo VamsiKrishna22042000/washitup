@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import "./bookservice.css";
 
+import axios from "axios";
+
 function Map({
   address,
   pincode,
@@ -22,7 +24,7 @@ function Map({
   useEffect(() => {
     const loadGoogleMapsApi = () => {
       const script = document.createElement("script");
-      const Key = "AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ";
+      const Key = `AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`;
       script.src = `https://maps.googleapis.com/maps/api/js?key=${Key}&callback=initMap`;
       script.async = true;
       script.defer = true;
@@ -111,22 +113,29 @@ function Map({
   }, [searchedAddress]);
 
   const getPlaces = async () => {
-    const apiKey = `${process.env.REACT_APP_SITE_KEY}`;
+    const apiKey = `AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`;
     const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchedAddress}&key=${apiKey}`;
 
     try {
-      const response = await fetch(apiUrl);
+      const source = axios.CancelToken.source();
+      const response = await axios.get(apiUrl, { cancelToken: source.token });
       const data = await response.json();
 
-      if (data.status === "OK") {
-        console.log(data.results);
-        setObtainedAddress(data.results);
+      if (response.status === 200) {
+        console.log(response.data.results);
+        setObtainedAddress(response.data.results);
       } else {
         console.error("Error:", data.status);
         return [];
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      if (axios.isCancel(error)) {
+        // Request was canceled
+        console.log("Request Cancled");
+      } else {
+        // Handle other errors
+        console.error("Error fetching data:", error);
+      }
       return [];
     }
   };

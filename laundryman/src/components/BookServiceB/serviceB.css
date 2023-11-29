@@ -49,6 +49,7 @@
   padding: 1% 2%;
   border-radius: 0.5rem;
 }
+
 .move-pin {
   position: relative;
   font-size: 0.9rem;
@@ -56,6 +57,40 @@
   margin-top: -2%;
   margin-bottom: 0.8%;
 }
+
+.gm-style-mtc {
+  display: none;
+}
+.gm-svpc {
+  display: none;
+}
+
+.search-box2 {
+  position: absolute;
+  font-size: 0.9rem;
+  color: #6759ff;
+  top: 8%;
+  width: 40%;
+  left: 7%;
+  height: 10%;
+  z-index: 1;
+  border: 1px solid #222222;
+  border-radius: 0.25rem;
+}
+
+.search-sug2 {
+  position: absolute;
+  height: 80%;
+  width: 85%;
+  z-index: 5;
+  background-color: white;
+  border: 1px solid #222222;
+  bottom: 0;
+  border-radius: 0.25rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 @media screen and (min-width: 992px) {
   .bookservice-time-B {
     border-style: solid;
@@ -186,6 +221,28 @@
 }
 
 @media screen and (max-width: 600px) {
+  .search-sug2 {
+    position: absolute;
+    height: 85%;
+    width: 80%;
+    z-index: 5;
+    background-color: white;
+    border: 1px solid #222222;
+    bottom: 0;
+    border-radius: 0.25rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .search-box2 {
+    position: absolute;
+    z-index: 1;
+    top: 5%;
+    height: 8.5%;
+    width: 45%;
+    left: 10%;
+    border: 1px solid #222222;
+    border-radius: 0.25rem;
+  }
   .where-buttonB {
     position: absolute;
     align-self: center;
