@@ -328,6 +328,7 @@
     padding-right: 5%;
     padding-bottom: 5%;
     flex-wrap: wrap;
+    margin-bottom: 5%;
   }
   .set-counter {
     width: 47%;

@@ -34,7 +34,7 @@ const Success = (props) => {
   return (
     <>
       <div style={{ position: "absolute", top: 0 }} id="success1"></div>
-      <div className="success-total-con">
+      <div style={{ marginBottom: "5%" }} className="success-total-con">
         <img
           className="success-anime"
           src="./successful-animation.gif"

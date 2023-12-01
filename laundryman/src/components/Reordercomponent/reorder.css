@@ -11,6 +11,11 @@
   cursor: not-allowed;
 }
 
+.date-input-b {
+  height: 20% !important;
+  width: 40% !important;
+}
+
 .type-of-reorder {
   position: absolute;
   width: 43vw;
@@ -269,6 +274,7 @@
     padding-top: 8%;
     padding-bottom: 8%;
     color: #9359ff;
+    margin-bottom: 5%;
   }
 
   .previous-items {

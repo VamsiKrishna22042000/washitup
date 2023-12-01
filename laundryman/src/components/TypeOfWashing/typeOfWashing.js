@@ -20,7 +20,7 @@ const TypeOfWashing = (props) => {
   return (
     <div className="type-of-wash">
       <ToastContainer />
-      <h1 className="type-of-head">Select Type of Wash</h1>
+      <h1 className="type-of-head1">Select Type of Wash</h1>
 
       {userLogged !== undefined && (
         <p className="reorder-animate">Repeat Previous Order ❯</p>
@@ -38,7 +38,7 @@ const TypeOfWashing = (props) => {
         />
       )}
 
-      <div className="type-of-wash-con">
+      <div className="type-of-wash-con1">
         <button
           onClick={() => {
             setselectedType("dry Cleaning");

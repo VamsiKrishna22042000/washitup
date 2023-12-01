@@ -30,6 +30,7 @@
     flex-direction: row;
     height: 100%;
     width: 100%;
+    padding: 9.23%;
   }
 
   .set-counter-b {
@@ -311,6 +312,7 @@
     align-self: flex-end;
     font-weight: bold;
     margin-right: 5%;
+    margin-top: 6%;
   }
 
   .type-of-wash-continue-addClothes2 {
@@ -330,6 +332,7 @@
     font-weight: bold;
     margin-right: 5%;
     width: 28%;
+    margin-top: 5.73%;
   }
   .set-counter-b > button:hover {
     color: #6759ff;

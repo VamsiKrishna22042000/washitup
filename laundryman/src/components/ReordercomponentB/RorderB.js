@@ -188,7 +188,7 @@ const ReorderB = ({ fromReroder, getReorder }) => {
   };
 
   return reorderData === "" ? (
-    <div className="type-of-reorder-watch-B">
+    <div className="type-of-reorder-B">
       <Watch
         visible={true}
         height="80"
@@ -270,6 +270,7 @@ const ReorderB = ({ fromReroder, getReorder }) => {
           <div className="select-option-B">
             <p>Select Date</p>
             <input
+              className="date-input-b"
               value={selectedData}
               onChange={(e) => {
                 setSelectedData(e.target.value);

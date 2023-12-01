@@ -23,7 +23,10 @@ const Washing = () => {
 
   return (
     <>
-      <div style={{ position: "absolute", top: 0 }} id="done1"></div>
+      <div
+        style={{ position: "absolute", top: 0, marginBottom: "5%" }}
+        id="done1"
+      ></div>
       <div className="washing-total-con">
         <div className="washing-note">
           <p>

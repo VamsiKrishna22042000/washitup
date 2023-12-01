@@ -588,8 +588,8 @@ const BookService = (props) => {
             <Map
               pincode={pincode}
               address={geoLoc}
-              initialLatitude={initialLatitude}
-              initialLongitude={initialLongitude}
+              initialLat={initialLatitude}
+              initialLong={initialLongitude}
               onAddressChange={onAddressChange}
             />
           )}

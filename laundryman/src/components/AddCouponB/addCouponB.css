@@ -10,11 +10,12 @@
     font-size: 0.7rem;
   }
   .login-book-service-coupon-B {
-    position: absolute;
+    position: relative;
     width: 90vw;
-    height: 82.5vh;
+    height: auto;
     margin-left: 5%;
-    margin-top: 6.5%;
+    margin-top: 1%;
+    margin-bottom: 5%;
     background: #ffffff;
     border-radius: 15px;
     z-index: 1;
@@ -31,14 +32,12 @@
     justify-content: space-around;
     align-self: center;
     display: flex;
-    margin-top: -7%;
-    margin-bottom: -4%;
   }
 
   .login-coupons {
     position: relative;
     width: 50%;
-    height: 50vh;
+    height: 45vh;
     background: #ffffff;
     border-radius: 15px;
     z-index: 1;
@@ -47,12 +46,13 @@
     align-items: center;
     overflow: hidden;
     padding: 0;
+    margin-bottom: 3.2%;
   }
 
   .login-coupons-C {
     position: relative;
     width: 50%;
-    height: 50vh;
+    height: 45vh;
     background: #ffffff;
     z-index: 1;
     display: flex;
@@ -66,6 +66,7 @@
     border-left: hidden;
     border-bottom: hidden;
     border-top: hidden;
+    margin-bottom: 2%;
   }
 
   .login-coupons-C p {
@@ -353,6 +354,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
+    margin-bottom: 5%;
   }
 
   .images-addCouponB {

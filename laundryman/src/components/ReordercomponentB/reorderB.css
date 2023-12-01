@@ -12,11 +12,11 @@
 }
 
 .type-of-reorder-B {
-  position: absolute;
+  position: relative;
   width: 90vw;
   height: 82.5vh;
   margin-left: 5%;
-  margin-top: 6.5%;
+  margin-top: 1%;
   background: #ffffff;
   border-radius: 15px;
   z-index: 1;
@@ -25,6 +25,7 @@
   justify-content: space-around;
   align-items: center;
   color: #6759ff;
+  margin-bottom: 5%;
 }
 
 .type-of-reorder-watch-B {
@@ -45,9 +46,10 @@
 
 .type-b-rorder {
   height: 60%;
-  width: 100%;
+  width: 92%;
   display: flex;
   padding: 0;
+  margin-top: -3%;
 }
 
 .userAddress-B {
@@ -274,6 +276,7 @@
   .type-of-reorder-B {
     position: relative;
     height: auto;
+    margin-bottom: 5%;
   }
 
   .type-b-rorder {
@@ -353,6 +356,7 @@
     padding-top: 8%;
     padding-bottom: 8%;
     color: #9359ff;
+    margin-bottom: 5%;
   }
 
   .previous-items {

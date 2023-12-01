@@ -44,6 +44,8 @@ function LaundryNav() {
 
   const [dataTobeSent, setDataTobeSent] = useState("");
 
+  const [showNavBar, setShowNavBar] = useState(false);
+
   const bookService = (data) => {
     setService(changeComponents.addCoupon);
     setDataTobeSent(data);
@@ -74,9 +76,7 @@ function LaundryNav() {
   };
 
   const navcontentshamberger = () => {
-    const navcontents = document.getElementById("contents");
-    console.log(navcontents);
-    navcontents.classList.toggle("donotshow");
+    setShowNavBar(!showNavBar);
   };
 
   const toReorder = () => {
@@ -95,23 +95,89 @@ function LaundryNav() {
   };
 
   return (
-    <div style={{ overflow: "hidden" }} id="home" className="background1-con">
-      <div className="bar" bg="#b8dde3" variant="light">
-        <div className="navbarcontainer">
+    <div style={{ overflow: "hidden" }} id="home" className="washitup-block1">
+      <div className="bar-nav" bg="#b8dde3" variant="light">
+        <div className="nav-bar-contents">
           <img
             onClick={() => {
               window.location.href = "/";
             }}
             href="#logo"
-            className="main-head"
             src="./washituplogo.png"
             alt="Main Logo"
           />
-          <button
-            style={{ cursor: "pointer" }}
-            id="contents"
-            className="navbar-nav donotshow"
+          <p
+            onClick={() => {
+              window.location.href = "/";
+            }}
+            className="home"
           >
+            Home
+          </p>
+          <p href="#features">About Us</p>
+          <p href="#pricing">Blog</p>
+          <p
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              Cookies.get("jwt_userId") !== undefined
+                ? (window.location.href = "/myorders")
+                : (window.location.href = "/userlogin");
+            }}
+            href="#myorders"
+          >
+            My Orders
+          </p>
+          {Cookies.get("jwt_userId") !== undefined ? (
+            <button
+              style={{ cursor: "pointer" }}
+              type="button"
+              onClick={() => {
+                Cookies.remove("jwt_userId");
+                Cookies.remove("jwt_userName");
+                Cookies.remove("jwt_mobileNumber");
+                Cookies.remove("jwt_adminLogin");
+                Cookies.remove("jwt_dono");
+                Cookies.remove("jwt_landmark");
+                Cookies.remove("jwt_location");
+                window.location.href = "/";
+              }}
+            >
+              Log Out
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "/userlogin";
+              }}
+            >
+              Log In
+            </button>
+          )}
+        </div>
+        {showNavBar && (
+          <div
+            id="nav-bar-id"
+            className={
+              showNavBar
+                ? "nav-bar-contents-mobile"
+                : "nav-bar-contents-mobile1"
+            }
+          >
+            <button
+              onClick={navcontentshamberger}
+              className="cross-mark-nav-bar"
+            >
+              ✖
+            </button>
+            <img
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              href="#logo"
+              src="./washituplogo.png"
+              alt="Main Logo"
+            />
             <p
               onClick={() => {
                 window.location.href = "/";
@@ -134,53 +200,35 @@ function LaundryNav() {
               My Orders
             </p>
             {Cookies.get("jwt_userId") !== undefined ? (
-              <div
+              <button
                 style={{ cursor: "pointer" }}
+                type="button"
                 onClick={() => {
                   Cookies.remove("jwt_userId");
+                  Cookies.remove("jwt_userName");
+                  Cookies.remove("jwt_mobileNumber");
+                  Cookies.remove("jwt_adminLogin");
+                  Cookies.remove("jwt_dono");
+                  Cookies.remove("jwt_landmark");
+                  Cookies.remove("jwt_location");
                   window.location.href = "/";
                 }}
-                href="#pricing"
-                className="blog"
               >
-                <button
-                  style={{ cursor: "pointer" }}
-                  type="button"
-                  onClick={() => {
-                    Cookies.remove("jwt_userId");
-                    Cookies.remove("jwt_userName");
-                    Cookies.remove("jwt_mobileNumber");
-                    Cookies.remove("jwt_adminLogin");
-                    Cookies.remove("jwt_dono");
-                    Cookies.remove("jwt_landmark");
-                    Cookies.remove("jwt_location");
-                    window.location.href = "/";
-                  }}
-                  className="but"
-                >
-                  Log Out
-                </button>
-              </div>
+                Log Out
+              </button>
             ) : (
-              <div
+              <button
+                type="button"
                 onClick={() => {
                   window.location.href = "/userlogin";
                 }}
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href = "/userlogin";
-                  }}
-                  className="but"
-                >
-                  Log In
-                </button>
-              </div>
+                Log In
+              </button>
             )}
-          </button>
-        </div>
-        <div className="hamburger">
+          </div>
+        )}
+        <div className="hamburger-icon">
           <svg
             onClick={navcontentshamberger}
             width="24"
@@ -196,21 +244,15 @@ function LaundryNav() {
           </svg>
         </div>
       </div>
-      <div className="content122">
-        <img className="cyancon" src="./cyan.png" alt="cyancon" />
-        <p className="head">
+
+      <img className="cyan-image" src="./cyan.png" alt="cyancon" />
+      <img className="pink-image" src="./pinkcon.png" alt="pinkcon" />
+      <div className="main-page-content">
+        <h4>
           Get The Best <br /> Laundry Service <br /> At Your
-          <span
-            style={{ fontFamily: "Arial", fontWeight: "900" }}
-            className="sp"
-          >
-            {" "}
-            Door Step
-          </span>
-        </p>
-        <p className="para1123">
-          Book laundry service with just few easy steps
-        </p>
+          <span>Door Step</span>
+        </h4>
+        <p>Book laundry service with just few easy steps</p>
       </div>
       {service === changeComponents.washClothes ? (
         <AddClothes typeOfWashing={typeOfWashing} wash={washClothes} />
@@ -237,7 +279,7 @@ function LaundryNav() {
       ) : (
         <Reorder fromReroder={fromReroder} getReorder={getReorder} />
       )}
-      <img className="impink" src="./pinkcon.png" alt="pinkcon" />
+
       <div
         style={{ position: "absolute" }}
         class="elfsight-app-7c53dc20-f0e1-4689-a2cd-9ffc37dc68ff"

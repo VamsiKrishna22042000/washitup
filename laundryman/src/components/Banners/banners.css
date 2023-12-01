@@ -1,9 +1,9 @@
 .banner-con {
-  height: 30%;
+  height: auto;
   width: 85%;
   align-self: center;
-  margin-top: -3.5%;
-  margin-bottom: -2.5%;
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
   position: relative;
   overflow: hidden;
 }
@@ -29,6 +29,7 @@
   border-top-left-radius: 0.8rem;
   border-bottom-right-radius: 1.5rem;
   border-bottom-left-radius: 1.5rem;**/
+  object-fit: cover;
 }
 
 @media screen and (max-width: 600px) {

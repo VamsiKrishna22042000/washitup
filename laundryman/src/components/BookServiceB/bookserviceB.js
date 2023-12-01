@@ -378,6 +378,49 @@ const BookServiceB = (props) => {
     userLoaction === undefined && reverseGeoCoding();
   }, [latitude, longitude]);
 
+  const geoCoding = async () => {
+    console.log("geoCoding");
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+          geoLoc
+        )}&key=AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`
+      );
+
+      if (!response.ok) {
+        throw new Error("Geocoding failed");
+      }
+
+      const data = await response.json();
+
+      if (data.status === "OK") {
+        const location = data.results[0].geometry.location;
+        setLatitude(location.lat);
+        setLongitude(location.lng);
+
+        const pincodeMatch = geoLoc.match(/\b\d{6}\b/);
+
+        if (pincodeMatch) {
+          const pincode = pincodeMatch[0];
+
+          console.log("Pin Code:", pincode);
+          setPincode(pincode);
+        } else {
+          console.log("Pin Code not found in the address.");
+        }
+
+        setTimeout(() => {
+          setLoading(false);
+          setShowMap(true);
+        }, 1000);
+      } else {
+        console.error(`Geocoding failed. Status: ${data.status}`);
+      }
+    } catch (error) {
+      console.error("Error during geocoding:", error.message);
+    }
+  };
+
   const onAddressChange = (data) => {
     console.log(data.formattedAddress);
     console.log(data.pincodee);
@@ -508,49 +551,6 @@ const BookServiceB = (props) => {
           theme: "colored",
         });
       }
-    }
-  };
-
-  const geoCoding = async () => {
-    console.log("geoCoding");
-    try {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-          geoLoc
-        )}&key=AIzaSyAm_75hdAbd0ukSKs2c-QG1IOkJcqgHEVQ`
-      );
-
-      if (!response.ok) {
-        throw new Error("Geocoding failed");
-      }
-
-      const data = await response.json();
-
-      if (data.status === "OK") {
-        const location = data.results[0].geometry.location;
-        setLatitude(location.lat);
-        setLongitude(location.lng);
-
-        const pincodeMatch = geoLoc.match(/\b\d{6}\b/);
-
-        if (pincodeMatch) {
-          const pincode = pincodeMatch[0];
-
-          console.log("Pin Code:", pincode);
-          setPincode(pincode);
-        } else {
-          console.log("Pin Code not found in the address.");
-        }
-
-        setTimeout(() => {
-          setLoading(false);
-          setShowMap(true);
-        }, 1000);
-      } else {
-        console.error(`Geocoding failed. Status: ${data.status}`);
-      }
-    } catch (error) {
-      console.error("Error during geocoding:", error.message);
     }
   };
 
@@ -804,8 +804,8 @@ const BookServiceB = (props) => {
               <MapB
                 pincode={pincode}
                 address={geoLoc}
-                initialLatitude={latitude}
-                initialLongitude={longitude}
+                initialLat={latitude}
+                initialLong={longitude}
                 onAddressChange={onAddressChange}
               />
               <button

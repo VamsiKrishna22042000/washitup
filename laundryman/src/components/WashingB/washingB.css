@@ -1,9 +1,10 @@
 .washing-total-con-B {
-  position: absolute;
+  position: relative;
   width: 90vw;
-  height: 82.5vh;
+  height: 84vh;
   margin-left: 5%;
-  margin-top: 6.5%;
+  margin-top: 1%;
+  margin-bottom: 5%;
   background: #ffffff;
   border-radius: 15px;
   z-index: 1;
@@ -74,6 +75,7 @@
   .washing-total-con-B {
     position: relative;
     height: 55vh;
+    margin-bottom: 5%;
   }
 
   .washing-total-con {

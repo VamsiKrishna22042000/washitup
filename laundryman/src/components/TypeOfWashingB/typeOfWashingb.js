@@ -31,7 +31,10 @@ const WashingB = (props) => {
   };
 
   return (
-    <div className="type-of-wash-continue-andAddItems">
+    <div
+      style={{ paddingTop: ".5%" }}
+      className="type-of-wash-continue-andAddItems"
+    >
       <ToastContainer />
       {userLogged !== undefined && (
         <p className="reorder-animate-B">Repeat Previous Order ❯</p>

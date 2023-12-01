@@ -13,7 +13,7 @@
 .reorder-animate-B {
   position: absolute;
   right: 38px;
-  top: 4px;
+  top: 6.5px;
   overflow: visible;
   font-size: 0.6rem;
   animation: animate-reorder 0.5s infinite alternate;
@@ -30,11 +30,12 @@
 }
 
 .type-of-wash-continue-andAddItems {
-  position: absolute;
+  position: relative;
   width: 90vw;
-  height: 82.5vh;
+  height: 90%;
   margin-left: 5%;
-  margin-top: 6.5%;
+  margin-top: 1%;
+  margin-bottom: 2.5%;
   background: #ffffff;
   border-radius: 15px;
   z-index: 1;
@@ -59,7 +60,7 @@
   align-items: center;
   width: 100%;
   border-radius: 15px;
-  height: 15vh;
+  height: 100%;
   margin: 0.25rem 5%;
   background-color: #ffffff;
   color: #6759ff;
@@ -79,7 +80,7 @@
   align-items: center;
   width: 100%;
   border-radius: 15px;
-  height: 15vh;
+  height: 100%;
   background-color: #ffffff;
   color: #6759ff;
   font-weight: bold;
@@ -105,6 +106,7 @@
   align-self: flex-end;
   font-weight: bold;
   margin-right: 5%;
+  margin-top: 6%;
 }
 
 .type-of-wash-continue-addClothes1 > span {
@@ -130,20 +132,22 @@
   font-weight: bold;
   margin-right: 5%;
   width: 28%;
+  margin-top: 5.73%;
 }
 
 .type-of-wash-continue-addClothes2 > span {
   width: 50%;
   font-family: "Instument Sans", sans-serif;
   font-weight: normal;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   margin-top: 2%;
   text-align: start;
+  font-weight: bold;
 }
 
 .type-of-wash-con-addClothes {
   height: auto;
-  width: 10%;
+  width: 11%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -151,15 +155,17 @@
 }
 
 .addCloths-con {
-  height: auto;
+  height: 90% !important;
   width: 85%;
-
   align-self: center;
   display: flex;
+  margin-top: -1%;
+  margin-bottom: 1.5%;
 }
 
 .typeof-clothes-toadd {
-  width: 90%;
+  width: 85%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -245,6 +251,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
+    margin-bottom: 5%;
   }
 
   .type-of-head {
