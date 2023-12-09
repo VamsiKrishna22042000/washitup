@@ -156,7 +156,7 @@ const AddClothesBSec = (props) => {
   const filterStore = clothes.filter((each) => category === each.category);
 
   return clothes.length > 0 ? (
-    <div className="add-Clothes-containerB">
+    <div style={{ cursor: "pointer" }} className="add-Clothes-containerB">
       <div className="counter-buttons-container-b">
         {/** Eliminating duplicates by using new Set() from the filterd category and displaying them*/}
         {[...new Set(filterCategory)].map((each) => (
@@ -183,6 +183,7 @@ const AddClothesBSec = (props) => {
                 alt={each._id}
               />
               <button
+                style={{ cursor: "pointer" }}
                 price={each.price}
                 id={each._id}
                 onClick={decrementCount}
@@ -214,6 +215,7 @@ const AddClothesBSec = (props) => {
                 {each.count * each.price}
               </p>
               <button
+                style={{ cursor: "pointer" }}
                 price={each.price}
                 id={each._id}
                 onClick={updateCount}

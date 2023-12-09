@@ -6,6 +6,8 @@ import { FaFacebook } from "react-icons/fa";
 
 import { AiFillTwitterCircle } from "react-icons/ai";
 
+import { useEffect } from "react";
+
 /**Last component that show's the washitup related static data and the social media icons related to washitup */
 const Lastsetion = () => {
   return (
@@ -15,6 +17,7 @@ const Lastsetion = () => {
           Unlock Top-Tier Laundry Care Reserve Our Services Today!
         </p>
         <button
+          style={{ cursor: "pointer" }}
           onClick={() => {
             document
               .getElementById("home")
@@ -32,6 +35,7 @@ const Lastsetion = () => {
           <div className="contentb5">
             <div className="subscription">
               <img
+                style={{ cursor: "pointer" }}
                 onClick={() => {
                   window.location.href = "/";
                 }}
@@ -53,7 +57,7 @@ const Lastsetion = () => {
                   type="text"
                   placeholder="Email address"
                 />
-                <button className="b5butt">
+                <button style={{ cursor: "pointer" }} className="b5butt">
                   Subscribe
                   <svg
                     width="16"
@@ -81,6 +85,7 @@ const Lastsetion = () => {
               </div>
               <div>
                 <FaFacebook
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     window.open(
                       "https://www.facebook.com/washitup.in",
@@ -90,6 +95,7 @@ const Lastsetion = () => {
                   className="last-section-icons1"
                 />
                 <AiOutlineInstagram
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     window.open(
                       "https://www.instagram.com/washitup.in/",
@@ -99,6 +105,7 @@ const Lastsetion = () => {
                   className="last-section-icons"
                 />
                 <AiFillTwitterCircle
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     window.open("https://twitter.com/washitup_in", "_blank");
                   }}
@@ -107,31 +114,37 @@ const Lastsetion = () => {
               </div>
             </div>
             <div className="sar">
-              <div className="services">
-                <h1 className="b5head">Company</h1>
-                <p>About Us</p>
-                <p>Meet the team</p>
-                <p>News & media</p>
-                <p>Our projects</p>
-                <p>Contact us</p>
+              <div style={{ cursor: "pointer" }} className="services">
+                <h1 style={{ cursor: "pointer" }} className="b5head">
+                  Company
+                </h1>
+                <p style={{ cursor: "pointer" }}>About Us</p>
+                <p style={{ cursor: "pointer" }}>Meet the team</p>
+                <p style={{ cursor: "pointer" }}>News & media</p>
+                <p style={{ cursor: "pointer" }}>Our projects</p>
+                <p style={{ cursor: "pointer" }}>Contact us</p>
               </div>
-              <div className="services">
-                <h1 className="b5head">Services</h1>
-                <p>Lorem ipsum</p>
-                <p>Lorem ipsum</p>
-                <p>Lorem ipsum</p>
-                <p>Lorem ipsum</p>
+              <div style={{ cursor: "pointer" }} className="services">
+                <h1 style={{ cursor: "pointer" }} className="b5head">
+                  Services
+                </h1>
+                <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
               </div>
-              <div className="services">
-                <h1 className="b5head">Support</h1>
-                <p>Terms & Conditions</p>
-                <p>Shipping Policy</p>
-                <p>Delivary Tips</p>
-                <p>Returns</p>
+              <div style={{ cursor: "pointer" }} className="services">
+                <h1 style={{ cursor: "pointer" }} className="b5head">
+                  Support
+                </h1>
+                <p style={{ cursor: "pointer" }}>Terms & Conditions</p>
+                <p style={{ cursor: "pointer" }}>Shipping Policy</p>
+                <p style={{ cursor: "pointer" }}>Delivary Tips</p>
+                <p style={{ cursor: "pointer" }}>Returns</p>
               </div>
             </div>
           </div>
-          <div className="last-3">
+          <div style={{ cursor: "pointer" }} className="last-3">
             © 2022 Laundry Shop, All Rights Reserved.
           </div>
         </div>

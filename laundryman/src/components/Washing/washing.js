@@ -27,14 +27,26 @@ const Washing = () => {
         style={{ position: "absolute", top: 0, marginBottom: "5%" }}
         id="done1"
       ></div>
-      <div className="washing-total-con">
-        <div className="washing-note">
+      <div className="washing-total-con-A">
+        <div className="washing-note-A">
           <p>
             Note : Our WashIt Executive will reach you out at your preferred
             timing Relax !
           </p>
         </div>
-        <img className="washing-anime" src="./deliveryboy.gif" alt="Washing" />
+        <img
+          className="washing-anime-A"
+          src="./deliveryboy.gif"
+          alt="Washing"
+        />
+        <p
+          className="go-back-button-A"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
+          Order Again →
+        </p>
       </div>
     </>
   );

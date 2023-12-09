@@ -848,37 +848,6 @@
     height: 4vw;
     background-color: #6759ff;
   }
-  .input1 {
-    height: 95%;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-  }
-  .input2 {
-    height: 95%;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-  }
-  .name {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1vw;
-    padding-left: 3%;
-    width: 100%;
-    border-style: solid;
-    border-radius: 6px;
-    border-width: 1px;
-    border-color: grey;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    border-color: #6759ff;
-    border-width: 1.5px;
-    margin-top: 0%;
-  }
 
   .name3 {
     font-family: Arial, Helvetica, sans-serif;
@@ -894,17 +863,6 @@
     border-color: #6759ff;
     border-width: 1.5px;
     margin-top: 0%;
-  }
-
-  .name2 {
-    height: 4vw;
-    width: 110%;
-    border-color: grey;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 0.5%;
   }
 
   .geoLocator {
@@ -969,23 +927,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    overflow: hidden;
-    min-height: 65vh;
-  }
-
-  .login-book-service {
-    position: absolute;
-    width: 43vw;
-    height: 65vh;
-    margin-left: 50%;
-    margin-top: 13%;
-    background: #ffffff;
-    border-radius: 15px;
-    z-index: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
     overflow: hidden;
     min-height: 65vh;
   }
@@ -1702,36 +1643,6 @@
     padding: 3%;
     background-color: #6759ff;
   }
-  .input1 {
-    height: 32%;
-    width: 85%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .input2 {
-    height: 32%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 5%;
-    width: 80%;
-  }
-  .name {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 3vw;
-    padding-left: 3.5%;
-    padding-top: 4%;
-    padding-bottom: 4%;
-    width: 90%;
-    border-style: solid;
-    border-radius: 6px;
-    border-width: 1px;
-    border-color: grey;
-    margin-left: 1%;
-  }
 
   #phone {
     margin-right: 5%;
@@ -1752,18 +1663,6 @@
     border-width: 1px;
     border-color: grey;
     margin-left: 6%;
-  }
-
-  .name2 {
-    width: 110% !important;
-    font-size: 3vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 2.5%;
-    padding-top: 2%;
-    padding-left: 0;
   }
 
   .geoLocator {
@@ -1831,23 +1730,6 @@
     overflow: hidden;
     padding-top: 4%;
     padding-bottom: 2%;
-  }
-  .login-book-service {
-    position: relative;
-    width: 85%;
-    margin-top: 5%;
-    margin-left: 8%;
-    background: #ffffff;
-    border-radius: 15px;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    overflow: hidden;
-    padding-top: 4%;
-    padding-bottom: 2%;
-    margin-bottom: 5%;
   }
 
   .blog {

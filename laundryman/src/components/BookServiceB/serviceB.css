@@ -1,3 +1,89 @@
+/**New Css**/
+
+.login-book-serviceB {
+  position: relative;
+  width: 90vw;
+  height: auto;
+  margin-left: 5%;
+  margin-top: 1%;
+  background: #ffffff;
+  border-radius: 15px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-bottom: 2.5%;
+  padding-bottom: 1%;
+}
+
+.addService-con-B {
+  height: auto;
+  width: 85%;
+  display: flex;
+  justify-content: space-around;
+  align-self: center;
+  display: flex;
+}
+
+.input2-BA {
+  height: auto !important;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.input1-BA {
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding-bottom: 1%;
+}
+.input1-BA {
+  height: auto;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding-bottom: 1%;
+}
+
+.input1-BA > input {
+  width: 100%;
+}
+
+.otp-box {
+  width: 100%;
+}
+
+.where-buttonB {
+  position: absolute;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 1rem;
+  width: 30%;
+  border-width: 0px;
+  background-color: #6759ff;
+  color: #fff;
+  border-radius: 5px;
+  right: 10% !important;
+  padding: 0.8% 0%;
+  bottom: 3% !important;
+  cursor: pointer;
+}
+
+/**NewCss**/
+
 .map-desktop {
   display: flex !important;
 }
@@ -105,136 +191,165 @@
   cursor: pointer;
 }
 
-@media screen and (min-width: 992px) {
-  .bookservice-time-B {
-    border-style: solid;
-    border-color: #6759ff;
-    border-width: 1px;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #6759ff;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.7rem;
-    font-weight: bolder;
-    height: 60%;
-    cursor: pointer;
-  }
-  .bookservice-time-B:hover {
-    border-style: solid;
-    border-color: #6759ff;
-    border-width: 1px;
-    border-radius: 5px;
-    background-color: #6759ff;
-    color: #ffffff;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.7rem;
-    font-weight: bolder;
-    height: 60%;
-  }
-  .selected-time-B {
-    border-style: solid;
-    border-color: #6759ff;
-    border-width: 1px;
-    border-radius: 5px;
-    background-color: #6759ff;
-    color: #ffffff;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.7rem;
-    font-weight: bolder;
-    height: 60%;
-    cursor: pointer;
-  }
-  .bookservice-pickup {
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.9vw;
-    position: absolute;
-    color: #6759ff;
-    font-weight: bold;
-    margin: 0px;
-    left: 7.5%;
-    top: 67%;
-  }
-  .where-head {
-    font-family: sans-serif;
-    font-size: 1.8vw;
-    align-self: center;
-    font-weight: bold;
-    color: #6759ff;
-    margin-bottom: 0;
-  }
-  .where-titles {
-    font-size: 1vw;
-    font-family: sans-serif;
-    margin-bottom: 0.5%;
-    margin-top: 2%;
-  }
-  .where-buttonB {
-    position: absolute;
-    align-self: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    font-size: 1rem;
-    width: 30%;
-    border-width: 0px;
-    background-color: #6759ff;
-    color: #fff;
-    border-radius: 5px;
-    right: 11%;
-    padding: 0.8% 0%;
-    bottom: 2%;
-    cursor: pointer;
-  }
-  .calender {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    font-size: 0.9rem;
-    align-self: center;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.bookservice-time-B {
+  border-style: solid;
+  border-color: #6759ff;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #6759ff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  height: 60%;
+  cursor: pointer;
+}
+.bookservice-time-B:hover {
+  border-style: solid;
+  border-color: #6759ff;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: #6759ff;
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  height: 60%;
+}
+.selected-time-B {
+  border-style: solid;
+  border-color: #6759ff;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: #6759ff;
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  height: 60%;
+  cursor: pointer;
+}
+.bookservice-pickup {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9vw;
+  position: absolute;
+  color: #6759ff;
+  font-weight: bold;
+  margin: 0px;
+  left: 7.5%;
+  top: 67%;
+}
+.where-head {
+  font-family: sans-serif;
+  font-size: 1.8vw;
+  align-self: center;
+  font-weight: bold;
+  color: #6759ff;
+  margin-bottom: 0;
+}
+.where-titles {
+  font-size: 1vw;
+  font-family: sans-serif;
+  margin-bottom: 0.5%;
+  margin-top: 2%;
+}
+.where-buttonB {
+  position: absolute;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 1rem;
+  width: 30%;
+  border-width: 0px;
+  background-color: #6759ff;
+  color: #fff;
+  border-radius: 5px;
+  right: 11%;
+  padding: 0.8% 0%;
+  bottom: 2%;
+  cursor: pointer;
+}
+.calender {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  font-size: 0.9rem;
+  align-self: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    border-width: 0px !important;
-  }
+  border-width: 0px !important;
+}
 
-  .calen-con {
-    height: 70%;
-    width: 100%;
-    position: relative;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
+.calen-con {
+  height: 70%;
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
-  .calen-con::-webkit-scrollbar {
-    width: 0.1em; /* Set the width of the scrollbar (you can adjust this) */
-  }
+.calen-con::-webkit-scrollbar {
+  width: 0.1em; /* Set the width of the scrollbar (you can adjust this) */
+}
 
-  .calen-con::-webkit-scrollbar-thumb {
-    background-color: #222222; /* Hide the thumb of the scrollbar */
-  }
+.calen-con::-webkit-scrollbar-thumb {
+  background-color: #222222; /* Hide the thumb of the scrollbar */
+}
 
-  .calen-con::-webkit-scrollbar-track {
-    background-color: transparent; /* Hide the track of the scrollbar */
-  }
+.calen-con::-webkit-scrollbar-track {
+  background-color: transparent; /* Hide the track of the scrollbar */
+}
 
-  .react-calendar__tile {
-    font-size: 0.9rem !important;
-    border-radius: 10px;
-  }
-  .react-calendar__month-view__days__day {
-    font-size: 0.9vw !important;
-  }
+.react-calendar__tile {
+  font-size: 0.9rem !important;
+  border-radius: 10px;
+}
+.react-calendar__month-view__days__day {
+  font-size: 0.9vw !important;
+}
 
-  .react-calendar__navigation__label {
-    font-size: 0.6rem;
-  }
+.react-calendar__navigation__label {
+  font-size: 0.6rem;
 }
 
 @media screen and (max-width: 600px) {
+  .addService-con-B {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input2-BA {
+    height: auto !important;
+    width: 100%;
+    margin-bottom: 5%;
+  }
+  .input1-BA > h1 {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .input1-BA > input {
+    width: 100% !important;
+    margin-left: 5%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+  }
+
+  .input1-BA {
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  .calen-con {
+    height: 49vh !important;
+    width: 100%;
+  }
   .search-sug2 {
     position: absolute;
     height: auto;
@@ -399,5 +514,118 @@
   .react-calendar__month-view__days__day {
     height: 100%;
     font-size: 2.5vw !important;
+  }
+
+  #phone {
+    width: 90% !important;
+  }
+  #name {
+    width: 90% !important;
+  }
+  #geoLoc {
+    width: 90% !important;
+  }
+  #addres {
+    width: 90% !important;
+  }
+  .where-buttonB {
+    bottom: 1.5% !important;
+  }
+}
+
+.otp-box {
+  position: relative;
+}
+
+.otp-button {
+  position: absolute !important;
+  right: 1.5%;
+  height: 80% !important;
+  top: 8.6% !important;
+  border: 0;
+  background-color: #6759ff;
+  color: #ffffff;
+  border-radius: 0.25rem;
+}
+
+@media screen and (max-width: 600px) {
+  .otp-button {
+    position: absolute !important;
+    right: 2.5%;
+    height: 80% !important;
+    top: 8.6% !important;
+    border: 0;
+    background-color: #6759ff;
+    color: #ffffff;
+    border-radius: 0.25rem;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
+  .input2-BA {
+    width: 30% !important;
+  }
+  .bookservice-time-B {
+    font-size: 0.5rem;
+    border-radius: 0.1rem;
+  }
+  .selected-time-B {
+    font-size: 0.5rem;
+    border-radius: 0.1rem;
+  }
+  .input1-BA input {
+    width: 100% !important;
+    border: 1px solid #6759ff;
+    border-radius: 0.25rem;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: portrait) {
+  .map-desktop {
+    height: 20vh !important;
+  }
+  .input2-BA {
+    width: 30%;
+  }
+  .bookservice-time-B {
+    font-size: 0.45rem;
+    border-radius: 0%;
+  }
+  .selected-time-B {
+    font-size: 0.45rem;
+    border-radius: 0%;
+  }
+
+  #phone {
+    width: 95% !important;
+  }
+  #name {
+    width: 95% !important;
+  }
+  #geoLoc {
+    width: 95% !important;
+  }
+  #addres {
+    width: 95% !important;
+  }
+  .where-buttonB {
+    bottom: 1.5% !important;
+  }
+  .search-box2 {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1366px) and (orientation: portrait) {
+  .map-desktop {
+    height: 20vh !important;
+  }
+  .bookservice-time-B {
+    font-size: 0.6rem;
+  }
+  .selected-time-B {
+    font-size: 0.6rem;
   }
 }

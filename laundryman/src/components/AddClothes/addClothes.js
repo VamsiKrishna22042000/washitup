@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 
 import { TailSpin } from "react-loader-spinner";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const AddClothes = (props) => {
   const { typeOfWashing } = props;
   const [clothes, setClothesStore] = useState([]);
@@ -52,16 +55,19 @@ const AddClothes = (props) => {
   /** Function to navigiate to the bookservice.js based on the total if total is 0 then it show error else move to the next page*/
   const washthem = () => {
     if (total > 0) {
-      const errorMessage = document.getElementById("add-clothes-err");
-      errorMessage.classList.add("add-clothes-error-msg-disable");
       const { wash } = props;
       const filteredItems = clothes.filter((each) => each.count > 0);
       wash(
         filteredItems
       ); /** Call back funciton to navigate to the bookservice.js*/
     } else {
-      const errorMessage = document.getElementById("add-clothes-err");
-      errorMessage.classList.remove("add-clothes-error-msg-disable");
+      toast.error("Add Atleast One Item", {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -147,99 +153,96 @@ const AddClothes = (props) => {
   const filterStore = clothes.filter((each) => category === each.category);
 
   return clothes.length > 0 ? (
-    <div className="add-Clothes">
-      <p className="counter-total-value">Total</p>
-      <div className="counter-buttons-container">
-        {/** Eliminating duplicates by using new Set() from the filterd category and displaying them*/}
-        {[...new Set(filterCategory)].map((each) => (
-          <button
-            onClick={selectCategory}
-            key={each}
-            id={each}
-            className={category === each ? "button-pick" : "pick-button"}
-            type="button"
-            style={{ textTransform: "capitalize" }}
-          >
-            {each}
-          </button>
-        ))}
-      </div>
-      <div className="clothes-add">
-        <BiRupee className="set-counter-total1" />
-        <p
-          style={{ marginLeft: "2%" }}
-          id="total-price"
-          className="counter-total-price"
-        >
-          {total}
-        </p>
-        {/** Displaying the filterd Items*/}
-        <div className="items-over">
-          {filterStore.map((each) => (
-            <div className="set-counter">
-              <img
-                src={each.image}
-                className="set-counter-icon"
-                alt={each._id}
-              />
-              <button
-                price={each.price}
-                id={each._id}
-                onClick={decrementCount}
-                className="set-counter-button"
-                type="button"
-              >
-                -
-              </button>
-              <p className="set-counter-para">{each.count}</p>
-              <p
-                style={{ textTransform: "capitalize" }}
-                className="set-counter-name"
-              >
-                {each.name}
-              </p>
-              <p className="set-counter-amount">
-                <BiRupee style={{ marginBottom: "8%" }} />
-                {each.price}
-              </p>
-              <p className="set-counter-price">
-                <BiRupee style={{ marginBottom: "8%" }} />
-                {each.count * each.price}
-              </p>
-              <BiRupee
-                className="set-couter-price-icon3"
-                style={{ marginBottom: "8%" }}
-              />
-              <p className="set-couter-price-price3">
-                {each.count * each.price}
-              </p>
-              <button
-                price={each.price}
-                id={each._id}
-                onClick={updateCount}
-                className="set-counter-button"
-                type="button"
-              >
-                +
-              </button>
-            </div>
+    <>
+      <ToastContainer />
+      <div className="addClothes-A">
+        <p className="counter-total-value-A">Total</p>
+        <div className="counter-buttons-container-A">
+          {/** Eliminating duplicates by using new Set() from the filterd category and displaying them*/}
+          {[...new Set(filterCategory)].map((each) => (
+            <button
+              onClick={selectCategory}
+              key={each}
+              id={each}
+              className={category === each ? "button-pick-A" : "pick-button-A"}
+              type="button"
+              style={{ textTransform: "capitalize" }}
+            >
+              {each}
+            </button>
           ))}
         </div>
+        <div className="clothes-add-A">
+          <BiRupee className="set-counter-total1-A" />
+          <p
+            style={{ marginLeft: "2%" }}
+            id="total-price"
+            className="counter-total-price-A"
+          >
+            {total}
+          </p>
+          {/** Displaying the filterd Items*/}
+          <div className="items-over-A">
+            {filterStore.map((each) => (
+              <div className="set-counter-A">
+                <img
+                  src={each.image}
+                  className="set-counter-icon-A"
+                  alt={each._id}
+                />
+                <button
+                  price={each.price}
+                  id={each._id}
+                  onClick={decrementCount}
+                  className="set-counter-button-A "
+                  type="button"
+                >
+                  -
+                </button>
+                <p className="set-counter-para-A">{each.count}</p>
+                <p
+                  style={{ textTransform: "capitalize" }}
+                  className="set-counter-name-A"
+                >
+                  {each.name}
+                </p>
+                <p className="set-counter-amount-A">
+                  <BiRupee style={{ marginBottom: "8%" }} />
+                  {each.price}
+                </p>
+                <p className="set-counter-price-A">
+                  <BiRupee style={{ marginBottom: "8%" }} />
+                  {each.count * each.price}
+                </p>
+                <BiRupee
+                  className="set-couter-price-icon3-A"
+                  style={{ marginBottom: "8%" }}
+                />
+                <p className="set-couter-price-price3-A">
+                  {each.count * each.price}
+                </p>
+                <button
+                  price={each.price}
+                  id={each._id}
+                  onClick={updateCount}
+                  className="set-counter-button-A"
+                  type="button"
+                >
+                  +
+                </button>
+              </div>
+            ))}
+          </div>
 
-        <p
-          id="add-clothes-err"
-          className="add-clothes-error-msg add-clothes-error-msg-disable"
-        >
-          *Add atleast one item to wash
-        </p>
-        <button onClick={washthem} className="wash-button">
-          Wash Clothes <AiOutlineArrowRight className="wash-clothes-icon" />
-        </button>
+          <button onClick={washthem} className="wash-button-A">
+            Wash Clothes <AiOutlineArrowRight className="wash-clothes-icon-A" />
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   ) : (
-    <div className="spinner-con">
-      <TailSpin color="#6759ff" height={50} width={50} />
+    <div className="addClothes-A">
+      <TailSpin color="#6759ff" height={55} width={55} />
     </div>
   );
 };

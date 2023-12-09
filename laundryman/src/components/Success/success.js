@@ -34,13 +34,13 @@ const Success = (props) => {
   return (
     <>
       <div style={{ position: "absolute", top: 0 }} id="success1"></div>
-      <div style={{ marginBottom: "5%" }} className="success-total-con">
+      <div className="success-total-con-A">
         <img
-          className="success-anime"
+          className="success-anime-A"
           src="./successful-animation.gif"
           alt="Successful"
         />
-        <p className="success-para">Booked</p>
+        <p className="success-para-A">Booked</p>
       </div>
       <audio id="audio">
         <source src="/success.mp3" type="audio/mp3"></source>

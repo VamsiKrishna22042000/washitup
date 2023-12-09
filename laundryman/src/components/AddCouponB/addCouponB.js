@@ -171,25 +171,37 @@ const AddCouponB = (props) => {
         <Banners />
         <div className="login-book-B">
           <div className="login-coupons-C">
-            <p>
-              <span>Name :</span> {dataTobeSent.name}
-            </p>
-            <p>
-              <span>Mobile Number :</span> {dataTobeSent.mobileNumber}
-            </p>
-            <p>
-              <span>Selected Date :</span> {dataTobeSent.date}
-            </p>
-            <p>
-              <span>Selected Time :</span> {dataTobeSent.time}
-            </p>
-            <p>
-              <span>Selected Location :</span> {dataTobeSent.location}
-            </p>
-            <p>
-              <span>Selcted Do / Flat No & LandMark :</span>{" "}
-              {dataTobeSent.address.dono} &nbsp; {dataTobeSent.address.landmark}
-            </p>
+            <h5>Booking Summary</h5>
+            <div>
+              <p>Name :</p>
+              <input readOnly type="text" value={dataTobeSent.name} />
+            </div>
+            <div>
+              <p>Mobile Number :</p>
+              <input readOnly type="text" value={dataTobeSent.mobileNumber} />
+            </div>
+            <div>
+              <p>Selected Date :</p>
+              <input readOnly type="text" value={dataTobeSent.date} />
+            </div>
+
+            <div>
+              <p>Selected Time :</p>
+              <input readOnly type="text" value={dataTobeSent.time} />
+            </div>
+            <div>
+              <p>Selected Location :</p>
+              <input readOnly type="text" value={dataTobeSent.location} />
+            </div>
+
+            <div>
+              <p>Selcted Do / Flat No & LandMark :</p>
+              <input
+                readOnly
+                type="text"
+                value={dataTobeSent.address.landmark}
+              />
+            </div>
           </div>
           <div className="login-coupons">
             {/**Used to load the celebrate animation for 3s after applying coupon*/}
@@ -202,13 +214,13 @@ const AddCouponB = (props) => {
             )}
             {/**Discount box used to show that the discount is available or not */}{" "}
             {discount === 0 ? (
-              total > 300 ? (
+              total > 0 ? (
                 <div className="apply-coupon-box-D">
                   <ToastContainer />
                   <input
                     className="apply-coupon-input1"
                     type="text"
-                    placeholder="Coupon Code"
+                    placeholder="Enter Coupon"
                     style={{ textTransform: "uppercase" }}
                     onChange={(e) => {
                       setCouponCode(e.target.value.toUpperCase());
@@ -219,9 +231,8 @@ const AddCouponB = (props) => {
                       onClick={applyCoupon}
                       className="apply-coupon-button"
                       type="button"
-                      style={{ backgroundColor: "#ffffff" }}
                     >
-                      <ThreeDots color="#6759ff" height={"50%"} width={"50%"} />
+                      <ThreeDots color="#6759ff" height={18} width={18} />
                     </button>
                   ) : (
                     <button
@@ -252,51 +263,21 @@ const AddCouponB = (props) => {
             )}
             {/**box used to show all the items selected but user for laundry along with count and price of each item */}
             <div className="apply-coupon-box2-B">
+              <div className="items-con-coupon-B">
+                <p>Product</p>
+                <p>Unit Price</p>
+                <p>Price</p>
+              </div>
               {items.map((each) => (
-                <div className="items-con-coupon">
-                  <p
-                    style={{
-                      width: "33%",
-                      textTransform: "capitalize",
-                      textAlign: "start",
-                      padding: "0",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      display: "-webkit-box", // Display as a flexible box
-                      WebkitLineClamp: 1, // Limit to 1 line
-                      WebkitBoxOrient: "vertical", // Display vertically
-                    }}
-                  >
-                    <img
-                      className="images-addCouponB"
-                      src={each.image}
-                      alt={each.name}
-                    />
+                <div className="items-con-coupon-B">
+                  <p>
+                    <img src={each.image} alt={each.name} />
                     {each.category} - {each.name}
                   </p>
-                  <p
-                    style={{
-                      width: "33%",
-                      textTransform: "capitalize",
-                      textAlign: "end",
-                      textOverflow: "ellipsis",
-                      lineClamp: 1,
-                    }}
-                  >
+                  <p>
                     {each.count} x {each.price}
                   </p>
-                  <p
-                    style={{
-                      width: "33%",
-                      textTransform: "capitalize",
-                      textAlign: "start",
-                      paddingLeft: "19%",
-                      textOverflow: "ellipsis",
-                      lineClamp: 1,
-                    }}
-                  >
-                    ₹ {each.price * each.count}
-                  </p>
+                  <p>₹ {each.price * each.count}</p>
                 </div>
               ))}
             </div>

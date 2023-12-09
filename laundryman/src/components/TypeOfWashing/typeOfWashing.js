@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./typeOfWashing.css";
 
 import Cookies from "js-cookie";
@@ -43,7 +43,7 @@ const TypeOfWashing = (props) => {
           onClick={() => {
             setselectedType("dry Cleaning");
           }}
-          style={{ position: "relative" }}
+          style={{ position: "relative", cursor: "pointer" }}
           className={
             selectedType === "dry Cleaning"
               ? "type-of-button1"
@@ -67,7 +67,7 @@ const TypeOfWashing = (props) => {
           Dry Cleaning
         </button>
         <button
-          style={{ position: "relative" }}
+          style={{ position: "relative", cursor: "pointer" }}
           onClick={() => {
             setselectedType("wash & iron");
           }}
@@ -94,7 +94,7 @@ const TypeOfWashing = (props) => {
           Wash & Iron
         </button>
         <button
-          style={{ position: "relative" }}
+          style={{ position: "relative", cursor: "pointer" }}
           onClick={() => {
             setselectedType("wash & fold");
           }}

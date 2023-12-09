@@ -1,9 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap");
+
+/**New CSS */
+
 .images-addCoupon {
   height: auto;
   width: 10%;
   margin-right: 2.5%;
   margin-bottom: -1%;
 }
+
+.login-book-service-coupon-A {
+  position: absolute;
+  background-color: #ffffff;
+  height: 60%;
+  right: 6%;
+  top: 27.5%;
+  padding: 1%;
+  width: 45%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.apply-coupon-box-A {
+  height: 8%;
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: -5%;
+}
+
+.apply-coupon-box-Ab {
+  height: 8%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -5%;
+  padding-right: 4%;
+  margin-top: 1% !important;
+}
+
+.apply-coupon-box-Ab p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 50%;
+}
+
+.font-total-A {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.celebration-A {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.apply-coupon-input1-A {
+  font-family: "Poppins", sans-serif;
+  width: 35%;
+  height: 100%;
+  font-size: 1.2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border-color: #222222;
+  outline: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-width: 1px;
+  padding-left: 1.5%;
+  align-self: flex-end;
+}
+
+.apply-coupon-button-A {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 0;
+  background-color: #6759ff;
+  color: #ffffff;
+  height: 100%;
+  width: 20%;
+  font-size: 1.2vw;
+  padding: 1.2% 0%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+}
+
+.applied-box2-A {
+  width: 42%;
+  height: 1005;
+  font-size: 1.2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #fc0404;
+  outline: none;
+  border-radius: 8px;
+  color: #fc0404;
+}
+
+.apply-coupon-box2-A {
+  height: 50%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-self: flex-start;
+  align-items: flex-start;
+  overflow-y: scroll;
+  align-content: flex-start;
+  margin-top: 2% !important;
+}
+
+.apply-coupon-box2-A::-webkit-scrollbar {
+  display: none;
+}
+
+.items-con-coupon-A {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0;
+  border: 1px solid #222222;
+  border-top: hidden;
+  border-right: hidden;
+  border-left: hidden;
+  margin: 1% 0%;
+}
+
+.items-con-coupon-A p {
+  font-family: "Poppins", sans-serif;
+  width: 33.33% !important;
+  text-transform: capitalize;
+}
+
+.items-quantity {
+  padding-left: 20% !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.items-price {
+  padding-left: 20% !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.items-con-coupon-A img {
+  height: 100%;
+  width: 12%;
+}
+
+.apply-coupon-button2-A {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 0;
+  background-color: #6759ff;
+  color: #ffffff;
+  width: 75%;
+  font-size: 1.5vw;
+  padding-bottom: 1%;
+  border-radius: 5px;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  margin-left: -1.5%;
+  padding: 1.5vh 1.5vh;
+}
+
+.applied-box-A {
+  height: 100%;
+  width: 100%;
+  font-size: 1.2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #006915;
+  outline: none;
+  border-radius: 8px;
+  color: #006915;
+}
+
+.coupon-applied-A {
+  height: 5vh;
+  margin-right: 20%;
+}
+
+@media screen and (max-width: 600px) {
+  .login-book-service-coupon-A {
+    height: 50vh;
+    width: 85%;
+    position: relative;
+    margin-top: 10%;
+    margin-left: 13.5% !important;
+    margin-bottom: 10%;
+  }
+  .items-con-coupon-A p {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
+  .items-con-coupon-A p {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .items-con-coupon-A p {
+    font-size: 0.7rem;
+  }
+  .apply-coupon-button2-A {
+    height: 10%;
+  }
+}
+
+/**New CSS */
+
+/**Old Css**/
 
 @media screen and (min-width: 992px) {
   .font-total {
@@ -101,39 +335,6 @@
     outline: none;
     border-radius: 8px;
     color: #006915;
-  }
-  .coupon-applied {
-    height: 6.5vh;
-    margin-right: 60%;
-  }
-  .celebration {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .applied-box2 {
-    width: 42%;
-    height: 5vh;
-    font-size: 1.2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #fc0404;
-    outline: none;
-    border-radius: 8px;
-    color: #fc0404;
-  }
-  .items-con-coupon {
-    height: auto;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0.25rem 0%;
-    padding: 0;
   }
 }
 
@@ -283,5 +484,22 @@
     justify-content: space-evenly;
     align-items: center;
     margin: 1.1% 0%;
+  }
+
+  .apply-coupon-input1-A {
+    width: 78%;
+    font-size: 0.8rem;
+    border: 1px solid #222222;
+  }
+  .apply-coupon-button-A {
+    font-size: 0.8rem;
+  }
+  .items-con-coupon-A {
+    font-size: 0.69rem;
+  }
+
+  .apply-coupon-button2-A {
+    height: 8%;
+    font-size: 1rem;
   }
 }

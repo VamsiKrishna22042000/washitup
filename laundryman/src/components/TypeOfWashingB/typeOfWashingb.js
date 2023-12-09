@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./washingB.css";
 
 import Cookies from "js-cookie";
@@ -55,7 +55,7 @@ const WashingB = (props) => {
       <div className="addCloths-con">
         <div className="type-of-wash-con-addClothes">
           <button
-            style={{ position: "relative" }}
+            style={{ position: "relative", cursor: "pointer" }}
             onClick={() => {
               setItems([]);
               setselectedType("wash & fold");
@@ -84,7 +84,7 @@ const WashingB = (props) => {
             Wash & Fold
           </button>
           <button
-            style={{ position: "relative" }}
+            style={{ position: "relative", cursor: "pointer" }}
             onClick={() => {
               setItems([]);
               setselectedType("wash & iron");
@@ -118,7 +118,7 @@ const WashingB = (props) => {
               setselectedType("dry Cleaning");
               typing("dry Cleaning");
             }}
-            style={{ position: "relative" }}
+            style={{ position: "relative", cursor: "pointer" }}
             className={
               selectedType === "dry Cleaning"
                 ? "type-of-button-addClothes1"
@@ -168,6 +168,7 @@ const WashingB = (props) => {
             </button>
           ) : (
             <button
+              style={{ cursor: "pointer" }}
               onClick={() => {
                 if (items.length <= 0) {
                   toast.error("Select Clothes To Wash", {

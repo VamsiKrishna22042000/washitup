@@ -7,6 +7,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 import { IoMdAlert } from "react-icons/io";
+
+import { IoStarOutline } from "react-icons/io5";
+import { IoStar } from "react-icons/io5";
+
 import { VscCheckAll } from "react-icons/vsc";
 
 import { TailSpin } from "react-loader-spinner";
@@ -26,12 +30,20 @@ const MyOrders = () => {
   const [showSupport, setShowSupport] = useState(false);
 
   const [showChangePickUpDate, setChangePickUpDate] = useState(true);
+  const [showNavBar, setShowNavBar] = useState(false);
 
   const [showDate, setShowDate] = useState(false);
 
   const [orderId, setOrderId] = useState("");
 
   const [status, setStatus] = useState("");
+  const [ratingBox, setRatingBox] = useState({
+    orderId: "",
+    qualityrating: 0,
+    packrating: 0,
+    deliveryboyrating: 0,
+    deliveryspeedrating: 0,
+  });
 
   useEffect(() => {
     getMyOrders();
@@ -165,9 +177,10 @@ const MyOrders = () => {
             left: 0,
             right: 0,
             backgroundColor: "#33333350",
+            zIndex: 20,
           }}
         ></div>
-        <div className="modal">
+        <div style={{ zIndex: 20 }} className="modal">
           <div className="items-modalbox-con">
             {!showDate && (
               <button
@@ -463,13 +476,14 @@ const MyOrders = () => {
             left: 0,
             right: 0,
             backgroundColor: "#33333350",
+            zIndex: "20",
           }}
         ></div>
         <div className="modal">
           <ToastContainer />
           {load ? (
             <>
-              <div className="support-modalbox-con">
+              <div style={{ zIndex: "20" }} className="support-modalbox-con">
                 {issues.length === 0 ? (
                   <div>
                     <img src="./no-orders.gif" />
@@ -548,13 +562,1009 @@ const MyOrders = () => {
             </>
           ) : (
             <div
-              style={{ paddingLeft: "22.5%" }}
-              className="support-modalbox-con"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+                width: "100vw",
+              }}
             >
               <TailSpin height={50} width={50} color="#6759ff" />
             </div>
           )}
         </div>
+      </>
+    );
+  };
+
+  const ShowRatingBox = () => {
+    const [loadRate, setLoadRate] = useState(false);
+
+    const postRating = async () => {
+      if (ratingBox.qualityrating === 0) {
+        toast.error("Please Add Rating for order quality", {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
+      } else if (ratingBox.deliveryspeedrating === 0) {
+        toast.error("Please Add Rating for delivery speed", {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
+      } else if (ratingBox.packrating === 0) {
+        toast.error("Please Add Rating for packing", {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
+      } else if (ratingBox.deliveryboyrating === 0) {
+        toast.error("Please Add Rating for delivery boy", {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
+      } else {
+        setLoadRate(true);
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/user/addRating`;
+
+        const headers = {
+          "Content-Type": "application/json",
+        };
+
+        const body = {
+          orderId: ratingBox.orderId,
+          qualityRating: ratingBox.qualityrating,
+          packageRating: ratingBox.packrating,
+          deliveryboyRating: ratingBox.deliveryboyrating,
+          deliveryspeedRating: ratingBox.deliveryspeedrating,
+        };
+
+        const res = await axios.post(url, body, headers);
+
+        if (res.status === 200) {
+          toast.success("Rating Added Successfully", {
+            autoClose: 2000,
+            pauseOnHover: true,
+            closeOnClick: true,
+            position: "top-center",
+            theme: "colored",
+          });
+          setRatingBox({ ...ratingBox, orderId: "" });
+        }
+      }
+    };
+
+    return (
+      <>
+        <ToastContainer style={{ width: "auto" }} />
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "#33333350",
+            zIndex: 20,
+          }}
+        ></div>
+        {loadRate ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            className="rating-box"
+          >
+            <TailSpin color="#6759ff" height={50} width={50} />
+          </div>
+        ) : (
+          <div className="rating-box">
+            <button
+              id="cancle-button"
+              onClick={() => {
+                setRatingBox({ ...ratingBox, orderId: "" });
+              }}
+              type="button"
+            >
+              ×
+            </button>
+            <h3>Review Service</h3>
+            <div className="review-service">
+              <h3>How was the order quality ?</h3>
+              {ratingBox.qualityrating === 0 ? (
+                <>
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.qualityrating === 1 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.qualityrating === 2 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.qualityrating === 3 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.qualityrating === 4 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 3 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, qualityrating: 5 });
+                    }}
+                  />
+                </>
+              ) : (
+                ratingBox.qualityrating === 5 && (
+                  <>
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, qualityrating: 1 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, qualityrating: 2 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, qualityrating: 3 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, qualityrating: 4 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, qualityrating: 5 });
+                      }}
+                    />
+                  </>
+                )
+              )}
+            </div>
+            <div className="review-service">
+              <h3>How was the delivery speed ?</h3>
+              {ratingBox.deliveryspeedrating === 0 ? (
+                <>
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryspeedrating === 1 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryspeedrating === 2 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryspeedrating === 3 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryspeedrating === 4 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 3 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryspeedrating: 5 });
+                    }}
+                  />
+                </>
+              ) : (
+                ratingBox.deliveryspeedrating === 5 && (
+                  <>
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryspeedrating: 1 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryspeedrating: 2 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryspeedrating: 3 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryspeedrating: 4 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryspeedrating: 5 });
+                      }}
+                    />
+                  </>
+                )
+              )}
+            </div>
+            <div className="review-service">
+              <h3>How was the packing ?</h3>
+
+              {ratingBox.packrating === 0 ? (
+                <>
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.packrating === 1 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.packrating === 2 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.packrating === 3 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.packrating === 4 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 3 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, packrating: 5 });
+                    }}
+                  />
+                </>
+              ) : (
+                ratingBox.packrating === 5 && (
+                  <>
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, packrating: 1 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, packrating: 2 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, packrating: 3 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, packrating: 4 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, packrating: 5 });
+                      }}
+                    />
+                  </>
+                )
+              )}
+            </div>
+            <div className="review-service">
+              <h3>Rate the delivery boy!</h3>
+
+              {ratingBox.deliveryboyrating === 0 ? (
+                <>
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryboyrating === 1 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 1 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryboyrating === 2 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 2 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryboyrating === 3 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 3 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 5 });
+                    }}
+                  />
+                </>
+              ) : ratingBox.deliveryboyrating === 4 ? (
+                <>
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 1 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 2 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 3 });
+                    }}
+                  />
+                  <IoStar
+                    style={{
+                      color: "yellow",
+                    }}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 4 });
+                    }}
+                  />
+                  <IoStarOutline
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, deliveryboyrating: 5 });
+                    }}
+                  />
+                </>
+              ) : (
+                ratingBox.deliveryboyrating === 5 && (
+                  <>
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryboyrating: 1 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryboyrating: 2 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryboyrating: 3 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryboyrating: 4 });
+                      }}
+                    />
+                    <IoStar
+                      style={{
+                        color: "yellow",
+                      }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, deliveryboyrating: 5 });
+                      }}
+                    />
+                  </>
+                )
+              )}
+            </div>
+            <button onClick={postRating} id="review-button" type="button">
+              Submit
+            </button>
+          </div>
+        )}
       </>
     );
   };
@@ -642,10 +1652,34 @@ const MyOrders = () => {
     setShowDate(false);
   };
 
+  const [mainStarAnimation, setAnimation] = useState(0);
+
+  useEffect(() => {
+    if (
+      ratingBox.orderId === "" &&
+      filterdItems.length === 0 &&
+      showSupport === false
+    ) {
+      setTimeout(() => {
+        if (mainStarAnimation === 0) {
+          setAnimation(mainStarAnimation + 1);
+        } else if (mainStarAnimation === 1) {
+          setAnimation(mainStarAnimation + 1);
+        } else if (mainStarAnimation === 2) {
+          setAnimation(mainStarAnimation + 1);
+        } else if (mainStarAnimation === 3) {
+          setAnimation(mainStarAnimation + 1);
+        } else if (mainStarAnimation === 4) {
+          setAnimation(mainStarAnimation + 1);
+        } else if (mainStarAnimation === 5) {
+          setAnimation(0);
+        }
+      }, 1000);
+    }
+  }, [mainStarAnimation]);
+
   const navcontentshamberger = () => {
-    const navcontents = document.getElementById("contents");
-    console.log(navcontents);
-    navcontents.classList.toggle("donotshow");
+    setShowNavBar(!showNavBar);
   };
 
   if (Cookies.get("jwt_userId") === undefined) {
@@ -667,33 +1701,111 @@ const MyOrders = () => {
       <>
         {filterdItems.length > 0 && <ModalBoxItems />}
         {showSupport && <SupportBox />}
-        <div className="bar" bg="#b8dde3" variant="light">
-          <div style={{ marginBottom: "-5rem" }} className="navbarcontainer">
+        {ratingBox.orderId !== "" && <ShowRatingBox />}
+        <div
+          style={{
+            position: "fixed",
+            backgroundColor: "#ffffff",
+            zIndex: "10",
+          }}
+          className="bar-nav naving"
+          bg="#b8dde3"
+          variant="light"
+        >
+          <div className="nav-bar-contents">
             <img
+              style={{ cursor: "pointer" }}
               onClick={() => {
                 window.location.href = "/";
               }}
               href="#logo"
-              className="main-head"
               src="./washituplogo.png"
               alt="Main Logo"
             />
-            <div
-              style={{ cursor: "pointer" }}
-              id="contents"
-              className="navbar-nav donotshow"
+            <p
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              className="home"
             >
-              <div
+              Home
+            </p>
+            <p href="#features">About Us</p>
+            <p href="#pricing">Blog</p>
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                Cookies.get("jwt_userId") !== undefined
+                  ? (window.location.href = "/myorders")
+                  : (window.location.href = "/userlogin");
+              }}
+              href="#myorders"
+            >
+              My Orders
+            </p>
+            {Cookies.get("jwt_userId") !== undefined ? (
+              <button
+                style={{ cursor: "pointer" }}
+                type="button"
+                onClick={() => {
+                  Cookies.remove("jwt_userId");
+                  Cookies.remove("jwt_userName");
+                  Cookies.remove("jwt_mobileNumber");
+                  Cookies.remove("jwt_adminLogin");
+                  Cookies.remove("jwt_dono");
+                  Cookies.remove("jwt_landmark");
+                  Cookies.remove("jwt_location");
+                  window.location.href = "/";
+                }}
+              >
+                Log Out
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = "/userlogin";
+                }}
+              >
+                Log In
+              </button>
+            )}
+          </div>
+          {showNavBar && (
+            <div
+              style={{ backgroundColor: "white" }}
+              id="nav-bar-id"
+              className={
+                showNavBar
+                  ? "nav-bar-contents-mobile"
+                  : "nav-bar-contents-mobile1"
+              }
+            >
+              <button
+                onClick={navcontentshamberger}
+                className="cross-mark-nav-bar"
+              >
+                ✖
+              </button>
+              <img
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+                href="#logo"
+                src="./washituplogo.png"
+                alt="Main Logo"
+              />
+              <p
                 onClick={() => {
                   window.location.href = "/";
                 }}
                 className="home"
               >
                 Home
-              </div>
-              <div href="#features">About us</div>
-              <div href="#pricing">Blog</div>
-              <div
+              </p>
+              <p href="#features">About Us</p>
+              <p href="#pricing">Blog</p>
+              <p
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   Cookies.get("jwt_userId") !== undefined
@@ -703,55 +1815,37 @@ const MyOrders = () => {
                 href="#myorders"
               >
                 My Orders
-              </div>
+              </p>
               {Cookies.get("jwt_userId") !== undefined ? (
-                <div
+                <button
                   style={{ cursor: "pointer" }}
+                  type="button"
                   onClick={() => {
                     Cookies.remove("jwt_userId");
+                    Cookies.remove("jwt_userName");
+                    Cookies.remove("jwt_mobileNumber");
+                    Cookies.remove("jwt_adminLogin");
+                    Cookies.remove("jwt_dono");
+                    Cookies.remove("jwt_landmark");
+                    Cookies.remove("jwt_location");
                     window.location.href = "/";
                   }}
-                  href="#pricing"
-                  className="blog"
                 >
-                  <button
-                    style={{ cursor: "pointer" }}
-                    type="button"
-                    onClick={() => {
-                      Cookies.remove("jwt_userId");
-                      Cookies.remove("jwt_userName");
-                      Cookies.remove("jwt_mobileNumber");
-                      Cookies.remove("jwt_adminLogin");
-                      Cookies.remove("jwt_dono");
-                      Cookies.remove("jwt_landmark");
-                      Cookies.remove("jwt_location");
-                      window.location.href = "/";
-                    }}
-                    className="but"
-                  >
-                    Log Out
-                  </button>
-                </div>
+                  Log Out
+                </button>
               ) : (
-                <div
+                <button
+                  type="button"
                   onClick={() => {
                     window.location.href = "/userlogin";
                   }}
                 >
-                  <button
-                    type="button"
-                    onClick={() => {
-                      window.location.href = "/userlogin";
-                    }}
-                    className="but"
-                  >
-                    Log In
-                  </button>
-                </div>
+                  Log In
+                </button>
               )}
             </div>
-          </div>
-          <div className="hamburger">
+          )}
+          <div className="hamburger-icon">
             <svg
               onClick={navcontentshamberger}
               width="24"
@@ -781,181 +1875,899 @@ const MyOrders = () => {
             }}
           >
             <div className="myorder-con">
-              {myorders.map((each) => (
-                <div
-                  id={each._id}
-                  onClick={seperateItems}
-                  key={each._id}
-                  className="subcon-myorders"
-                >
-                  {each.progress === "Active" ? (
+              {myorders.map((each) =>
+                each.progress !== "Completed" ? (
+                  <div
+                    id={each._id}
+                    onClick={seperateItems}
+                    key={each._id}
+                    className="subcon-myorders"
+                  >
+                    {each.progress === "Active" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "green",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    ) : each.progress === "Completed" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "orange",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    ) : each.progress === "cancel" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "red",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    ) : (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "#6759ff",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    )}
+                    <p id={each._id} onClick={seperateItems}>
+                      Id : {each._id}
+                    </p>
+                    {each.progress === "Active" ? (
+                      <p
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="status"
+                        style={{ color: "green" }}
+                      >
+                        Order Placed
+                      </p>
+                    ) : each.progress === "Completed" ? (
+                      <p
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="status"
+                        style={{ color: "orange" }}
+                      >
+                        Washing Completed
+                      </p>
+                    ) : each.progress === "cancel" ? (
+                      <p
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="status"
+                        style={{ color: "red" }}
+                      >
+                        Order Canceled
+                      </p>
+                    ) : (
+                      <p
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="status"
+                        style={{ color: "#6759ff" }}
+                      >
+                        Washing In Progress
+                      </p>
+                    )}
+                    <p id={each._id} onClick={seperateItems}>
+                      Items :{" "}
+                      <span
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="span-el"
+                      >
+                        {each.items.length}
+                      </span>
+                    </p>
+                    <p id={each._id} onClick={seperateItems}>
+                      Date & Time :{" "}
+                      <span
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="span-el"
+                      >
+                        {each.date} - {each.time}
+                      </span>
+                    </p>
+                    <p id={each._id} onClick={seperateItems}>
+                      Delivery Date :{" "}
+                      <span
+                        id={each._id}
+                        onClick={seperateItems}
+                        style={{ textTransform: "capitalize" }}
+                        className="span-el"
+                      >
+                        {each.deliveryDate}
+                      </span>
+                    </p>
+                    <p id={each._id} onClick={seperateItems}>
+                      Service Type :{" "}
+                      <span
+                        id={each._id}
+                        onClick={seperateItems}
+                        style={{ textTransform: "capitalize" }}
+                        className="span-el"
+                      >
+                        {each.service}
+                      </span>
+                    </p>
+                    {each.service === "dry Cleaning" ? (
+                      <img
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="service-image"
+                        src="/drycleaning.png"
+                        alt="Dry Cleaning"
+                      />
+                    ) : each.service === "wash & iron" ? (
+                      <img
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="service-image"
+                        src="/wash&iron.png"
+                        alt="wash & iron"
+                      />
+                    ) : (
+                      <img
+                        id={each._id}
+                        onClick={seperateItems}
+                        className="service-image"
+                        src="/wash&fold.png"
+                        alt="wash&fold"
+                      />
+                    )}
+                    <p id={each._id} onClick={seperateItems} className="amount">
+                      Total - {"  "}
+                      <span
+                        id={each._id}
+                        onClick={seperateItems}
+                        style={{ color: "green" }}
+                      >
+                        ₹ {each.totalAmount}
+                      </span>
+                    </p>
+                  </div>
+                ) : each?.packageRating !== undefined &&
+                  each?.qualityRating !== undefined &&
+                  each.deliveryboyRating !== undefined &&
+                  each.deliveryspeedRating !== undefined ? (
+                  <div
+                    onClick={seperateItems}
+                    id={each._id}
+                    key={each._id}
+                    className="subcon-myorders"
+                  >
+                    {each.progress === "Active" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "green",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                        onClick={seperateItems}
+                      ></div>
+                    ) : each.progress === "Completed" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "orange",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                        onClick={seperateItems}
+                      ></div>
+                    ) : each.progress === "cancel" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "red",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                        onClick={seperateItems}
+                      ></div>
+                    ) : (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "#6759ff",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                        onClick={seperateItems}
+                      ></div>
+                    )}
+                    <p id={each._id}>Id : {each._id}</p>
+                    {each.progress === "Active" ? (
+                      <p
+                        id={each._id}
+                        className="status"
+                        style={{ color: "green" }}
+                        onClick={seperateItems}
+                      >
+                        Order Placed
+                      </p>
+                    ) : each.progress === "Completed" ? (
+                      <p
+                        id={each._id}
+                        className="status"
+                        style={{ color: "orange" }}
+                        onClick={seperateItems}
+                      >
+                        Washing Completed
+                      </p>
+                    ) : each.progress === "cancel" ? (
+                      <p
+                        id={each._id}
+                        className="status"
+                        style={{ color: "red" }}
+                        onClick={seperateItems}
+                      >
+                        Order Canceled
+                      </p>
+                    ) : (
+                      <p
+                        id={each._id}
+                        className="status"
+                        style={{ color: "#6759ff" }}
+                        onClick={seperateItems}
+                      >
+                        Washing In Progress
+                      </p>
+                    )}
+                    <p onClick={seperateItems} id={each._id}>
+                      Items :{" "}
+                      <span id={each._id} className="span-el">
+                        {each.items.length}
+                      </span>
+                    </p>
+                    <p onClick={seperateItems} id={each._id}>
+                      Date & Time :{" "}
+                      <span id={each._id} className="span-el">
+                        {each.date} - {each.time}
+                      </span>
+                    </p>
+                    <p onClick={seperateItems} id={each._id}>
+                      Delivery Date :{" "}
+                      <span
+                        id={each._id}
+                        style={{ textTransform: "capitalize" }}
+                        className="span-el"
+                      >
+                        {each.deliveryDate}
+                      </span>
+                    </p>
+                    <p onClick={seperateItems} id={each._id}>
+                      Service Type :{" "}
+                      <span
+                        id={each._id}
+                        style={{ textTransform: "capitalize" }}
+                        className="span-el"
+                      >
+                        {each.service}
+                      </span>
+                    </p>
+                    {each.service === "dry Cleaning" ? (
+                      <img
+                        onClick={seperateItems}
+                        id={each._id}
+                        className="service-image"
+                        src="/drycleaning.png"
+                        alt="Dry Cleaning"
+                      />
+                    ) : each.service === "wash & iron" ? (
+                      <img
+                        onClick={seperateItems}
+                        id={each._id}
+                        className="service-image"
+                        src="/wash&iron.png"
+                        alt="wash & iron"
+                      />
+                    ) : (
+                      <img
+                        onClick={seperateItems}
+                        id={each._id}
+                        className="service-image"
+                        src="/wash&fold.png"
+                        alt="wash&fold"
+                      />
+                    )}
+                    <p onClick={seperateItems} id={each._id} className="amount">
+                      Total -
+                      <span id={each._id} style={{ color: "green" }}>
+                        ₹ {each.totalAmount}
+                      </span>
+                    </p>
                     <div
-                      style={{
-                        width: "105%",
-                        height: "2.5%",
-                        backgroundColor: "green",
-                        position: "absolute",
-                        left: "-2.5%",
-                        top: 0,
-                        borderRadius: "1rem",
-                      }}
-                    ></div>
-                  ) : each.progress === "Completed" ? (
-                    <div
-                      style={{
-                        width: "105%",
-                        height: "2.5%",
-                        backgroundColor: "orange",
-                        position: "absolute",
-                        left: "-2.5%",
-                        top: 0,
-                        borderRadius: "1rem",
-                      }}
-                    ></div>
-                  ) : each.progress === "cancel" ? (
-                    <div
-                      style={{
-                        width: "105%",
-                        height: "2.5%",
-                        backgroundColor: "red",
-                        position: "absolute",
-                        left: "-2.5%",
-                        top: 0,
-                        borderRadius: "1rem",
-                      }}
-                    ></div>
-                  ) : (
-                    <div
-                      style={{
-                        width: "105%",
-                        height: "2.5%",
-                        backgroundColor: "#6759ff",
-                        position: "absolute",
-                        left: "-2.5%",
-                        top: 0,
-                        borderRadius: "1rem",
-                      }}
-                    ></div>
-                  )}
-                  <p id={each._id} onClick={seperateItems}>
-                    Id : {each._id}
-                  </p>
-                  {each.progress === "Active" ? (
+                      onClick={seperateItems}
+                      id={each._id}
+                      className="rating-main"
+                    >
+                      {Math.ceil(
+                        (each?.packageRating +
+                          each?.qualityRating +
+                          each.deliveryboyRating +
+                          each.deliveryspeedRating) /
+                          4
+                      ) === 0 ? (
+                        <>
+                          <p onClick={seperateItems} id={each._id}>
+                            Your Rating
+                          </p>
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                        </>
+                      ) : Math.ceil(
+                          (each?.packageRating +
+                            each?.qualityRating +
+                            each.deliveryboyRating +
+                            each.deliveryspeedRating) /
+                            4
+                        ) === 1 ? (
+                        <>
+                          <p onClick={seperateItems} id={each._id}>
+                            Your Rating
+                          </p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStarOutline
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                        </>
+                      ) : Math.ceil(
+                          (each?.packageRating +
+                            each?.qualityRating +
+                            each.deliveryboyRating +
+                            each.deliveryspeedRating) /
+                            4
+                        ) === 2 ? (
+                        <>
+                          <p onClick={seperateItems} id={each._id}>
+                            Your Rating
+                          </p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                            onClick={seperateItems}
+                            id={each._id}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                        </>
+                      ) : Math.ceil(
+                          (each?.packageRating +
+                            each?.qualityRating +
+                            each.deliveryboyRating +
+                            each.deliveryspeedRating) /
+                            4
+                        ) === 3 ? (
+                        <>
+                          <p>Your Rating</p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                        </>
+                      ) : Math.ceil(
+                          (each?.packageRating +
+                            each?.qualityRating +
+                            each.deliveryboyRating +
+                            each.deliveryspeedRating) /
+                            4
+                        ) === 4 ? (
+                        <>
+                          <p>Your Rating</p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStarOutline />
+                        </>
+                      ) : (
+                        Math.ceil(
+                          (each?.packageRating +
+                            each?.qualityRating +
+                            each.deliveryboyRating +
+                            each.deliveryspeedRating) /
+                            4
+                        ) === 5 && (
+                          <>
+                            <p>Your Rating</p>
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                          </>
+                        )
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    id={each._id}
+                    onClick={() => {
+                      setRatingBox({ ...ratingBox, orderId: each._id });
+                    }}
+                    key={each._id}
+                    className="subcon-myorders"
+                  >
+                    {each.progress === "Active" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "green",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    ) : each.progress === "Completed" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "orange",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    ) : each.progress === "cancel" ? (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "red",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    ) : (
+                      <div
+                        style={{
+                          width: "105%",
+                          height: "2.5%",
+                          backgroundColor: "#6759ff",
+                          position: "absolute",
+                          left: "-2.5%",
+                          top: 0,
+                          borderRadius: "1rem",
+                        }}
+                      ></div>
+                    )}
                     <p
                       id={each._id}
-                      onClick={seperateItems}
-                      className="status"
-                      style={{ color: "green" }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, orderId: each._id });
+                      }}
                     >
-                      Order Placed
+                      Id : {each._id}
                     </p>
-                  ) : each.progress === "Completed" ? (
+                    {each.progress === "Active" ? (
+                      <p
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="status"
+                        style={{ color: "green" }}
+                      >
+                        Order Placed
+                      </p>
+                    ) : each.progress === "Completed" ? (
+                      <p
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="status"
+                        style={{ color: "orange" }}
+                      >
+                        Washing Completed
+                      </p>
+                    ) : each.progress === "cancel" ? (
+                      <p
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="status"
+                        style={{ color: "red" }}
+                      >
+                        Order Canceled
+                      </p>
+                    ) : (
+                      <p
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="status"
+                        style={{ color: "#6759ff" }}
+                      >
+                        Washing In Progress
+                      </p>
+                    )}
                     <p
                       id={each._id}
-                      onClick={seperateItems}
-                      className="status"
-                      style={{ color: "orange" }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, orderId: each._id });
+                      }}
                     >
-                      Washing Completed
+                      Items :{" "}
+                      <span
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="span-el"
+                      >
+                        {each.items.length}
+                      </span>
                     </p>
-                  ) : each.progress === "cancel" ? (
                     <p
                       id={each._id}
-                      onClick={seperateItems}
-                      className="status"
-                      style={{ color: "red" }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, orderId: each._id });
+                      }}
                     >
-                      Order Canceled
+                      Date & Time :{" "}
+                      <span
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="span-el"
+                      >
+                        {each.date} - {each.time}
+                      </span>
                     </p>
-                  ) : (
                     <p
                       id={each._id}
-                      onClick={seperateItems}
-                      className="status"
-                      style={{ color: "#6759ff" }}
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, orderId: each._id });
+                      }}
                     >
-                      Washing In Progress
+                      Delivery Date :{" "}
+                      <span
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        style={{ textTransform: "capitalize" }}
+                        className="span-el"
+                      >
+                        {each.deliveryDate}
+                      </span>
                     </p>
-                  )}
-                  <p id={each._id} onClick={seperateItems}>
-                    Items :{" "}
-                    <span
+                    <p
                       id={each._id}
-                      onClick={seperateItems}
-                      className="span-el"
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, orderId: each._id });
+                      }}
                     >
-                      {each.items.length}
-                    </span>
-                  </p>
-                  <p id={each._id} onClick={seperateItems}>
-                    Date & Time :{" "}
-                    <span
+                      Service Type :{" "}
+                      <span
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        style={{ textTransform: "capitalize" }}
+                        className="span-el"
+                      >
+                        {each.service}
+                      </span>
+                    </p>
+                    {each.service === "dry Cleaning" ? (
+                      <img
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="service-image"
+                        src="/drycleaning.png"
+                        alt="Dry Cleaning"
+                      />
+                    ) : each.service === "wash & iron" ? (
+                      <img
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="service-image"
+                        src="/wash&iron.png"
+                        alt="wash & iron"
+                      />
+                    ) : (
+                      <img
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        className="service-image"
+                        src="/wash&fold.png"
+                        alt="wash&fold"
+                      />
+                    )}
+                    <p
                       id={each._id}
-                      onClick={seperateItems}
-                      className="span-el"
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, orderId: each._id });
+                      }}
+                      className="amount"
                     >
-                      {each.date} - {each.time}
-                    </span>
-                  </p>
-                  <p id={each._id} onClick={seperateItems}>
-                    Delivery Date :{" "}
-                    <span
-                      id={each._id}
-                      onClick={seperateItems}
-                      style={{ textTransform: "capitalize" }}
-                      className="span-el"
+                      Total - {"  "}
+                      <span
+                        id={each._id}
+                        onClick={() => {
+                          setRatingBox({ ...ratingBox, orderId: each._id });
+                        }}
+                        style={{ color: "green" }}
+                      >
+                        ₹ {each.totalAmount}
+                      </span>
+                    </p>
+                    <div
+                      onClick={() => {
+                        setRatingBox({ ...ratingBox, orderId: each._id });
+                      }}
+                      className="rating-main"
                     >
-                      {each.deliveryDate}
-                    </span>
-                  </p>
-                  <p id={each._id} onClick={seperateItems}>
-                    Service Type :{" "}
-                    <span
-                      id={each._id}
-                      onClick={seperateItems}
-                      style={{ textTransform: "capitalize" }}
-                      className="span-el"
-                    >
-                      {each.service}
-                    </span>
-                  </p>
-                  {each.service === "dry Cleaning" ? (
-                    <img
-                      id={each._id}
-                      onClick={seperateItems}
-                      className="service-image"
-                      src="/drycleaning.png"
-                      alt="Dry Cleaning"
-                    />
-                  ) : each.service === "wash & iron" ? (
-                    <img
-                      id={each._id}
-                      onClick={seperateItems}
-                      className="service-image"
-                      src="/wash&iron.png"
-                      alt="wash & iron"
-                    />
-                  ) : (
-                    <img
-                      id={each._id}
-                      onClick={seperateItems}
-                      className="service-image"
-                      src="/wash&fold.png"
-                      alt="wash&fold"
-                    />
-                  )}
-                  <p id={each._id} onClick={seperateItems} className="amount">
-                    Total - {"  "}
-                    <span
-                      id={each._id}
-                      onClick={seperateItems}
-                      style={{ color: "green" }}
-                    >
-                      {each.totalAmount}
-                    </span>
-                  </p>
-                </div>
-              ))}
+                      {mainStarAnimation === 0 ? (
+                        <>
+                          <p>Please Rate Our Service</p>
+                          <IoStarOutline />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                        </>
+                      ) : mainStarAnimation === 1 ? (
+                        <>
+                          <p>Please Rate Our Service</p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                        </>
+                      ) : mainStarAnimation === 2 ? (
+                        <>
+                          <p>Please Rate Our Service</p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                        </>
+                      ) : mainStarAnimation === 3 ? (
+                        <>
+                          <p>Please Rate Our Service</p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStarOutline />
+                          <IoStarOutline />
+                        </>
+                      ) : mainStarAnimation === 4 ? (
+                        <>
+                          <p>Please Rate Our Service</p>
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStar
+                            style={{
+                              color: "yellow",
+                            }}
+                          />
+                          <IoStarOutline />
+                        </>
+                      ) : (
+                        mainStarAnimation === 5 && (
+                          <>
+                            <p>Please Rate Our Service</p>
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                            <IoStar
+                              style={{
+                                color: "yellow",
+                              }}
+                            />
+                          </>
+                        )
+                      )}
+                    </div>
+                  </div>
+                )
+              )}
             </div>
           </div>
         ) : (

@@ -5,501 +5,450 @@
   margin-bottom: -1%;
 }
 
-@media screen and (min-width: 992px) {
-  .font-total-B {
-    font-size: 0.7rem;
-  }
-  .login-book-service-coupon-B {
-    position: relative;
-    width: 90vw;
-    height: auto;
-    margin-left: 5%;
-    margin-top: 1%;
-    margin-bottom: 5%;
-    background: #ffffff;
-    border-radius: 15px;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-  }
+.items-con-coupon-B {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  overflow-y: scroll;
+}
 
+.items-con-coupon-B p {
+  font-size: 0.8rem;
+  height: 5vh !important;
+  width: 33%;
+  text-transform: capitalize;
+  margin: 1% 0%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+.items-con-coupon-B img {
+  height: 60%;
+  margin-right: 5%;
+}
+
+.items-con-coupon-B p:nth-child(2) {
+  padding-left: 8%;
+}
+
+.items-con-coupon-B p:nth-child(3) {
+  padding-left: 10%;
+}
+
+.font-total-B {
+  font-size: 0.7rem;
+}
+.login-book-service-coupon-B {
+  position: relative;
+  width: 90vw;
+  height: auto;
+  margin-left: 5%;
+  margin-top: 1%;
+  margin-bottom: 5%;
+  background: #ffffff;
+  border-radius: 15px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.login-book-B {
+  height: auto;
+  width: 85%;
+  display: flex;
+  justify-content: space-around;
+  align-self: center;
+  display: flex;
+}
+
+.login-coupons {
+  position: relative;
+  width: 48%;
+  height: 45vh;
+  background: #ffffff;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 3.2%;
+  border: 2px solid #6759ff;
+  border-radius: 0.5rem;
+  margin-left: 5%;
+}
+
+.login-coupons-C {
+  position: relative;
+  width: 48%;
+  height: 45vh;
+  background: #ffffff;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  overflow: hidden;
+  flex-wrap: wrap;
+  padding: 0;
+  border: 2px solid #6759ff;
+  margin-bottom: 2%;
+  padding-left: 2.5%;
+  border-radius: 0.5rem;
+}
+
+.login-coupons-C h5 {
+  text-align: center;
+  color: #6759ff;
+  width: 100%;
+}
+
+.login-coupons-C div {
+  width: 90%;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-coupons-C p {
+  font-size: 0.8rem;
+}
+
+.login-coupons-C input {
+  outline: none;
+  border: 1px solid #6759ff;
+  font-size: 0.8rem;
+  width: 48%;
+  padding-left: 2.5%;
+  border-radius: 0.25rem;
+}
+
+.apply-coupon-box-D {
+  height: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  border: 1px solid transparent;
+  margin-top: 1%;
+}
+
+.apply-coupon-box-B {
+  height: 8vh;
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5%;
+  flex-wrap: wrap;
+}
+
+.apply-coupon-box-B p {
+  text-align: right;
+  width: 93%;
+}
+
+.apply-coupon-input1 {
+  width: 35%;
+  height: 4.6vh;
+  font-size: 1.2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border-color: #6759ff;
+  outline: none;
+  border-top-left-radius: 0.35rem !important;
+  border-bottom-left-radius: 0.35rem !important;
+  border-top-right-radius: 0rem !important;
+  border-bottom-right-radius: 0rem !important;
+  border-width: 2px;
+  padding-left: 1.5%;
+}
+.apply-coupon-button {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 0;
+  background-color: #6759ff;
+  color: #ffffff;
+  width: 20%;
+  font-size: 1.2vw;
+  padding: 1.2% 0%;
+  border-top-left-radius: 0rem !important;
+  border-bottom-left-radius: 0rem !important;
+  border-top-right-radius: 0.35rem !important;
+  border-bottom-right-radius: 0.35rem !important;
+  margin-right: 0%;
+}
+.apply-coupon-button2-B {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 0;
+  background-color: #6759ff;
+  color: #ffffff;
+  width: 75%;
+  font-size: 1rem;
+  padding-bottom: 1%;
+  border-radius: 5px;
+  margin-left: -1.5%;
+  padding: 1% 1%;
+  margin-bottom: 1%;
+}
+.apply-coupon-box2-B {
+  margin-top: 2.5%;
+  height: 55%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-self: flex-start;
+  align-items: flex-start;
+  overflow-y: scroll;
+  align-content: flex-start;
+}
+.applied-box-D {
+  height: 5vh;
+  width: 50%;
+  font-size: 1.2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #006915;
+  outline: none;
+  border-radius: 8px;
+  color: #006915;
+}
+.coupon-applied-D {
+  height: 6.5vh;
+  width: 10%;
+  margin-right: 40%;
+}
+.celebration {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.applied-box2-D {
+  width: 55%;
+  height: 5vh;
+  font-size: 1.2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #fc0404;
+  outline: none;
+  border-radius: 8px;
+  color: #fc0404;
+}
+.items-con-coupon {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0.25rem 0%;
+  padding: 0;
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: portrait) {
   .login-book-B {
-    height: auto;
-    width: 85%;
-    display: flex;
-    justify-content: space-around;
-    align-self: center;
-    display: flex;
-  }
-
-  .login-coupons {
-    position: relative;
-    width: 50%;
-    height: 45vh;
-    background: #ffffff;
-    border-radius: 15px;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-    padding: 0;
-    margin-bottom: 3.2%;
-  }
-
-  .login-coupons-C {
-    position: relative;
-    width: 50%;
-    height: 45vh;
-    background: #ffffff;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    overflow: hidden;
-    flex-wrap: wrap;
-    padding: 0;
-    border: 2px solid #22222250;
-    border-left: hidden;
-    border-bottom: hidden;
-    border-top: hidden;
-    margin-bottom: 2%;
-  }
-
-  .login-coupons-C p {
     width: 90%;
-    font-size: 0.9rem;
   }
-
-  .login-coupons-C span {
-    color: #6759ff;
-    font-weight: bold;
-    margin-right: 2.5%;
-    font-size: 1rem;
+  .login-coupons-C,
+  .login-coupons {
+    height: 25vh;
   }
-
   .apply-coupon-box-D {
-    height: auto;
-    width: 85%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .apply-coupon-box-B {
-    height: 8vh;
-    width: 85%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2.5%;
-    flex-wrap: wrap;
-  }
-
-  .apply-coupon-box-B p {
-    text-align: right;
-    width: 93%;
+    height: 10%;
   }
 
   .apply-coupon-input1 {
-    width: 35%;
-    height: 5vh;
-    font-size: 1.2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-color: #6759ff;
-    outline: none;
-    border-radius: 8px;
-    border-width: 2px;
-    padding-left: 1.5%;
+    height: 100% !important;
   }
-  .apply-coupon-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-width: 0;
-    background-color: #6759ff;
-    color: #ffffff;
-    width: 20%;
-    font-size: 1.2vw;
-    padding: 1.2% 0%;
-    border-radius: 5px;
-    margin-right: 40%;
+  .login-coupons-C p {
+    font-size: 0.5rem;
   }
+
+  .items-con-coupon-B p {
+    font-size: 0.5rem;
+  }
+
+  .items-con-coupon-B img {
+    height: 40%;
+  }
+
   .apply-coupon-button2-B {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-width: 0;
-    background-color: #6759ff;
-    color: #ffffff;
-    width: 75%;
-    font-size: 1.5vw;
-    padding-bottom: 1%;
-    border-radius: 5px;
-    margin-left: -1.5%;
-    padding: 1.5vh 1.5vh;
+    margin-bottom: 2.5%;
   }
-  .apply-coupon-box2-B {
-    margin-top: 2.5%;
-    height: 55%;
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-self: flex-start;
-    align-items: flex-start;
-    overflow-y: scroll;
-    align-content: flex-start;
-  }
-  .applied-box-D {
-    height: 5vh;
-    width: 50%;
-    font-size: 1.2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #006915;
-    outline: none;
-    border-radius: 8px;
-    color: #006915;
-  }
-  .coupon-applied-D {
-    height: 6.5vh;
-    width: 10%;
-    margin-right: 40%;
-  }
-  .celebration {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .applied-box2-D {
-    width: 55%;
-    height: 5vh;
-    font-size: 1.2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #fc0404;
-    outline: none;
-    border-radius: 8px;
-    color: #fc0404;
-  }
-  .items-con-coupon {
-    height: auto;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0.25rem 0%;
-    padding: 0;
+  .login-coupons-C input {
+    width: 42.5%;
+    padding: 1% 2%;
+    font-size: 0.5rem;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
+  .login-coupons-C,
+  .login-coupons {
+    height: 35vh;
+  }
+  .apply-coupon-box-D {
+    height: 10%;
+  }
+
+  .apply-coupon-input1 {
+    height: 100% !important;
+  }
+  .login-coupons-C p {
+    font-size: 0.6rem;
+  }
+
+  .items-con-coupon-B p {
+    font-size: 0.55rem;
+  }
   .apply-coupon-button2-B {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-width: 0;
-    background-color: #6759ff;
-    color: #ffffff;
-    width: 100%;
-    font-size: 1rem;
-    padding: 2%;
-    margin-top: 5%;
-    border-radius: 0.25rem;
+    margin-bottom: 2.5%;
   }
 
-  .font-total-B {
-    margin-top: 2.5%;
-    font-size: 0.7rem;
-    text-align: right;
-    margin-right: 5%;
+  .login-coupons-C input {
+    padding: 1% 2%;
+  }
+}
+
+/* @media screen and (min-width: 1025px) and (max-width: 1366px) and (orientation: landscape) {
+  .login-coupons-C,
+  .login-coupons {
+    height: 35vh;
+  }
+  .apply-coupon-box-D {
+    height: 10%;
   }
 
-  .apply-coupon-box2-B {
-    height: 55%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-self: flex-start;
-    align-items: flex-start;
-    overflow-y: scroll;
-    align-content: flex-start;
+  .apply-coupon-input1 {
+    height: 100% !important;
+  }
+  .login-coupons-C p {
+    font-size: 0.75rem;
   }
 
-  .applied-box-D {
+  .items-con-coupon-B p {
+    font-size: 0.65rem;
+  }
+  .apply-coupon-button2-B {
+    margin-bottom: 2.5%;
+  }
+  .login-coupons-C input {
+    padding: 1% 2%;
+  }
+} */
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  .login-book-B {
     height: auto;
-    width: 70%;
-    font-size: 1rem;
+    width: 80%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    text-transform: uppercase;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #006915;
-    outline: none;
-    border-radius: 0.25rem;
-    color: #006915;
-    padding: 1% 0%;
+  }
+  .login-coupons-C,
+  .login-coupons {
+    height: 35vh;
+    width: 100%;
+    margin: 2.5% 0%;
+    padding: 0% 4%;
+  }
+  .apply-coupon-box-D {
+    height: 10%;
   }
 
-  .coupon-applied-D {
+  .apply-coupon-input1 {
+    height: 100% !important;
+  }
+  .login-coupons-C p {
+    font-size: 0.55rem;
+  }
+
+  .items-con-coupon-B p {
+    font-size: 0.6rem;
+  }
+
+  .items-con-coupon-B p:nth-child(1) {
+    width: 50%;
+  }
+
+  .items-con-coupon-B p:nth-child(2) {
+    width: 40%;
+    padding: 0;
+  }
+  .items-con-coupon-B p:nth-child(3) {
     width: 10%;
+    padding: 0;
+  }
+
+  .items-con-coupon-B img {
+    height: 40%;
+  }
+
+  .apply-coupon-button2-B {
+    margin-bottom: 2.5%;
+  }
+  .login-coupons-C input {
+    width: 42.5%;
+    padding: 1% 2%;
+    font-size: 0.6rem;
+    border-radius: 0.15rem;
+  }
+  .login-coupons-C div {
+    width: 100%;
+  }
+  .apply-coupon-box2-B {
+    height: 60%;
+    width: 100%;
+    margin-bottom: -8%;
+  }
+  .apply-coupon-box2-B::-webkit-scrollbar {
+    display: none;
+  }
+  .apply-coupon-box-B {
+    width: 100%;
+  }
+  .apply-coupon-button2-B {
+    width: 100%;
+    margin-left: 1.5%;
   }
 
   .apply-coupon-box-D {
-    height: auto;
-    width: 85%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5%;
-  }
-
-  .applied-box2-D {
     width: 100%;
-    height: auto;
-    font-size: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #fc0404;
-    outline: none;
-    border-radius: 0.25rem;
-    color: #fc0404;
-    padding: 2% 0%;
-    margin-bottom: 4%;
-  }
-
-  .login-coupons-C {
-    position: relative;
-    width: 100%;
-    height: auto;
-    background: #ffffff;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    overflow: hidden;
-    flex-wrap: wrap;
-    padding: 0;
-    border: 2px solid #22222250;
-    border-left: hidden;
-    border-right: hidden;
-    border-top: hidden;
-    margin-bottom: 4%;
-  }
-
-  .login-coupons-C p {
-    width: 100%;
-    font-size: 0.9rem;
-    margin: 2.5% 0%;
-  }
-
-  .login-coupons-C span {
-    color: #6759ff;
-    font-weight: bold;
-    margin-right: 2.5%;
-    font-size: 1rem;
-    display: block;
-    width: 100% !important;
-    margin-bottom: 0.5%;
-  }
-
-  .login-book-B {
-    height: auto;
-    width: 85%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-self: center;
-    display: flex;
-    margin-top: 1%;
-    margin-bottom: 7%;
-  }
-
-  .login-book-service-coupon-B {
-    position: relative;
-    width: 90vw;
-    height: auto;
-    margin-left: 5%;
-    margin-top: 6.5%;
-    background: #ffffff;
-    border-radius: 15px;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    margin-bottom: 5%;
-  }
-
-  .images-addCouponB {
-    height: auto;
-    width: 13%;
-    margin-right: 2.5%;
-    margin-bottom: -1%;
-  }
-
-  .font-total {
-    font-size: 3vw;
-  }
-  .login-book-service-coupon {
-    height: auto;
-    position: relative;
-    width: 85%;
-    margin-top: 5%;
-    margin-left: 8%;
-    background: #ffffff;
-    border-radius: 15px;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    overflow: hidden;
-    padding-top: 4%;
-    padding-bottom: 2%;
-    font-size: 2.5vw;
-  }
-  .apply-coupon-box {
-    height: auto;
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2vh;
+    height: 8%;
   }
   .apply-coupon-input1 {
-    width: 35%;
-    font-size: 2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-color: #6759ff;
-    outline: none;
-    border-radius: 5px;
-    border-width: 2px;
-    padding-left: 1.5%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
-    margin-left: -5%;
+    font-size: 0.6rem;
   }
   .apply-coupon-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-width: 0;
-    background-color: #6759ff;
-    color: #ffffff;
-    width: 20%;
-    font-size: 2.5vw;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    border-radius: 3px;
-    margin-right: 40%;
+    font-size: 0.6rem;
   }
-  .apply-coupon-button2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-width: 0;
-    background-color: #6759ff;
-    color: #ffffff;
-    width: 80%;
-    font-size: 3.5vw;
-    padding: 2% 0%;
-    border-radius: 3px;
-    margin-top: 8%;
-    margin-bottom: 5%;
-  }
-  /*.apply-coupon-box2 {
-    height: 25vh;
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-self: flex-start;
-    align-items: flex-start;
-    margin-bottom: 5%;
-    overflow-y: scroll;
-    align-content: flex-start;
-  }*/
-  .applied-box {
-    width: 35%;
-    font-size: 2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-style: solid;
-    border-color: #006915;
-    color: #006915;
-    outline: none;
-    border-radius: 5px;
-    border-width: 2px;
-    margin-left: -5%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
-  }
-  .coupon-applied {
-    height: 4vh;
-    margin-right: 55%;
-  }
-  .celebration {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .applied-box2 {
-    width: 45%;
-    font-size: 2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    border-style: solid;
-    border-color: #fc0404;
-    color: #fc0404;
-    outline: none;
-    border-radius: 5px;
-    border-width: 2px;
-    margin-left: -5%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
-  }
-  .items-con-coupon {
-    height: auto;
-    font-size: 3vw;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 1.1% 0%;
+  .login-book-service-coupon-B {
+    padding-bottom: 5%;
   }
 }

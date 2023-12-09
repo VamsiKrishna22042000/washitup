@@ -48,7 +48,7 @@ function Map({ address, pincode, initialLat, initialLong, onAddressChange }) {
     };
     const mapOptions = {
       center: initialCoordinates,
-      zoom: 18,
+      zoom: 16,
     };
     const map = new window.google.maps.Map(
       document.getElementById("map"),
@@ -75,7 +75,7 @@ function Map({ address, pincode, initialLat, initialLong, onAddressChange }) {
     };
     const mapOptions = {
       center: initialCoordinates,
-      zoom: 18,
+      zoom: 16,
     };
     const map = new window.google.maps.Map(
       document.getElementById("map"),
@@ -202,6 +202,7 @@ function Map({ address, pincode, initialLat, initialLong, onAddressChange }) {
         flexDirection: "column",
         alignItems: "center",
       }}
+      className="map-class-A"
     >
       <button
         onClick={() => {
@@ -229,7 +230,7 @@ function Map({ address, pincode, initialLat, initialLong, onAddressChange }) {
           setSearchedAddress(e.target.value);
         }}
         value={searchedAddress}
-        className="search-box"
+        className="search-box-A"
         type="search"
         placeholder="  Search Location 🔍"
       />
@@ -259,11 +260,11 @@ function Map({ address, pincode, initialLat, initialLong, onAddressChange }) {
         </div>
       )}
       {searchedAddress.length >= 1 && obtainedAddress.length === 0 && (
-        <div className="search-sug">
+        <div className="search-sug-A">
           <p style={{ textAlign: "center" }}>Address Not Found!</p>
         </div>
       )}
-      <p className="move-pin">Move Pin To Your Address</p>
+      <p className="move-pin-A">Move Pin To Your Address</p>
 
       <div
         id="map"
@@ -273,7 +274,7 @@ function Map({ address, pincode, initialLat, initialLong, onAddressChange }) {
           height: "80%",
         }}
       ></div>
-      <div className="address-box">
+      <div className="address-box-A">
         <p>{currentAddress}</p>
         <button
           onClick={() => {

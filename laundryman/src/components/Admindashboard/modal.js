@@ -1,8 +1,10 @@
-import React from 'react';
-import './modal.css'
+import React from "react";
+import "./modal.css";
+
+import { useEffect } from "react";
 
 function CustomModal({ show, handleClose, children }) {
-  const modalStyle = show ? { display: 'block' } : { display: 'none' };
+  const modalStyle = show ? { display: "block" } : { display: "none" };
 
   return (
     <div className="custom-modal" style={modalStyle}>

@@ -36,6 +36,14 @@ const WashingBC = () => {
           src="./deliveryboy.gif"
           alt="Washing"
         />
+        <p
+          className="go-back-button-B"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
+          Order Again →
+        </p>
       </div>
     </>
   );

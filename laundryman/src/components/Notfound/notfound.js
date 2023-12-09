@@ -1,5 +1,7 @@
 import "../LaundryMain/index.css";
 
+import { useEffect } from "react";
+
 const Notfound = () => {
   return (
     <div className="error-con">

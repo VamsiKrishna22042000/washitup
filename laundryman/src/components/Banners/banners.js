@@ -29,7 +29,11 @@ const Banners = () => {
 
   return (
     <div className="banner-con">
-      <Slider className="banner-desk" {...settings}>
+      <Slider
+        style={{ cursor: "pointer" }}
+        className="banner-desk"
+        {...settings}
+      >
         <img src="/offer1.webp" alt="offer1" />
         <img src="/offer2.webp" alt="offer2" />
         <img src="/offer1.webp" alt="offer1" />
@@ -43,7 +47,11 @@ const Banners = () => {
         <img src="/offer1.webp" alt="offer1" />
         <img src="/offer2.webp" alt="offer2" />
       </Slider>
-      <Slider className="banner-mobile" {...settings2}>
+      <Slider
+        style={{ cursor: "pointer" }}
+        className="banner-mobile"
+        {...settings2}
+      >
         <img src="/offer1.webp" alt="offer1" />
         <img src="/offer2.webp" alt="offer2" />
         <img src="/offer1.webp" alt="offer1" />

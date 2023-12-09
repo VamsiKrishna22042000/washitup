@@ -47,7 +47,7 @@ function MapB({ address, pincode, initialLat, initialLong, onAddressChange }) {
     };
     const mapOptions = {
       center: initialCoordinates,
-      zoom: 18,
+      zoom: 16,
     };
     const map = new window.google.maps.Map(
       document.getElementById("map"),
@@ -74,7 +74,7 @@ function MapB({ address, pincode, initialLat, initialLong, onAddressChange }) {
     };
     const mapOptions = {
       center: initialCoordinates,
-      zoom: 18,
+      zoom: 16,
     };
     const map = new window.google.maps.Map(
       document.getElementById("map"),

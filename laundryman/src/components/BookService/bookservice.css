@@ -7,6 +7,468 @@
   }
 }
 
+/**New Responsive Css*/
+
+.login-book-service-A {
+  position: absolute;
+  background-color: #ffffff;
+  height: 60%;
+  right: 6%;
+  top: 27.5%;
+  padding: 1%;
+  width: 45%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.input2-A {
+  height: 95%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.where-head-A {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  align-self: center;
+  font-weight: bold;
+  color: #6759ff;
+  margin-bottom: 0;
+}
+
+.calender-A {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  font-size: 0.9rem;
+  align-self: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-width: 0px !important;
+}
+
+.calen-con-A {
+  height: 70%;
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.calen-con-A::-webkit-scrollbar {
+  width: 0.1em; /* Set the width of the scrollbar (you can adjust this) */
+}
+
+.calen-con-A::-webkit-scrollbar-thumb {
+  background-color: #222222; /* Hide the thumb of the scrollbar */
+}
+
+.calen-con-A::-webkit-scrollbar-track {
+  background-color: transparent; /* Hide the track of the scrollbar */
+}
+
+.react-calendar__tile {
+  font-size: 0.9rem !important;
+  border-radius: 10px;
+}
+.react-calendar__month-view__days__day {
+  font-size: 0.9vw !important;
+}
+
+.react-calendar__navigation__label {
+  font-size: 0.6rem;
+}
+
+.where-titles-A {
+  font-size: 0.8rem;
+  font-family: sans-serif;
+  margin-bottom: 0.5%;
+  margin-top: 2%;
+}
+
+.name2-A {
+  height: 15%;
+  width: 110%;
+  border-color: grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 0.5%;
+}
+
+.selected-time-A {
+  border-style: solid;
+  border-color: #6759ff;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: #6759ff;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1vw;
+  font-weight: bold;
+  height: 60%;
+}
+
+.bookservice-time-A {
+  border-style: solid;
+  border-color: #6759ff;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #6759ff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  height: 50%;
+  cursor: pointer;
+}
+.bookservice-time-A:hover {
+  border-color: #6759ff;
+  background-color: #6759ff;
+  color: #fff;
+}
+
+.input1-A {
+  height: 95%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.otp-box-A {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.name-A {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1vw;
+  padding-left: 3%;
+  width: 100%;
+  border-style: solid;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: grey;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  border-color: #6759ff;
+  border-width: 1.5px;
+  margin-top: 0%;
+}
+
+.otp-button-A {
+  position: absolute;
+  border: 0;
+  right: 2%;
+  color: #ffffff;
+  font-size: 0.75rem;
+  padding: 2% 3%;
+  background-color: var(--def-color);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  height: 80%;
+}
+
+.name3-A {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1vw;
+  padding-left: 5%;
+  width: 100%;
+  border-style: solid;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: grey;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  border-color: #6759ff;
+  border-width: 1.5px;
+  margin-top: 0%;
+}
+
+.click-here-A {
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: green;
+  font-weight: 900;
+  animation: clickanimation 1s ease-in-out infinite alternate;
+}
+
+.geoLocator-A {
+  color: #6759ff;
+  position: absolute;
+  font-size: 1.2vw;
+  bottom: 17%;
+  left: 2%;
+}
+
+.where-button-A {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 1.2vw;
+  width: 80%;
+  border-width: 0px;
+  background-color: #6759ff;
+  color: #fff;
+  border-radius: 5px;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  cursor: pointer;
+}
+.search-box-A {
+  position: absolute;
+  font-size: 0.9rem;
+  color: #222222;
+  top: 8%;
+  width: 28%;
+  left: 7%;
+  height: 10%;
+  z-index: 1;
+  border: 0px solid #222222;
+  border-radius: 0.25rem;
+  box-shadow: 0px 2px 8px #22222270;
+  outline: none;
+}
+
+.search-sug-A {
+  position: absolute;
+  height: auto;
+  min-height: 8%;
+  max-height: 80%;
+  width: 85%;
+  z-index: 5;
+  background-color: white;
+  border: 0px solid #222222;
+  top: 20%;
+  border-radius: 0.25rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-shadow: 0px 2px 8px #22222270;
+}
+
+.search-sug-A p {
+  font-size: 0.8rem;
+  padding: 1.5%;
+  cursor: pointer;
+}
+
+.move-pin-A {
+  position: relative;
+  font-size: 0.9rem;
+  color: #6759ff;
+  margin-top: -0.5%;
+  margin-bottom: 1%;
+}
+
+.gm-style-mtc {
+  display: none;
+}
+.gm-svpc {
+  display: none;
+}
+
+.gm-fullscreen-control {
+  display: none;
+}
+
+.address-box-A {
+  height: 18%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.address-box-A > p {
+  height: 80%;
+  font-size: 0.8rem;
+  font-family: "Instrument Sans", sans-serif;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5%;
+}
+
+.address-box-A button {
+  border-width: 0;
+  background-color: #6759ff;
+  color: #fff;
+  padding: 1% 2%;
+  border-radius: 0.5rem;
+}
+
+.map-class-A {
+  height: 100% !important;
+  overflow: hidden;
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .login-book-service-A {
+    height: auto;
+    position: relative;
+    width: 85%;
+    margin-top: 5%;
+    flex-direction: column;
+    margin-left: 12.5%;
+    margin-bottom: 8%;
+  }
+  .input2-A {
+    height: 50vh;
+    width: 90%;
+  }
+
+  .input1-A {
+    height: 50vh;
+    width: 90%;
+  }
+  .name2-A {
+    width: 100% !important;
+  }
+
+  .bookservice-time-A {
+    width: 18%;
+    font-size: 0.8rem;
+  }
+  .selected-time-A {
+    width: 18%;
+    font-size: 0.8rem;
+  }
+
+  .name-A {
+    font-size: 1rem;
+    width: 90% !important;
+    margin-left: 5%;
+  }
+
+  #phone {
+    font-size: 1rem;
+    width: 100% !important;
+    margin-left: 5%;
+  }
+  .name3-A {
+    font-size: 1rem;
+    width: 90% !important;
+    margin-left: 5%;
+  }
+  .where-button-A {
+    font-size: 1rem;
+  }
+  .geoLocator-A {
+    bottom: 15.5%;
+    left: 8%;
+    font-size: 1rem !important;
+  }
+
+  .map-class-A {
+    height: 55vh !important;
+    width: 90% !important;
+    overflow: hidden;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .search-box-A {
+    height: 8% !important;
+    width: 60% !important;
+    left: 3%;
+  }
+
+  .search-sug {
+    margin-top: 7%;
+    width: 90% !important;
+    min-height: 0% !important;
+  }
+
+  .search-sug-A {
+    min-height: 1% !important;
+  }
+
+  .address-box-A p {
+    font-size: 0.65rem;
+    margin-left: 0% !important;
+    left: 0% !important;
+    width: 80% !important;
+  }
+
+  .address-box-A button {
+    margin-right: -5%;
+  }
+  .otp-button-A {
+    right: 6.1%;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
+  .bookservice-time-A {
+    font-size: 0.45rem;
+  }
+
+  .selected-time-A {
+    font-size: 0.45rem;
+  }
+
+  .geoLocator-A {
+    bottom: 13.5%;
+    left: 2%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .bookservice-time-A {
+    font-size: 0.35rem;
+  }
+
+  .selected-time-A {
+    font-size: 0.35rem;
+  }
+
+  .geoLocator-A {
+    bottom: 13%;
+    left: 2%;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+  .bookservice-time-A {
+    font-size: 0.45rem;
+  }
+
+  .selected-time-A {
+    font-size: 0.45rem;
+  }
+
+  .geoLocator-A {
+    bottom: 16%;
+    left: 2%;
+  }
+}
+
+/**New Responsive Css**/
+
 .search-box {
   position: absolute;
   font-size: 0.9rem;
@@ -42,17 +504,6 @@
   font-size: 0.8rem;
   padding: 1.5%;
   cursor: pointer;
-}
-
-.click-here {
-  margin-left: 5%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  color: green;
-  font-weight: 900;
-  animation: clickanimation 1s ease-in-out infinite alternate;
 }
 
 .gm-style-mtc {
@@ -123,64 +574,7 @@
   margin-bottom: 0.8%;
 }
 
-.otp-box {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.otp-button {
-  position: absolute;
-  border: 0;
-  right: 2%;
-  color: #ffffff;
-  font-size: 0.75rem;
-  padding: 2% 3%;
-  background-color: var(--def-color);
-  border-radius: 0.25rem;
-  cursor: pointer;
-  height: 80%;
-}
-
 @media screen and (min-width: 992px) {
-  .bookservice-time {
-    border-style: solid;
-    border-color: #6759ff;
-    border-width: 1px;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #6759ff;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.9vw;
-    font-weight: bolder;
-    height: 50%;
-  }
-  .bookservice-time:hover {
-    border-style: solid;
-    border-color: #6759ff;
-    border-width: 1px;
-    border-radius: 5px;
-    background-color: #6759ff;
-    color: #fff;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.9vw;
-    font-weight: bold;
-    height: 60%;
-  }
-  .selected-time {
-    border-style: solid;
-    border-color: #6759ff;
-    border-width: 1px;
-    border-radius: 5px;
-    background-color: #6759ff;
-    color: #fff;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 1vw;
-    font-weight: bold;
-    height: 60%;
-  }
   .bookservice-pickup {
     font-family: "Courier New", Courier, monospace;
     font-size: 0.9vw;
@@ -191,20 +585,7 @@
     left: 7.5%;
     top: 67%;
   }
-  .where-head {
-    font-family: sans-serif;
-    font-size: 1.8vw;
-    align-self: center;
-    font-weight: bold;
-    color: #6759ff;
-    margin-bottom: 0;
-  }
-  .where-titles {
-    font-size: 1vw;
-    font-family: sans-serif;
-    margin-bottom: 0.5%;
-    margin-top: 2%;
-  }
+
   .where-button {
     align-self: center;
     display: flex;
@@ -222,51 +603,6 @@
     padding-bottom: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
-  }
-  .calender {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    font-size: 0.9rem;
-    align-self: center;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    border-width: 0px !important;
-  }
-
-  .calen-con {
-    height: 70%;
-    width: 100%;
-    position: relative;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-
-  .calen-con::-webkit-scrollbar {
-    width: 0.1em; /* Set the width of the scrollbar (you can adjust this) */
-  }
-
-  .calen-con::-webkit-scrollbar-thumb {
-    background-color: #222222; /* Hide the thumb of the scrollbar */
-  }
-
-  .calen-con::-webkit-scrollbar-track {
-    background-color: transparent; /* Hide the track of the scrollbar */
-  }
-
-  .react-calendar__tile {
-    font-size: 0.9rem !important;
-    border-radius: 10px;
-  }
-  .react-calendar__month-view__days__day {
-    font-size: 0.9vw !important;
-  }
-
-  .react-calendar__navigation__label {
-    font-size: 0.6rem;
   }
 }
 
@@ -328,21 +664,6 @@
     padding: 1%;
   }
 
-  .selected-time {
-    border-style: solid;
-    border-color: #6759ff;
-    border-width: 1px;
-    border-radius: 2px;
-    background-color: #6759ff;
-    color: #fff;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.7rem;
-    font-weight: bold;
-    height: 80%;
-    margin-top: 2.5%;
-    padding: 1%;
-  }
-
   .bookservice-pickup {
     font-family: "Courier New", Courier, monospace;
     font-size: 2vw;
@@ -354,15 +675,7 @@
     top: 79%;
   }
 
-  .where-head {
-    font-family: sans-serif;
-    font-size: 4vw;
-    align-self: center;
-    font-weight: bold;
-    color: #6759ff;
-    margin-bottom: 0;
-  }
-  .where-titles {
+  .where-titles-A {
     font-size: 3vw;
     font-family: sans-serif;
     margin-bottom: 2%;

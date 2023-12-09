@@ -582,8 +582,8 @@ const BookServiceB = (props) => {
       <ToastContainer />
       <div className="login-book-serviceB">
         <Banners />
-        <div className="addService-con">
-          <div className="input2-B">
+        <div className="addService-con-B">
+          <div className="input2-BA">
             <h1 className="where-head">When?</h1>
             <div className="calen-con">
               <Calendar
@@ -616,7 +616,7 @@ const BookServiceB = (props) => {
               ))}
             </div>
           </div>
-          <div className="input1-B">
+          <div className="input1-BA">
             <h1 className="where-head">Where ?</h1>
 
             {otpVerification.otpSent ? (
@@ -628,7 +628,13 @@ const BookServiceB = (props) => {
             {otpVerification.otpSent ? (
               <div className="otp-box">
                 {otpVerification.otpLoad ? (
-                  <div style={{ marginRight: "45%" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <TailSpin height={30} width={30} />
                   </div>
                 ) : (
@@ -661,7 +667,13 @@ const BookServiceB = (props) => {
             ) : (
               <div className="otp-box">
                 {otpVerification.otpLoad ? (
-                  <div style={{ marginRight: "45%" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <TailSpin height={30} width={30} />
                   </div>
                 ) : (

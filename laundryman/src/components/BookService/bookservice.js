@@ -580,7 +580,7 @@ const BookService = (props) => {
   return (
     <>
       <ToastContainer />
-      <div className="login-book-service">
+      <div className="login-book-service-A">
         {showMap &&
           !geoLoading &&
           initialLatitude !== "" &&
@@ -594,23 +594,23 @@ const BookService = (props) => {
             />
           )}
         {!showMap && (
-          <div className="input2">
-            <h1 className="where-head">When?</h1>
-            <div className="calen-con">
+          <div className="input2-A">
+            <h1 className="where-head-A">When?</h1>
+            <div className="calen-con-A">
               <Calendar
                 minDate={min}
                 maxDate={max}
-                className="calender"
+                className="calender-A"
                 onChange={(date) => {
                   setDate(date);
                 }}
                 value={date}
               />
             </div>
-            <p style={{ alignSelf: "center" }} className="where-titles">
+            <p style={{ alignSelf: "center" }} className="where-titles-A">
               Time
             </p>
-            <div id="clothes" className="name2">
+            <div id="clothes" className="name2-A">
               {timeArray.map((each) => (
                 <button
                   onClick={() => {
@@ -618,7 +618,7 @@ const BookService = (props) => {
                   }}
                   id={each.id}
                   className={
-                    each.id === time ? "selected-time" : "bookservice-time"
+                    each.id === time ? "selected-time-A" : "bookservice-time-A"
                   }
                   key={each.id}
                 >
@@ -629,17 +629,17 @@ const BookService = (props) => {
           </div>
         )}
         {!showMap && (
-          <div className="input1">
-            <h1 className="where-head">Where ?</h1>
+          <div className="input1-A">
+            <h1 className="where-head-A">Where ?</h1>
 
             {otpVerification.otpSent ? (
-              <p className="where-titles">Enter OTP</p>
+              <p className="where-titles-A">Enter OTP</p>
             ) : (
-              <p className="where-titles">Mobile Number</p>
+              <p className="where-titles-A">Mobile Number</p>
             )}
 
             {otpVerification.otpSent ? (
-              <div className="otp-box">
+              <div className="otp-box-A">
                 {otpVerification.otpLoad ? (
                   <div style={{ marginRight: "45%" }}>
                     <TailSpin height={30} width={30} />
@@ -648,7 +648,7 @@ const BookService = (props) => {
                   <>
                     <input
                       id="phone"
-                      className="name"
+                      className="name-A"
                       type="number"
                       value={otpVerification.otpNumber}
                       placeholder="Enter OTP"
@@ -663,7 +663,7 @@ const BookService = (props) => {
                     />
                     <button
                       onClick={verifyOtp}
-                      className="otp-button"
+                      className="otp-button-A"
                       type="button"
                     >
                       Verify
@@ -672,7 +672,7 @@ const BookService = (props) => {
                 )}
               </div>
             ) : (
-              <div className="otp-box">
+              <div className="otp-box-A">
                 {otpVerification.otpLoad ? (
                   <div style={{ marginRight: "45%" }}>
                     <TailSpin height={30} width={30} />
@@ -681,7 +681,7 @@ const BookService = (props) => {
                   <>
                     <input
                       id="phone"
-                      className="name"
+                      className="name-A"
                       type="number"
                       value={input.number}
                       placeholder="Phone Number"
@@ -703,7 +703,7 @@ const BookService = (props) => {
                       !otp && (
                         <button
                           onClick={handleOtp}
-                          className="otp-button"
+                          className="otp-button-A"
                           type="button"
                         >
                           Send OTP
@@ -713,7 +713,7 @@ const BookService = (props) => {
                 )}
               </div>
             )}
-            <p className="where-titles" htmlFor="name">
+            <p className="where-titles-A" htmlFor="name">
               Name
             </p>
             <input
@@ -726,18 +726,18 @@ const BookService = (props) => {
                   }));
               }}
               id="name"
-              className="name"
+              className="name-A"
               type="text"
               placeholder="Name"
               value={input.name}
             />
 
             <div style={{ position: "relative", width: "100%" }}>
-              <p className="where-titles">Add Location</p>
+              <p className="where-titles-A">Add Location</p>
               {userLoaction !== undefined && (
                 <p
                   onClick={handleChangeAddress}
-                  className="where-titles"
+                  className="where-titles-A"
                   style={{
                     position: "absolute",
                     right: "5%",
@@ -753,7 +753,7 @@ const BookService = (props) => {
               )}
               {geoLoading ? (
                 <div
-                  className="name3"
+                  className="name3-A"
                   style={{
                     paddingLeft: "10%",
                     display: "flex",
@@ -775,8 +775,8 @@ const BookService = (props) => {
                   />
                 </div>
               ) : geoLoc === "" ? (
-                <div className="name3">
-                  <p className="click-here">
+                <div className="name3-A">
+                  <p className="click-here-A">
                     <IoIosArrowBack />
                     Click Here
                   </p>
@@ -786,7 +786,7 @@ const BookService = (props) => {
                   readOnly
                   id="geoLoc"
                   value={geoLoc}
-                  className="name3"
+                  className="name3-A"
                   type="text"
                   placeholder="Click Here to add you location"
                   style={{ paddingLeft: "10%" }}
@@ -800,7 +800,7 @@ const BookService = (props) => {
                   <BiCurrentLocation
                     cursor={"pointer"}
                     color="green"
-                    className="geoLocator"
+                    className="geoLocator-A"
                     onClick={() => {
                       setShowMap(true);
                     }}
@@ -808,7 +808,7 @@ const BookService = (props) => {
                 ) : (
                   <BiCurrentLocation
                     cursor={"pointer"}
-                    className="geoLocator"
+                    className="geoLocator-A"
                     onClick={getLocation}
                   />
                 )
@@ -816,7 +816,7 @@ const BookService = (props) => {
                 <BiCurrentLocation
                   cursor={"pointer"}
                   color="green"
-                  className="geoLocator"
+                  className="geoLocator-A"
                   onClick={() => {
                     setShowMap(true);
                   }}
@@ -824,21 +824,21 @@ const BookService = (props) => {
               ) : geoLoc === "" ? (
                 <BiCurrentLocation
                   cursor={"pointer"}
-                  className="geoLocator"
+                  className="geoLocator-A"
                   onClick={getLocation}
                 />
               ) : (
                 <BiCurrentLocation
                   color="green"
                   cursor={"pointer"}
-                  className="geoLocator"
+                  className="geoLocator-A"
                 />
               )}
             </div>
-            <p className="where-titles">Door / Flat No</p>
+            <p className="where-titles-A">Door / Flat No</p>
             <input
               id="addres"
-              className="name"
+              className="name-A"
               placeholder="Do / Flat No"
               value={userAddress.dono}
               onChange={(e) => {
@@ -846,10 +846,10 @@ const BookService = (props) => {
               }}
             />
 
-            <p className="where-titles">LandMark</p>
+            <p className="where-titles-A">LandMark</p>
             <input
               id="addres"
-              className="name"
+              className="name-A"
               placeholder="LandMark"
               value={userAddress.landmark}
               onChange={(e) => {
@@ -859,7 +859,11 @@ const BookService = (props) => {
               }}
             />
 
-            <button id="bookService" onClick={bookNow} className="where-button">
+            <button
+              id="bookService"
+              onClick={bookNow}
+              className="where-button-A"
+            >
               Book Service
             </button>
           </div>

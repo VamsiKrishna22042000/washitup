@@ -188,7 +188,10 @@ const ReorderB = ({ fromReroder, getReorder }) => {
   };
 
   return reorderData === "" ? (
-    <div className="type-of-reorder-B">
+    <div
+      style={{ height: "85vh", marginTop: "0%" }}
+      className="type-of-reorder-B"
+    >
       <Watch
         visible={true}
         height="80"
@@ -247,6 +250,7 @@ const ReorderB = ({ fromReroder, getReorder }) => {
               backgroundColor: "transparent",
               border: 0,
               fontSize: "1rem",
+              cursor: "pointer",
             }}
             type="button"
             onClick={() => {

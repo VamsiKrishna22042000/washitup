@@ -144,7 +144,7 @@ class LaundryBody extends Component {
       <>
         {!this.props.typeAB && (
           <div style={{ overflow: "hidden" }} className="background22">
-            <h1 className="offer-22-head">Exiting Offers</h1>
+            <h1 className="offer-22-head">Exciting Offers</h1>
             <img className="offer-22" src="/offer1.webp" alt="offer1" />
             <img className="offer-22" src="/offer2.webp" alt="offer2" />
           </div>

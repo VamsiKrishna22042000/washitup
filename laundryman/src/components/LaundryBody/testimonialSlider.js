@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./TestimonialSlider.css";
 
+import { useEffect } from "react";
+
 // Existing code above...
 
 /**Variable to store the data showed in the testimonial slider */

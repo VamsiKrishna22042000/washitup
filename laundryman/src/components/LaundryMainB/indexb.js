@@ -1,6 +1,6 @@
 import "./indexb.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import BookServiceB from "../BookServiceB/bookserviceB.js";
 
@@ -98,6 +98,7 @@ function LaundryNavB() {
       <div className="bar-nav" bg="#b8dde3" variant="light">
         <div className="nav-bar-contents">
           <img
+            style={{ cursor: "pointer" }}
             onClick={() => {
               window.location.href = "/";
             }}

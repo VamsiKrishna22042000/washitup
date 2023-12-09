@@ -1,5 +1,7 @@
 import "../LaundryMain/index.css";
 
+import { useEffect } from "react";
+
 const ConnectionLost = ({ connectionLostImage }) => {
   return (
     <div className="error-con">

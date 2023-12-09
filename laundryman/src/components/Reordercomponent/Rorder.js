@@ -189,7 +189,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
   };
 
   return reorderData === "" ? (
-    <div className="type-of-reorder-watch">
+    <div className="type-of-reorder-Aspinner">
       <Watch
         visible={true}
         height="80"
@@ -199,11 +199,11 @@ const Reorder = ({ fromReroder, getReorder }) => {
       />
     </div>
   ) : (
-    <div className="type-of-reorder">
+    <div className="type-of-reorder-A">
       <ToastContainer />
-      <div className="userAddress2">
-        <div className="previous-items">
-          <div className="items-con1">
+      <div className="userAddress2-A">
+        <div className="previous-items-A">
+          <div className="items-con1-A">
             <p style={{ textTransform: "capitalize" }}>
               Service : {reorderData.service}
             </p>
@@ -211,15 +211,15 @@ const Reorder = ({ fromReroder, getReorder }) => {
               Total : ₹ {totalPrice}
             </p>
           </div>
-          <div className="items-con2">
+          <div className="items-con2-A">
             {reorderData.items.map((each) => (
-              <div className="item-con3">
+              <div className="item-con3-A">
                 <img
-                  className="items-image"
+                  className="items-image-A"
                   src={each.itemId.image}
                   alt={each.itemId.name}
                 />
-                <p className="item-con-para">
+                <p className="item-con-para-A">
                   {each.itemId.name} x {each.itemCount}
                 </p>
                 <p>
@@ -233,7 +233,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
             ))}
           </div>
         </div>
-        <div className="select-option">
+        <div className="select-option-A">
           <p>Select Date</p>
           <input
             value={selectedData}
@@ -245,7 +245,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
             max={max}
           />
           <p>Select Time</p>
-          <div className="select-time">
+          <div className="select-time-A">
             {timeArray.map((each) => (
               <button
                 onClick={() => {
@@ -255,7 +255,9 @@ const Reorder = ({ fromReroder, getReorder }) => {
                 type="button"
                 id={each.id}
                 className={
-                  selectedTime === each.time ? "button-style2" : "button-style1"
+                  selectedTime === each.time
+                    ? "button-style2-A"
+                    : "button-style1-A"
                 }
               >
                 {each.time}
@@ -264,7 +266,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
           </div>
         </div>
       </div>
-      <div className="userAddress">
+      <div className="userAddress-A">
         <button
           style={{
             position: "absolute",
@@ -276,6 +278,7 @@ const Reorder = ({ fromReroder, getReorder }) => {
             backgroundColor: "transparent",
             border: 0,
             fontSize: "1rem",
+            cursor: "pointer",
           }}
           type="button"
           onClick={() => {
@@ -294,7 +297,11 @@ const Reorder = ({ fromReroder, getReorder }) => {
         <input value={reorderData.address.landmark} readOnly />
         <p>Location</p>
         <textarea value={reorderData.location} readOnly></textarea>
-        <button onClick={handleReorder} className="repeat-order" type="button">
+        <button
+          onClick={handleReorder}
+          className="repeat-order-A"
+          type="button"
+        >
           Repeat Order
         </button>
       </div>

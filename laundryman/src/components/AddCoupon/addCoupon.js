@@ -165,25 +165,25 @@ const AddCoupon = (props) => {
       <div style={{ position: "absolute", top: 0 }} id="coupon1"></div>
       <ReCAPTCHA ref={recapRef} size="invisible" sitekey={siteRecapKey} />
 
-      <div className="login-book-service-coupon">
+      <div className="login-book-service-coupon-A">
         {/**Used to load the celebrate animation for 3s after applying coupon*/}
         {loadCelebration && (
           <img
-            className="celebration"
+            className="celebration-A"
             src="/celebration.gif"
             alt="Celebration"
           />
         )}
         {/**Discount box used to show that the discount is available or not */}{" "}
         {discount === 0 ? (
-          total > 300 ? (
-            <div className="apply-coupon-box">
+          total > 0 ? (
+            <div className="apply-coupon-box-A">
               <ToastContainer />
               <input
-                className="apply-coupon-input1"
+                className="apply-coupon-input1-A"
                 type="text"
                 style={{ textTransform: "uppercase" }}
-                placeholder="Coupon Code"
+                placeholder="Enter Coupon"
                 onChange={(e) => {
                   setCouponCode(e.target.value.toUpperCase());
                 }}
@@ -191,16 +191,16 @@ const AddCoupon = (props) => {
               {loadapply ? (
                 <button
                   onClick={applyCoupon}
-                  className="apply-coupon-button"
+                  className="apply-coupon-button-A"
                   type="button"
-                  style={{ backgroundColor: "#ffffff" }}
+                  style={{ backgroundColor: "#ffffff", marginLeft: "1%" }}
                 >
-                  <ThreeDots color="#6759ff" height={"50%"} width={"50%"} />
+                  <ThreeDots color="#6759ff" height={"30%"} width={"30%"} />
                 </button>
               ) : (
                 <button
                   onClick={applyCoupon}
-                  className="apply-coupon-button"
+                  className="apply-coupon-button-A"
                   type="button"
                 >
                   Apply
@@ -208,39 +208,27 @@ const AddCoupon = (props) => {
               )}
             </div>
           ) : (
-            <div className="apply-coupon-box">
+            <div className="apply-coupon-box-A">
               <ToastContainer />
-              <div className="applied-box2">No Coupon available</div>
+              <div className="applied-box2-A">No Coupon available</div>
             </div>
           )
         ) : (
-          <div className="apply-coupon-box">
+          <div className="apply-coupon-box-A">
             <ToastContainer />
-            <div className="applied-box"> COUPON APPLIED</div>
+            <div className="applied-box-A"> COUPON APPLIED</div>
             <img
-              className="coupon-applied"
+              className="coupon-applied-A"
               src="/coupon.gif"
               alt="couponApplied"
             />
           </div>
         )}
         {/**box used to show all the items selected but user for laundry along with count and price of each item */}
-        <div className="apply-coupon-box2">
+        <div className="apply-coupon-box2-A">
           {items.map((each) => (
-            <div className="items-con-coupon">
-              <p
-                style={{
-                  width: "33%",
-                  textTransform: "capitalize",
-                  textAlign: "start",
-                  padding: "0",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box", // Display as a flexible box
-                  WebkitLineClamp: 1, // Limit to 1 line
-                  WebkitBoxOrient: "vertical", // Display vertically
-                }}
-              >
+            <div className="items-con-coupon-A">
+              <p>
                 <img
                   className="images-addCoupon"
                   src={each.image}
@@ -248,132 +236,45 @@ const AddCoupon = (props) => {
                 />
                 {each.category} - {each.name}
               </p>
-              <p
-                style={{
-                  width: "33%",
-                  textTransform: "capitalize",
-                  textAlign: "end",
-                  textOverflow: "ellipsis",
-                  lineClamp: 1,
-                }}
-              >
+              <p className="items-quantity">
                 {each.count} x {each.price}
               </p>
-              <p
-                style={{
-                  width: "33%",
-                  textTransform: "capitalize",
-                  textAlign: "start",
-                  paddingLeft: "19%",
-                  textOverflow: "ellipsis",
-                  lineClamp: 1,
-                }}
-              >
-                ₹ {each.price * each.count}
-              </p>
+              <p className="items-price">₹ {each.price * each.count}</p>
             </div>
           ))}
         </div>
-        <div
-          style={{ marginTop: "-5%", position: "relative" }}
-          className="apply-coupon-box"
-        >
-          {/**Total price before discount and after discount */}{" "}
-          {discount === 0 ? (
-            <>
-              <p
-                className="font-total"
-                style={{
-                  margin: 0,
-                  height: "1vh",
-                  position: "absolute",
-                  fontWeight: "bold",
-                  fontFamily: "monospace",
-                  color: "green",
-                }}
-              >
-                Total
-              </p>
-              <p
-                className="font-total"
-                style={{
-                  margin: 0,
-                  height: "1vh",
-                  position: "absolute",
-                  right: "5%",
-                  fontWeight: "bold",
-                  color: "green",
-                  fontFamily: "Arial",
-                }}
-              >
-                ₹ {total}
-              </p>
-            </>
-          ) : (
-            <>
-              <p
-                className="font-total"
-                style={{
-                  margin: 0,
-                  height: "1vh",
-                  position: "absolute",
-                  fontWeight: "bold",
-                  fontFamily: "monospace",
-                }}
-              >
-                Sub Total
-              </p>
-              <p
-                className="font-total"
-                style={{
-                  margin: 0,
-                  height: "1vh",
-                  position: "absolute",
-                  right: "5%",
-                  fontFamily: "Arial",
-                  fontWeight: "bold",
-                }}
-              >
-                ₹ {total}
-              </p>
-              <p
-                className="font-total"
-                style={{
-                  margin: 0,
-                  height: "1vh",
-                  position: "absolute",
-                  left: "0%",
-                  fontWeight: "bold",
-                  marginTop: "15%",
-                  color: "green",
-                  fontFamily: "monospace",
-                }}
-              >
-                Total
-              </p>
-              <p
-                className="font-total"
-                style={{
-                  margin: 0,
-                  height: "1vh",
-                  position: "absolute",
-                  right: "5%",
-                  fontWeight: "bold",
-                  marginTop: "15%",
-                  color: "green",
-                  fontFamily: "Arial",
-                }}
-              >
-                ₹ {total - discount}
-              </p>
-            </>
-          )}
-        </div>
+        {/**Total price before discount and after discount */}{" "}
+        {discount === 0 ? (
+          <div
+            style={{ marginTop: "-5%", position: "relative" }}
+            className="apply-coupon-box-Ab"
+          >
+            <p>Total</p>
+            <p className="font-total-A">₹ {total}</p>
+          </div>
+        ) : (
+          <>
+            <div
+              style={{ marginTop: "-5%", position: "relative" }}
+              className="apply-coupon-box-Ab"
+            >
+              <p>Sub Total</p>
+              <p className="font-total-A">₹ {total}</p>
+            </div>
+            <div
+              style={{ marginTop: "-5%", position: "relative" }}
+              className="apply-coupon-box-Ab"
+            >
+              <p style={{ display: "block" }}>Total</p>
+              <p className="font-total-A">₹ {total - discount}</p>
+            </div>
+          </>
+        )}
         {/**Button used to book the laundry hits the setToWashing Function*/}
         {loadbutton ? (
           <button
             onClick={setToWashing}
-            className="apply-coupon-button2"
+            className="apply-coupon-button2-A"
             type="button"
           >
             <TailSpin color="#ffffff" height={23} width={23} />
@@ -381,7 +282,7 @@ const AddCoupon = (props) => {
         ) : (
           <button
             onClick={setToWashing}
-            className="apply-coupon-button2"
+            className="apply-coupon-button2-A"
             type="button"
           >
             Book
