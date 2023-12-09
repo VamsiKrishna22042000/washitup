@@ -1,3 +1,6 @@
+::selection {
+  background-color: transparent;
+}
 
 .App-logo {
   height: 40vmin;
