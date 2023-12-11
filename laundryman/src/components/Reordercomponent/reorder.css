@@ -65,6 +65,7 @@
 .items-con2-A {
   height: 90%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .item-con3-A {
@@ -278,6 +279,8 @@
   .items-con2-A {
     height: 80%;
     margin-bottom: 0% !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   .select-option-A {
