@@ -1,3 +1,7 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 #datePicker {
   display: none;
   position: absolute;

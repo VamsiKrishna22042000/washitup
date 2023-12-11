@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap");
+
 @keyframes clickanimation {
   0% {
     transform: translateX(8%);
@@ -5,6 +7,10 @@
   100% {
     transform: translateX(-1%);
   }
+}
+
+*::selection {
+  background-color: transparent;
 }
 
 /**New Responsive Css*/
@@ -346,7 +352,8 @@
     width: 90%;
   }
   .name2-A {
-    width: 100% !important;
+    width: 110% !important;
+    margin-left: -5%;
   }
 
   .bookservice-time-A {

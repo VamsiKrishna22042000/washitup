@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap");
+
+*::selection {
+  background-color: transparent;
+}
 
 .spinner-con {
   position: absolute;
@@ -128,7 +132,7 @@
 }
 
 .set-counter-name {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.75vh;
   color: #6759ff;
   position: absolute;
@@ -138,7 +142,7 @@
 }
 
 .set-counter-amount {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.75vh;
   color: #6759ff;
   position: absolute;
@@ -179,7 +183,7 @@
   color: #fff;
   padding: 3%;
   border-width: 0px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.5vw;
   display: flex;
   flex-direction: row;
@@ -198,7 +202,7 @@
 
 .add-clothes-error-msg {
   position: absolute;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   color: red;
   font-size: 1.1vw;
   bottom: 4%;
@@ -250,7 +254,7 @@
   border-width: 2px;
   border-radius: 5px;
   color: #5647fe;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1vw;
   font-weight: bold;
   background-color: transparent;
@@ -271,13 +275,19 @@
   border-width: 2px;
   border-radius: 5px;
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1vw;
   font-weight: bold;
   background-color: #6759ff;
   border-color: #6759ff;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
+}
+
+.type-of-wash-continue-addClothes2 {
+  width: 35%;
+  cursor: pointer;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) and (orientation: portrait) {
@@ -313,6 +323,9 @@
     justify-content: flex-start;
     align-content: flex-start;
   }
+  .set-counter-name {
+    font-size: 0.7rem !important;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -337,7 +350,7 @@
     padding-right: 1.25%;
     padding-left: 1.25%;
     border-width: 0px;
-    font-family: "Instument Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1rem;
     display: flex;
     flex-direction: row;
@@ -356,7 +369,7 @@
     color: #fff;
     padding: 1.25% 1.25%;
     border-width: 0px;
-    font-family: "Instument Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1rem;
     display: flex;
     flex-direction: row;
@@ -546,7 +559,7 @@
   }
 
   .set-counter-price {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1.2vh;
     color: #6759ff;
     position: absolute;
@@ -577,7 +590,7 @@
   }
 
   .set-counter-name {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1.45vh;
     color: #6759ff;
     position: absolute;
@@ -586,7 +599,7 @@
   }
 
   .set-counter-amount {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1.2vh;
     color: #6759ff;
     position: absolute;
@@ -628,7 +641,7 @@
     padding-top: 5%;
     padding-bottom: 5%;
     border-width: 0px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 4vw;
     display: flex;
     flex-direction: row;
@@ -648,7 +661,7 @@
 
   .add-clothes-error-msg {
     position: absolute;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
     color: red;
     font-size: 2.8vw;
     height: 0.5%;
@@ -702,7 +715,7 @@
     border-width: 1px;
     border-radius: 2px;
     color: #5647fe;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 2.3vw;
     font-weight: bold;
     background-color: transparent;
@@ -727,7 +740,7 @@
     border-radius: 2px;
     color: #fff;
     background-color: #6759ff;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 2.3vw;
     font-weight: bold;
   }
@@ -754,5 +767,45 @@
   .type-of-wash-continue-addClothes2 {
     width: 40%;
     bottom: 8%;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: portrait) {
+  .set-counter-name {
+    font-size: 0.7rem !important;
+  }
+  .set-couter-price-icon3 {
+    font-size: 1rem;
+    margin-top: 3%;
+  }
+
+  .set-couter-price-price3 {
+    font-size: 0.8rem !important;
+    margin-top: 0.5%;
+  }
+  .set-counter-amount {
+    font-size: 0.8rem !important;
+    margin-top: 0.1%;
+  }
+  .type-of-wash-continue-addClothes1 {
+    font-size: 0.6rem !important;
+  }
+  .type-of-wash-continue-addClothes2 {
+    font-size: 0.6rem !important;
+    height: 8%;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) and (orientation: landscape) {
+  .set-counter-name {
+    font-size: 0.5rem !important;
+  }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1024px) and (orientation: landscape) {
+  .set-counter-name {
+    font-size: 0.7rem !important;
   }
 }

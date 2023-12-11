@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500&display=swap");
 
+*::selection {
+  background-color: transparent;
+}
+
 .issue-body {
   height: 87%;
   width: 100%;

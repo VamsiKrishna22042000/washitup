@@ -5,6 +5,10 @@
   margin: 0px;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @keyframes downAnimation {
   0% {
     transform: translateY(-100%);
@@ -1079,7 +1083,7 @@
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2vw;
-    border-color: #fff;
+    border-color: transparent;
     border-radius: 10px;
     color: #6759ff;
     background-color: #fff;
@@ -1792,7 +1796,7 @@
   }
 
   .name2-B {
-    width: 100% !important;
+    width: 110% !important;
     font-size: 3vw;
     display: flex;
     flex-direction: row;
@@ -1800,6 +1804,8 @@
     align-items: center;
     padding-bottom: 2.5%;
     padding-top: 2%;
+
+    margin-left: -5%;
   }
 
   .geoLocator {
@@ -2235,7 +2241,7 @@
     padding-top: 2%;
     padding-bottom: 2%;
     border-radius: 8px;
-    border-color: #fff;
+    border-color: transparent;
     color: #6759ff;
   }
 

@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  background-color: transparent;
+}
+
 .nine-one {
   height: 55%;
 }

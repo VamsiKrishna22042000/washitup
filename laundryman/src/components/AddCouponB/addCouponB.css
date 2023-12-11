@@ -1,3 +1,7 @@
+*::selection {
+  background-color: transparent;
+}
+
 .images-addCouponB {
   height: auto;
   width: 10%;

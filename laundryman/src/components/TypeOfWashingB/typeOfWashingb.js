@@ -30,6 +30,97 @@ const WashingB = (props) => {
     setTotal(obtained.total);
   };
 
+  const [showModalAlert, setModalAlert] = useState(false);
+  const [modalWashingAlert, setAlertWashing] = useState("");
+  const [modalAlert, setShowModalAlert] = useState(false);
+
+  const ShowAlert = () => {
+    return (
+      <>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "#22222250",
+            zIndex: 1,
+            borderRadius: "1rem",
+          }}
+        ></div>
+        <div className="alert">
+          <p>
+            Selected items will be deleted, only one type of wash can be used at
+            a time.
+          </p>
+          <div>
+            <button
+              onClick={() => {
+                setModalAlert(false);
+              }}
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                setModalAlert(false);
+                setselectedType(modalWashingAlert);
+                typing(modalWashingAlert);
+              }}
+              type="button"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  const ShowModalAlert = () => {
+    return (
+      <>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#22222250",
+            borderRadius: "1rem",
+            zIndex: 2,
+          }}
+        ></div>
+
+        <div className="alertClassB">
+          <p>Would You like to select more items !</p>
+          <div>
+            <button
+              onClick={() => {
+                setShowModalAlert(false);
+              }}
+              type="button"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => {
+                setShowModalAlert(false);
+                callBackForTypeOfWashing({ typeofWash: selectedType, items });
+              }}
+              type="button"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <div
       style={{ paddingTop: ".5%" }}
@@ -51,15 +142,24 @@ const WashingB = (props) => {
           alt="reorder"
         />
       )}
+
+      {showModalAlert && <ShowAlert />}
+      {modalAlert && <ShowModalAlert />}
+
       <Banners />
       <div className="addCloths-con">
         <div className="type-of-wash-con-addClothes">
           <button
             style={{ position: "relative", cursor: "pointer" }}
             onClick={() => {
-              setItems([]);
-              setselectedType("wash & fold");
-              typing("wash & fold");
+              if (total === 0) {
+                setItems([]);
+                setselectedType("wash & fold");
+                typing("wash & fold");
+              } else {
+                setModalAlert(true);
+                setAlertWashing("wash & fold");
+              }
             }}
             className={
               selectedType === "wash & fold"
@@ -86,9 +186,14 @@ const WashingB = (props) => {
           <button
             style={{ position: "relative", cursor: "pointer" }}
             onClick={() => {
-              setItems([]);
-              setselectedType("wash & iron");
-              typing("wash & iron");
+              if (total === 0) {
+                setItems([]);
+                setselectedType("wash & iron");
+                typing("wash & iron");
+              } else {
+                setModalAlert(true);
+                setAlertWashing("wash & iron");
+              }
             }}
             className={
               selectedType === "wash & iron"
@@ -114,9 +219,14 @@ const WashingB = (props) => {
           </button>
           <button
             onClick={() => {
-              setItems([]);
-              setselectedType("dry Cleaning");
-              typing("dry Cleaning");
+              if (total === 0) {
+                setItems([]);
+                setselectedType("dry Cleaning");
+                typing("dry Cleaning");
+              } else {
+                setModalAlert(true);
+                setAlertWashing("dry Cleaning");
+              }
             }}
             style={{ position: "relative", cursor: "pointer" }}
             className={
@@ -147,7 +257,7 @@ const WashingB = (props) => {
           {items.length > 0 ? (
             <button
               onClick={() => {
-                if (items.length <= 0) {
+                if (parseInt(total) <= 0) {
                   toast.error("Select Clothes To Wash", {
                     autoClose: 2000,
                     pauseOnHover: true,
@@ -155,8 +265,16 @@ const WashingB = (props) => {
                     position: "top-center",
                     theme: "colored",
                   });
-                } else {
-                  callBackForTypeOfWashing({ typeofWash: selectedType, items });
+                } else if (parseInt(total) < 270) {
+                  toast.error("Please Order Above 270", {
+                    autoClose: 2000,
+                    pauseOnHover: true,
+                    closeOnClick: true,
+                    position: "top-center",
+                    theme: "colored",
+                  });
+                } else if (parseInt(total) > 270) {
+                  setShowModalAlert(true);
                 }
               }}
               className="type-of-wash-continue-addClothes2"
@@ -170,7 +288,7 @@ const WashingB = (props) => {
             <button
               style={{ cursor: "pointer" }}
               onClick={() => {
-                if (items.length <= 0) {
+                if (parseInt(total) <= 0) {
                   toast.error("Select Clothes To Wash", {
                     autoClose: 2000,
                     pauseOnHover: true,
@@ -178,8 +296,16 @@ const WashingB = (props) => {
                     position: "top-center",
                     theme: "colored",
                   });
-                } else {
-                  callBackForTypeOfWashing({ typeofWash: selectedType, items });
+                } else if (parseInt(total) < 270) {
+                  toast.error("Please Order Above 270", {
+                    autoClose: 2000,
+                    pauseOnHover: true,
+                    closeOnClick: true,
+                    position: "top-center",
+                    theme: "colored",
+                  });
+                } else if (parseInt(total) > 270) {
+                  setShowModalAlert(true);
                 }
               }}
               className="type-of-wash-continue-addClothes1"

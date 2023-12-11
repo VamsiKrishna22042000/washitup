@@ -6,6 +6,10 @@
   height: 55%;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @media screen and (max-width: 600px) {
   .nine-one {
     height: 67%;

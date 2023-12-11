@@ -1,6 +1,6 @@
 import "../LaundryMain/index.css";
 
-import { useEffect } from "react";
+import "./connectionlost.css";
 
 const ConnectionLost = ({ connectionLostImage }) => {
   return (
@@ -20,7 +20,7 @@ const ConnectionLost = ({ connectionLostImage }) => {
         onClick={() => {
           window.location.href = "/";
         }}
-        className="error-button"
+        className="error-button-2"
         type="button"
       >
         Go To HomePage

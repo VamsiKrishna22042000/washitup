@@ -14,6 +14,9 @@ const AddClothesBSec = (props) => {
     return [];
   });
 
+  /** Updating the total count */
+  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     setClothesStore([]);
     getTheCategories();
@@ -70,9 +73,6 @@ const AddClothesBSec = (props) => {
 
   /** state to store the category selected*/
   const [category, setCategory] = useState("men");
-
-  /** Updating the total count */
-  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     let totalCount = 0;

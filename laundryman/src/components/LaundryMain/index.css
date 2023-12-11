@@ -5,6 +5,10 @@
   margin: 0px;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @keyframes downAnimation {
   0% {
     transform: translateY(-100%);
@@ -1029,7 +1033,7 @@
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2vw;
-    border-color: #fff;
+    border-color: transparent;
     border-radius: 10px;
     color: #6759ff;
     background-color: #fff;
@@ -2082,7 +2086,7 @@
     padding-top: 2%;
     padding-bottom: 2%;
     border-radius: 8px;
-    border-color: #fff;
+    border-color: transparent;
     color: #6759ff;
   }
 

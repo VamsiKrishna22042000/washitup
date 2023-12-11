@@ -2,6 +2,10 @@
 
 /**NewCss**/
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .success-total-con-A {
   position: absolute;
   background-color: #ffffff;

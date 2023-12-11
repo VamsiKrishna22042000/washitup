@@ -15,6 +15,8 @@ const AddClothes = (props) => {
   const { typeOfWashing } = props;
   const [clothes, setClothesStore] = useState([]);
 
+  const [modalAlert, setShowModalAlert] = useState(false);
+
   useEffect(() => {
     getTheCategories();
   }, []);
@@ -52,14 +54,64 @@ const AddClothes = (props) => {
     }
   };
 
+  const ShowModalAlert = () => {
+    return (
+      <>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#22222250",
+            borderRadius: "1rem",
+            zIndex: 2,
+          }}
+        ></div>
+
+        <div className="alertClass">
+          <p>Would You like to select more items !</p>
+          <div>
+            <button
+              onClick={() => {
+                setShowModalAlert(false);
+              }}
+              type="button"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => {
+                setShowModalAlert(false);
+                const { wash } = props;
+                const filteredItems = clothes.filter((each) => each.count > 0);
+                wash(
+                  filteredItems
+                ); /** Call back funciton to navigate to the bookservice.js*/
+              }}
+              type="button"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   /** Function to navigiate to the bookservice.js based on the total if total is 0 then it show error else move to the next page*/
   const washthem = () => {
-    if (total > 0) {
-      const { wash } = props;
-      const filteredItems = clothes.filter((each) => each.count > 0);
-      wash(
-        filteredItems
-      ); /** Call back funciton to navigate to the bookservice.js*/
+    if (total > 270) {
+      setShowModalAlert(true);
+    } else if (total < 270) {
+      toast.error("Please Order Above 270", {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     } else {
       toast.error("Add Atleast One Item", {
         autoClose: 2000,
@@ -156,6 +208,7 @@ const AddClothes = (props) => {
     <>
       <ToastContainer />
       <div className="addClothes-A">
+        {modalAlert && <ShowModalAlert />}
         <p className="counter-total-value-A">Total</p>
         <div className="counter-buttons-container-A">
           {/** Eliminating duplicates by using new Set() from the filterd category and displaying them*/}

@@ -1,4 +1,7 @@
 /**New Css**/
+*::selection {
+  background-color: transparent;
+}
 
 .login-book-serviceB {
   position: relative;

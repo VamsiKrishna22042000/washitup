@@ -641,6 +641,7 @@ const MyOrders = () => {
             theme: "colored",
           });
           setRatingBox({ ...ratingBox, orderId: "" });
+          window.location.reload();
         }
       }
     };
@@ -2226,7 +2227,7 @@ const MyOrders = () => {
                           each.deliveryspeedRating) /
                           4
                       ) === 0 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p onClick={seperateItems} id={each._id}>
                             Your Rating
                           </p>
@@ -2250,7 +2251,7 @@ const MyOrders = () => {
                             onClick={seperateItems}
                             id={each._id}
                           />
-                        </>
+                        </div>
                       ) : Math.ceil(
                           (each?.packageRating +
                             each?.qualityRating +
@@ -2258,7 +2259,7 @@ const MyOrders = () => {
                             each.deliveryspeedRating) /
                             4
                         ) === 1 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p onClick={seperateItems} id={each._id}>
                             Your Rating
                           </p>
@@ -2285,7 +2286,7 @@ const MyOrders = () => {
                             onClick={seperateItems}
                             id={each._id}
                           />
-                        </>
+                        </div>
                       ) : Math.ceil(
                           (each?.packageRating +
                             each?.qualityRating +
@@ -2293,7 +2294,7 @@ const MyOrders = () => {
                             each.deliveryspeedRating) /
                             4
                         ) === 2 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p onClick={seperateItems} id={each._id}>
                             Your Rating
                           </p>
@@ -2312,7 +2313,7 @@ const MyOrders = () => {
                           <IoStarOutline />
                           <IoStarOutline />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : Math.ceil(
                           (each?.packageRating +
                             each?.qualityRating +
@@ -2320,7 +2321,7 @@ const MyOrders = () => {
                             each.deliveryspeedRating) /
                             4
                         ) === 3 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p>Your Rating</p>
                           <IoStar
                             style={{
@@ -2339,7 +2340,7 @@ const MyOrders = () => {
                           />
                           <IoStarOutline />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : Math.ceil(
                           (each?.packageRating +
                             each?.qualityRating +
@@ -2347,7 +2348,7 @@ const MyOrders = () => {
                             each.deliveryspeedRating) /
                             4
                         ) === 4 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p>Your Rating</p>
                           <IoStar
                             style={{
@@ -2370,7 +2371,7 @@ const MyOrders = () => {
                             }}
                           />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : (
                         Math.ceil(
                           (each?.packageRating +
@@ -2379,7 +2380,7 @@ const MyOrders = () => {
                             each.deliveryspeedRating) /
                             4
                         ) === 5 && (
-                          <>
+                          <div className="rating-order-1">
                             <p>Your Rating</p>
                             <IoStar
                               style={{
@@ -2406,7 +2407,7 @@ const MyOrders = () => {
                                 color: "yellow",
                               }}
                             />
-                          </>
+                          </div>
                         )
                       )}
                     </div>
@@ -2648,16 +2649,16 @@ const MyOrders = () => {
                       className="rating-main"
                     >
                       {mainStarAnimation === 0 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p>Please Rate Our Service</p>
                           <IoStarOutline />
                           <IoStarOutline />
                           <IoStarOutline />
                           <IoStarOutline />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : mainStarAnimation === 1 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p>Please Rate Our Service</p>
                           <IoStar
                             style={{
@@ -2668,9 +2669,9 @@ const MyOrders = () => {
                           <IoStarOutline />
                           <IoStarOutline />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : mainStarAnimation === 2 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p>Please Rate Our Service</p>
                           <IoStar
                             style={{
@@ -2685,9 +2686,9 @@ const MyOrders = () => {
                           <IoStarOutline />
                           <IoStarOutline />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : mainStarAnimation === 3 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p>Please Rate Our Service</p>
                           <IoStar
                             style={{
@@ -2706,9 +2707,9 @@ const MyOrders = () => {
                           />
                           <IoStarOutline />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : mainStarAnimation === 4 ? (
-                        <>
+                        <div className="rating-order-1">
                           <p>Please Rate Our Service</p>
                           <IoStar
                             style={{
@@ -2731,10 +2732,10 @@ const MyOrders = () => {
                             }}
                           />
                           <IoStarOutline />
-                        </>
+                        </div>
                       ) : (
                         mainStarAnimation === 5 && (
-                          <>
+                          <div className="rating-order-1">
                             <p>Please Rate Our Service</p>
                             <IoStar
                               style={{
@@ -2761,7 +2762,7 @@ const MyOrders = () => {
                                 color: "yellow",
                               }}
                             />
-                          </>
+                          </div>
                         )
                       )}
                     </div>

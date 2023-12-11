@@ -145,7 +145,13 @@ const Lastsetion = () => {
             </div>
           </div>
           <div style={{ cursor: "pointer" }} className="last-3">
-            © 2022 Laundry Shop, All Rights Reserved.
+            <p
+              onClick={() => {
+                window.open("https://ioninks.com/", "_blank");
+              }}
+            >
+              © 2023 All Rights Reserved, By IonInks
+            </p>
           </div>
         </div>
       </div>
