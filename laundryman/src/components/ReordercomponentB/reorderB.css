@@ -266,12 +266,8 @@
     margin-left: 5%;
   }
 
-  .item-con3-B {
-    height: 7.5vh;
-  }
-
   .item-con3-B img {
-    height: 50%;
+    height: 100%;
     width: 25%;
   }
 
@@ -281,6 +277,10 @@
     text-align: center;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  .item-con3-B {
+    height: 10vh !important;
   }
 
   .item-con3-B img {
@@ -449,6 +449,10 @@
   .item-con3-B p {
     font-size: 0.75rem !important;
   }
+  .repeat-order {
+    position: relative !important;
+    margin-top: 5%;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
@@ -489,5 +493,17 @@
 @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .type-of-reorder-B {
     height: 60vh;
+  }
+  .item-con3-B {
+    height: 12vh;
+  }
+
+  .item-con3-B img {
+    height: 30%;
+  }
+
+  .item-con-para-B-D {
+    font-size: 0.8rem !important;
+    height: auto !important;
   }
 }

@@ -297,14 +297,14 @@ const WashingB = (props) => {
                     theme: "colored",
                   });
                 } else if (parseInt(total) < 270) {
-                  toast.error("Please Order Above 270", {
+                  toast.error("Order value should be 270 or above", {
                     autoClose: 2000,
                     pauseOnHover: true,
                     closeOnClick: true,
                     position: "top-center",
                     theme: "colored",
                   });
-                } else if (parseInt(total) > 270) {
+                } else if (parseInt(total) >= 270) {
                   setShowModalAlert(true);
                 }
               }}

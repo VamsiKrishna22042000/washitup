@@ -102,10 +102,10 @@ const AddClothes = (props) => {
 
   /** Function to navigiate to the bookservice.js based on the total if total is 0 then it show error else move to the next page*/
   const washthem = () => {
-    if (total > 270) {
+    if (total >= 270) {
       setShowModalAlert(true);
     } else if (total < 270) {
-      toast.error("Please Order Above 270", {
+      toast.error("Order Value should be 270 or above", {
         autoClose: 2000,
         pauseOnHover: true,
         closeOnClick: true,
