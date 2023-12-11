@@ -191,7 +191,7 @@
   }
 
   .type-of-reorder-A {
-    height: 100vh;
+    height: auto;
     width: 85%;
     position: relative;
     display: flex;
