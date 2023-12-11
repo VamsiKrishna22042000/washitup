@@ -326,6 +326,10 @@
   .set-counter-name {
     font-size: 0.7rem !important;
   }
+
+  .type-of-wash-continue-addClothes2 {
+    width: 80% !important;
+  }
 }
 
 @media screen and (max-width: 767px) {

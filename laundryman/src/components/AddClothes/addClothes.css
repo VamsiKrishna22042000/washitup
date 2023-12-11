@@ -161,8 +161,8 @@
   align-content: flex-start;
   flex-wrap: wrap;
   overflow-y: scroll;
-  height: 30vh;
-  margin-top: 10%;
+  height: 65%;
+  margin-top: 5%;
   margin-right: 5%;
 }
 
@@ -335,6 +335,7 @@
   .items-over-A {
     margin-top: 18%;
     margin-bottom: 2.5%;
+    height: 30vh !important;
   }
   .set-counter-icon-A {
     height: 50%;
