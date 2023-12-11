@@ -253,7 +253,7 @@
   }
 
   .userAddress-B {
-    height: 35vh;
+    height: 37.5vh;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -264,6 +264,7 @@
     padding-left: 5%;
     margin-top: 1%;
     margin-left: 5%;
+    border: 2px solid transparent !important;
   }
 
   .item-con3-B img {
@@ -443,7 +444,7 @@
   .repeat-order {
     align-self: center;
     margin-right: 10%;
-    margin-top: -5%;
+    margin-top: 5%;
   }
 
   .item-con3-B p {
@@ -505,5 +506,11 @@
   .item-con-para-B-D {
     font-size: 0.8rem !important;
     height: auto !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .items-con2-B {
+    height: 29vh;
   }
 }

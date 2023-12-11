@@ -510,3 +510,13 @@
     margin-top: -1%;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .items-con2-A {
+    height: 30vh;
+    margin-bottom: 0% !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 2%;
+  }
+}
