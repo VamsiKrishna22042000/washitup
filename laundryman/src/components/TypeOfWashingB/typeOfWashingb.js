@@ -104,7 +104,7 @@ const WashingB = (props) => {
               }}
               type="button"
             >
-              Yes
+              Add
             </button>
             <button
               onClick={() => {
@@ -113,7 +113,7 @@ const WashingB = (props) => {
               }}
               type="button"
             >
-              No
+              Continue to order
             </button>
           </div>
         </div>
@@ -273,7 +273,7 @@ const WashingB = (props) => {
                     position: "top-center",
                     theme: "colored",
                   });
-                } else if (parseInt(total) > 270) {
+                } else if (parseInt(total) >= 270) {
                   setShowModalAlert(true);
                 }
               }}
@@ -288,7 +288,11 @@ const WashingB = (props) => {
             <button
               style={{ cursor: "pointer" }}
               onClick={() => {
+                console.log(total);
+                console.log(typeof total);
+
                 if (parseInt(total) <= 0) {
+                  console.log("hi");
                   toast.error("Select Clothes To Wash", {
                     autoClose: 2000,
                     pauseOnHover: true,

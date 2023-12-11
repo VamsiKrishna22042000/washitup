@@ -79,7 +79,7 @@ const AddClothes = (props) => {
               }}
               type="button"
             >
-              Yes
+              Add
             </button>
             <button
               onClick={() => {
@@ -92,7 +92,7 @@ const AddClothes = (props) => {
               }}
               type="button"
             >
-              No
+              Continue to order
             </button>
           </div>
         </div>
