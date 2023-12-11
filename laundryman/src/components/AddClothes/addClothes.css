@@ -523,18 +523,4 @@
   }
 }
 
-@media screen and (min-width: 1300px) and (max-width: 1366px) and (orientation: landscape) {
-  .items-over-A {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 20vh;
-    margin-top: 10%;
-  }
-}
-
 /**NewCss*/
