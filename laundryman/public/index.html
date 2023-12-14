@@ -161,6 +161,23 @@
     </script>
     <!-- End VWO Async SmartCode -->
   </head>
+  <script>
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        // Code to execute when the page is hidden (e.g., switch to another tab)
+        document.title = "Missing you already";
+        document
+          .querySelector("link[rel*='icon']")
+          .setAttribute("href", "%PUBLIC_URL%/sademoji.webp");
+      } else {
+        // Code to execute when the page is visible again
+        document.title = "WashIt Up";
+        document
+          .querySelector("link[rel*='icon']")
+          .setAttribute("href", "%PUBLIC_URL%/favicon.ico");
+      }
+    });
+  </script>
   <!-- Meta Pixel Code -->
   <script>
     !(function (f, b, e, v, n, t, s) {

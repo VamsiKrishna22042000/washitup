@@ -1,5 +1,8 @@
 import "../LaundryMain/index.css";
-import { Component } from "react";
+
+import "./excitingOffers.css";
+
+import { Component, useEffect, useState } from "react";
 import FeatureBox from "./featurebox";
 
 import Iphonecon from "./iphonecon.js";
@@ -14,7 +17,7 @@ import Lastsetion from "./lastsection";
 const fearturesOfback2 = [
   {
     id: "fe1",
-    con1: "f1",
+    con1: "fes1",
     imageUrl: "fastdelivery.png",
     featureName: "Lightning-Fast Turnaround",
     feature:
@@ -23,7 +26,7 @@ const fearturesOfback2 = [
 
   {
     id: "fe2",
-    con1: "f2 boxshow",
+    con1: "fes2 show-feature",
     imageUrl: "exprtise.png",
     featureName: "Expertise and Quality",
     feature:
@@ -32,7 +35,7 @@ const fearturesOfback2 = [
 
   {
     id: "fe3",
-    con1: "f3 boxshow",
+    con1: "fes3 show-feature",
     imageUrl: "price.png",
     featureName: "Competitive Pricing",
     feature:
@@ -41,7 +44,7 @@ const fearturesOfback2 = [
 
   {
     id: "fe4",
-    con1: "f4 boxshow",
+    con1: "fes4 show-feature",
     imageUrl: "eco.png",
     featureName: "Eco-Friendly Approach",
     feature:
@@ -53,10 +56,10 @@ const fearturesOfback2 = [
 const iphones = [
   {
     class: "women1",
-    iurl: "/womenwashituppic1.webp",
+    iurl: "/womenwashituppic1.png",
     fep1: "FEATURES",
     lan: "WashIt Up Features",
-    phonecon: "phone1",
+    phonecon: "phones-con1",
     image1: "/garmentcare.png",
     feName1: "Professional Garment Care",
     fe1: "We handle your clothes with the utmost care, using advanced equipment and premium detergents to ensure they look and feel their best.",
@@ -69,10 +72,10 @@ const iphones = [
   },
   {
     class: "women2",
-    iurl: "/womenwashituppic2.webp",
+    iurl: "/womenwashituppic2.png",
     fep1: "FEATURES",
     lan: "WashIt Up Features",
-    phonecon: "phone2",
+    phonecon: "phones-con2",
     image1: "/fragrence.png",
     feName1: "Fragrance Options",
     fe1: "Choose from a range of delightful scents to add that extra freshness to your freshly laundered clothes.",
@@ -85,102 +88,108 @@ const iphones = [
   },
 ];
 
-class LaundryBody extends Component {
+const LaundryBody = (props) => {
   /**Function to change the feature on clicking the dots in the mobile mode*/
-  boxchange = (event) => {
-    if (event.target.id === "dt1") {
+
+  const [changeDot, setDot] = useState("dt1");
+
+  useEffect(() => {
+    setTimeout(() => {
+      boxchange();
+    }, 2000);
+  });
+
+  const boxchange = () => {
+    if (changeDot === "dt1") {
       let box1 = document.getElementById("fe1");
       let box2 = document.getElementById("fe2");
       let box3 = document.getElementById("fe3");
       let box4 = document.getElementById("fe4");
 
-      console.log(event.target);
-      console.log(box1);
-      box1.classList.remove("boxshow");
-      box2.classList.add("boxshow");
-      box3.classList.add("boxshow");
-      box4.classList.add("boxshow");
-    } else if (event.target.id === "dt2") {
+      // console.log(event.target);
+      // console.log(box1);
+      box1.classList.remove("show-feature");
+      box2.classList.add("show-feature");
+      box3.classList.add("show-feature");
+      box4.classList.add("show-feature");
+      setDot("dt2");
+    } else if (changeDot === "dt2") {
       let box1 = document.getElementById("fe1");
       let box2 = document.getElementById("fe2");
       let box3 = document.getElementById("fe3");
       let box4 = document.getElementById("fe4");
 
-      console.log(event.target);
-      console.log(box2);
-      box1.classList.add("boxshow");
-      box2.classList.remove("boxshow");
-      box3.classList.add("boxshow");
-      box4.classList.add("boxshow");
-    } else if (event.target.id === "dt3") {
+      // console.log(event.target);
+      // console.log(box2);
+      box1.classList.add("show-feature");
+      box2.classList.remove("show-feature");
+      box3.classList.add("show-feature");
+      box4.classList.add("show-feature");
+      setDot("dt3");
+    } else if (changeDot === "dt3") {
       let box1 = document.getElementById("fe1");
       let box2 = document.getElementById("fe2");
       let box3 = document.getElementById("fe3");
       let box4 = document.getElementById("fe4");
 
-      console.log(event.target);
-      console.log(box3);
-      box1.classList.add("boxshow");
-      box2.classList.add("boxshow");
-      box3.classList.remove("boxshow");
-      box4.classList.add("boxshow");
-    } else if (event.target.id === "dt4") {
+      // console.log(event.target);
+      // console.log(box3);
+      box1.classList.add("show-feature");
+      box2.classList.add("show-feature");
+      box3.classList.remove("show-feature");
+      box4.classList.add("show-feature");
+      setDot("dt4");
+    } else if (changeDot === "dt4") {
       let box1 = document.getElementById("fe1");
       let box2 = document.getElementById("fe2");
       let box3 = document.getElementById("fe3");
       let box4 = document.getElementById("fe4");
 
-      console.log(event.target);
-      console.log(box4);
-      box1.classList.add("boxshow");
-      box2.classList.add("boxshow");
-      box3.classList.add("boxshow");
-      box4.classList.remove("boxshow");
+      // console.log(event.target);
+      // console.log(box4);
+      box1.classList.add("show-feature");
+      box2.classList.add("show-feature");
+      box3.classList.add("show-feature");
+      box4.classList.remove("show-feature");
+      setDot("dt1");
     }
   };
 
-  render() {
-    return (
-      <>
-        {!this.props.typeAB && (
-          <div style={{ overflow: "hidden" }} className="background22">
-            <h1 className="offer-22-head">Exciting Offers</h1>
-            <img className="offer-22" src="/offer1.webp" alt="offer1" />
-            <img className="offer-22" src="/offer2.webp" alt="offer2" />
+  return (
+    <>
+      {!props.typeAB && (
+        <div style={{ overflow: "hidden" }} className="offers-background">
+          <h1>Exciting Offers</h1>
+          <div>
+            <img src="/offer1.webp" alt="offer1" />
+            <img src="/offer2.webp" alt="offer2" />
           </div>
-        )}
-        <div className="background-2">
-          <h1 className="back2-head">
-            Why To Choose
-            <span className="span2"> WashIt Up </span>?
-          </h1>
-          <h1 className="back2-head2">
-            Why To Choose
-            <br />
-            <span className="span2"> WashIt Up </span>?
-          </h1>
-          <p className="tagline"></p>
-
-          <div className="features">
-            {fearturesOfback2.map((each) => (
-              <FeatureBox each={each} key={each.con1} />
-            ))}
-          </div>
-          <div className="dots">
-            <button id="dt1" className="d1" onClick={this.boxchange}></button>
-            <button id="dt2" className="d1" onClick={this.boxchange}></button>
-            <button id="dt3" className="d1" onClick={this.boxchange}></button>
-            <button id="dt4" className="d1" onClick={this.boxchange}></button>
-          </div>
-          {iphones.map((eachi) => (
-            <Iphonecon key={eachi.iurl} eachi={eachi} />
-          ))}
-          <TestimonialSlider />
-          <Alliphones />
-          <Lastsetion />
         </div>
+      )}
+      <>
+        <h1 className="feature-head-text">
+          Why To Choose
+          <span> WashIt Up </span>?
+        </h1>
+        <div className="feature-background">
+          {fearturesOfback2.map((each) => (
+            <FeatureBox each={each} key={each.con1} />
+          ))}
+        </div>
+        <div className="dots">
+          <button id="dt1" className="d1" onClick={boxchange}></button>
+          <button id="dt2" className="d1" onClick={boxchange}></button>
+          <button id="dt3" className="d1" onClick={boxchange}></button>
+          <button id="dt4" className="d1" onClick={boxchange}></button>
+        </div>
+        {iphones.map((eachi) => (
+          <Iphonecon key={eachi.iurl} eachi={eachi} />
+        ))}
+        <TestimonialSlider />
+        <Alliphones />
+        <Lastsetion />
       </>
-    );
-  }
-}
+    </>
+  );
+};
 export default LaundryBody;
