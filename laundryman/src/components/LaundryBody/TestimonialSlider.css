@@ -1,3 +1,181 @@
+/**New Css**/
+
+@keyframes hideDataAnimation {
+  0% {
+    transform: translate(0%);
+    opacity: 100%;
+  }
+  25% {
+    transform: translate(-120%);
+    opacity: 0%;
+  }
+  50% {
+    transform: translate(120%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translate(0%);
+    opacity: 100%;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap");
+
+:root {
+  --def-color: #6759ff;
+  --def-font: "Poppins", sans-serif;
+}
+
+.slider-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style-type: none;
+}
+
+.slider-container2 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style-type: none;
+}
+
+.slider-container2 li {
+  border: 2px solid #222222;
+  width: 80% !important;
+  margin-top: 5%;
+  padding: 2%;
+  border-radius: 1rem;
+  animation: hideDataAnimation 2.5s linear;
+}
+
+.slider-container2 > li > div {
+  width: 20%;
+  margin-left: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-container2 > li > div img {
+  width: 10%;
+}
+
+.slider-container2 h3 {
+  font-family: var(--def-font);
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1% 0%;
+}
+
+.slider-container2 h4 {
+  font-family: var(--def-font);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 1% 0%;
+}
+
+.slider-container2 p {
+  font-family: "Caveat";
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  color: grey;
+  max-width: 90%;
+  margin: 1% 0%;
+  margin-left: 5%;
+}
+
+#customer-image1 {
+  width: 80%;
+  transition: all 0.5s linear;
+  transform: scale(1);
+  border: 2px solid #6759ff;
+  background-color: #6759ff;
+  border-radius: 50%;
+}
+
+#customer-image2 {
+  width: 80%;
+  transition: all 0.5s linear;
+  transform: scale(1.5);
+  border: 2px solid #6759ff;
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 5%;
+}
+
+.sliding {
+  margin-top: 5%;
+  margin-bottom: -10%;
+}
+
+.sliding h2 {
+  font-family: "Caveat";
+  color: var(--def-color);
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  #customer-image1 {
+    width: 50%;
+    transition: all 0.5s linear;
+    transform: scale(1);
+    border: 2px solid #6759ff;
+    background-color: #6759ff;
+    border-radius: 50%;
+  }
+
+  #customer-image2 {
+    width: 50%;
+    transition: all 0.5s linear;
+    transform: scale(1.5);
+    border: 2px solid #6759ff;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 5%;
+  }
+
+  .slider-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .slider-container2 {
+    width: 100%;
+    margin-left: -5%;
+    margin-top: 10%;
+  }
+
+  .slider-container2 > li > div {
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .slider-container2 p {
+    font-family: "Caveat";
+    font-size: 0.8rem;
+  }
+}
+
+/**New Css**/
+
 /* TestimonialSlider.css */
 
 .testimonial {
