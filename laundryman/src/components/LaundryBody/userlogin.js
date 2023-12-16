@@ -204,6 +204,7 @@ const UserLogin = () => {
       const data = await response.json();
 
       if (response.ok) {
+        Cookies.set("jwt_userToken", data.token, { expires: 30 });
         Cookies.set("jwt_userId", data.data[0]._id, { expires: 30 });
         Cookies.set("jwt_adminLogin", data.data[0].isAdmin, { expires: 30 });
         Cookies.set("jwt_userName", data.data[0].name, { expires: 30 });

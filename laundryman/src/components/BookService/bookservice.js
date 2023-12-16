@@ -519,7 +519,33 @@ const BookService = (props) => {
       };
 
       const response = await fetch(url, reqConfigure);
+
+      const data = await response.json();
       if (response.ok) {
+        // console.log(data);
+        Cookies.set("jwt_userToken", data.token, { expires: 30 });
+        Cookies.set("jwt_userId", data.data._id, { expires: 30 });
+        Cookies.set("jwt_adminLogin", data.data.isAdmin, {
+          expires: 30,
+        });
+        Cookies.set("jwt_userName", data.data.name, {
+          expires: 30,
+        });
+        Cookies.set("jwt_mobileNumber", data.data.mobileNumber, {
+          expires: 30,
+        });
+        data.data.location !== undefined &&
+          Cookies.set("jwt_location", data.data.location, {
+            expires: 30,
+          });
+        data.data.address !== undefined &&
+          Cookies.set("jwt_dono", data.data.address.dono, {
+            expires: 30,
+          });
+        data.data.address !== undefined &&
+          Cookies.set("jwt_landmark", data.data.address.landmark, {
+            expires: 30,
+          });
         setOtpVerification({
           ...otpVerification,
           otpSent: false,

@@ -119,7 +119,7 @@ function LaundryNavB() {
           <p
             style={{ cursor: "pointer" }}
             onClick={() => {
-              Cookies.get("jwt_userId") !== undefined
+              Cookies.get("jwt_userToken") !== undefined
                 ? (window.location.href = "/myorders")
                 : (window.location.href = "/userlogin");
             }}
@@ -127,11 +127,12 @@ function LaundryNavB() {
           >
             My Orders
           </p>
-          {Cookies.get("jwt_userId") !== undefined ? (
+          {Cookies.get("jwt_userToken") !== undefined ? (
             <button
               style={{ cursor: "pointer" }}
               type="button"
               onClick={() => {
+                Cookies.remove("jwt_userToken");
                 Cookies.remove("jwt_userId");
                 Cookies.remove("jwt_userName");
                 Cookies.remove("jwt_mobileNumber");
@@ -204,6 +205,7 @@ function LaundryNavB() {
                 style={{ cursor: "pointer" }}
                 type="button"
                 onClick={() => {
+                  Cookies.remove("jwt_userToken");
                   Cookies.remove("jwt_userId");
                   Cookies.remove("jwt_userName");
                   Cookies.remove("jwt_mobileNumber");

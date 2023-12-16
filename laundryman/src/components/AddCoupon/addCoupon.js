@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 
+import Cookies from "js-cookie";
+
 import "./addCoupon.css";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -48,6 +50,8 @@ const AddCoupon = (props) => {
     /**Function used to book the laundry by passing the itemsSelected, typeofWash,userForm */
   }
   const setToWashing = async () => {
+    const userId = Cookies.get("jwt_userToken");
+
     setLoadButton(true);
 
     const token = await recapRef.current.executeAsync();
@@ -60,6 +64,7 @@ const AddCoupon = (props) => {
 
       headers: {
         "Content-Type": "Application/json",
+        Authorization: `Bearer ${userId}`,
       },
 
       body: JSON.stringify({
@@ -80,6 +85,7 @@ const AddCoupon = (props) => {
     /**Function used to apply the coupon and get the discount of the coupon and update the state of the discount */
   }
   const applyCoupon = async () => {
+    const userId = Cookies.get("jwt_userToken");
     setApply(true);
     const url = `${process.env.REACT_APP_ROOT_URL}/api/user/applyCoupon`;
 
@@ -88,6 +94,7 @@ const AddCoupon = (props) => {
 
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${userId}`,
       },
 
       body: JSON.stringify({

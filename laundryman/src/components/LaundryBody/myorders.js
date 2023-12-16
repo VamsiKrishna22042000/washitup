@@ -1571,11 +1571,17 @@ const MyOrders = () => {
   };
 
   const getMyOrders = async () => {
-    const url = `${
-      process.env.REACT_APP_ROOT_URL
-    }/api/user/getMyOrders/${Cookies.get("jwt_userId")}`;
+    const userId = Cookies.get("jwt_userId");
+    const userToken = Cookies.get("jwt_userToken");
 
-    const response = await fetch(url);
+    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getMyOrders/${userId}`;
+
+    const options = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${userToken}` },
+    };
+
+    const response = await fetch(url, options);
 
     const data = await response.json();
 
@@ -1749,6 +1755,7 @@ const MyOrders = () => {
                 style={{ cursor: "pointer" }}
                 type="button"
                 onClick={() => {
+                  Cookies.remove("jwt_userToken");
                   Cookies.remove("jwt_userId");
                   Cookies.remove("jwt_userName");
                   Cookies.remove("jwt_mobileNumber");
@@ -1822,6 +1829,7 @@ const MyOrders = () => {
                   style={{ cursor: "pointer" }}
                   type="button"
                   onClick={() => {
+                    Cookies.remove("jwt_userToken");
                     Cookies.remove("jwt_userId");
                     Cookies.remove("jwt_userName");
                     Cookies.remove("jwt_mobileNumber");

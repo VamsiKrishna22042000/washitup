@@ -82,10 +82,18 @@ const ReorderB = ({ fromReroder, getReorder }) => {
   const getReorderData = async () => {
     try {
       const userId = Cookies.get("jwt_userId");
+      const userToken = Cookies.get("jwt_userToken");
 
       const url = `${process.env.REACT_APP_ROOT_URL}/api/user/reorder/${userId}`;
 
-      const response = await fetch(url);
+      const options = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
+
+      const response = await fetch(url, options);
       const data = await response.json();
 
       const items = [];

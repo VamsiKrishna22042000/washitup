@@ -133,6 +133,7 @@ function LaundryNav() {
               style={{ cursor: "pointer" }}
               type="button"
               onClick={() => {
+                Cookies.remove("jwt_userToken");
                 Cookies.remove("jwt_userId");
                 Cookies.remove("jwt_userName");
                 Cookies.remove("jwt_mobileNumber");
@@ -205,6 +206,7 @@ function LaundryNav() {
                 style={{ cursor: "pointer" }}
                 type="button"
                 onClick={() => {
+                  Cookies.remove("jwt_userToken");
                   Cookies.remove("jwt_userId");
                   Cookies.remove("jwt_userName");
                   Cookies.remove("jwt_mobileNumber");
