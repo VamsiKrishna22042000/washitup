@@ -441,7 +441,6 @@ const Orders = () => {
                   >
                     <option>Active</option>
                     <option>In Progress</option>
-                    <option>Cancel</option>
                   </select>
                 )}
 

@@ -710,7 +710,7 @@ const Driver = () => {
                 </p>
                 <p className="order-body-para">Order Total</p>
                 <p
-                  style={{ backgroundColor: "white" }}
+                  style={{ backgroundColor: "white", marginRight: "4%" }}
                   className="order-body-para1"
                 >
                   Status
@@ -765,6 +765,7 @@ const Driver = () => {
                             color: "#FFA000",
                             borderRadius: "10px",
                             textTransform: "capitalize",
+                            marginRight: "5%",
                           }
                         : each.status === "In Progress"
                         ? {
@@ -772,6 +773,7 @@ const Driver = () => {
                             backgroundColor: "#6759FF25",
                             borderRadius: "10px",
                             textTransform: "capitalize",
+                            marginRight: "5%",
                           }
                         : each.status === "Completed"
                         ? {
@@ -779,12 +781,14 @@ const Driver = () => {
                             backgroundColor: "#519C6625",
                             borderRadius: "10px",
                             textTransform: "capitalize",
+                            marginRight: "5%",
                           }
                         : each.status === "cancel" && {
                             color: "#FF0000",
                             backgroundColor: "#FF000025",
                             borderRadius: "10px",
                             textTransform: "capitalize",
+                            marginRight: "5%",
                           }
                     }
                     className="order-body-para1"
@@ -797,6 +801,7 @@ const Driver = () => {
                       textTransform: "capitalize",
                       color:
                         each.acceptorreject !== "Rejected" ? "green" : "red",
+                      width: "auto",
                     }}
                     className="order-body-para1"
                   >

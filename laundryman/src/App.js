@@ -13,6 +13,7 @@ import ConnectionLost from "./components/ConnectionLost/connectionlost";
 import MyOrders from "./components/LaundryBody/myorders";
 
 import ProtectedRoute2 from "./components/ProtectedRoute/protectedroute2";
+import MyProfile from "./components/MyProfile/myprofile.js";
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -71,6 +72,7 @@ function App() {
           />
           <Route exact path="/userlogin" component={UserLogin} />
           <Route exact path="/myorders" component={MyOrders} />
+          <Route exact path="/myprofile" component={MyProfile} />
           <Route component={Notfound} />
         </Switch>
       ) : (

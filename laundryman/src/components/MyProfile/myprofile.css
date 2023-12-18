@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap");
+
+.my-profile-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.my-profile-container h1 {
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  top: 0%;
+  left: 10%;
+  z-index: 2;
+  font-weight: 500;
+}
+
+.star1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35%;
+  z-index: -1;
+}
+
+.star2 {
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 10%;
+  z-index: -1;
+}
+
+.profile-modal-box {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  height: 80%;
+  width: 80%;
+  left: 10%;
+  box-shadow: 1px 1px 5px #222222;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.profile-tabs {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-tabs div:first-child {
+  width: 80%;
+  position: relative;
+  top: 5%;
+  padding: 1%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: #80808030;
+}
+
+.profile-tabs div:first-child h2 {
+  font-family: "Poppins", sans-serif;
+  color: #22222290;
+}
+
+.profile-tabs div:first-child > img {
+  width: 20%;
+}
+
+.profile-tabs div:last-child {
+  border: 2px solid transparent;
+}
+.tabs {
+  height: 80%;
+  width: 80%;
+}
+
+.not-selected {
+  font-family: "Poppins", sans-serif;
+  padding-left: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: #222222;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.not-selected:hover {
+  border: 8px solid #6759ff;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  background-color: #80808030;
+}
+.selected {
+  font-family: "Poppins", sans-serif;
+  padding-left: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 8px solid #6759ff;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  background-color: #80808030;
+  cursor: pointer;
+}
+
+.tabs p:active {
+  border: 8px solid #6759ff;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  background-color: #80808030;
+}
+
+.log-out {
+  margin-left: 5%;
+  font-family: "Poppins", sans-serif;
+  border: 0;
+  background-color: #6759ff;
+  color: #ffffff;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: 1px solid #6759ff;
+}
+
+.log-out:hover {
+  color: #6759ff;
+  background-color: #ffffff;
+}
+.log-out:active {
+  color: #6759ff;
+  background-color: #ffffff;
+}
+
+.profile-details {
+  height: 100%;
+  width: 100%;
+  border: 2px solid red;
+}
