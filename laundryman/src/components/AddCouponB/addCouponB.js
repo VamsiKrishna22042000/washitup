@@ -280,7 +280,7 @@ const AddCouponB = (props) => {
                 <div className="items-con-coupon-B">
                   <p>
                     <img src={each.image} alt={each.name} />
-                    {each.category} - {each.name}
+                    {each.name}
                   </p>
                   <p>
                     {each.count} x {each.price}

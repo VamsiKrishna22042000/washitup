@@ -155,6 +155,7 @@
   font-family: "Poppins", sans-serif;
   width: 33.33% !important;
   text-transform: capitalize;
+  font-size: 0.8rem;
 }
 
 .items-quantity {

@@ -12,7 +12,7 @@ import Dashboard from "./vdashboard.js";
 
 import Orders from "./vorders.js";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const availableSection = [
   {

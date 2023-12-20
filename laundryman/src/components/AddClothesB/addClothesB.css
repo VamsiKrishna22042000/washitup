@@ -294,16 +294,19 @@
   .add-Clothes-containerB {
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
   .counter-buttons-container-b {
-    width: 85%;
+    width: 100%;
     display: flex !important;
-    justify-content: space-between !important;
+    justify-content: space-evenly !important;
     align-items: center !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     margin-top: 0%;
     margin-bottom: 0%;
+    margin-left: -5%;
   }
   .button-pick-b {
     width: auto !important;

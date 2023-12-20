@@ -241,7 +241,7 @@ const AddCoupon = (props) => {
                   src={each.image}
                   alt={each.name}
                 />
-                {each.category} - {each.name}
+                {each.name}
               </p>
               <p className="items-quantity">
                 {each.count} x {each.price}
