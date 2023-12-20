@@ -292,13 +292,17 @@
 
 @media screen and (max-width: 600px) and (orientation: portrait) {
   .add-Clothes-containerB {
+    position: relative;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
+  }
+  .add-Clothes-containerB::-webkit-scrollbar {
+    display: none;
   }
   .counter-buttons-container-b {
-    width: 100%;
+    width: 100% !important;
     display: flex !important;
     justify-content: space-evenly !important;
     align-items: center !important;
@@ -306,15 +310,19 @@
     flex-wrap: nowrap !important;
     margin-top: 0%;
     margin-bottom: 0%;
-    margin-left: -5%;
+    padding-top: 0.5%;
+    position: sticky;
+    top: 0;
   }
   .button-pick-b {
     width: auto !important;
     font-size: 0.65rem;
+    margin: 0;
   }
   .pick-button-b {
     font-size: 0.65rem;
     width: auto !important;
+    margin: 0%;
   }
   .reorder-animate-B {
     top: 1.6%;
@@ -332,6 +340,10 @@
 
   .type-of-wash-continue-addClothes2 {
     width: 80% !important;
+  }
+
+  .set-counter-amount > svg {
+    margin-bottom: 15% !important;
   }
 }
 
@@ -577,6 +589,10 @@
     right: 4%;
     top: 0%;
   }
+
+  .set-counter-price > svg {
+    margin-bottom: 15% !important;
+  }
   .set-counter-total1 {
     font-size: 1.7vh;
     color: #6759ff;
@@ -795,6 +811,7 @@
     font-size: 0.8rem !important;
     margin-top: 0.1%;
   }
+
   .type-of-wash-continue-addClothes1 {
     font-size: 0.6rem !important;
   }

@@ -1,5 +1,7 @@
 import "./admin.css";
 
+import Cookies from "js-cookie";
+
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -54,7 +56,14 @@ const Vendors = () => {
   const getAllVendors = async () => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
-    const response = await fetch(url);
+    const adminToken = Cookies.get("jwt_adminLogin");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${adminToken}`,
+    };
+
+    const response = await fetch(url, { headers });
 
     const data = await response.json();
 
@@ -432,7 +441,14 @@ const Vendors = () => {
   const filterVendorOrders2 = async (vendorId) => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
-    const response = await fetch(url);
+    const adminToken = Cookies.get("jwt_adminLogin");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${adminToken}`,
+    };
+
+    const response = await fetch(url, { headers });
 
     const data = await response.json();
 

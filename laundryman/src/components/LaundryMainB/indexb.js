@@ -142,7 +142,7 @@ function LaundryNavB() {
                 Cookies.remove("jwt_userId");
                 Cookies.remove("jwt_userName");
                 Cookies.remove("jwt_mobileNumber");
-                Cookies.remove("jwt_adminLogin");
+                // Cookies.remove("jwt_adminLogin");
                 Cookies.remove("jwt_dono");
                 Cookies.remove("jwt_landmark");
                 Cookies.remove("jwt_location");
@@ -221,7 +221,7 @@ function LaundryNavB() {
                   Cookies.remove("jwt_userId");
                   Cookies.remove("jwt_userName");
                   Cookies.remove("jwt_mobileNumber");
-                  Cookies.remove("jwt_adminLogin");
+                  // Cookies.remove("jwt_adminLogin");
                   Cookies.remove("jwt_dono");
                   Cookies.remove("jwt_landmark");
                   Cookies.remove("jwt_location");

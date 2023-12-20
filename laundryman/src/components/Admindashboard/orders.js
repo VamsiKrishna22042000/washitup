@@ -5,6 +5,8 @@ import { TailSpin } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Cookies from "js-cookie";
+
 import { FaCalendarAlt } from "react-icons/fa";
 
 import { LuImagePlus } from "react-icons/lu";
@@ -55,7 +57,16 @@ const Orders = () => {
   const getAllOrders = async () => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const response = await fetch(url);
+    const adminToken = Cookies.get("jwt_adminLogin");
+
+    const reqConfigure = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      },
+    };
+
+    const response = await fetch(url, reqConfigure);
     const data = await response.json();
 
     if (response.ok) {
@@ -231,7 +242,16 @@ const Orders = () => {
   const filterCustomer2 = async (orderId) => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const response = await fetch(url);
+    const adminToken = Cookies.get("jwt_adminLogin");
+
+    const reqConfigure = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      },
+    };
+
+    const response = await fetch(url, reqConfigure);
     const data = await response.json();
 
     if (response.ok) {
@@ -304,7 +324,14 @@ const Orders = () => {
     const getAllVendors = async () => {
       const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
-      const response = await fetch(url);
+      const adminToken = Cookies.get("jwt_adminLogin");
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      };
+
+      const response = await fetch(url, { headers });
 
       const data = await response.json();
 
@@ -322,12 +349,17 @@ const Orders = () => {
       let orderId = selectedCustomer[0]._id;
       let vendorId = e.target.id;
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/assignNewVendor`;
+      const adminToken = Cookies.get("jwt_adminLogin");
+
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/admin/assignNewVendor/${Cookies.get("jwt_adminId")}`;
 
       const reqConfigure = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
         },
         body: JSON.stringify({ vendorId, orderId }),
       };
@@ -359,12 +391,17 @@ const Orders = () => {
       let previVendorId = selectedCustomer[0].vendorId._id;
       let previVendorOrderId = selectedCustomer[0]._id;
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/changeVendor`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/vendor/changeVendor/${Cookies.get("jwt_adminId")}`;
+
+      const adminToken = Cookies.get("jwt_adminLogin");
 
       const reqConfigure = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
         },
         body: JSON.stringify({
           vendorId,
@@ -596,11 +633,16 @@ const Orders = () => {
     const getAllDriver = async () => {
       const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllDrivers`;
 
-      const response = await fetch(url);
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+      };
+
+      const response = await fetch(url, { headers });
 
       const data = await response.json();
 
-      console.log(data);
+      // console.log(data);
 
       if (response.ok) {
         setLoad(false);

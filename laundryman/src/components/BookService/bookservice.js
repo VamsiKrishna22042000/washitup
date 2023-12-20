@@ -525,9 +525,9 @@ const BookService = (props) => {
         // console.log(data);
         Cookies.set("jwt_userToken", data.token, { expires: 30 });
         Cookies.set("jwt_userId", data.data._id, { expires: 30 });
-        Cookies.set("jwt_adminLogin", data.data.isAdmin, {
-          expires: 30,
-        });
+        // Cookies.set("jwt_adminLogin", data.data.isAdmin, {
+        //   expires: 30,
+        // });
         Cookies.set("jwt_userName", data.data.name, {
           expires: 30,
         });

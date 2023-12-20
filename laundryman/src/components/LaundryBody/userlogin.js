@@ -1,6 +1,6 @@
 import "./userlogin.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
 
@@ -11,8 +11,6 @@ import { AiOutlineInstagram } from "react-icons/ai";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import { useEffect } from "react";
 
 const loadStatus = {
   get: "get",
@@ -31,6 +29,13 @@ const UserLogin = () => {
   const [mobileNumber, setMobileNumber] = useState(0);
 
   const [otp, setOtp] = useState(0);
+
+  useEffect(() => {
+    const loggedIn = Cookies.get("jwt_userId");
+    if (loggedIn !== undefined) {
+      window.location.href = "/";
+    }
+  }, []);
 
   const getOtpSignUpVerify = async () => {
     if (otp !== 0) {
@@ -57,6 +62,17 @@ const UserLogin = () => {
       const data = await respone.json();
 
       if (respone.ok) {
+        Cookies.set("jwt_userToken", data.token, { expires: 30 });
+        Cookies.set("jwt_userId", data.data._id, { expires: 30 });
+        // Cookies.set("jwt_adminLogin", data.data.isAdmin, {
+        //   expires: 30,
+        // });
+        Cookies.set("jwt_userName", data.data.name, {
+          expires: 30,
+        });
+        Cookies.set("jwt_mobileNumber", data.data.mobileNumber, {
+          expires: 30,
+        });
         window.location.href = "/";
       } else {
         setLoad(loadStatus.signup);
@@ -206,7 +222,7 @@ const UserLogin = () => {
       if (response.ok) {
         Cookies.set("jwt_userToken", data.token, { expires: 30 });
         Cookies.set("jwt_userId", data.data[0]._id, { expires: 30 });
-        Cookies.set("jwt_adminLogin", data.data[0].isAdmin, { expires: 30 });
+        // Cookies.set("jwt_adminLogin", data.data[0].isAdmin, { expires: 30 });
         Cookies.set("jwt_userName", data.data[0].name, { expires: 30 });
         Cookies.set("jwt_mobileNumber", data.data[0].mobileNumber, {
           expires: 30,

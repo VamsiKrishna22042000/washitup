@@ -12,6 +12,7 @@ import PhoneInput from "react-phone-number-input";
 
 import { useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
+import Cookies from "js-cookie";
 
 /**Modal Box for Adding Customer */
 const AddCustomerModel = (props) => {
@@ -197,7 +198,16 @@ const Customers = () => {
   const getAllCustomers = async () => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const response = await fetch(url);
+    const adminToken = Cookies.get("jwt_adminLogin");
+
+    const reqConfigure = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      },
+    };
+
+    const response = await fetch(url, reqConfigure);
     const data = await response.json();
 
     {
@@ -293,7 +303,16 @@ const Customers = () => {
   const filterCustomer2 = async (id) => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const response = await fetch(url);
+    const adminToken = Cookies.get("jwt_adminLogin");
+
+    const reqConfigure = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      },
+    };
+
+    const response = await fetch(url, reqConfigure);
     const data = await response.json();
 
     if (response.ok) {

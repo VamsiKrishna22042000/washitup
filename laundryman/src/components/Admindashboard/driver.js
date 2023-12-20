@@ -1,5 +1,7 @@
 import "./admin.css";
 
+import Cookies from "js-cookie";
+
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -50,7 +52,12 @@ const Driver = () => {
   const getAllDrivers = async () => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllDrivers`;
 
-    const response = await fetch(url);
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+    };
+
+    const response = await fetch(url, { headers });
 
     const data = await response.json();
 

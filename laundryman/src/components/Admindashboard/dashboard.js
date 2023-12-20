@@ -3,6 +3,7 @@ import "./admin.css";
 
 import { TailSpin } from "react-loader-spinner";
 import { OrderChart } from "./chart";
+import Cookies from "js-cookie";
 
 const Dashboard = () => {
   /**State used to store the dashboard data obtained for getDashboardData function*/
@@ -23,7 +24,16 @@ const Dashboard = () => {
     try {
       const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllCounts`;
 
-      const respone = await fetch(url);
+      const adminToken = Cookies.get("jwt_adminLogin");
+
+      const reqConfigure = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
+        },
+      };
+
+      const respone = await fetch(url, reqConfigure);
 
       const data = await respone.json();
 
@@ -33,7 +43,17 @@ const Dashboard = () => {
         setLoad(false);
       }
       const revenueUrl = `${process.env.REACT_APP_ROOT_URL}/api/admin/totalRevenue`;
-      const revenueResponse = await fetch(revenueUrl);
+
+      const adToken = Cookies.get("jwt_adminLogin");
+
+      const req = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adToken}`,
+        },
+      };
+
+      const revenueResponse = await fetch(revenueUrl, req);
       const revenueData = await revenueResponse.json();
 
       if (revenueResponse.ok) {
@@ -44,7 +64,17 @@ const Dashboard = () => {
         }));
       }
       const todayRevenueUrl = `${process.env.REACT_APP_ROOT_URL}/api/admin/todayRevenue`;
-      const todayRevenueResponse = await fetch(todayRevenueUrl);
+
+      const adTo = Cookies.get("jwt_adminLogin");
+
+      const re = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adTo}`,
+        },
+      };
+
+      const todayRevenueResponse = await fetch(todayRevenueUrl, re);
       const todayRevenueData = await todayRevenueResponse.json();
 
       if (todayRevenueResponse.ok) {
