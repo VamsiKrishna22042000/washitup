@@ -114,7 +114,13 @@ function LaundryNavB() {
           >
             Home
           </p>
-          <p href="#features">About Us</p>
+          <p
+            onClick={() => {
+              window.location.href = "/about";
+            }}
+          >
+            About Us
+          </p>
           <p href="#pricing">Blog</p>
           <p
             style={{ cursor: "pointer" }}
@@ -187,7 +193,13 @@ function LaundryNavB() {
             >
               Home
             </p>
-            <p href="#features">About Us</p>
+            <p
+              onClick={() => {
+                window.location.href = "/about";
+              }}
+            >
+              About Us
+            </p>
             <p href="#pricing">Blog</p>
             <p
               style={{ cursor: "pointer" }}

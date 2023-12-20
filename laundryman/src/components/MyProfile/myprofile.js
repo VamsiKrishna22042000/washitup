@@ -1,9 +1,18 @@
 import "../LaundryMain/index.css";
 import "./myprofile.css";
 
-import Profile from "./profile.js";
+import { AiOutlineInstagram } from "react-icons/ai";
 
-import Lastsetion from "../LaundryBody/lastsection.js";
+import { FaFacebook } from "react-icons/fa";
+
+import { AiFillTwitterCircle } from "react-icons/ai";
+
+import Profile from "./profile.js";
+import Address from "./address.js";
+
+import Refer from "./referfriend.js";
+
+import MyOrders from "../LaundryBody/myorders.js";
 
 import Cookies from "js-cookie";
 
@@ -12,6 +21,7 @@ import { useState } from "react";
 const tabsections = {
   profileDetails: "PROFILE DETAILS",
   myaddress: "MY ADDRESS",
+  myorders: "MY ORDERS",
   referfriend: "REFER A FRIEND",
 };
 
@@ -51,7 +61,13 @@ const MyProfile = () => {
             >
               Home
             </p>
-            <p href="#features">About Us</p>
+            <p
+              onClick={() => {
+                window.location.href = "/about";
+              }}
+            >
+              About Us
+            </p>
             <p href="#pricing">Blog</p>
             <p
               style={{ cursor: "pointer" }}
@@ -124,7 +140,13 @@ const MyProfile = () => {
               >
                 Home
               </p>
-              <p href="#features">About Us</p>
+              <p
+                onClick={() => {
+                  window.location.href = "/about";
+                }}
+              >
+                About Us
+              </p>
               <p href="#pricing">Blog</p>
               <p
                 style={{ cursor: "pointer" }}
@@ -201,6 +223,14 @@ const MyProfile = () => {
                   selectedSection(tabsections.profileDetails);
                 }}
               >
+                <img
+                  src={
+                    selected === tabsections.profileDetails
+                      ? "/profile2details.png"
+                      : "/profile1details.png"
+                  }
+                  alt="profiledetails"
+                />
                 PROFILE DETAILS
               </p>
               <p
@@ -213,7 +243,35 @@ const MyProfile = () => {
                   selectedSection(tabsections.myaddress);
                 }}
               >
+                <img
+                  src={
+                    selected === tabsections.myaddress
+                      ? "/myaddress2details.png"
+                      : "/myaddress1details.png"
+                  }
+                  alt="profiledetails"
+                />{" "}
                 MY ADDRESS
+              </p>
+              <p
+                className={
+                  selected === tabsections.myorders
+                    ? "selected"
+                    : "not-selected"
+                }
+                onClick={() => {
+                  selectedSection(tabsections.myorders);
+                }}
+              >
+                <img
+                  src={
+                    selected === tabsections.myorders
+                      ? "/myorders2details.png"
+                      : "/myorders1details.png"
+                  }
+                  alt="profiledetails"
+                />{" "}
+                MY ORDERS
               </p>
               <p
                 className={
@@ -225,6 +283,14 @@ const MyProfile = () => {
                   selectedSection(tabsections.referfriend);
                 }}
               >
+                <img
+                  src={
+                    selected === tabsections.referfriend
+                      ? "/referafriend2details.png"
+                      : "/referafriend1details.png"
+                  }
+                  alt="profiledetails"
+                />{" "}
                 REFER A FRIEND
               </p>
               <button
@@ -239,13 +305,126 @@ const MyProfile = () => {
           </div>
           <div className="profile-details">
             {selected === tabsections.profileDetails && <Profile />}
+            {selected === tabsections.myaddress && <Address />}
+            {selected === tabsections.referfriend && <Refer />}
+            {selected === tabsections.myorders && <MyOrders />}
           </div>
         </div>
         <img className="star1" src="Star 1.png" alt="star1" />
         <img className="star2" src="Star 2.png" alt="star1" />
       </div>
-
-      <Lastsetion />
+      <div className="footer-container">
+        {/* <div className="footer-first-con">
+        <p>Unlock Top-Tier Laundry Care Reserve Our Services Today!</p>
+        <button
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            document
+              .getElementById("home")
+              .scrollIntoView({ behavior: "smooth" });
+          }}
+          type="button"
+        >
+          Book Now
+        </button>
+        <img src="./purplelastsection.png" alt="purplesvg" />
+      </div> */}
+        <div className="footer-second-con">
+          <div>
+            <div className="contact-section-con">
+              <div>
+                <img
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    window.location.href = "/";
+                  }}
+                  src="/washituplogo.png"
+                />
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur
+                  <br />
+                  adipiscing elit, sed do eiusmod tempor incididunt
+                  <br />
+                  ut labore et dolore magna aliqua.
+                </p>
+                <p id="subscribe-para">Subscribe to get latest news</p>
+                <div className="subscribe-email">
+                  <input id="email" type="text" placeholder="Email address" />
+                  <button style={{ cursor: "pointer" }}>Subscribe</button>
+                </div>
+                <div className="subscribe-icons-con">
+                  <FaFacebook
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      window.open(
+                        "https://www.facebook.com/washitup.in",
+                        "_blank"
+                      );
+                    }}
+                  />
+                  <AiOutlineInstagram
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      window.open(
+                        "https://www.instagram.com/washitup.in/",
+                        "_blank"
+                      );
+                    }}
+                  />
+                  <AiFillTwitterCircle
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      window.open("https://twitter.com/washitup_in", "_blank");
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="footer-subsection">
+                <div id="items-subs1" style={{ cursor: "pointer" }}>
+                  <h1 style={{ cursor: "pointer" }}>Company</h1>
+                  <p
+                    onClick={() => {
+                      window.location.href = "/about";
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    About Us
+                  </p>
+                  <p style={{ cursor: "pointer" }}>Meet the team</p>
+                  <p style={{ cursor: "pointer" }}>News & media</p>
+                  <p style={{ cursor: "pointer" }}>Our projects</p>
+                  <p style={{ cursor: "pointer" }}>Contact us</p>
+                </div>
+                <div id="items-subs2" style={{ cursor: "pointer" }}>
+                  <h1 style={{ cursor: "pointer" }}>Services</h1>
+                  <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                  <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                  <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                  <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                  <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                </div>
+                <div id="items-subs3" style={{ cursor: "pointer" }}>
+                  <h1 style={{ cursor: "pointer" }}>Support</h1>
+                  <p style={{ cursor: "pointer" }}>Terms & Conditions</p>
+                  <p style={{ cursor: "pointer" }}>Shipping Policy</p>
+                  <p style={{ cursor: "pointer" }}>Delivary Tips</p>
+                  <p style={{ cursor: "pointer" }}>Returns</p>
+                  <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                </div>
+              </div>
+            </div>
+            <div className="copy-rights" style={{ cursor: "pointer" }}>
+              <p
+                onClick={() => {
+                  window.open("https://ioninks.com/", "_blank");
+                }}
+              >
+                © 2023 All Rights Reserved, By IonInks
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

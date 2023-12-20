@@ -1,102 +1,28 @@
-import "./index.css";
+import "../LaundryMain/index.css";
 
-import { useState, useEffect } from "react";
+import "../MyProfile/myprofile.css";
 
-import BookService from "../BookService/bookservice.js";
-
-import AddClothes from "../AddClothes/addClothes";
-
-import Success from "../Success/success";
-
-import Washing from "../Washing/washing";
-import AddCoupon from "../AddCoupon/addCoupon";
-import TypeOfWashing from "../TypeOfWashing/typeOfWashing";
-
-import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import "./about.css";
 
 import Cookies from "js-cookie";
 
-import Reorder from "../Reordercomponent/Rorder";
+import { useState } from "react";
 
-const changeComponents = {
-  success: "SUCCESS",
-  addCoupon: "COUPON",
-  typeOfWash: "TYPEOFWASHING ",
-  bookService: "BOOK_SERVICE",
-  washClothes: "WASH_CLOTHES",
-  washing: "WASHING",
-  reorder: "REORDER",
-};
-
-{
-  /**Component which is the merge point of all the component's that which are displayed in the main page  and has the call back functions to pass from one component to another component*/
-}
-function LaundryNav() {
-  const [service, setService] = useState(changeComponents.typeOfWash);
-
-  const [time, setTime] = useState(0);
-
-  const [typeOfWashing, setTypeofWashing] = useState("");
-
-  const [selectedTime, setSelectedTime] = useState("");
-
-  const [items, setItems] = useState([]);
-
-  const [dataTobeSent, setDataTobeSent] = useState("");
-
+const About = () => {
   const [showNavBar, setShowNavBar] = useState(false);
-
-  const bookService = (data) => {
-    setService(changeComponents.addCoupon);
-    setDataTobeSent(data);
-  };
-
-  const washClothes = (selectedtoWash) => {
-    setService(changeComponents.bookService);
-    setItems(selectedtoWash);
-  };
-
-  const callBackForTypeOfWashing = (type) => {
-    console.log(type);
-    setService(changeComponents.washClothes);
-    setTypeofWashing(type);
-  };
-
-  const washing = () => {
-    setService(changeComponents.washing);
-  };
-
-  const getTime = (e) => {
-    setTime(e.id);
-    setSelectedTime(e.time);
-  };
-
-  const setSuccess = () => {
-    setService(changeComponents.success);
-  };
 
   const navcontentshamberger = () => {
     setShowNavBar(!showNavBar);
   };
 
-  const toReorder = () => {
-    setService(changeComponents.reorder);
-  };
-
-  const fromReroder = () => {
-    setService(changeComponents.typeOfWash);
-  };
-
-  const getReorder = (reorderData) => {
-    setTypeofWashing(reorderData.typeofWash);
-    setItems(reorderData.item);
-    setDataTobeSent(reorderData.data);
-    setService(changeComponents.addCoupon);
-  };
-
   return (
-    <div style={{ overflow: "hidden" }} id="home" className="washitup-block1">
-      <div className="bar-nav" bg="#b8dde3" variant="light">
+    <div className="about-us">
+      <div
+        style={{ backgroundColor: "#ffffff" }}
+        className="bar-nav"
+        bg="#b8dde3"
+        variant="light"
+      >
         <div className="nav-bar-contents">
           <img
             style={{ cursor: "pointer" }}
@@ -259,48 +185,87 @@ function LaundryNav() {
           </svg>
         </div>
       </div>
-
-      <img className="cyan-image" src="./cyan.png" alt="cyancon" />
-      <img className="pink-image" src="./pinkcon.png" alt="pinkcon" />
-      <div className="main-page-content">
-        <h4>
-          Get The Best <br /> Laundry Service <br /> At Your
-          <span>Door Step</span>
-        </h4>
-        <p>Book laundry service with just few easy steps</p>
+      <div className="about">
+        <h2>
+          LAUNDRY BELONGS IN <span>WASHITUP</span>
+        </h2>
+        <p>
+          An average human spends between 12000 hours of their adult life in
+          cleaning and managing their clothes. We have all grown upon a heavy
+          dose of detergent commercials propagating the idea of
+          <span>‘whiter the better’</span>.
+        </p>
+        <div>
+          <img src="/about.png" about="about-image" />
+          <div>
+            <p>
+              But none of these commercials talked about the hours of hard work
+              required to get that blinding whiteness. Do the words ‘enzyme
+              soak’, hot water cleaning’, ‘bluing’ ring a bell? How we wish
+              maintaining outwrite clothes was easy as watching those
+              commercials. With WASHITUP, <span>it is Easier!</span>
+            </p>
+            <p>
+              <span>At WASHITUP</span>, we bring the best-in-class Laundry, Dry
+              Cleaning and Home Cleaning Services at your doorstep!
+            </p>
+            <p>
+              WASHITUP operates an expanding network of over 30+ mini
+              laundromats across 8+ cities, making
+              <span>
+                {" "}
+                it the Largest Laundry & Dry-Cleaning Chain in India.
+              </span>
+              Your nearest WASHITUP store offerslive laundry, steam ironing and
+              dry-cleaning services, with freehome pick & drop, and a promise to
+              deliver your clothes in less than 24 hours*.
+            </p>
+          </div>
+        </div>
+        <h1>Our Promise</h1>
+        <div className="promise">
+          <div>
+            <img src="/quality.png" alt="promise" />
+            <h3>QUALITY</h3>
+            <p>Expert professionals handlingyour clothes with utmost care.</p>
+          </div>
+          <div>
+            <img src="/transparency.png" alt="promise" />
+            <h3>TRANSPARENCY</h3>
+            <p>
+              Neighbourhood live laundry storesoffering service as you please.
+            </p>
+          </div>
+          <div>
+            <img src="/speed.png" alt="promise" />
+            <h3>SPEED</h3>
+            <p>Shorter turnaround times, deliverywithin24 hours of pick up.</p>
+          </div>
+        </div>
+        <div className="aim">
+          <div>
+            <img src="/weaim.png" alt="we aim" />
+            <div>
+              <h3>WE AIM</h3>
+              <p>To provide all cleaning solutions on a click.</p>
+            </div>
+          </div>
+          <div>
+            <img src="/weaspair.png" alt="we aim" />
+            <div>
+              <h3>WE ASPIRE</h3>
+              <p>
+                To become India’s largest and most preferred brand of cleaning
+                services.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      {service === changeComponents.washClothes ? (
-        <AddClothes typeOfWashing={typeOfWashing} wash={washClothes} />
-      ) : service === changeComponents.typeOfWash ? (
-        <TypeOfWashing type={callBackForTypeOfWashing} toReorder={toReorder} />
-      ) : service === changeComponents.bookService ? (
-        <BookService
-          items={items}
-          book={bookService}
-          time={time}
-          getTime={getTime}
-        />
-      ) : service === changeComponents.addCoupon ? (
-        <AddCoupon
-          items={items}
-          dataTobeSent={dataTobeSent}
-          success={setSuccess}
-          typeOfWashing={typeOfWashing}
-        />
-      ) : service === changeComponents.success ? (
-        <Success washing={washing} />
-      ) : service === changeComponents.washing ? (
-        <Washing selectedTime={selectedTime} />
-      ) : (
-        <Reorder fromReroder={fromReroder} getReorder={getReorder} />
-      )}
-
-      <div
-        style={{ position: "absolute" }}
-        class="elfsight-app-7c53dc20-f0e1-4689-a2cd-9ffc37dc68ff"
-      ></div>
+      <img className="star1" src="Star 1.png" alt="star1" />
+      <img className="star2" src="Star 2.png" alt="star1" />
     </div>
   );
-}
+};
 
-export default withRouter(LaundryNav);
+export default About;

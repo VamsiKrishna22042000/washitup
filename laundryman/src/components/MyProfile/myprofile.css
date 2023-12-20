@@ -92,6 +92,19 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-size: 0.8rem;
+  border: 8px solid transparent;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.selected img {
+  width: 20%;
+}
+
+.not-selected img {
+  width: 20%;
 }
 
 .not-selected:hover {
@@ -116,6 +129,7 @@
   border-bottom: 0;
   background-color: #80808030;
   cursor: pointer;
+  font-size: 0.8rem;
 }
 
 .tabs p:active {
@@ -148,6 +162,246 @@
 
 .profile-details {
   height: 100%;
-  width: 100%;
+  width: 80%;
+  padding: 5%;
+}
+
+.detials-profile {
   border: 2px solid red;
+  height: 100%;
+  width: 100%;
+}
+
+.detials-profile {
+  height: 100%;
+  width: 100%;
+}
+
+.detials-profile > div {
+  width: 30%;
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  position: relative;
+  height: 10%;
+}
+
+.detials-profile > div > img {
+  position: absolute;
+  width: 7%;
+  margin: 0;
+  left: 19.5%;
+}
+
+.detials-profile > div > input {
+  font-size: 0.8rem;
+  width: 80%;
+  margin-left: 15%;
+  height: 100%;
+  padding-left: 10%;
+}
+
+.detials-profile button {
+  margin-left: 30%;
+  margin-top: 5%;
+  border: 1px solid #6759ff;
+  background-color: #6759ff;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  padding: 0% 2%;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.detials-profile button:hover {
+  background-color: #ffffff;
+  color: #6759ff;
+}
+
+.detials-profile button:active {
+  background-color: #ffffff;
+  color: #6759ff;
+}
+
+.address-profile {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 1%;
+}
+
+.address-subsection {
+  font-family: "Poppins", sans-serif;
+  height: 40%;
+  width: 35%;
+  position: relative;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 8px #222222;
+}
+
+.address-subsection > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.address-subsection > div > img {
+  height: 15%;
+  width: 8%;
+}
+
+.address-subsection p {
+  margin: 0;
+  font-size: 0.5rem;
+}
+
+.address-subsection textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.address-subsection textarea {
+  height: 45%;
+  width: 80%;
+}
+
+.address-subsection > div > div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.address-subsection > div > div button {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+
+.address-subsection > div > div button:first-child {
+  color: red;
+  border: 1px solid red;
+  background-color: rgb(255, 213, 213);
+  border-radius: 0.25rem;
+}
+
+.address-subsection > div > div button:first-child:hover {
+  color: #ffffff;
+  border: 1px solid red;
+  background-color: red;
+  border-radius: 0.25rem;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.address-subsection > div > div button:first-child:active {
+  color: #ffffff;
+  border: 1px solid red;
+  background-color: red;
+  border-radius: 0.25rem;
+}
+
+.address-subsection > div > div button:last-child {
+  color: #ffffff;
+  border: 1px solid #6759ff;
+  background-color: #6759ff;
+  border-radius: 0.25rem;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.address-subsection > div > div button:last-child:hover {
+  color: #6759ff;
+  border: 1px solid #6759ff;
+  background-color: #6759ff50;
+  border-radius: 0.25rem;
+}
+
+.refer-details {
+  border: 2px solid red;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.refer-details > div {
+  height: 30%;
+  width: 35%;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 8px #222222;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.refer-details > div > div:first-child {
+  height: 100%;
+  width: 30%;
+  background-color: #6759ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.refer-details > div > div:first-child img {
+  width: 80%;
+}
+
+.refer-details > div > div:last-child {
+  height: 100%;
+  width: 70%;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-left: 2%;
+}
+
+.refer-details > div > div:last-child h3 {
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #6759ff;
+}
+
+.refer-details > div > div:last-child p {
+  font-size: 0.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.refer-details > div > div:last-child button {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  border: 1px solid #6759ff;
+  background-color: #6759ff;
+  color: #ffffff;
+  border-radius: 0.2rem;
+  padding: 1% 5%;
+  cursor: pointer;
+}
+
+.refer-details > div > div:last-child button:hover {
+  background-color: #ffffff;
+  color: #6759ff;
 }

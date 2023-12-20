@@ -14,6 +14,7 @@ import MyOrders from "./components/LaundryBody/myorders";
 
 import ProtectedRoute2 from "./components/ProtectedRoute/protectedroute2";
 import MyProfile from "./components/MyProfile/myprofile.js";
+import About from "./components/About/about.js";
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -70,6 +71,7 @@ function App() {
             path="/vendordashboard"
             component={VendorDashboard}
           />
+          <Route exact path="/about" component={About} />
           <Route exact path="/userlogin" component={UserLogin} />
           <Route exact path="/myorders" component={MyOrders} />
           <Route exact path="/myprofile" component={MyProfile} />

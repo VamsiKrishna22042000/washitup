@@ -2,6 +2,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* WebKit browsers */
+  margin: 0; /* Removes the inner and outer spin button */
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

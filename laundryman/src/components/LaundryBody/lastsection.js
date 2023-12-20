@@ -80,7 +80,14 @@ const Lastsetion = () => {
             <div className="footer-subsection">
               <div id="items-subs1" style={{ cursor: "pointer" }}>
                 <h1 style={{ cursor: "pointer" }}>Company</h1>
-                <p style={{ cursor: "pointer" }}>About Us</p>
+                <p
+                  onClick={() => {
+                    window.location.href = "/about";
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  About Us
+                </p>
                 <p style={{ cursor: "pointer" }}>Meet the team</p>
                 <p style={{ cursor: "pointer" }}>News & media</p>
                 <p style={{ cursor: "pointer" }}>Our projects</p>

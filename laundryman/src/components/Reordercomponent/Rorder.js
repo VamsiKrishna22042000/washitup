@@ -86,7 +86,10 @@ const Reorder = ({ fromReroder, getReorder }) => {
 
       const options = {
         method: "GET",
-        headers: { Authorization: `Bearer ${userToken}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
       };
 
       const response = await fetch(url, options);

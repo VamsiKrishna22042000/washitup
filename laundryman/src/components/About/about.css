@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap");
+
+.about-us {
+  height: 100%;
+  width: 100%;
+}
+.about {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.about h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  align-self: center;
+  margin-top: 8%;
+}
+
+.about h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5rem;
+  align-self: center;
+  margin-top: 3%;
+}
+
+.about p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  align-self: center;
+  width: 60%;
+  text-align: center;
+  margin-top: 2%;
+}
+
+.about span {
+  color: #6759ff;
+}
+
+.about > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.about > div > img {
+  width: 30%;
+  margin-left: 10%;
+}
+
+.about > div > div {
+  height: auto;
+  width: 70%;
+  padding-left: 10%;
+}
+
+.about > div > div > p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  width: 85%;
+  text-align: start;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.promise {
+  height: auto;
+  width: 100%;
+}
+
+.promise > div {
+  height: auto;
+  width: 30% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 !important;
+}
+
+.promise > div > img {
+  height: auto;
+  width: 30%;
+}
+
+.promise > div h3 {
+  font-size: 1.5rem;
+  margin-top: 5%;
+}
+
+.promise > div p {
+  text-align: center !important;
+}
+
+.aim {
+  height: 30%;
+  width: 100%;
+  border: 2px solid red;
+}
+
+.aim > div:first-child {
+  width: 50%;
+  border: 2px solid red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.aim > div:last-child {
+  width: 50%;
+  border: 2px solid red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.aim img {
+  width: 20% !important;
+}
+
+.aim > div > div {
+  border: 2px solid blue;
+  height: auto;
+  width: 70%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.aim > div > div h3 {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: flex-start;
+}
+
+.aim > div > div p {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: flex-start !important;
+  align-self: flex-start !important;
+  font-size: 0.7rem;
+}

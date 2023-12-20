@@ -133,11 +133,13 @@ const MyOrders = () => {
 
         const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/user/changeOrderDate`;
 
+        const user_JWT = Cookies.get("jwt_userToken");
         const reqConfigure = {
           method: "PUT",
 
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user_JWT}`,
           },
           body: JSON.stringify({
             orderId,
@@ -382,9 +384,15 @@ const MyOrders = () => {
     }, []);
 
     const getIssues = async () => {
+      const userToken = Cookies.get("jwt_userToken");
       const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getIssueByOrderId/${orderId}`;
 
-      const res = await axios.get(url);
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      };
+
+      const res = await axios.get(url, { headers });
 
       if (res.status === 200) {
         /*console.log(JSON.stringify(res.data.data));*/
@@ -418,6 +426,7 @@ const MyOrders = () => {
       } else {
         try {
           setLoad(false);
+          const userToken = Cookies.get("jwt_userToken");
           const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/orderIssue`;
 
           const reqConfigure = {
@@ -425,6 +434,7 @@ const MyOrders = () => {
 
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${userToken}`,
             },
             body: JSON.stringify({
               orderId: orderId,
@@ -616,10 +626,12 @@ const MyOrders = () => {
         });
       } else {
         setLoadRate(true);
+        const userToken = Cookies.get("jwt_userToken");
         const url = `${process.env.REACT_APP_ROOT_URL}/api/user/addRating`;
 
         const headers = {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         };
 
         const body = {
@@ -1737,7 +1749,13 @@ const MyOrders = () => {
             >
               Home
             </p>
-            <p href="#features">About Us</p>
+            <p
+              onClick={() => {
+                window.location.href = "/about";
+              }}
+            >
+              About Us
+            </p>
             <p href="#pricing">Blog</p>
             <p
               style={{ cursor: "pointer" }}
@@ -1811,7 +1829,13 @@ const MyOrders = () => {
               >
                 Home
               </p>
-              <p href="#features">About Us</p>
+              <p
+                onClick={() => {
+                  window.location.href = "/about";
+                }}
+              >
+                About Us
+              </p>
               <p href="#pricing">Blog</p>
               <p
                 style={{ cursor: "pointer" }}
