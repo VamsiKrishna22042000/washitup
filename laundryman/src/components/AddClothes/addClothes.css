@@ -162,9 +162,11 @@
   align-content: flex-start;
   flex-wrap: wrap;
   overflow-y: scroll;
-  height: 65%;
-  margin-top: 5%;
+  height: 30vh;
+  margin-top: 12.5%;
   margin-right: 5%;
+  border: 2px solid transparent;
+  overflow-x: hidden;
 }
 
 .set-counter-A {
