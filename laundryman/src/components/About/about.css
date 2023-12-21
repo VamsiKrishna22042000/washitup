@@ -100,12 +100,12 @@
 .aim {
   height: 30%;
   width: 100%;
-  border: 2px solid red;
+  background-color: #6759ff33;
+  padding: 2%;
 }
 
 .aim > div:first-child {
   width: 50%;
-  border: 2px solid red;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -113,18 +113,20 @@
 
 .aim > div:last-child {
   width: 50%;
-  border: 2px solid red;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
-.aim img {
-  width: 20% !important;
+.aim-img1 {
+  width: 18% !important;
+}
+
+.aim-img2 {
+  width: 18% !important;
 }
 
 .aim > div > div {
-  border: 2px solid blue;
   height: auto;
   width: 70%;
   margin-top: 5%;
@@ -138,11 +140,69 @@
   text-align: flex-start;
 }
 
-.aim > div > div p {
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: flex-start !important;
-  align-self: flex-start !important;
-  font-size: 0.7rem;
+#aim-para1 {
+  text-align: start;
+  width: 100%;
+}
+
+#aim-para2 {
+  text-align: start;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .about > div > div > p {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  .about > h2 {
+    font-size: 2.6rem;
+    text-align: center;
+  }
+
+  .about > p {
+    width: 90%;
+  }
+
+  .about > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .about > div > img {
+    width: 90%;
+    margin: 0%;
+  }
+
+  .about > div > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0%;
+  }
+
+  .promise > div {
+    width: 100% !important;
+    margin-top: 5%;
+  }
+
+  .aim > div {
+    width: 100% !important;
+  }
+
+  .aim-img1 {
+    width: 40% !important;
+    margin: 5% 0%;
+  }
+
+  .aim-img2 {
+    width: 40% !important;
+    margin: 5% 0%;
+  }
 }

@@ -2,6 +2,8 @@ import "./admin.css";
 
 import { TailSpin } from "react-loader-spinner";
 
+import Cookies from "js-cookie";
+
 import { useState, useEffect } from "react";
 
 import { AiOutlinePlus } from "react-icons/ai";
@@ -157,10 +159,15 @@ const Services = () => {
           fd.append(`${each}`, toAddCategory[each]);
         }
 
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/addItem`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/addItem/${Cookies.get("jwt_adminId")}`;
 
         const reqConfigure = {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+          },
           body: fd,
         };
 
@@ -459,10 +466,15 @@ const Services = () => {
           fd.append("image", toAddCategory.image);
         }
 
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/editItem/${showModalEdit}`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/editItem/${showModalEdit}/${Cookies.get("jwt_adminId")}`;
 
         const reqConfigure = {
           method: "PUT",
+          headers: {
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+          },
           body: fd,
         };
 

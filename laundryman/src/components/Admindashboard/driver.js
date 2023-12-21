@@ -123,13 +123,16 @@ const Driver = () => {
         });
       } else {
         setLoad(true);
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/addDriver`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/addDriver/${Cookies.get("jwt_adminId")}`;
 
         const reqConfigure = {
           method: "POST",
 
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
           },
 
           body: JSON.stringify({

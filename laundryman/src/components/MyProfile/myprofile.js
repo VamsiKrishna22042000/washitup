@@ -313,7 +313,10 @@ const MyProfile = () => {
         <img className="star1" src="Star 1.png" alt="star1" />
         <img className="star2" src="Star 2.png" alt="star1" />
       </div>
-      <div className="footer-container">
+      <div
+        style={{ marginTop: 0, backgroundColor: "#9EF9D890" }}
+        className="footer-container"
+      >
         {/* <div className="footer-first-con">
         <p>Unlock Top-Tier Laundry Care Reserve Our Services Today!</p>
         <button

@@ -1,5 +1,7 @@
 import "./issues.css";
 
+import Cookies from "js-cookie";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { IoMdAlert } from "react-icons/io";
@@ -26,7 +28,11 @@ const Issues = () => {
     try {
       const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllIssue`;
 
-      const response = await axios.get(url);
+      const headers = {
+        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+      };
+
+      const response = await axios.get(url, { headers });
 
       // console.log(response);
 
@@ -75,13 +81,18 @@ const Issues = () => {
     // console.log(status);
 
     try {
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/changeIssueStatus`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/admin/changeIssueStatus/${Cookies.get("admin_Id")}`;
       const body = {
         issueMainId,
         issueId,
         status,
       };
-      const response = await axios.post(url, body);
+      const headers = {
+        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+      };
+      const response = await axios.post(url, body, { headers });
 
       if (response.status === 200) {
         getIssues();
@@ -98,13 +109,20 @@ const Issues = () => {
     // console.log(status);
 
     try {
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/changeIssueStatus`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/admin/changeIssueStatus/${Cookies.get("jwt_adminId")}`;
       const body = {
         issueMainId,
         issueId,
         status,
       };
-      const response = await axios.post(url, body);
+
+      const headers = {
+        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+      };
+
+      const response = await axios.post(url, body, { headers });
 
       if (response.status === 200) {
         setFilteredObtainedIssue([

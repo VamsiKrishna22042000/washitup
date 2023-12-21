@@ -657,12 +657,15 @@ const Orders = () => {
       let orderId = selectedCustomer[0]._id;
       let driverId = e.target.id;
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/driver/assignOrderToDriver`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/driver/assignOrderToDriver/${Cookies.get("jwt_adminId")}`;
 
       const reqConfigure = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
         },
         body: JSON.stringify({ driverId, orderId, userId }),
       };
@@ -696,12 +699,15 @@ const Orders = () => {
           ? selectedCustomer[0].driverName1
           : selectedCustomer[0].driverName2;
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/driver/changeDriver`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/driver/changeDriver/${Cookies.get("jwt_adminId")}`;
 
       const reqConfigure = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
         },
         body: JSON.stringify({
           newDriverId,

@@ -175,13 +175,16 @@ const Vendors = () => {
           secondaryMobile: value2.slice(3, value2.length + 1),
         };
 
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/vendor/addVendor`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/vendor/addVendor/${Cookies.get("jwt_adminId")}`;
 
         const reqConfigure = {
           method: "POST",
 
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
           },
 
           body: JSON.stringify(dateTobeSent),

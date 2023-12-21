@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./admin.css";
 
+import Cookies from "js-cookie";
+
 import { TailSpin } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,7 +29,11 @@ const Coupons = () => {
   const getAllCoupons = async () => {
     const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/getAllCoupon`;
 
-    const response = await fetch(url);
+    const headers = {
+      Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+    };
+
+    const response = await fetch(url, { headers });
 
     const data = await response.json();
 
@@ -44,13 +50,18 @@ const Coupons = () => {
     const deleteCouponFun = async () => {
       setLoad(false);
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/deleteCoupon?couponId=${deleteCoupon}`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/admin/coupon/deleteCoupon?couponId=${deleteCoupon}/${Cookies.get(
+        "jwt_adminId"
+      )}`;
 
       const reqConfigure = {
         method: "DELETE",
 
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
         },
       };
 
@@ -161,13 +172,16 @@ const Coupons = () => {
 
     const addCouponFun = async () => {
       setLoad(false);
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/addCoupon`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/admin/addCoupon/${Cookies.get("jwt_adminId")}`;
 
       const reqConfigure = {
         method: "POST",
 
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
         },
 
         body: JSON.stringify({
@@ -327,13 +341,16 @@ const Coupons = () => {
   const settingProgress = async (e) => {
     setLoading(true);
 
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/changeStatus`;
+    const url = `${
+      process.env.REACT_APP_ROOT_URL
+    }/api/admin/coupon/changeStatus/${Cookies.get("jwt_adminId")}`;
 
     const reqConfigure = {
       method: "PUT",
 
       headers: {
         "Content-type": "application/json",
+        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
       },
 
       body: JSON.stringify({

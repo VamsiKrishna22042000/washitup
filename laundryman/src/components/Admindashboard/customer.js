@@ -46,13 +46,16 @@ const AddCustomerModel = (props) => {
       });
     } else {
       setLoad(true);
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/createNewUser`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/admin/createNewUser${Cookies.get("jwt_adminId")}`;
 
       const reqConfigure = {
         method: "POST",
 
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
         },
 
         body: JSON.stringify({ name: newUser, mobileNumber: value }),
