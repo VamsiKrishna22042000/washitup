@@ -10,7 +10,7 @@ import { CgProfile } from "react-icons/cg";
 
 import Dashboard from "./vdashboard.js";
 
-import Orders from "./vorders.js";
+import VOrders from "./vorders.js";
 
 import { useState } from "react";
 
@@ -114,7 +114,7 @@ const VendorDashboard = () => {
             </div>
           </header>
           {/**Ternary operators used to display the component's based onthe selected section*/}
-          {selectedSection === "Dashboard" ? <Dashboard /> : <Orders />}
+          {selectedSection === "Dashboard" ? <Dashboard /> : <VOrders />}
         </div>
       </div>
       <div className="vendortotal-dashboard-container2">

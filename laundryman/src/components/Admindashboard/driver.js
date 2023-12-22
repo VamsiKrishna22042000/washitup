@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 
 import { AiOutlinePlus } from "react-icons/ai";
 
+import { v4 as uuidV4 } from "uuid";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -335,7 +337,9 @@ const Driver = () => {
   };
 
   const suborderFiltered = subOrders.filter((each) =>
-    selectedDate.date === "" ? each : each.date === selectedDate.date
+    selectedDate.date === ""
+      ? each
+      : String(each.date) === String(selectedDate.date) && each
   );
 
   const Caland = () => {
@@ -362,8 +366,10 @@ const Driver = () => {
 
           let d = dateArr.includes(dd) ? dd[1] : dd;
 
+          let m = dateArr.includes(mm) ? mm[1] : mm;
+
           // Combine them in the desired format
-          const formattedDate = `${d}-${mm}-${yyyy}`;
+          const formattedDate = `${d}-${m}-${yyyy}`;
           setSelectedData({ date: formattedDate, id: "" });
           setShowDate(false);
         }}
@@ -733,7 +739,10 @@ const Driver = () => {
                 </p>
               </div>
               {suborderFiltered.map((each) => (
-                <div key={each.orderId} className="order-body-header2">
+                <div
+                  key={`${each.orderId}${uuidV4()}`}
+                  className="order-body-header2"
+                >
                   {/**all orders booked by the user sorted based on the date */}
 
                   <p
@@ -913,7 +922,10 @@ const Driver = () => {
             </div>
             {filteredVendors.length > 0 ? (
               filteredVendors.map((each) => (
-                <div key={each._id} className="order-body-header2">
+                <div
+                  key={`${each.orderId}${uuidV4()}`}
+                  className="order-body-header2"
+                >
                   <div
                     onClick={filterVendorOrders}
                     id={each._id}

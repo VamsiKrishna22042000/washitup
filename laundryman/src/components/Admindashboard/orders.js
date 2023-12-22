@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import "./admin.css";
 
+import { v4 as uuidV4 } from "uuid";
+
 import { TailSpin } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -185,8 +187,13 @@ const Orders = () => {
   );
 
   const filterdAllOrders = filterdSearch.filter((each) =>
-    selectedDate.date === "" ? each : each.date === selectedDate.date
+    selectedDate.date === ""
+      ? each
+      : String(each.date) === String(selectedDate.date) && each
   );
+
+  console.log(filterdAllOrders);
+
   /**Function used to set the progress of the particular order(active,inprogress,completed,cancel) */
   const settingProgress = async (e) => {
     setAllOrders([]);
@@ -527,7 +534,10 @@ const Orders = () => {
             {/**Available vendor's data*/}
             {filteredVendors.length > 0 ? (
               filteredVendors.map((each) => (
-                <div key={each.id} className="order-body-header2">
+                <div
+                  key={`${each.id}${uuidV4()}`}
+                  className="order-body-header2"
+                >
                   <p
                     id={each._id}
                     className="order-body-para"
@@ -829,7 +839,10 @@ const Orders = () => {
             {/**Available vendor's data*/}
             {filteredVendors.length > 0 ? (
               filteredVendors.map((each) => (
-                <div key={each.id} className="order-body-header2">
+                <div
+                  key={`${each.id}${uuidV4()}`}
+                  className="order-body-header2"
+                >
                   <p
                     id={each._id}
                     className="order-body-para"
@@ -999,14 +1012,14 @@ const Orders = () => {
             "09",
           ];
 
-          /**let d = dateArr.includes(dd) ? dd[1] : dd;**/
+          let d = dateArr.includes(dd) ? dd[1] : dd;
 
-          let d = dd;
+          let m = dateArr.includes(mm) ? mm[1] : mm;
 
-          console.log(d);
+          // console.log(d);
 
           // Combine them in the desired format
-          const formattedDate = `${d}-${mm}-${yyyy}`;
+          const formattedDate = `${d}-${m}-${yyyy}`;
           setSelectedData({ date: formattedDate, id: "cal" });
           setShowDate(false);
         }}
@@ -1070,7 +1083,7 @@ const Orders = () => {
         return (
           <div
             style={{ position: "relative" }}
-            key={each._id}
+            key={`${each._id}${uuidV4()}`}
             className="order-body-header2"
           >
             {/**all orders booked by the user sorted based on the date */}
@@ -1199,7 +1212,7 @@ const Orders = () => {
         return (
           <div
             style={{ position: "relative" }}
-            key={each._id}
+            key={`${each._id}${uuidV4()}`}
             className="order-body-header2"
           >
             {/**all orders booked by the user sorted based on the date */}
@@ -1332,7 +1345,7 @@ const Orders = () => {
       return (
         <div
           style={{ position: "relative" }}
-          key={each._id}
+          key={`${each._id}${uuidV4()}`}
           className="order-body-header2"
         >
           {/**all orders booked by the user sorted based on the date */}
@@ -1455,7 +1468,7 @@ const Orders = () => {
       return (
         <div
           style={{ position: "relative" }}
-          key={each._id}
+          key={`${each._id}${uuidV4()}`}
           className="order-body-header2"
         >
           {/**all orders booked by the user sorted based on the date */}
@@ -1578,7 +1591,7 @@ const Orders = () => {
       return (
         <div
           style={{ position: "relative" }}
-          key={each._id}
+          key={`${each._id}${uuidV4()}`}
           className="order-body-header2"
         >
           {/**all orders booked by the user sorted based on the date */}
@@ -1713,7 +1726,7 @@ const Orders = () => {
             justifyContent: "space-evenly",
             alignItem: "center",
           }}
-          key={each._id}
+          key={`${each._id}${uuidV4()}`}
           className="order-body-header2"
         >
           {/**all orders booked by the user sorted based on the date */}
@@ -1823,7 +1836,7 @@ const Orders = () => {
             justifyContent: "space-evenly",
             alignItem: "center",
           }}
-          key={each._id}
+          key={`${each._id}${uuidV4()}`}
           className="order-body-header2"
         >
           {/**all orders booked by the user sorted based on the date */}
@@ -1940,7 +1953,7 @@ const Orders = () => {
             justifyContent: "space-evenly",
             alignItem: "center",
           }}
-          key={each._id}
+          key={`${each._id}${uuidV4()}`}
           className="order-body-header2"
         >
           {/**all orders booked by the user sorted based on the date */}
@@ -2060,7 +2073,7 @@ const Orders = () => {
             justifyContent: "space-evenly",
             alignItem: "center",
           }}
-          key={each._id}
+          key={`${each._id}${uuidV4()}`}
           className="order-body-header2"
         >
           {/**all orders booked by the user sorted based on the date */}
@@ -3149,7 +3162,10 @@ const Orders = () => {
                 <p className="order-body-para">Unit Price</p>
               </div>
               {items.map((each) => (
-                <div key={each.id} className="order-body-header2">
+                <div
+                  key={`${each.id}${uuidV4()}`}
+                  className="order-body-header2"
+                >
                   <div className="order-body-para">
                     <img
                       style={{ height: "100%", width: "16%" }}

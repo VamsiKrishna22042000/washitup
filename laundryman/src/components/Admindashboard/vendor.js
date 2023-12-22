@@ -2,6 +2,8 @@ import "./admin.css";
 
 import Cookies from "js-cookie";
 
+import { v4 as uuidV4 } from "uuid";
+
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -501,6 +503,42 @@ const Vendors = () => {
     }
   };
 
+  const Caland = () => {
+    return (
+      <Calendar
+        className="calender3"
+        onChange={(date) => {
+          setDate(date);
+          const dd = String(date.getDate()).padStart(2, "0");
+          const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
+          const yyyy = date.getFullYear();
+
+          const dateArr = [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+          ];
+
+          let d = dateArr.includes(dd) ? dd[1] : dd;
+          let m = dateArr.includes(mm) ? mm[1] : mm;
+          // let d = dd;
+
+          // Combine them in the desired format
+          const formattedDate = `${d}-${m}-${yyyy}`;
+          setSelectedData({ date: formattedDate, id: "cal" });
+          setShowDate(false);
+        }}
+        value={date}
+      />
+    );
+  };
+
   /**Function to change the progress of the orders in the subsection of the vendor */
   const settingProgress = async (e) => {
     setLoad(true);
@@ -538,47 +576,14 @@ const Vendors = () => {
   };
 
   const filterdSuborder = subOrders.filter((each) =>
-    subfilter === "" ? each : each.progress === subfilter
+    subfilter === "" ? each : String(each.progress) === String(subfilter)
   );
 
   const suborderFiltered = filterdSuborder.filter((each) =>
-    selectedDate.date === "" ? each : each.date === selectedDate.date
+    selectedDate.date === ""
+      ? each
+      : String(each.date) === String(selectedDate.date) && each
   );
-
-  const Caland = () => {
-    return (
-      <Calendar
-        className="calender3"
-        onChange={(date) => {
-          setDate(date);
-          const dd = String(date.getDate()).padStart(2, "0");
-          const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
-          const yyyy = date.getFullYear();
-
-          const dateArr = [
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-          ];
-
-          /**let d = dateArr.includes(dd) ? dd[1] : dd;*/
-          let d = dd;
-
-          // Combine them in the desired format
-          const formattedDate = `${d}-${mm}-${yyyy}`;
-          setSelectedData({ date: formattedDate, id: "cal" });
-          setShowDate(false);
-        }}
-        value={date}
-      />
-    );
-  };
 
   console.log(suborderFiltered);
 
@@ -1038,13 +1043,13 @@ const Vendors = () => {
                       ? { display: "inline-flex" }
                       : { display: "none" }
                   }
-                  key={each.orderId}
+                  key={`${each.orderId}${uuidV4()}`}
                   className="order-body-header2"
                 >
                   {/**all orders booked by the user sorted based on the date */}
 
                   <p
-                    key={each.orderId}
+                    key={`${each.orderId}${uuidV4()}`}
                     userId={each.userId}
                     id={each.orderId}
                     style={{ width: "20%" }}
@@ -1053,7 +1058,7 @@ const Vendors = () => {
                     {each.orderId}
                   </p>
                   <p
-                    key={each.orderId}
+                    key={`${each.orderId}${uuidV4()}`}
                     userId={each.userId}
                     id={each.orderId}
                     className="order-body-para"
@@ -1061,25 +1066,37 @@ const Vendors = () => {
                     {each.date} - {each.time}
                   </p>
                   {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
-                    <p key={each.orderId} className="order-body-para">
+                    <p
+                      key={`${each.orderId}${uuidV4()}`}
+                      className="order-body-para"
+                    >
                       ₹ {parseInt(each.totalAmount) / 1000} K
                     </p>
                   ) : each.totalAmount > 100000 &&
                     each.totalAmount < 1000000 ? (
-                    <p key={each.orderId} className="order-body-para">
+                    <p
+                      key={`${each.orderId}${uuidV4()}`}
+                      className="order-body-para"
+                    >
                       ₹ {parseInt(each.totalAmount) / 100000} L
                     </p>
                   ) : each.totalAmount > 1000000 ? (
-                    <p key={each.orderId} className="order-body-para">
+                    <p
+                      key={`${each.orderId}${uuidV4()}`}
+                      className="order-body-para"
+                    >
                       ₹ {parseInt(each.totalAmount) / 1000000} M
                     </p>
                   ) : (
-                    <p key={each.orderId} className="order-body-para">
+                    <p
+                      key={`${each.orderId}${uuidV4()}`}
+                      className="order-body-para"
+                    >
                       ₹ {each.totalAmount}
                     </p>
                   )}
                   <select
-                    key={each.orderId}
+                    key={`${each.orderId}${uuidV4()}`}
                     userId={each.userId}
                     id={each.orderId}
                     onChange={settingProgress}
@@ -1088,7 +1105,7 @@ const Vendors = () => {
                   >
                     {each.action.map((e) => (
                       <option
-                        key={each.orderId}
+                        key={`${each.orderId}${uuidV4()}`}
                         style={{ textTransform: "capitalize" }}
                         selected={each.progress === e ? true : false}
                       >
@@ -1097,7 +1114,7 @@ const Vendors = () => {
                     ))}
                   </select>
                   <p
-                    key={each.orderId}
+                    key={`${each.orderId}${uuidV4()}`}
                     style={
                       each.progress === "Active"
                         ? {
@@ -1132,7 +1149,7 @@ const Vendors = () => {
                     {each.progress}
                   </p>
                   <p
-                    key={each.orderId}
+                    key={`${each.orderId}${uuidV4()}`}
                     className="order-body-para"
                     style={
                       each.activeorinactive === "Rejected"
@@ -1240,7 +1257,10 @@ const Vendors = () => {
             </div>
             {filteredVendors.length > 0 ? (
               filteredVendors.map((each) => (
-                <div key={each._id} className="order-body-header2">
+                <div
+                  key={`${each.orderId}${uuidV4()}`}
+                  className="order-body-header2"
+                >
                   <div
                     onClick={filterVendorOrders}
                     id={each._id}

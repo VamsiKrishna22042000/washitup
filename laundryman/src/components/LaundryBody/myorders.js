@@ -627,7 +627,9 @@ const MyOrders = () => {
       } else {
         setLoadRate(true);
         const userToken = Cookies.get("jwt_userToken");
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/user/addRating`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/user/addRating/${Cookies.get("jwt_adminId")}`;
 
         const headers = {
           "Content-Type": "application/json",

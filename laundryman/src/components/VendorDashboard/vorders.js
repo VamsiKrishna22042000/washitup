@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "../Admindashboard/admin.css";
 
+import { v4 as uuidV4 } from "uuid";
+
 import { TailSpin } from "react-loader-spinner";
 
 import { FaCalendarAlt } from "react-icons/fa";
@@ -14,7 +16,7 @@ import { MdLocalLaundryService } from "react-icons/md";
 
 import Cookies from "js-cookie";
 
-const Orders = () => {
+const VOrders = () => {
   /**allorders is the state used to get all the orders of all the user's */
   const [allorders, setAllOrders] = useState([]);
 
@@ -349,16 +351,19 @@ const Orders = () => {
             "09",
           ];
 
-          console.log(dd);
+          // console.log(dd);
+          // console.log(mm);
 
           let d = dateArr.includes(dd) ? dd[1] : dd;
+          let m = dateArr.includes(mm) ? mm[1] : mm;
 
           // let d = dd;
 
-          console.log(d);
+          // console.log(d);
+          // console.log(m);
 
           // Combine them in the desired format
-          const formattedDate = `${d}-${mm}-${yyyy}`;
+          const formattedDate = `${d}-${m}-${yyyy}`;
           setSelectedData({ date: formattedDate, id: "cal" });
           setShowDate(false);
         }}
@@ -372,9 +377,18 @@ const Orders = () => {
       ? each
       : each.progress === subfilter && each.status === "Accepted"
   );
+
   const filterByDate = filterByProgress.filter((each) =>
-    selectedDate.date === "" ? each : each.date === selectedDate.date
+    selectedDate.date === ""
+      ? each
+      : String(each.date) === String(selectedDate.date) && each
   );
+
+  console.log(selectedDate);
+
+  console.log(filterByProgress);
+
+  console.log(filterByDate);
 
   const acceptOrReject = async (e) => {
     setAllOrders([]);
@@ -901,7 +915,7 @@ const Orders = () => {
                             style={{
                               position: "relative",
                             }}
-                            key={each._id}
+                            key={`${each._id}${uuidV4()}`}
                             className="summary-view4"
                           >
                             {/**all orders booked by the user sorted based on the date */}
@@ -1275,7 +1289,7 @@ const Orders = () => {
                       position: "relative",
                       backgroundColor: "#22222215",
                     }}
-                    key={each._id}
+                    key={`${each._id}${uuidV4()}`}
                     className="order-body-header2"
                   >
                     {/**all orders booked by the user sorted based on the date */}
@@ -1354,7 +1368,7 @@ const Orders = () => {
                   each.driverName1 === "empty" ? (
                   <div
                     style={{ position: "relative" }}
-                    key={each._id}
+                    key={`${each._id}${uuidV4()}`}
                     className="order-body-header2"
                   >
                     {/**all orders booked by the user sorted based on the date */}
@@ -1455,7 +1469,7 @@ const Orders = () => {
                 ) : each.status === "Accepted" && each.progress !== "cancel" ? (
                   <div
                     style={{ position: "relative" }}
-                    key={each._id}
+                    key={`${each._id}${uuidV4()}`}
                     className="order-body-header2"
                   >
                     {/**all orders booked by the user sorted based on the date */}
@@ -1632,7 +1646,7 @@ const Orders = () => {
                   each.status === "Accepted" && (
                     <div
                       style={{ position: "relative" }}
-                      key={each._id}
+                      key={`${each._id}${uuidV4()}`}
                       className="order-body-header2"
                     >
                       {/**all orders booked by the user sorted based on the date */}
@@ -1765,7 +1779,10 @@ const Orders = () => {
                 <p className="order-body-para">Item Total</p>
               </div>
               {items.map((each) => (
-                <div key={each.id} className="order-body-header2">
+                <div
+                  key={`${each._id}${uuidV4()}`}
+                  className="order-body-header2"
+                >
                   <div className="order-body-para">
                     <img
                       style={{ height: "100%", width: "16%" }}
@@ -1882,4 +1899,4 @@ const Orders = () => {
     </div>
   );
 };
-export default Orders;
+export default VOrders;

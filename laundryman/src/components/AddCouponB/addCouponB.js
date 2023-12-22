@@ -59,7 +59,9 @@ const AddCouponB = (props) => {
     const token = await recapRef.current.executeAsync();
 
     let totalAmount = total - discount;
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/bookOrder`;
+    const url = `${
+      process.env.REACT_APP_ROOT_URL
+    }/api/user/bookOrder/${Cookies.get("jwt_userId")}`;
 
     const options = {
       method: "POST",
