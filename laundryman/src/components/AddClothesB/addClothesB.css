@@ -366,11 +366,11 @@
     color: #fff;
     padding-top: 1%;
     padding-bottom: 1.25%;
-    padding-right: 1.25%;
-    padding-left: 1.25%;
+    padding-right: 1.5%;
+    padding-left: 1.5%;
     border-width: 0px;
     font-family: "Poppins", sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     display: flex;
     flex-direction: row;
     align-items: center;

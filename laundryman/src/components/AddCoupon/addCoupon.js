@@ -75,6 +75,8 @@ const AddCoupon = (props) => {
       }),
     };
 
+    console.log(options.body);
+
     const response = await fetch(url, options);
     if (response.ok) {
       success();

@@ -98,9 +98,12 @@ function LaundryNavB() {
       <div className="bar-nav" bg="#b8dde3" variant="light">
         <div className="nav-bar-contents">
           <img
-            style={{ cursor: "pointer" }}
             onClick={() => {
               window.location.href = "/";
+            }}
+            style={{
+              cursor: "pointer",
+              marginRight: "28%",
             }}
             href="#logo"
             src="./washituplogo.png"

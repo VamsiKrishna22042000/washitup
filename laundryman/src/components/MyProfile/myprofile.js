@@ -45,7 +45,10 @@ const MyProfile = () => {
         >
           <div className="nav-bar-contents">
             <img
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                marginRight: "28%",
+              }}
               onClick={() => {
                 window.location.href = "/";
               }}
