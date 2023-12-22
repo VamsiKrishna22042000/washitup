@@ -66,10 +66,10 @@ const BookService = (props) => {
   );
 
   const min = new Date();
-  min.setDate(min.getDate() - 30);
+  min.setDate(min.getDate() + 1);
 
   const max = new Date();
-  max.setDate(max.getDate() + 30);
+  max.setDate(max.getDate() + 7);
 
   const [date, setDate] = useState(min);
 
