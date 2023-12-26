@@ -338,8 +338,25 @@
     font-size: 0.7rem !important;
   }
 
+  .type-of-wash-continue-addClothes1 {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    font-size: 0.7rem;
+    padding: 1% 5% !important;
+    right: 4%;
+  }
+
   .type-of-wash-continue-addClothes2 {
-    width: 80% !important;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    width: 70% !important;
+    padding: 1% 2.5% !important;
+    cursor: pointer;
+    font-size: 0.7rem !important;
+  }
+
+  .type-of-wash-continue-addClothes2 span {
+    font-size: 0.6rem !important;
   }
 
   .set-counter-amount > svg {
@@ -365,7 +382,7 @@
     border-radius: 0.25rem;
     color: #fff;
     padding-top: 1%;
-    padding-bottom: 1.25%;
+    padding-bottom: 1%;
     padding-right: 1.5%;
     padding-left: 1.5%;
     border-width: 0px;
@@ -831,5 +848,23 @@
 @media screen and (min-width: 1001px) and (max-width: 1024px) and (orientation: landscape) {
   .set-counter-name {
     font-size: 0.7rem !important;
+  }
+}
+
+@media screen and (max-width: 350px) and (orientation: portrait) {
+  .type-of-wash-continue-addClothes2 {
+    width: 90% !important;
+  }
+  .type-of-button-addClothes1 {
+    margin: 0.25rem 3% !important;
+  }
+  .type-of-button-addClothes {
+    margin: 0.25rem 3% !important;
+  }
+}
+
+@media screen and (max-width: 376px) and (orientation: portrait) {
+  .search-box2 {
+    width: 60% !important;
   }
 }

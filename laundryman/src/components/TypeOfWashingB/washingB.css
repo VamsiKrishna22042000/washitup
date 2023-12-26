@@ -40,7 +40,16 @@
   padding: 1% 2%;
   background-color: var(--def-color);
   color: #ffffff;
-  border: 0;
+  border: 1px solid var(--def-color);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.alertClassB > div button:first-child {
+  padding: 1% 2%;
+  background-color: #ffffff;
+  color: var(--def-color);
+  border: 1px solid var(--def-color);
   border-radius: 0.25rem;
   cursor: pointer;
 }
@@ -167,10 +176,6 @@
   background-color: #6759ff;
   border-radius: 0.25rem;
   color: #fff;
-  padding-top: 1%;
-  padding-bottom: 1.25%;
-  padding-right: 1.25%;
-  padding-left: 1.25%;
   border-width: 0px;
   font-family: "Poppins", sans-serif;
   font-size: 0.8rem;
@@ -182,6 +187,7 @@
   font-weight: bold;
   margin-right: 5%;
   margin-top: 6%;
+  padding: 1% 2.5%;
 }
 
 .type-of-wash-continue-addClothes1 > span {
@@ -198,7 +204,7 @@
   padding: 1.25% 1.25%;
   border-width: 0px;
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -216,7 +222,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: normal;
   font-size: 0.6rem;
-  margin-top: 2%;
+  margin-top: 1.5%;
   text-align: start;
   font-weight: bold;
 }
@@ -450,18 +456,20 @@
   .type-of-wash-continue-addClothes1 {
     margin-top: 2.5%;
     margin-bottom: 2.5%;
+    font-size: 0.7rem;
+    padding: 1% 2.5%;
   }
 
   .type-of-wash-continue-addClothes2 {
     margin-top: 2.5%;
     margin-bottom: 2.5%;
     width: 70% !important;
-    padding-right: 2% !important;
+    padding: 1% 2.5% !important;
     cursor: pointer;
+    font-size: 0.7rem;
   }
   .type-of-wash-continue-addClothes2 span {
-    margin-bottom: 1.5%;
-    margin-left: 2%;
+    font-size: 0.6rem !important;
   }
 }
 

@@ -172,3 +172,52 @@
   }
 }
 /**Responsive Css**/
+
+@media screen and (max-height: 700px) and (orientation: portrait) {
+  .type-of-wash {
+    height: 50vh !important;
+  }
+
+  .type-of-head1 {
+    font-size: 1rem;
+  }
+
+  .type-of-wash-con1 {
+    height: 40% !important;
+  }
+
+  .type-of-button {
+    height: 80% !important;
+    width: 31% !important;
+  }
+
+  .type-of-button1 {
+    height: 80% !important;
+    width: 31% !important;
+  }
+
+  .reorder-animate {
+    font-size: 0.6rem !important;
+  }
+
+  .reorder-button {
+    height: 20px !important;
+    width: 20px !important;
+  }
+}
+
+@media screen and (max-width: 320px) and (orientation: portrait) {
+  .type-of-button {
+    height: 80% !important;
+    width: 30% !important;
+  }
+
+  .type-of-button1 {
+    height: 80% !important;
+    width: 30% !important;
+  }
+
+  .reorder-animate {
+    font-size: 0.5rem;
+  }
+}

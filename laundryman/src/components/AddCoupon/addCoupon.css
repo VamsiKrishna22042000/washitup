@@ -508,3 +508,9 @@
     font-size: 1rem;
   }
 }
+
+@media screen and (max-width: 350px) and (orientation: portrait) {
+  .items-quantity {
+    padding-left: 15% !important;
+  }
+}

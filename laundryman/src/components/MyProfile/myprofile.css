@@ -239,6 +239,31 @@
   padding: 1%;
 }
 
+.address-profile > button {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  background-color: #6759ff;
+  border: 0;
+  color: #ffffff;
+  padding: 0.6% 1.1%;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.addAddress-Modal > button {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background-color: #6759ff;
+  border: 0;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 0.8% 1.5%;
+  border-radius: 0.3rem;
+  cursor: pointer !important;
+}
+
 .address-subsection {
   font-family: "Poppins", sans-serif;
   height: 40%;
@@ -404,4 +429,43 @@
 .refer-details > div > div:last-child button:hover {
   background-color: #ffffff;
   color: #6759ff;
+}
+
+.addAddress-Modal {
+  position: absolute;
+  background-color: #ffffff;
+  z-index: 5;
+  height: 80%;
+  width: 30%;
+  left: 35%;
+  top: 8%;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 5px #222222;
+  padding: 1.5%;
+}
+
+.addAddress-Modal > form {
+  height: 80%;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.addAddress-Modal > form label {
+  width: 100%;
+}
+
+.addAddress-Modal > form > input {
+  padding: 2%;
+}
+
+.addAddress-Modal > form > button {
+  border: 0;
+  background-color: #6759ff;
+  color: #ffffff;
+  padding: 1% 3%;
+  cursor: pointer;
+  border-radius: 0.3rem;
 }

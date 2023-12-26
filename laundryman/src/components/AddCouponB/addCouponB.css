@@ -456,3 +456,15 @@
     padding-bottom: 5%;
   }
 }
+
+@media screen and (max-width: 350px) and (orientation: portrait) {
+  .items-con-coupon-B p:nth-child(2) {
+    width: 35%;
+  }
+  .items-con-coupon-B p:nth-child(3) {
+    width: 15%;
+  }
+  .apply-coupon-input1 {
+    width: 45%;
+  }
+}

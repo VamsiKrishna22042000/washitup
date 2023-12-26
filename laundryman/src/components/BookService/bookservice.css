@@ -750,4 +750,17 @@
     overflow-y: scroll;
     box-shadow: 0px 2px 8px #22222270;
   }
+
+  .input1-A {
+    height: 60vh !important;
+  }
+}
+
+@media screen and (max-width: 350px) and (orientation: portrait) {
+  .bookservice-time-A {
+    font-size: 0.6rem;
+  }
+  .search-box-A {
+    width: 70% !important;
+  }
 }

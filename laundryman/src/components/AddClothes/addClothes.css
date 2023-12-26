@@ -306,7 +306,7 @@
 
 @media screen and (max-width: 600px) and (orientation: portrait) {
   .addClothes-A {
-    height: 50vh;
+    height: 52vh;
     width: 85%;
     position: relative;
     margin-top: 10%;
@@ -539,3 +539,58 @@
 }
 
 /**NewCss*/
+
+@media screen and (max-width: 420px) and (orientation: portrait) {
+  .set-counter-icon-A {
+    height: 45%;
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 350px) and (orientation: portrait) {
+  .button-pick-A {
+    font-size: 0.5rem;
+  }
+
+  .pick-button-A {
+    font-size: 0.5rem;
+    margin-top: 5%;
+  }
+
+  .items-over-A {
+    margin-top: 25%;
+    height: 35vh !important;
+  }
+
+  .set-counter-A > p {
+    font-size: 0.65rem;
+  }
+
+  .set-couter-price-icon3-A {
+    font-size: 0.65rem;
+  }
+
+  .addClothes-A {
+    height: 65vh !important;
+  }
+
+  .wash-button-A {
+    margin-top: 10% !important;
+  }
+  .set-counter-icon-A {
+    height: 40%;
+  }
+
+  .set-counter-para-A {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media screen and (max-width: 376px) and (orientation: portrait) {
+  .set-counter-amount-A {
+    top: 0% !important;
+  }
+  .set-counter-para-A {
+    font-size: 0.8rem !important;
+  }
+}
