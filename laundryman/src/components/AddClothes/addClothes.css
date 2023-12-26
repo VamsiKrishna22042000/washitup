@@ -307,10 +307,10 @@
 @media screen and (max-width: 600px) and (orientation: portrait) {
   .addClothes-A {
     height: 52vh;
-    width: 85%;
+    width: 90%;
     position: relative;
     margin-top: 10%;
-    margin-left: 13.5% !important;
+    margin-left: 11.5% !important;
     margin-bottom: 10%;
   }
   .counter-buttons-container-A {

@@ -214,10 +214,10 @@
 @media screen and (max-width: 600px) {
   .login-book-service-coupon-A {
     height: 50vh;
-    width: 85%;
+    width: 90%;
     position: relative;
     margin-top: 10%;
-    margin-left: 13.5% !important;
+    margin-left: 11.5% !important;
     margin-bottom: 10%;
   }
   .items-con-coupon-A p {

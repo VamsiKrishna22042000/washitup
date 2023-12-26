@@ -128,8 +128,9 @@
   .type-of-wash {
     position: relative;
     margin-top: -10%;
-    margin-left: 13.5% !important;
+    margin-left: 11.5% !important;
     margin-bottom: 10%;
+    width: 90% !important;
   }
 
   .type-of-head1 {

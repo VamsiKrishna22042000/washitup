@@ -184,20 +184,20 @@
   .type-of-reorder-Aspinner {
     position: relative;
     height: 40vh;
-    width: 85%;
+    width: 90%;
     margin-top: 5%;
-    margin-left: 12.5%;
+    margin-left: 11.5%;
     margin-bottom: 10%;
   }
 
   .type-of-reorder-A {
     height: auto;
-    width: 85%;
+    width: 90%;
     position: relative;
     display: flex;
     flex-direction: column;
     margin-top: 5%;
-    margin-left: 13.5% !important;
+    margin-left: 11.5% !important;
     margin-bottom: 10%;
   }
   .userAddress2-A {
