@@ -18,15 +18,21 @@ const Address = () => {
 
   const [whatTofocus, setFocus] = useState("");
 
-  // useEffect(() => {
-  //   getAddressById();
-  // }, []);
+  useEffect(() => {
+    getAddressById();
+  }, []);
 
-  // const getAddressById = async () => {
-  //   const url = `${process.env.REACT_APP_ROOT_URL}/`;
+  const getAddressById = async () => {
+    const url = `${
+      process.env.REACT_APP_ROOT_URL
+    }/api/user/getAllAddress/${Cookies.get("jwt_userId")}`;
 
-  //   const res = await axios.get("");
-  // };
+    const res = await axios.get(url);
+
+    if (res.status === 200) {
+      console.log(res.data);
+    }
+  };
 
   const AddAddressModel = () => {
     const submitForm = async (e) => {
