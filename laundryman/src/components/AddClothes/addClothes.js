@@ -23,34 +23,44 @@ const AddClothes = (props) => {
 
   /** Getting all the category of clothes */
   const getTheCategories = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getAllCategories`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getAllCategories`;
 
-    const response = await fetch(url);
+      const response = await fetch(url);
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      console.log(data);
-      const obtainedData = data.data.map((each) => ({
-        ...each,
-        count: 0,
-        price:
-          typeOfWashing === "dry Cleaning"
-            ? each.drycleaning
-            : typeOfWashing === "wash & fold"
-            ? each.washfold
-            : each.washiron,
-      }));
+      if (response.ok) {
+        console.log(data);
+        const obtainedData = data.data.map((each) => ({
+          ...each,
+          count: 0,
+          price:
+            typeOfWashing === "dry Cleaning"
+              ? each.drycleaning
+              : typeOfWashing === "wash & fold"
+              ? each.washfold
+              : each.washiron,
+        }));
 
-      const filterObtainedData = obtainedData.filter((each) => {
-        if (typeOfWashing === "dry Cleaning") {
-          return each.type === "dry";
-        } else {
-          return each.type === "wash";
-        }
+        const filterObtainedData = obtainedData.filter((each) => {
+          if (typeOfWashing === "dry Cleaning") {
+            return each.type === "dry";
+          } else {
+            return each.type === "wash";
+          }
+        });
+
+        setClothesStore(filterObtainedData);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
       });
-
-      setClothesStore(filterObtainedData);
     }
   };
 

@@ -52,36 +52,46 @@ const AddCouponB = (props) => {
     /**Function used to book the laundry by passing the itemsSelected, typeofWash,userForm */
   }
   const setToWashing = async () => {
-    const userId = Cookies.get("jwt_userToken");
+    try {
+      const userId = Cookies.get("jwt_userToken");
 
-    setLoadButton(true);
+      setLoadButton(true);
 
-    const token = await recapRef.current.executeAsync();
+      const token = await recapRef.current.executeAsync();
 
-    let totalAmount = total - discount;
-    const url = `${
-      process.env.REACT_APP_ROOT_URL
-    }/api/user/bookOrder/${Cookies.get("jwt_userId")}`;
+      let totalAmount = total - discount;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/user/bookOrder/${Cookies.get("jwt_userId")}`;
 
-    const options = {
-      method: "POST",
+      const options = {
+        method: "POST",
 
-      headers: {
-        "Content-Type": "Application/json",
-        Authorization: `Bearer ${userId}`,
-      },
+        headers: {
+          "Content-Type": "Application/json",
+          Authorization: `Bearer ${userId}`,
+        },
 
-      body: JSON.stringify({
-        ...dataTobeSent,
-        totalAmount,
-        token,
-        service: typeOfWashing,
-      }),
-    };
+        body: JSON.stringify({
+          ...dataTobeSent,
+          totalAmount,
+          token,
+          service: typeOfWashing,
+        }),
+      };
 
-    const response = await fetch(url, options);
-    if (response.ok) {
-      success();
+      const response = await fetch(url, options);
+      if (response.ok) {
+        success();
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -89,51 +99,61 @@ const AddCouponB = (props) => {
     /**Function used to apply the coupon and get the discount of the coupon and update the state of the discount */
   }
   const applyCoupon = async () => {
-    const userId = Cookies.get("jwt_userToken");
+    try {
+      const userId = Cookies.get("jwt_userToken");
 
-    setApply(true);
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/applyCoupon`;
+      setApply(true);
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/applyCoupon`;
 
-    const reqConfigure = {
-      method: "POST",
+      const reqConfigure = {
+        method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userId}`,
-      },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userId}`,
+        },
 
-      body: JSON.stringify({
-        couponCode: couponCode.toUpperCase(),
-        amount: total,
-        mobileNumber: parseInt(dataTobeSent.mobileNumber),
-      }),
-    };
+        body: JSON.stringify({
+          couponCode: couponCode.toUpperCase(),
+          amount: total,
+          mobileNumber: parseInt(dataTobeSent.mobileNumber),
+        }),
+      };
 
-    const respone = await fetch(url, reqConfigure);
+      const respone = await fetch(url, reqConfigure);
 
-    const data = await respone.json();
+      const data = await respone.json();
 
-    if (respone.ok) {
-      setCelebration(true);
-      setApply(false);
-      toast.success("Coupon Applied", {
-        position: "top-center",
+      if (respone.ok) {
+        setCelebration(true);
+        setApply(false);
+        toast.success("Coupon Applied", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+        setDiscount(data.data.discount);
+        setTimeout(() => {
+          setCelebration(false);
+        }, 2000);
+      } else {
+        setApply(false);
+        toast.error(`${data.message}`, {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
         autoClose: 2000,
-        closeOnClick: true,
         pauseOnHover: true,
-        theme: "colored",
-      });
-      setDiscount(data.data.discount);
-      setTimeout(() => {
-        setCelebration(false);
-      }, 2000);
-    } else {
-      setApply(false);
-      toast.error(`${data.message}`, {
+        closeOnClick: true,
         position: "top-center",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
         theme: "colored",
       });
     }

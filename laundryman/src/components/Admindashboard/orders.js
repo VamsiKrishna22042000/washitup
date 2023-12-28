@@ -15,7 +15,6 @@ import { LuImagePlus } from "react-icons/lu";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { MdTranslate } from "react-icons/md";
 
 const Orders = () => {
   /**allorders is the state used to get all the orders of all the user's */
@@ -49,6 +48,8 @@ const Orders = () => {
 
   const [showDate, setShowDate] = useState(false);
 
+  const [filterPresentOrders, setPresentOrders] = useState([]);
+
   /**To get all the order before mounting by an api call*/
   useEffect(() => {
     getAllOrders();
@@ -57,88 +58,98 @@ const Orders = () => {
   /**getAllOrders is a function to get alltheorders that were booked by all users*/
 
   const getAllOrders = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const adminToken = Cookies.get("jwt_adminLogin");
+      const adminToken = Cookies.get("jwt_adminLogin");
 
-    const reqConfigure = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${adminToken}`,
-      },
-    };
+      const reqConfigure = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
+        },
+      };
 
-    const response = await fetch(url, reqConfigure);
-    const data = await response.json();
+      const response = await fetch(url, reqConfigure);
+      const data = await response.json();
 
-    if (response.ok) {
-      /**This is an array to insert name,mobileNumber,userId of the user into the each order object which were in the array of orders */
-      let eachObjInsertedWithNumberName = [];
+      if (response.ok) {
+        /**This is an array to insert name,mobileNumber,userId of the user into the each order object which were in the array of orders */
+        let eachObjInsertedWithNumberName = [];
 
-      let activeCount = 0;
+        let activeCount = 0;
 
-      let inprogressCount = 0;
+        let inprogressCount = 0;
 
-      let completedCount = 0;
+        let completedCount = 0;
 
-      let cancelCount = 0;
+        let cancelCount = 0;
 
-      for (let eachorder of data) {
-        if (eachorder.progress === "Active") {
-          activeCount = activeCount + 1;
+        for (let eachorder of data) {
+          if (eachorder.progress === "Active") {
+            activeCount = activeCount + 1;
+          }
+
+          if (eachorder.progress === "In Progress") {
+            inprogressCount = inprogressCount + 1;
+          }
+
+          if (eachorder.progress === "Completed") {
+            completedCount = completedCount + 1;
+          }
+
+          if (eachorder.progress === "cancel") {
+            cancelCount = cancelCount + 1;
+          }
+
+          console.log(eachorder);
+
+          eachObjInsertedWithNumberName.push({
+            ...eachorder,
+            mobileNumber:
+              eachorder.userId
+                .mobileNumber /**mobile number,name,userId were added into each order object which were not obtained out of the object from backend */,
+            name: eachorder.userId.name,
+            userId: eachorder.userId._id,
+          });
         }
 
-        if (eachorder.progress === "In Progress") {
-          inprogressCount = inprogressCount + 1;
-        }
+        /**Sorted the array of orders based onthe latest date */
 
-        if (eachorder.progress === "Completed") {
-          completedCount = completedCount + 1;
-        }
+        eachObjInsertedWithNumberName.sort(function (a, b) {
+          var datePartsA = a.date.split("-").map(Number); // Convert date strings to arrays of numbers
+          var datePartsB = b.date.split("-").map(Number);
 
-        if (eachorder.progress === "cancel") {
-          cancelCount = cancelCount + 1;
-        }
-
-        console.log(eachorder);
-
-        eachObjInsertedWithNumberName.push({
-          ...eachorder,
-          mobileNumber:
-            eachorder.userId
-              .mobileNumber /**mobile number,name,userId were added into each order object which were not obtained out of the object from backend */,
-          name: eachorder.userId.name,
-          userId: eachorder.userId._id,
+          // Compare the date parts (year, month, day) in descending order
+          if (datePartsA[2] < datePartsB[2]) return 1; // Compare years
+          if (datePartsA[2] > datePartsB[2]) return -1;
+          if (datePartsA[1] < datePartsB[1]) return 1; // Compare months
+          if (datePartsA[1] > datePartsB[1]) return -1;
+          if (datePartsA[0] < datePartsB[0]) return 1; // Compare days
+          if (datePartsA[0] > datePartsB[0]) return -1;
+          return 0;
         });
+
+        setCount({
+          active: activeCount,
+          inprogress: inprogressCount,
+          completed: completedCount,
+          cancel: cancelCount,
+        });
+
+        console.log(eachObjInsertedWithNumberName);
+
+        setAllOrders(eachObjInsertedWithNumberName);
+        setLoadingSpinner(true);
       }
-
-      /**Sorted the array of orders based onthe latest date */
-
-      eachObjInsertedWithNumberName.sort(function (a, b) {
-        var datePartsA = a.date.split("-").map(Number); // Convert date strings to arrays of numbers
-        var datePartsB = b.date.split("-").map(Number);
-
-        // Compare the date parts (year, month, day) in descending order
-        if (datePartsA[2] < datePartsB[2]) return 1; // Compare years
-        if (datePartsA[2] > datePartsB[2]) return -1;
-        if (datePartsA[1] < datePartsB[1]) return 1; // Compare months
-        if (datePartsA[1] > datePartsB[1]) return -1;
-        if (datePartsA[0] < datePartsB[0]) return 1; // Compare days
-        if (datePartsA[0] > datePartsB[0]) return -1;
-        return 0;
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
       });
-
-      setCount({
-        active: activeCount,
-        inprogress: inprogressCount,
-        completed: completedCount,
-        cancel: cancelCount,
-      });
-
-      console.log(eachObjInsertedWithNumberName);
-
-      setAllOrders(eachObjInsertedWithNumberName);
-      setLoadingSpinner(true);
     }
   };
 
@@ -192,117 +203,145 @@ const Orders = () => {
       : String(each.date) === String(selectedDate.date) && each
   );
 
-  console.log(filterdAllOrders);
-
   /**Function used to set the progress of the particular order(active,inprogress,completed,cancel) */
   const settingProgress = async (e) => {
-    setAllOrders([]);
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
-    let userId = e.target.getAttribute("userId");
-    let orderId = e.target.id;
-    let progress = e.target.value;
+    try {
+      setAllOrders([]);
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
+      let userId = e.target.getAttribute("userId");
+      let orderId = e.target.id;
+      let progress = e.target.value;
 
-    const reqConfigure = {
-      method: "POST",
+      const reqConfigure = {
+        method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      body: JSON.stringify({ userId, orderId, progress }),
-    };
+        body: JSON.stringify({ userId, orderId, progress }),
+      };
 
-    const response = await fetch(url, reqConfigure);
+      const response = await fetch(url, reqConfigure);
 
-    if (response.ok) {
-      getAllOrders();
+      if (response.ok) {
+        getAllOrders();
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
   /**Fuction to update progress in the sub section */
   const settingProgress2 = async (e) => {
-    setLoad(true);
-    let userId = e.target.getAttribute("userId");
-    let orderId = e.target.id;
-    let progress = e.target.value;
+    try {
+      setLoad(true);
+      let userId = e.target.getAttribute("userId");
+      let orderId = e.target.id;
+      let progress = e.target.value;
 
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
 
-    const reqConfigure = {
-      method: "POST",
+      const reqConfigure = {
+        method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      body: JSON.stringify({ userId, orderId, progress }),
-    };
+        body: JSON.stringify({ userId, orderId, progress }),
+      };
 
-    const response = await fetch(url, reqConfigure);
+      const response = await fetch(url, reqConfigure);
 
-    if (response.ok) {
-      filterCustomer2(orderId);
+      if (response.ok) {
+        filterCustomer2(orderId);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
   /**Fuction to update progress in the sub section and*/
   const filterCustomer2 = async (orderId) => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const adminToken = Cookies.get("jwt_adminLogin");
+      const adminToken = Cookies.get("jwt_adminLogin");
 
-    const reqConfigure = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${adminToken}`,
-      },
-    };
+      const reqConfigure = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
+        },
+      };
 
-    const response = await fetch(url, reqConfigure);
-    const data = await response.json();
+      const response = await fetch(url, reqConfigure);
+      const data = await response.json();
 
-    if (response.ok) {
-      let eachObjInsertedWithNumberName = [];
+      if (response.ok) {
+        let eachObjInsertedWithNumberName = [];
 
-      for (let eachorder of data) {
-        eachObjInsertedWithNumberName.push({
-          ...eachorder,
-          mobileNumber:
-            eachorder.userId
-              .mobileNumber /**mobile number,name,userId were added into each order object which were not obtained out of the object from backend */,
-          name: eachorder.userId.name,
-          userId: eachorder.userId._id,
-        });
-      }
-
-      const selectedCustomerOrder = eachObjInsertedWithNumberName.filter(
-        (each) => each._id === orderId
-      );
-
-      let itemsObtained = [];
-
-      for (let each of selectedCustomerOrder[0].items) {
-        for (let e of each.uniqueId) {
-          itemsObtained.push({
-            uniqueId: e,
-            count: each.itemCount,
-            id: each.itemId._id,
-            itemCategory: each.itemId.category,
-            itemName: each.itemId.name,
-            price:
-              selectedCustomerOrder[0].service === "dry Cleaning"
-                ? each.itemId.drycleaning
-                : selectedCustomerOrder[0].service === "wash & fold"
-                ? each.itemId.washfold
-                : each.itemId.washiron,
-            image: each.itemId.image,
+        for (let eachorder of data) {
+          eachObjInsertedWithNumberName.push({
+            ...eachorder,
+            mobileNumber:
+              eachorder.userId
+                .mobileNumber /**mobile number,name,userId were added into each order object which were not obtained out of the object from backend */,
+            name: eachorder.userId.name,
+            userId: eachorder.userId._id,
           });
         }
-      }
 
-      setLoad(false);
-      setItems(itemsObtained);
-      setSelectedCustomer(selectedCustomerOrder);
+        const selectedCustomerOrder = eachObjInsertedWithNumberName.filter(
+          (each) => each._id === orderId
+        );
+
+        let itemsObtained = [];
+
+        for (let each of selectedCustomerOrder[0].items) {
+          for (let e of each.uniqueId) {
+            itemsObtained.push({
+              uniqueId: e,
+              count: each.itemCount,
+              id: each.itemId._id,
+              itemCategory: each.itemId.category,
+              itemName: each.itemId.name,
+              price:
+                selectedCustomerOrder[0].service === "dry Cleaning"
+                  ? each.itemId.drycleaning
+                  : selectedCustomerOrder[0].service === "wash & fold"
+                  ? each.itemId.washfold
+                  : each.itemId.washiron,
+              image: each.itemId.image,
+            });
+          }
+        }
+
+        setLoad(false);
+        setItems(itemsObtained);
+        setSelectedCustomer(selectedCustomerOrder);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -329,111 +368,141 @@ const Orders = () => {
 
     /**Function to get all the vendors */
     const getAllVendors = async () => {
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
+      try {
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
-      const adminToken = Cookies.get("jwt_adminLogin");
+        const adminToken = Cookies.get("jwt_adminLogin");
 
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${adminToken}`,
-      };
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
+        };
 
-      const response = await fetch(url, { headers });
+        const response = await fetch(url, { headers });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        /**console.log(data);*/
-        setLoad(false);
-        setVendors(data);
+        if (response.ok) {
+          /**console.log(data);*/
+          setLoad(false);
+          setVendors(data);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
       }
     };
 
     /**Function to assign an order to particular vendor */
     const assignVendor = async (e) => {
-      setLoad(true);
-      /*let userId = selectedCustomer[0].userId;*/
-      let orderId = selectedCustomer[0]._id;
-      let vendorId = e.target.id;
+      try {
+        setLoad(true);
+        /*let userId = selectedCustomer[0].userId;*/
+        let orderId = selectedCustomer[0]._id;
+        let vendorId = e.target.id;
 
-      const adminToken = Cookies.get("jwt_adminLogin");
+        const adminToken = Cookies.get("jwt_adminLogin");
 
-      const url = `${
-        process.env.REACT_APP_ROOT_URL
-      }/api/admin/assignNewVendor/${Cookies.get("jwt_adminId")}`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/assignNewVendor/${Cookies.get("jwt_adminId")}`;
 
-      const reqConfigure = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${adminToken}`,
-        },
-        body: JSON.stringify({ vendorId, orderId }),
-      };
+        const reqConfigure = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${adminToken}`,
+          },
+          body: JSON.stringify({ vendorId, orderId }),
+        };
 
-      const response = await fetch(url, reqConfigure);
+        const response = await fetch(url, reqConfigure);
 
-      if (response.ok) {
-        toast.success("Assigned Vendor", {
-          position: "top-center",
-          autoClose: 1000,
-          closeOnClick: true,
+        if (response.ok) {
+          toast.success("Assigned Vendor", {
+            position: "top-center",
+            autoClose: 1000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setTimeout(() => {
+            setshowAddVendor(false);
+            setAllOrders([]);
+            getAllOrders();
+            filterCustomer2(orderId);
+          }, 1500);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
+          autoClose: 2000,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-        setTimeout(() => {
-          setshowAddVendor(false);
-          setAllOrders([]);
-          getAllOrders();
-          filterCustomer2(orderId);
-        }, 1500);
       }
     };
 
     /**Function to change the assigned vendor */
     const changeVendor = async (e) => {
-      setLoad(true);
-      let orderId = selectedCustomer[0]._id;
-      let vendorId = e.target.id;
-      let previVendorId = selectedCustomer[0].vendorId._id;
-      let previVendorOrderId = selectedCustomer[0]._id;
+      try {
+        setLoad(true);
+        let orderId = selectedCustomer[0]._id;
+        let vendorId = e.target.id;
+        let previVendorId = selectedCustomer[0].vendorId._id;
+        let previVendorOrderId = selectedCustomer[0]._id;
 
-      const url = `${
-        process.env.REACT_APP_ROOT_URL
-      }/api/vendor/changeVendor/${Cookies.get("jwt_adminId")}`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/vendor/changeVendor/${Cookies.get("jwt_adminId")}`;
 
-      const adminToken = Cookies.get("jwt_adminLogin");
+        const adminToken = Cookies.get("jwt_adminLogin");
 
-      const reqConfigure = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${adminToken}`,
-        },
-        body: JSON.stringify({
-          vendorId,
-          orderId,
-          previVendorId,
-          previVendorOrderId,
-        }),
-      };
+        const reqConfigure = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${adminToken}`,
+          },
+          body: JSON.stringify({
+            vendorId,
+            orderId,
+            previVendorId,
+            previVendorOrderId,
+          }),
+        };
 
-      const response = await fetch(url, reqConfigure);
+        const response = await fetch(url, reqConfigure);
 
-      if (response.ok) {
-        toast.success("Changed Vendor", {
-          position: "top-center",
-          autoClose: 1000,
-          closeOnClick: true,
+        if (response.ok) {
+          toast.success("Changed Vendor", {
+            position: "top-center",
+            autoClose: 1000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setTimeout(() => {
+            setshowAddVendor(false);
+            setAllOrders([]);
+            getAllOrders();
+            filterCustomer2(orderId);
+          }, 1500);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
+          autoClose: 2000,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-        setTimeout(() => {
-          setshowAddVendor(false);
-          setAllOrders([]);
-          getAllOrders();
-          filterCustomer2(orderId);
-        }, 1500);
       }
     };
 
@@ -641,104 +710,134 @@ const Orders = () => {
 
     /**Function to get all the vendors */
     const getAllDriver = async () => {
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllDrivers`;
+      try {
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllDrivers`;
 
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-      };
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+        };
 
-      const response = await fetch(url, { headers });
+        const response = await fetch(url, { headers });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      // console.log(data);
+        // console.log(data);
 
-      if (response.ok) {
-        setLoad(false);
-        setVendors(data.data);
+        if (response.ok) {
+          setLoad(false);
+          setVendors(data.data);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
       }
     };
 
     /**Function to assign an order to particular vendor */
     const assignVendor = async (e) => {
-      setLoad(true);
-      let userId = selectedCustomer[0].userId;
-      let orderId = selectedCustomer[0]._id;
-      let driverId = e.target.id;
+      try {
+        setLoad(true);
+        let userId = selectedCustomer[0].userId;
+        let orderId = selectedCustomer[0]._id;
+        let driverId = e.target.id;
 
-      const url = `${
-        process.env.REACT_APP_ROOT_URL
-      }/api/driver/assignOrderToDriver/${Cookies.get("jwt_adminId")}`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/driver/assignOrderToDriver/${Cookies.get("jwt_adminId")}`;
 
-      const reqConfigure = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-        },
-        body: JSON.stringify({ driverId, orderId, userId }),
-      };
+        const reqConfigure = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+          },
+          body: JSON.stringify({ driverId, orderId, userId }),
+        };
 
-      const response = await fetch(url, reqConfigure);
+        const response = await fetch(url, reqConfigure);
 
-      if (response.ok) {
-        toast.success("Assigned Driver", {
-          position: "top-center",
-          autoClose: 1000,
-          closeOnClick: true,
+        if (response.ok) {
+          toast.success("Assigned Driver", {
+            position: "top-center",
+            autoClose: 1000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setTimeout(() => {
+            setshowAddDriver(false);
+            setAllOrders([]);
+            getAllOrders();
+            filterCustomer2(orderId);
+          }, 1500);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
+          autoClose: 2000,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-        setTimeout(() => {
-          setshowAddDriver(false);
-          setAllOrders([]);
-          getAllOrders();
-          filterCustomer2(orderId);
-        }, 1500);
       }
     };
 
     /**Function to change the assigned vendor */
     const changeVendor = async (e) => {
-      setLoad(true);
-      let orderId = selectedCustomer[0]._id;
-      let newDriverId = e.target.id;
-      let prevDriverId =
-        selectedCustomer[0].driverName2 === "empty"
-          ? selectedCustomer[0].driverName1
-          : selectedCustomer[0].driverName2;
+      try {
+        setLoad(true);
+        let orderId = selectedCustomer[0]._id;
+        let newDriverId = e.target.id;
+        let prevDriverId =
+          selectedCustomer[0].driverName2 === "empty"
+            ? selectedCustomer[0].driverName1
+            : selectedCustomer[0].driverName2;
 
-      const url = `${
-        process.env.REACT_APP_ROOT_URL
-      }/api/driver/changeDriver/${Cookies.get("jwt_adminId")}`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/driver/changeDriver/${Cookies.get("jwt_adminId")}`;
 
-      const reqConfigure = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-        },
-        body: JSON.stringify({
-          newDriverId,
-          orderId,
-          prevDriverId,
-        }),
-      };
+        const reqConfigure = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+          },
+          body: JSON.stringify({
+            newDriverId,
+            orderId,
+            prevDriverId,
+          }),
+        };
 
-      const response = await fetch(url, reqConfigure);
+        const response = await fetch(url, reqConfigure);
 
-      if (response.ok) {
-        toast.success("Changed Driver", {
-          position: "top-center",
-          autoClose: 1000,
-          closeOnClick: true,
+        if (response.ok) {
+          toast.success("Changed Driver", {
+            position: "top-center",
+            autoClose: 1000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setTimeout(() => {
+            setshowAddDriver(false);
+          }, 1500);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
+          autoClose: 2000,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-        setTimeout(() => {
-          setshowAddDriver(false);
-        }, 1500);
       }
     };
 
@@ -1034,38 +1133,48 @@ const Orders = () => {
   const fileInputRef = useRef("");
 
   const handleFileChange = async (event) => {
-    setLoad(true);
-    let orderId = selectedCustomer[0]._id;
-    let element = document.getElementById("file-upload");
-    let itemId = item;
-    let uniqueId = unique;
-    let img = event.target.files[0];
-
-    let fd = new FormData();
-
-    fd.append("orderId", orderId);
-    fd.append("itemId", itemId);
-    fd.append("uniqueId", uniqueId);
-    fd.append("image", img);
-
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/uploadItemImage`;
-
-    console.log(Object.fromEntries(fd.entries()));
-
-    const reqConfigure = {
-      method: "POST",
-      body: fd,
-    };
-
-    const response = await fetch(url, reqConfigure);
-
-    const data = await response.json();
-
-    if (response.ok) {
-      console.log(data);
-      filterCustomer2(orderId);
-    } else {
+    try {
       setLoad(true);
+      let orderId = selectedCustomer[0]._id;
+      let element = document.getElementById("file-upload");
+      let itemId = item;
+      let uniqueId = unique;
+      let img = event.target.files[0];
+
+      let fd = new FormData();
+
+      fd.append("orderId", orderId);
+      fd.append("itemId", itemId);
+      fd.append("uniqueId", uniqueId);
+      fd.append("image", img);
+
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/uploadItemImage`;
+
+      console.log(Object.fromEntries(fd.entries()));
+
+      const reqConfigure = {
+        method: "POST",
+        body: fd,
+      };
+
+      const response = await fetch(url, reqConfigure);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data);
+        filterCustomer2(orderId);
+      } else {
+        setLoad(true);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -2171,6 +2280,21 @@ const Orders = () => {
     }
   };
 
+  const handlePresentRequests = () => {
+    let obtainedPresentRequests = allorders.filter((order) => {
+      let orderDate = new Date(order.orderBookDate);
+      let selectedDate = new Date();
+
+      if (orderDate.toDateString() === selectedDate.toDateString()) {
+        return order;
+      }
+    });
+
+    // console.log(allorders);
+    console.log(obtainedPresentRequests);
+    setPresentOrders(obtainedPresentRequests);
+  };
+
   return allorders.length > 0 ? (
     <>
       {showDate && <Caland />}
@@ -2726,22 +2850,39 @@ const Orders = () => {
                     <p style={{ marginLeft: "2%", marginBottom: 0 }}>
                       New Orders
                     </p>
-                    <div
-                      style={{
-                        height: "80%",
-                        overflowY: "scroll",
-                        overflowX: "hidden",
-                      }}
-                    >
-                      {filterdAllOrders.length > 0 ? (
-                        filterdAllOrders.map((each) => handleNewRequests(each))
-                      ) : (
+                    {selectedDate.id !== "Present" ? (
+                      <div
+                        style={{
+                          height: "80%",
+                          overflowY: "scroll",
+                          overflowX: "hidden",
+                        }}
+                      >
+                        {filterdAllOrders.length > 0 ? (
+                          filterdAllOrders.map((each) =>
+                            handleNewRequests(each)
+                          )
+                        ) : (
+                          <div className="order-body-header4">
+                            <img src="/noresult.png" className="noresult" />
+                            <h1>No Orders</h1>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          height: "80%",
+                          overflowY: "scroll",
+                          overflowX: "hidden",
+                        }}
+                      >
                         <div className="order-body-header4">
                           <img src="/noresult.png" className="noresult" />
                           <h1>No Orders</h1>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </>
@@ -2906,7 +3047,27 @@ const Orders = () => {
                     type="search"
                     placeholder="Search Customer"
                   />
+                  <button
+                    id="Present"
+                    className={
+                      selectedDate.id === "Present"
+                        ? "filterButton2"
+                        : "filterButton"
+                    }
+                    type="button"
+                    onClick={(e) => {
+                      const today = new Date();
+                      const dd = String(today.getDate()).padStart(2, "0");
+                      const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+                      const yyyy = today.getFullYear();
 
+                      const currentDate = `${dd}-${mm}-${yyyy}`;
+                      setSelectedData({ date: currentDate, id: e.target.id });
+                      handlePresentRequests();
+                    }}
+                  >
+                    Present Bookings
+                  </button>
                   <button
                     onClick={(e) => {
                       setSelectedData({ date: "", id: "" });
@@ -3121,13 +3282,140 @@ const Orders = () => {
                   Status
                 </p>
               </div>
-              {filterdAllOrders.length > 0 ? (
-                filterdAllOrders.map((each) => handelVendorDriverEmpty(each))
+              {selectedDate.id !== "Present" ? (
+                filterdAllOrders.length > 0 ? (
+                  filterdAllOrders.map((each) => handelVendorDriverEmpty(each))
+                ) : (
+                  <div className="order-body-header4">
+                    <img src="/noresult.png" className="noresult" />
+                    <h1>No Such Customer</h1>
+                  </div>
+                )
               ) : (
-                <div className="order-body-header4">
-                  <img src="/noresult.png" className="noresult" />
-                  <h1>No Such Customer</h1>
-                </div>
+                filterPresentOrders.length > 0 &&
+                filterPresentOrders.map((each) => (
+                  <div
+                    style={{ position: "relative" }}
+                    key={`${each._id}${uuidV4()}`}
+                    className="order-body-header2"
+                  >
+                    {/**all orders booked by the user sorted based on the date */}
+                    <div
+                      style={{
+                        paddingBottom: "2%",
+                        background: "#fff",
+                        color: "red",
+                        fontWeight: "bold",
+                      }}
+                      className="vender-assigned-or-not"
+                    ></div>
+
+                    <p className="vendor-assign-check">Order Cancled</p>
+
+                    <p
+                      style={{ textTransform: "capitalize", width: "14%" }}
+                      id={each._id}
+                      onClick={filterCustomer}
+                      className="order-body-para"
+                    >
+                      {each.name}
+                    </p>
+                    <p
+                      id={each._id}
+                      onClick={filterCustomer}
+                      className="order-body-para"
+                    >
+                      {each.date} - {each.time}
+                    </p>
+                    <p
+                      id={each._id}
+                      onClick={filterCustomer}
+                      style={{ width: "20%" }}
+                      className="order-body-para"
+                    >
+                      {each._id}
+                    </p>
+                    <p
+                      id={each._id}
+                      onClick={filterCustomer}
+                      className="order-body-para"
+                      style={{ textTransform: "capitalize", width: "14%" }}
+                    >
+                      {each.service}
+                    </p>
+
+                    {each.totalAmount > 1000 && each.totalAmount < 100000 ? (
+                      <p className="order-body-para">
+                        ₹ {parseInt(each.totalAmount) / 1000} K
+                      </p>
+                    ) : each.totalAmount > 100000 &&
+                      each.totalAmount < 1000000 ? (
+                      <p className="order-body-para">
+                        ₹ {parseInt(each.totalAmount) / 100000} L
+                      </p>
+                    ) : each.totalAmount > 1000000 ? (
+                      <p className="order-body-para">
+                        ₹ {parseInt(each.totalAmount) / 1000000} M
+                      </p>
+                    ) : (
+                      <p className="order-body-para">₹ {each.totalAmount}</p>
+                    )}
+
+                    <select
+                      userId={each.userId}
+                      id={each._id}
+                      onChange={settingProgress}
+                      className="order-body-select"
+                      style={{ textTransform: "capitalize" }}
+                    >
+                      {each.action.map((e) => (
+                        <option
+                          style={{ textTransform: "capitalize" }}
+                          selected={each.progress === e ? true : false}
+                        >
+                          {e}
+                        </option>
+                      ))}
+                    </select>
+                    <p
+                      className="order-body-para1"
+                      style={
+                        each.progress === "Active"
+                          ? {
+                              backgroundColor: "#FFA00025",
+                              color: "#FFA000",
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                            }
+                          : each.progress === "In Progress"
+                          ? {
+                              color: "#6759FF",
+                              backgroundColor: "#6759FF25",
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                              textAlign: "start",
+                            }
+                          : each.progress === "Completed"
+                          ? {
+                              color: "#519C66",
+                              backgroundColor: "#519C6625",
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                              textAlign: "start",
+                            }
+                          : each.progress === "cancel" && {
+                              color: "#FF0000",
+                              backgroundColor: "#FF000025",
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                              textAlign: "start",
+                            }
+                      }
+                    >
+                      {each.progress}
+                    </p>
+                  </div>
+                ))
               )}
             </div>
           ) : (

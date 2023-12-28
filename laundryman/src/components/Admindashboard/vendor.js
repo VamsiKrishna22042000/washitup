@@ -56,23 +56,33 @@ const Vendors = () => {
 
   /**Function to get all the vendor and set vendor to allVendors state */
   const getAllVendors = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
-    const adminToken = Cookies.get("jwt_adminLogin");
+      const adminToken = Cookies.get("jwt_adminLogin");
 
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${adminToken}`,
-    };
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      };
 
-    const response = await fetch(url, { headers });
+      const response = await fetch(url, { headers });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      console.log(data);
-      setVendors(data);
-      setLoad(false);
+      if (response.ok) {
+        console.log(data);
+        setVendors(data);
+        setLoad(false);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -170,43 +180,53 @@ const Vendors = () => {
           theme: "colored",
         });
       } else {
-        setLoad(true);
-        const dateTobeSent = {
-          ...vendorData,
-          mobileNumber: val.slice(3, val.length + 1),
-          secondaryMobile: value2.slice(3, value2.length + 1),
-        };
+        try {
+          setLoad(true);
+          const dateTobeSent = {
+            ...vendorData,
+            mobileNumber: val.slice(3, val.length + 1),
+            secondaryMobile: value2.slice(3, value2.length + 1),
+          };
 
-        const url = `${
-          process.env.REACT_APP_ROOT_URL
-        }/api/vendor/addVendor/${Cookies.get("jwt_adminId")}`;
+          const url = `${
+            process.env.REACT_APP_ROOT_URL
+          }/api/vendor/addVendor/${Cookies.get("jwt_adminId")}`;
 
-        const reqConfigure = {
-          method: "POST",
+          const reqConfigure = {
+            method: "POST",
 
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-          },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+            },
 
-          body: JSON.stringify(dateTobeSent),
-        };
+            body: JSON.stringify(dateTobeSent),
+          };
 
-        const response = await fetch(url, reqConfigure);
+          const response = await fetch(url, reqConfigure);
 
-        if (response.ok) {
-          toast.success("Vendor Added", {
-            position: "top-center",
+          if (response.ok) {
+            toast.success("Vendor Added", {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+            setTimeout(() => {
+              setLoad(false);
+              setAddVendor(false);
+              getAllVendors();
+            }, 1500);
+          }
+        } catch (error) {
+          toast.error(`${error}`, {
             autoClose: 2000,
-            closeOnClick: true,
             pauseOnHover: true,
+            closeOnClick: true,
+            position: "top-center",
             theme: "colored",
           });
-          setTimeout(() => {
-            setLoad(false);
-            setAddVendor(false);
-            getAllVendors();
-          }, 1500);
         }
       }
     };
@@ -444,62 +464,72 @@ const Vendors = () => {
 
   /**Same as filterVendorOrders2 but when we update the progress of a order in the subsection of the vendor*/
   const filterVendorOrders2 = async (vendorId) => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllVendors`;
 
-    const adminToken = Cookies.get("jwt_adminLogin");
+      const adminToken = Cookies.get("jwt_adminLogin");
 
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${adminToken}`,
-    };
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      };
 
-    const response = await fetch(url, { headers });
+      const response = await fetch(url, { headers });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      const filterdOrder = data.filter((each) => each._id === vendorId);
+      if (response.ok) {
+        const filterdOrder = data.filter((each) => each._id === vendorId);
 
-      const sub = filterdOrder[0].orders.map((each) => ({
-        userId: each.order.userId,
-        orderId: each.order._id,
-        date: each.order.date,
-        time: each.order.time,
-        totalAmount: each.order.totalAmount,
-        action: each.order.action,
-        progress: each.order.progress,
-        activeorinactive: each.status,
-      }));
+        const sub = filterdOrder[0].orders.map((each) => ({
+          userId: each.order.userId,
+          orderId: each.order._id,
+          date: each.order.date,
+          time: each.order.time,
+          totalAmount: each.order.totalAmount,
+          action: each.order.action,
+          progress: each.order.progress,
+          activeorinactive: each.status,
+        }));
 
-      let totalOrdersAmount = 0;
+        let totalOrdersAmount = 0;
 
-      sub.map((each) => {
-        each.progress === "Completed" &&
-          (totalOrdersAmount = totalOrdersAmount + each.totalAmount);
-      });
+        sub.map((each) => {
+          each.progress === "Completed" &&
+            (totalOrdersAmount = totalOrdersAmount + each.totalAmount);
+        });
 
-      if (
-        parseInt(totalOrdersAmount) > 1000 &&
-        parseInt(totalOrdersAmount) < 100000
-      ) {
-        setTotal(`${parseInt(totalOrdersAmount) / 1000} K`);
-      } else if (
-        parseInt(totalOrdersAmount) > 100000 &&
-        parseInt(totalOrdersAmount) < 1000000
-      ) {
-        setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
-      } else if (parseInt(totalOrdersAmount) > 1000000) {
-        setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
-      } else {
-        setTotal(parseInt(totalOrdersAmount));
+        if (
+          parseInt(totalOrdersAmount) > 1000 &&
+          parseInt(totalOrdersAmount) < 100000
+        ) {
+          setTotal(`${parseInt(totalOrdersAmount) / 1000} K`);
+        } else if (
+          parseInt(totalOrdersAmount) > 100000 &&
+          parseInt(totalOrdersAmount) < 1000000
+        ) {
+          setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
+        } else if (parseInt(totalOrdersAmount) > 1000000) {
+          setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
+        } else {
+          setTotal(parseInt(totalOrdersAmount));
+        }
+
+        setVendors(data);
+        setLoad(false);
+
+        setSubOrders(sub);
+
+        setVendorOrders(filterdOrder);
       }
-
-      setVendors(data);
-      setLoad(false);
-
-      setSubOrders(sub);
-
-      setVendorOrders(filterdOrder);
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -541,28 +571,38 @@ const Vendors = () => {
 
   /**Function to change the progress of the orders in the subsection of the vendor */
   const settingProgress = async (e) => {
-    setLoad(true);
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
-    let userId = e.target.getAttribute("userId");
-    let orderId = e.target.id;
-    let progress = e.target.value;
+    try {
+      setLoad(true);
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
+      let userId = e.target.getAttribute("userId");
+      let orderId = e.target.id;
+      let progress = e.target.value;
 
-    const reqConfigure = {
-      method: "POST",
+      const reqConfigure = {
+        method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      body: JSON.stringify({ userId, orderId, progress }),
-    };
+        body: JSON.stringify({ userId, orderId, progress }),
+      };
 
-    console.log(reqConfigure);
+      console.log(reqConfigure);
 
-    const response = await fetch(url, reqConfigure);
+      const response = await fetch(url, reqConfigure);
 
-    if (response.ok) {
-      filterVendorOrders2(showVendorOrders[0]._id);
+      if (response.ok) {
+        filterVendorOrders2(showVendorOrders[0]._id);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 

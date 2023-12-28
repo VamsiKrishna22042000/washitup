@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import "./admin.css";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { TailSpin } from "react-loader-spinner";
 import { OrderChart } from "./chart";
 import Cookies from "js-cookie";
@@ -85,7 +88,13 @@ const Dashboard = () => {
         }));
       }
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 

@@ -39,49 +39,59 @@ const UserLogin = () => {
 
   const getOtpSignUpVerify = async () => {
     if (otp !== 0) {
-      setLoad(loadStatus.got);
+      try {
+        setLoad(loadStatus.got);
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifySignup`;
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifySignup`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          name,
-          mobileNumber: parseInt(mobileNumber),
-          otp: parseInt(otp),
-        }),
-      };
+          body: JSON.stringify({
+            name,
+            mobileNumber: parseInt(mobileNumber),
+            otp: parseInt(otp),
+          }),
+        };
 
-      const respone = await fetch(url, reqConfigure);
+        const respone = await fetch(url, reqConfigure);
 
-      const data = await respone.json();
+        const data = await respone.json();
 
-      if (respone.ok) {
-        Cookies.set("jwt_userToken", data.token, { expires: 30 });
-        Cookies.set("jwt_userId", data.data._id, { expires: 30 });
-        // Cookies.set("jwt_adminLogin", data.data.isAdmin, {
-        //   expires: 30,
-        // });
-        Cookies.set("jwt_userName", data.data.name, {
-          expires: 30,
-        });
-        Cookies.set("jwt_mobileNumber", data.data.mobileNumber, {
-          expires: 30,
-        });
-        window.location.href = "/";
-      } else {
-        setLoad(loadStatus.signup);
-        setgetotp(true);
-        toast.error(`${data.message}`, {
-          position: "top-center",
+        if (respone.ok) {
+          Cookies.set("jwt_userToken", data.token, { expires: 30 });
+          Cookies.set("jwt_userId", data.data._id, { expires: 30 });
+          // Cookies.set("jwt_adminLogin", data.data.isAdmin, {
+          //   expires: 30,
+          // });
+          Cookies.set("jwt_userName", data.data.name, {
+            expires: 30,
+          });
+          Cookies.set("jwt_mobileNumber", data.data.mobileNumber, {
+            expires: 30,
+          });
+          window.location.href = "/";
+        } else {
+          setLoad(loadStatus.signup);
+          setgetotp(true);
+          toast.error(`${data.message}`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
       }
@@ -98,35 +108,45 @@ const UserLogin = () => {
 
   const getOtpRequestSignUp = async () => {
     if (mobileNumber !== 0 && name !== "") {
-      setLoad(loadStatus.message);
+      try {
+        setLoad(loadStatus.message);
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpSignup`;
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpSignup`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ mobileNumber }),
-      };
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ mobileNumber }),
+        };
 
-      const respone = await fetch(url, reqConfigure);
+        const respone = await fetch(url, reqConfigure);
 
-      const data = await respone.json();
+        const data = await respone.json();
 
-      if (respone.ok) {
-        setgetotp(true);
-        setTimeout(() => {
+        if (respone.ok) {
+          setgetotp(true);
+          setTimeout(() => {
+            setLoad(loadStatus.signup);
+          }, 2500);
+        } else {
           setLoad(loadStatus.signup);
-        }, 2500);
-      } else {
-        setLoad(loadStatus.signup);
-        toast.error(`${data.message}`, {
-          position: "top-center",
+          toast.error(`${data.message}`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
       }
@@ -153,37 +173,47 @@ const UserLogin = () => {
 
   const getOtpRequestLogin = async () => {
     if (mobileNumber !== 0) {
-      setLoad(loadStatus.message);
+      try {
+        setLoad(loadStatus.message);
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpLogin`;
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpLogin`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" },
 
-        body: JSON.stringify({
-          mobileNumber: parseInt(mobileNumber),
-        }),
-      };
+          body: JSON.stringify({
+            mobileNumber: parseInt(mobileNumber),
+          }),
+        };
 
-      const response = await fetch(url, reqConfigure);
-      const data = await response.json();
+        const response = await fetch(url, reqConfigure);
+        const data = await response.json();
 
-      if (response.ok) {
-        setgetotp(true);
-        setTimeout(() => {
+        if (response.ok) {
+          setgetotp(true);
+          setTimeout(() => {
+            setLoad(loadStatus.get);
+          }, 2500);
+        } else {
+          toast.error(`${data.message}`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
           setLoad(loadStatus.get);
-        }, 2500);
-      } else {
-        toast.error(`${data.message}`, {
-          position: "top-center",
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-        setLoad(loadStatus.get);
       }
     } else {
       toast.error(`Please Enter Valid Mobile Number`, {
@@ -198,57 +228,67 @@ const UserLogin = () => {
 
   const getOtpLoginVerify = async () => {
     if (otp !== 0 && mobileNumber !== 0) {
-      setLoad(loadStatus.got);
+      try {
+        setLoad(loadStatus.got);
 
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifyLoginOTP`;
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifyLoginOTP`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          otp: parseInt(otp),
-          mobileNumber: parseInt(mobileNumber),
-        }),
-      };
+          body: JSON.stringify({
+            otp: parseInt(otp),
+            mobileNumber: parseInt(mobileNumber),
+          }),
+        };
 
-      const response = await fetch(url, reqConfigure);
+        const response = await fetch(url, reqConfigure);
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        Cookies.set("jwt_userToken", data.token, { expires: 30 });
-        Cookies.set("jwt_userId", data.data[0]._id, { expires: 30 });
-        // Cookies.set("jwt_adminLogin", data.data[0].isAdmin, { expires: 30 });
-        Cookies.set("jwt_userName", data.data[0].name, { expires: 30 });
-        Cookies.set("jwt_mobileNumber", data.data[0].mobileNumber, {
-          expires: 30,
-        });
-        data.data[0].location !== undefined &&
-          Cookies.set("jwt_location", data.data[0].location, {
+        if (response.ok) {
+          Cookies.set("jwt_userToken", data.token, { expires: 30 });
+          Cookies.set("jwt_userId", data.data[0]._id, { expires: 30 });
+          // Cookies.set("jwt_adminLogin", data.data[0].isAdmin, { expires: 30 });
+          Cookies.set("jwt_userName", data.data[0].name, { expires: 30 });
+          Cookies.set("jwt_mobileNumber", data.data[0].mobileNumber, {
             expires: 30,
           });
-        data.data[0].address !== undefined &&
-          Cookies.set("jwt_dono", data.data[0].address.dono, {
-            expires: 30,
-          });
-        data.data[0].address !== undefined &&
-          Cookies.set("jwt_landmark", data.data[0].address.landmark, {
-            expires: 30,
-          });
+          data.data[0].location !== undefined &&
+            Cookies.set("jwt_location", data.data[0].location, {
+              expires: 30,
+            });
+          data.data[0].address !== undefined &&
+            Cookies.set("jwt_dono", data.data[0].address.dono, {
+              expires: 30,
+            });
+          data.data[0].address !== undefined &&
+            Cookies.set("jwt_landmark", data.data[0].address.landmark, {
+              expires: 30,
+            });
 
-        window.location.href = "/";
-      } else {
-        setgetotp(true);
-        setLoad(loadStatus.get);
-        toast.error(`${data.message}`, {
-          position: "top-center",
+          window.location.href = "/";
+        } else {
+          setgetotp(true);
+          setLoad(loadStatus.get);
+          toast.error(`${data.message}`, {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
       }

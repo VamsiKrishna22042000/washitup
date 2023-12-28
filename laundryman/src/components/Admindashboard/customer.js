@@ -45,37 +45,47 @@ const AddCustomerModel = (props) => {
         theme: "colored",
       });
     } else {
-      setLoad(true);
-      const url = `${
-        process.env.REACT_APP_ROOT_URL
-      }/api/admin/createNewUser${Cookies.get("jwt_adminId")}`;
+      try {
+        setLoad(true);
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/createNewUser${Cookies.get("jwt_adminId")}`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-        },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+          },
 
-        body: JSON.stringify({ name: newUser, mobileNumber: value }),
-      };
+          body: JSON.stringify({ name: newUser, mobileNumber: value }),
+        };
 
-      const res = await fetch(url, reqConfigure);
+        const res = await fetch(url, reqConfigure);
 
-      if (res.ok) {
-        toast.success("Added", {
-          position: "top-center",
+        if (res.ok) {
+          toast.success("Added", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+          setTimeout(() => {
+            setLoad(false);
+            setAddCustomer(false);
+            getAllCustomers();
+          }, 1000);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-        setTimeout(() => {
-          setLoad(false);
-          setAddCustomer(false);
-          getAllCustomers();
-        }, 1000);
       }
     }
   };
@@ -199,33 +209,45 @@ const Customers = () => {
 
   /**Function which makes an api call to get all the orders and convertes the ordes as an array of customer objects and each customer object has array of order objects which were orders by the user*/
   const getAllCustomers = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const adminToken = Cookies.get("jwt_adminLogin");
+      const adminToken = Cookies.get("jwt_adminLogin");
 
-    const reqConfigure = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${adminToken}`,
-      },
-    };
+      const reqConfigure = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
+        },
+      };
 
-    const response = await fetch(url, reqConfigure);
-    const data = await response.json();
-
-    {
-      /**if condition used to convert the obtained data to array of customer object where each customer object has their array of orderobjects*/
-    }
-    if (response.ok) {
-      const userArray = [];
-      const userIdArray = [];
+      const response = await fetch(url, reqConfigure);
+      const data = await response.json();
 
       {
-        /**Loop which filters the customers and their id's and pushes the objects to userArray and id's(type-number) to userIdArray*/
+        /**if condition used to convert the obtained data to array of customer object where each customer object has their array of orderobjects*/
       }
-      for (let each of data) {
-        if (userArray.length > 0) {
-          if (!userIdArray.includes(each.userId._id)) {
+      if (response.ok) {
+        const userArray = [];
+        const userIdArray = [];
+
+        {
+          /**Loop which filters the customers and their id's and pushes the objects to userArray and id's(type-number) to userIdArray*/
+        }
+        for (let each of data) {
+          if (userArray.length > 0) {
+            if (!userIdArray.includes(each.userId._id)) {
+              userIdArray.push(each.userId._id);
+              userArray.push({
+                name: each.userId.name,
+                mobileNumber: each.userId.mobileNumber,
+                address: each.address,
+                location: each.location,
+                _id: each.userId._id,
+                orders: [],
+              });
+            }
+          } else {
             userIdArray.push(each.userId._id);
             userArray.push({
               name: each.userId.name,
@@ -236,32 +258,30 @@ const Customers = () => {
               orders: [],
             });
           }
-        } else {
-          userIdArray.push(each.userId._id);
-          userArray.push({
-            name: each.userId.name,
-            mobileNumber: each.userId.mobileNumber,
-            address: each.address,
-            location: each.location,
-            _id: each.userId._id,
-            orders: [],
-          });
         }
-      }
 
-      {
-        /**for loop to push the orders as a object into the field named orders(which is an array) present inthe each customerobject in the userArray */
-      }
-      for (let e2 of userArray) {
-        for (let each2 of data) {
-          if (e2._id === each2.userId._id) {
-            e2.orders.push(each2);
+        {
+          /**for loop to push the orders as a object into the field named orders(which is an array) present inthe each customerobject in the userArray */
+        }
+        for (let e2 of userArray) {
+          for (let each2 of data) {
+            if (e2._id === each2.userId._id) {
+              e2.orders.push(each2);
+            }
           }
         }
-      }
 
-      setAllCustomers(userArray);
-      setLoadingSpinner(true);
+        setAllCustomers(userArray);
+        setLoadingSpinner(true);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -304,27 +324,39 @@ const Customers = () => {
 
   /**Same as filter Customer but is used to rerender the subsection while changing the action of an order*/
   const filterCustomer2 = async (id) => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllOrders`;
 
-    const adminToken = Cookies.get("jwt_adminLogin");
+      const adminToken = Cookies.get("jwt_adminLogin");
 
-    const reqConfigure = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${adminToken}`,
-      },
-    };
+      const reqConfigure = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
+        },
+      };
 
-    const response = await fetch(url, reqConfigure);
-    const data = await response.json();
+      const response = await fetch(url, reqConfigure);
+      const data = await response.json();
 
-    if (response.ok) {
-      const userArray = [];
-      const userIdArray = [];
+      if (response.ok) {
+        const userArray = [];
+        const userIdArray = [];
 
-      for (let each of data) {
-        if (userArray.length > 0) {
-          if (!userIdArray.includes(each.userId._id)) {
+        for (let each of data) {
+          if (userArray.length > 0) {
+            if (!userIdArray.includes(each.userId._id)) {
+              userIdArray.push(each.userId._id);
+              userArray.push({
+                name: each.userId.name,
+                mobileNumber: each.userId.mobileNumber,
+                address: each.address,
+                location: each.location,
+                _id: each.userId._id,
+                orders: [],
+              });
+            }
+          } else {
             userIdArray.push(each.userId._id);
             userArray.push({
               name: each.userId.name,
@@ -335,53 +367,53 @@ const Customers = () => {
               orders: [],
             });
           }
-        } else {
-          userIdArray.push(each.userId._id);
-          userArray.push({
-            name: each.userId.name,
-            mobileNumber: each.userId.mobileNumber,
-            address: each.address,
-            location: each.location,
-            _id: each.userId._id,
-            orders: [],
-          });
         }
-      }
 
-      for (let e2 of userArray) {
-        for (let each2 of data) {
-          if (e2._id === each2.userId._id) {
-            e2.orders.push(each2);
+        for (let e2 of userArray) {
+          for (let each2 of data) {
+            if (e2._id === each2.userId._id) {
+              e2.orders.push(each2);
+            }
           }
         }
-      }
 
-      let totalOrdersAmount = 0;
-      const selectedCustomerOrder = userArray.filter((each) => each._id === id);
-      setSelectedCustomer(selectedCustomerOrder);
-      selectedCustomerOrder[0].orders.map(
-        (each) =>
-          each.progress === "Completed" &&
-          (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
-      );
-      setUserId(selectedCustomerOrder[0]._id);
-      if (
-        parseInt(totalOrdersAmount) > 1000 &&
-        parseInt(totalOrdersAmount) < 100000
-      ) {
-        setTotal(`${parseInt(totalOrdersAmount) / 1000} K`);
-      } else if (
-        parseInt(totalOrdersAmount) > 100000 &&
-        parseInt(totalOrdersAmount) < 1000000
-      ) {
-        setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
-      } else if (parseInt(totalOrdersAmount) > 1000000) {
-        setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
-      } else {
-        setTotal(totalOrdersAmount);
+        let totalOrdersAmount = 0;
+        const selectedCustomerOrder = userArray.filter(
+          (each) => each._id === id
+        );
+        setSelectedCustomer(selectedCustomerOrder);
+        selectedCustomerOrder[0].orders.map(
+          (each) =>
+            each.progress === "Completed" &&
+            (totalOrdersAmount = totalOrdersAmount + each.totalAmount)
+        );
+        setUserId(selectedCustomerOrder[0]._id);
+        if (
+          parseInt(totalOrdersAmount) > 1000 &&
+          parseInt(totalOrdersAmount) < 100000
+        ) {
+          setTotal(`${parseInt(totalOrdersAmount) / 1000} K`);
+        } else if (
+          parseInt(totalOrdersAmount) > 100000 &&
+          parseInt(totalOrdersAmount) < 1000000
+        ) {
+          setTotal(`${parseInt(totalOrdersAmount) / 100000} L`);
+        } else if (parseInt(totalOrdersAmount) > 1000000) {
+          setTotal(`${parseInt(totalOrdersAmount) / 1000000} M`);
+        } else {
+          setTotal(totalOrdersAmount);
+        }
+        console.log(selectedCustomerOrder);
+        setSelectedOrders(selectedCustomerOrder[0].orders);
       }
-      console.log(selectedCustomerOrder);
-      setSelectedOrders(selectedCustomerOrder[0].orders);
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -392,31 +424,41 @@ const Customers = () => {
 
   /**Function to change the action a order(only one order at a time) */
   const settingProgress = async (e) => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/progressActive`;
 
-    let orderId = e.target.id;
-    let progress = e.target.value;
+      let orderId = e.target.id;
+      let progress = e.target.value;
 
-    const reqConfigure = {
-      method: "POST",
+      const reqConfigure = {
+        method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      body: JSON.stringify({ userId, orderId, progress }),
-    };
+        body: JSON.stringify({ userId, orderId, progress }),
+      };
 
-    const response = await fetch(url, reqConfigure);
+      const response = await fetch(url, reqConfigure);
 
-    if (response.ok) {
-      setAllCustomers([]);
-      setSelectedCustomer([]);
-      setSelectedOrders([]);
-      getAllCustomers();
-      setTimeout(() => {
-        filterCustomer2(userId);
-      }, 1000);
+      if (response.ok) {
+        setAllCustomers([]);
+        setSelectedCustomer([]);
+        setSelectedOrders([]);
+        getAllCustomers();
+        setTimeout(() => {
+          filterCustomer2(userId);
+        }, 1000);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 

@@ -27,20 +27,30 @@ const Coupons = () => {
   }, []);
 
   const getAllCoupons = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/getAllCoupon`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/getAllCoupon`;
 
-    const headers = {
-      Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-    };
+      const headers = {
+        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+      };
 
-    const response = await fetch(url, { headers });
+      const response = await fetch(url, { headers });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      console.log(data);
-      setCoupons(data.data);
-      setLoading(false);
+      if (response.ok) {
+        console.log(data);
+        setCoupons(data.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -48,38 +58,48 @@ const Coupons = () => {
     const [load, setLoad] = useState(true);
 
     const deleteCouponFun = async () => {
-      setLoad(false);
+      try {
+        setLoad(false);
 
-      const url = `${
-        process.env.REACT_APP_ROOT_URL
-      }/api/admin/coupon/deleteCoupon?couponId=${deleteCoupon}/${Cookies.get(
-        "jwt_adminId"
-      )}`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/coupon/deleteCoupon?couponId=${deleteCoupon}/${Cookies.get(
+          "jwt_adminId"
+        )}`;
 
-      const reqConfigure = {
-        method: "DELETE",
+        const reqConfigure = {
+          method: "DELETE",
 
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-        },
-      };
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+          },
+        };
 
-      const respone = await fetch(url, reqConfigure);
+        const respone = await fetch(url, reqConfigure);
 
-      if (respone.ok) {
-        toast.error("Coupon Deleted", {
-          position: "top-center",
+        if (respone.ok) {
+          toast.error("Coupon Deleted", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+
+          setTimeout(() => {
+            setDeleteCoupon("");
+            getAllCoupons();
+          }, 1000);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-
-        setTimeout(() => {
-          setDeleteCoupon("");
-          getAllCoupons();
-        }, 1000);
       }
     };
 
@@ -171,40 +191,50 @@ const Coupons = () => {
     });
 
     const addCouponFun = async () => {
-      setLoad(false);
-      const url = `${
-        process.env.REACT_APP_ROOT_URL
-      }/api/admin/addCoupon/${Cookies.get("jwt_adminId")}`;
+      try {
+        setLoad(false);
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/addCoupon/${Cookies.get("jwt_adminId")}`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-        },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+          },
 
-        body: JSON.stringify({
-          ...coupondetails,
-          couponCode: coupondetails.couponCode.toUpperCase(),
-        }),
-      };
+          body: JSON.stringify({
+            ...coupondetails,
+            couponCode: coupondetails.couponCode.toUpperCase(),
+          }),
+        };
 
-      const respone = await fetch(url, reqConfigure);
+        const respone = await fetch(url, reqConfigure);
 
-      if (respone.ok) {
-        toast.success("Coupon Added", {
-          position: "top-center",
+        if (respone.ok) {
+          toast.success("Coupon Added", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+
+          setTimeout(() => {
+            setAddCoupon(false);
+            getAllCoupons();
+          }, 1000);
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-
-        setTimeout(() => {
-          setAddCoupon(false);
-          getAllCoupons();
-        }, 1000);
       }
     };
 
@@ -339,31 +369,41 @@ const Coupons = () => {
   );
 
   const settingProgress = async (e) => {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const url = `${
-      process.env.REACT_APP_ROOT_URL
-    }/api/admin/coupon/changeStatus/${Cookies.get("jwt_adminId")}`;
+      const url = `${
+        process.env.REACT_APP_ROOT_URL
+      }/api/admin/coupon/changeStatus/${Cookies.get("jwt_adminId")}`;
 
-    const reqConfigure = {
-      method: "PUT",
+      const reqConfigure = {
+        method: "PUT",
 
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-      },
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+        },
 
-      body: JSON.stringify({
-        id: e.target.id,
-        status: e.target.value,
-      }),
-    };
+        body: JSON.stringify({
+          id: e.target.id,
+          status: e.target.value,
+        }),
+      };
 
-    const respone = await fetch(url, reqConfigure);
+      const respone = await fetch(url, reqConfigure);
 
-    if (respone.ok) {
-      getAllCoupons();
-      setLoading(false);
+      if (respone.ok) {
+        getAllCoupons();
+        setLoading(false);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 

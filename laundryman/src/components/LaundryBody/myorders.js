@@ -125,45 +125,55 @@ const MyOrders = () => {
           theme: "colored",
         });
       } else {
-        setfilterloadingItems(false);
-        setChangePickUpDate(false);
+        try {
+          setfilterloadingItems(false);
+          setChangePickUpDate(false);
 
-        let dateArray = selectedData.split("-");
-        let dateString = dateArray.reverse().join("-");
+          let dateArray = selectedData.split("-");
+          let dateString = dateArray.reverse().join("-");
 
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/user/changeOrderDate`;
+          const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/user/changeOrderDate`;
 
-        const user_JWT = Cookies.get("jwt_userToken");
-        const reqConfigure = {
-          method: "PUT",
+          const user_JWT = Cookies.get("jwt_userToken");
+          const reqConfigure = {
+            method: "PUT",
 
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user_JWT}`,
-          },
-          body: JSON.stringify({
-            orderId,
-            date: dateString,
-            time: selectedTime,
-          }),
-        };
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user_JWT}`,
+            },
+            body: JSON.stringify({
+              orderId,
+              date: dateString,
+              time: selectedTime,
+            }),
+          };
 
-        const res = await fetch(url, reqConfigure);
+          const res = await fetch(url, reqConfigure);
 
-        if (res.ok) {
-          toast.success(`Changed Pick Up Date`, {
-            position: "top-center",
+          if (res.ok) {
+            toast.success(`Changed Pick Up Date`, {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+            setTimeout(() => {
+              setSelectedTime("");
+              setChangePickUpDate(true);
+              setfilterItems([]);
+              window.location.reload();
+            }, 2000);
+          }
+        } catch (error) {
+          toast.error(`${error}`, {
             autoClose: 2000,
-            closeOnClick: true,
             pauseOnHover: true,
+            closeOnClick: true,
+            position: "top-center",
             theme: "colored",
           });
-          setTimeout(() => {
-            setSelectedTime("");
-            setChangePickUpDate(true);
-            setfilterItems([]);
-            window.location.reload();
-          }, 2000);
         }
       }
     };
@@ -1585,40 +1595,50 @@ const MyOrders = () => {
   };
 
   const getMyOrders = async () => {
-    const userId = Cookies.get("jwt_userId");
-    const userToken = Cookies.get("jwt_userToken");
+    try {
+      const userId = Cookies.get("jwt_userId");
+      const userToken = Cookies.get("jwt_userToken");
 
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getMyOrders/${userId}`;
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getMyOrders/${userId}`;
 
-    const options = {
-      method: "GET",
-      headers: { Authorization: `Bearer ${userToken}` },
-    };
+      const options = {
+        method: "GET",
+        headers: { Authorization: `Bearer ${userToken}` },
+      };
 
-    const response = await fetch(url, options);
+      const response = await fetch(url, options);
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      /*console.log(data.Orders.orders);*/
-      setLoad(false);
-      let orders = data.Orders.orders.sort(function (a, b) {
-        var datePartsA = a.date.split("-").map(Number); // Convert date strings to arrays of numbers
-        var datePartsB = b.date.split("-").map(Number);
+      if (response.ok) {
+        /*console.log(data.Orders.orders);*/
+        setLoad(false);
+        let orders = data.Orders.orders.sort(function (a, b) {
+          var datePartsA = a.date.split("-").map(Number); // Convert date strings to arrays of numbers
+          var datePartsB = b.date.split("-").map(Number);
 
-        // Compare the date parts (year, month, day) in descending order
-        if (datePartsA[2] < datePartsB[2]) return 1; // Compare years
-        if (datePartsA[2] > datePartsB[2]) return -1;
-        if (datePartsA[1] < datePartsB[1]) return 1; // Compare months
-        if (datePartsA[1] > datePartsB[1]) return -1;
-        if (datePartsA[0] < datePartsB[0]) return 1; // Compare days
-        if (datePartsA[0] > datePartsB[0]) return -1;
-        return 0;
+          // Compare the date parts (year, month, day) in descending order
+          if (datePartsA[2] < datePartsB[2]) return 1; // Compare years
+          if (datePartsA[2] > datePartsB[2]) return -1;
+          if (datePartsA[1] < datePartsB[1]) return 1; // Compare months
+          if (datePartsA[1] > datePartsB[1]) return -1;
+          if (datePartsA[0] < datePartsB[0]) return 1; // Compare days
+          if (datePartsA[0] > datePartsB[0]) return -1;
+          return 0;
+        });
+
+        setMyOrders(orders);
+      } else {
+        setLoad(false);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
       });
-
-      setMyOrders(orders);
-    } else {
-      setLoad(false);
     }
   };
 

@@ -28,25 +28,35 @@ const Services = () => {
 
   /** function to get all the category of clothes */
   const getTheCategories = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getAllCategories`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/user/getAllCategories`;
 
-    const response = await fetch(url);
+      const response = await fetch(url);
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      const obtainedData = data.data.map((each) => ({
-        ...each,
-        count: 0,
-        imgUrl: "/Men-shirt.png",
-      }));
+      if (response.ok) {
+        const obtainedData = data.data.map((each) => ({
+          ...each,
+          count: 0,
+          imgUrl: "/Men-shirt.png",
+        }));
 
-      let availableCategories = obtainedData.map((each) => each.category);
+        let availableCategories = obtainedData.map((each) => each.category);
 
-      setCategories([...new Set(availableCategories)]);
+        setCategories([...new Set(availableCategories)]);
 
-      console.log(obtainedData);
-      setClothesStore(obtainedData);
+        console.log(obtainedData);
+        setClothesStore(obtainedData);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -151,40 +161,50 @@ const Services = () => {
           theme: "colored",
         });
       } else {
-        let fd = new FormData();
+        try {
+          let fd = new FormData();
 
-        setLoad(false);
+          setLoad(false);
 
-        for (let each in toAddCategory) {
-          fd.append(`${each}`, toAddCategory[each]);
-        }
+          for (let each in toAddCategory) {
+            fd.append(`${each}`, toAddCategory[each]);
+          }
 
-        const url = `${
-          process.env.REACT_APP_ROOT_URL
-        }/api/admin/addItem/${Cookies.get("jwt_adminId")}`;
+          const url = `${
+            process.env.REACT_APP_ROOT_URL
+          }/api/admin/addItem/${Cookies.get("jwt_adminId")}`;
 
-        const reqConfigure = {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-          },
-          body: fd,
-        };
+          const reqConfigure = {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+            },
+            body: fd,
+          };
 
-        const respone = await fetch(url, reqConfigure);
+          const respone = await fetch(url, reqConfigure);
 
-        if (respone.ok) {
-          setClothesStore([]);
-          toast.success("Item Added", {
-            position: "top-center",
+          if (respone.ok) {
+            setClothesStore([]);
+            toast.success("Item Added", {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+            getTheCategories();
+
+            setAddModal("");
+          }
+        } catch (error) {
+          toast.error(`${error}`, {
             autoClose: 2000,
-            closeOnClick: true,
             pauseOnHover: true,
+            closeOnClick: true,
+            position: "top-center",
             theme: "colored",
           });
-          getTheCategories();
-
-          setAddModal("");
         }
       }
     };
@@ -437,61 +457,71 @@ const Services = () => {
         toAddCategory.washiron !== toEdit.washiron ||
         toAddCategory.image !== toEdit.image
       ) {
-        setLoad(false);
+        try {
+          setLoad(false);
 
-        let fd = new FormData();
+          let fd = new FormData();
 
-        if (toAddCategory.category !== toEdit.category) {
-          fd.append("category", toAddCategory.category);
-        }
-        if (toAddCategory.name !== toEdit.name) {
-          fd.append("name", toAddCategory.name);
-        }
+          if (toAddCategory.category !== toEdit.category) {
+            fd.append("category", toAddCategory.category);
+          }
+          if (toAddCategory.name !== toEdit.name) {
+            fd.append("name", toAddCategory.name);
+          }
 
-        if (toAddCategory.type !== toEdit.type) {
-          fd.append("type", toAddCategory.type);
-        }
+          if (toAddCategory.type !== toEdit.type) {
+            fd.append("type", toAddCategory.type);
+          }
 
-        if (toAddCategory.drycleaning !== toEdit.drycleaning) {
-          fd.append("drycleaning", toAddCategory.drycleaning);
-        }
-        if (toAddCategory.washfold !== toEdit.washfold) {
-          fd.append("washfold", toAddCategory.washfold);
-        }
-        if (toAddCategory.washfold !== toEdit.washfold) {
-          fd.append("washiron", toAddCategory.washiron);
-        }
+          if (toAddCategory.drycleaning !== toEdit.drycleaning) {
+            fd.append("drycleaning", toAddCategory.drycleaning);
+          }
+          if (toAddCategory.washfold !== toEdit.washfold) {
+            fd.append("washfold", toAddCategory.washfold);
+          }
+          if (toAddCategory.washfold !== toEdit.washfold) {
+            fd.append("washiron", toAddCategory.washiron);
+          }
 
-        if (toAddCategory.image !== toEdit.image) {
-          fd.append("image", toAddCategory.image);
-        }
+          if (toAddCategory.image !== toEdit.image) {
+            fd.append("image", toAddCategory.image);
+          }
 
-        const url = `${
-          process.env.REACT_APP_ROOT_URL
-        }/api/admin/editItem/${showModalEdit}/${Cookies.get("jwt_adminId")}`;
+          const url = `${
+            process.env.REACT_APP_ROOT_URL
+          }/api/admin/editItem/${showModalEdit}/${Cookies.get("jwt_adminId")}`;
 
-        const reqConfigure = {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-          },
-          body: fd,
-        };
+          const reqConfigure = {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+            },
+            body: fd,
+          };
 
-        const response = await fetch(url, reqConfigure);
+          const response = await fetch(url, reqConfigure);
 
-        if (response.ok) {
-          setClothesStore([]);
-          toast.success("Item Edited", {
-            position: "top-center",
+          if (response.ok) {
+            setClothesStore([]);
+            toast.success("Item Edited", {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+            getTheCategories();
+
+            setEditModal("");
+          }
+        } catch (error) {
+          toast.error(`${error}`, {
             autoClose: 2000,
-            closeOnClick: true,
             pauseOnHover: true,
+            closeOnClick: true,
+            position: "top-center",
             theme: "colored",
           });
-          getTheCategories();
-
-          setEditModal("");
         }
       } else {
         toast.error("No Changes Made", {

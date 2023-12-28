@@ -52,21 +52,31 @@ const Driver = () => {
 
   /**Function to get all the vendor and set vendor to allVendors state */
   const getAllDrivers = async () => {
-    const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllDrivers`;
+    try {
+      const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/getAllDrivers`;
 
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-    };
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+      };
 
-    const response = await fetch(url, { headers });
+      const response = await fetch(url, { headers });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      console.log(data);
-      setVendors(data.data);
-      setLoad(false);
+      if (response.ok) {
+        console.log(data);
+        setVendors(data.data);
+        setLoad(false);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
@@ -124,42 +134,52 @@ const Driver = () => {
           theme: "colored",
         });
       } else {
-        setLoad(true);
-        const url = `${
-          process.env.REACT_APP_ROOT_URL
-        }/api/admin/addDriver/${Cookies.get("jwt_adminId")}`;
+        try {
+          setLoad(true);
+          const url = `${
+            process.env.REACT_APP_ROOT_URL
+          }/api/admin/addDriver/${Cookies.get("jwt_adminId")}`;
 
-        const reqConfigure = {
-          method: "POST",
+          const reqConfigure = {
+            method: "POST",
 
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-          },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+            },
 
-          body: JSON.stringify({
-            name: newUser,
-            mobileNumber: value.substring(3),
-            email: email,
-            address: address,
-          }),
-        };
+            body: JSON.stringify({
+              name: newUser,
+              mobileNumber: value.substring(3),
+              email: email,
+              address: address,
+            }),
+          };
 
-        const res = await fetch(url, reqConfigure);
+          const res = await fetch(url, reqConfigure);
 
-        if (res.ok) {
-          toast.success("Added", {
-            position: "top-center",
+          if (res.ok) {
+            toast.success("Added", {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+            setTimeout(() => {
+              setLoad(false);
+              setAddVendor(false);
+              getAllDrivers();
+            }, 1000);
+          }
+        } catch (error) {
+          toast.error(`${error}`, {
             autoClose: 2000,
-            closeOnClick: true,
             pauseOnHover: true,
+            closeOnClick: true,
+            position: "top-center",
             theme: "colored",
           });
-          setTimeout(() => {
-            setLoad(false);
-            setAddVendor(false);
-            getAllDrivers();
-          }, 1000);
         }
       }
     };

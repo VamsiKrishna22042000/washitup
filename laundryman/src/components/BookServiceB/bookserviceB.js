@@ -438,59 +438,69 @@ const BookServiceB = (props) => {
         theme: "colored",
       });
     } else {
-      setOtpVerification({ ...otpVerification, otpLoad: true });
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpSignup`;
+      try {
+        setOtpVerification({ ...otpVerification, otpLoad: true });
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/otpSignup`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({ mobileNumber: input.number }),
-      };
+          body: JSON.stringify({ mobileNumber: input.number }),
+        };
 
-      const response = await fetch(url, reqConfigure);
+        const response = await fetch(url, reqConfigure);
 
-      const data = await response.json();
-      if (response.ok) {
-        setOtpVerification({
-          ...otpVerification,
-          otpSent: true,
-          otpLoad: false,
-        });
-        toast.success("OTP Sent", {
-          position: "top-center",
+        const data = await response.json();
+        if (response.ok) {
+          setOtpVerification({
+            ...otpVerification,
+            otpSent: true,
+            otpLoad: false,
+          });
+          toast.success("OTP Sent", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        } else {
+          setOtpVerification({
+            ...otpVerification,
+            otpLoad: false,
+          });
+
+          if (data.message === "User already registered!") {
+            toast.success(`Verified You are already registerd`, {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+            setOtp(true);
+          } else {
+            toast.error(`${data.message}`, {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+          }
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
           theme: "colored",
         });
-      } else {
-        setOtpVerification({
-          ...otpVerification,
-          otpLoad: false,
-        });
-
-        if (data.message === "User already registered!") {
-          toast.success(`Verified You are already registerd`, {
-            position: "top-center",
-            autoClose: 2000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            theme: "colored",
-          });
-          setOtp(true);
-        } else {
-          toast.error(`${data.message}`, {
-            position: "top-center",
-            autoClose: 2000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            theme: "colored",
-          });
-        }
       }
     }
   };
@@ -505,74 +515,84 @@ const BookServiceB = (props) => {
         theme: "colored",
       });
     } else {
-      setOtpVerification({ ...otpVerification, otpLoad: true });
-      const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifySignup`;
+      try {
+        setOtpVerification({ ...otpVerification, otpLoad: true });
+        const url = `${process.env.REACT_APP_ROOT_URL}/api/otp/verifySignup`;
 
-      const reqConfigure = {
-        method: "POST",
+        const reqConfigure = {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          mobileNumber: parseInt(input.number),
-          name: input.name,
-          otp: parseInt(otpVerification.otpNumber),
-        }),
-      };
+          body: JSON.stringify({
+            mobileNumber: parseInt(input.number),
+            name: input.name,
+            otp: parseInt(otpVerification.otpNumber),
+          }),
+        };
 
-      const response = await fetch(url, reqConfigure);
+        const response = await fetch(url, reqConfigure);
 
-      const data = await response.json();
-      if (response.ok) {
-        Cookies.set("jwt_userToken", data.token, { expires: 30 });
-        Cookies.set("jwt_userId", data.data._id, { expires: 30 });
-        // Cookies.set("jwt_adminLogin", data.data.isAdmin, {
-        //   expires: 30,
-        // });
-        Cookies.set("jwt_userName", data.data.name, {
-          expires: 30,
-        });
-        Cookies.set("jwt_mobileNumber", data.data.mobileNumber, {
-          expires: 30,
-        });
-        data.data.location !== undefined &&
-          Cookies.set("jwt_location", data.data.location, {
+        const data = await response.json();
+        if (response.ok) {
+          Cookies.set("jwt_userToken", data.token, { expires: 30 });
+          Cookies.set("jwt_userId", data.data._id, { expires: 30 });
+          // Cookies.set("jwt_adminLogin", data.data.isAdmin, {
+          //   expires: 30,
+          // });
+          Cookies.set("jwt_userName", data.data.name, {
             expires: 30,
           });
-        data.data.address !== undefined &&
-          Cookies.set("jwt_dono", data.data.address.dono, {
+          Cookies.set("jwt_mobileNumber", data.data.mobileNumber, {
             expires: 30,
           });
-        data.data.address !== undefined &&
-          Cookies.set("jwt_landmark", data.data.address.landmark, {
-            expires: 30,
+          data.data.location !== undefined &&
+            Cookies.set("jwt_location", data.data.location, {
+              expires: 30,
+            });
+          data.data.address !== undefined &&
+            Cookies.set("jwt_dono", data.data.address.dono, {
+              expires: 30,
+            });
+          data.data.address !== undefined &&
+            Cookies.set("jwt_landmark", data.data.address.landmark, {
+              expires: 30,
+            });
+          setOtpVerification({
+            ...otpVerification,
+            otpSent: false,
+            otpLoad: false,
           });
-        setOtpVerification({
-          ...otpVerification,
-          otpSent: false,
-          otpLoad: false,
-        });
-        setOtp(true);
-        toast.success("Verified", {
-          position: "top-center",
+          setOtp(true);
+          toast.success("Verified", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        } else {
+          setOtpVerification({
+            ...otpVerification,
+            otpNumber: "",
+            otpLoad: false,
+          });
+          toast.error("Enter Valid OTP", {
+            position: "top-center",
+            autoClose: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "colored",
+          });
+        }
+      } catch (error) {
+        toast.error(`${error}`, {
           autoClose: 2000,
-          closeOnClick: true,
           pauseOnHover: true,
-          theme: "colored",
-        });
-      } else {
-        setOtpVerification({
-          ...otpVerification,
-          otpNumber: "",
-          otpLoad: false,
-        });
-        toast.error("Enter Valid OTP", {
+          closeOnClick: true,
           position: "top-center",
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
           theme: "colored",
         });
       }
