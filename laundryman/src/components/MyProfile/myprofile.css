@@ -141,7 +141,7 @@
 }
 
 .log-out {
-  margin-left: 25%;
+  margin-left: 18%;
   font-family: "Poppins", sans-serif;
   border: 0;
   background-color: #6759ff;
@@ -149,6 +149,8 @@
   border-radius: 0.25rem;
   cursor: pointer;
   border: 1px solid #6759ff;
+  padding: 2% 8%;
+  font-size: 0.8rem;
 }
 
 .log-out:hover {
@@ -253,7 +255,7 @@
 
 .addAddress-Modal > button {
   position: absolute;
-  bottom: 5%;
+  bottom: 6%;
   right: 5%;
   background-color: #6759ff;
   border: 0;
@@ -266,7 +268,7 @@
 
 .address-subsection {
   font-family: "Poppins", sans-serif;
-  height: 62.5%;
+  height: 62%;
   width: 35%;
   position: relative;
   border-radius: 0.5rem;
@@ -274,6 +276,10 @@
   padding: 2%;
   margin-top: 2.5%;
   margin-bottom: 2.5%;
+}
+
+.address-subsection input {
+  width: 85%;
 }
 
 .address-subsection > div {
@@ -286,7 +292,6 @@
 }
 
 .address-subsection > div > img {
-  height: 15%;
   width: 8%;
   margin-bottom: 3%;
   align-self: center;
@@ -432,17 +437,17 @@
   position: absolute;
   background-color: #ffffff;
   z-index: 5;
-  height: 80%;
+  height: 70%;
   width: 30%;
   left: 35%;
-  top: 8%;
+  top: 10%;
   border-radius: 0.5rem;
   box-shadow: 1px 1px 5px #222222;
   padding: 1.5%;
 }
 
 .addAddress-Modal > form {
-  height: 80%;
+  height: 90%;
   margin-top: 5%;
   display: flex;
   flex-direction: column;
@@ -527,9 +532,11 @@
   background-color: #ffffff;
 }
 
+@media screen and (max-width: 600px) {
+}
+
 @media screen and (max-width: 1025px) and (orientation: portrait) {
   .profile-tabs {
-    border: 2px solid red;
     width: 30%;
     justify-content: space-around;
   }
@@ -553,5 +560,119 @@
 
   .log-out {
     font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 1365px) and (orientation: landscape) {
+  .address-subsection {
+    height: 35%;
+  }
+
+  .not-selected {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .profile-tabs {
+    justify-content: space-around;
+  }
+
+  .selected {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .addAddress-Modal {
+    top: 25%;
+    height: 45%;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1367px) and (orientation: portrait) {
+  .address-profile {
+    padding-top: 3%;
+  }
+  .address-subsection {
+    height: 20%;
+    width: 40%;
+  }
+
+  .addAddress-Modal {
+    top: 30%;
+    height: 30%;
+    width: 40%;
+  }
+
+  .profile-tabs {
+    width: 35%;
+    justify-content: flex-start;
+  }
+
+  .tabs {
+    margin-top: 25%;
+    height: 50%;
+  }
+
+  .address-profile {
+    padding: 0%;
+    height: 95%;
+    margin-top: 5%;
+  }
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .address-subsection {
+    height: 45%;
+    width: 45%;
+    padding: 3%;
+  }
+  .profile-tabs {
+    justify-content: flex-start;
+  }
+  .tabs {
+    width: 100%;
+    margin-top: 25%;
+    height: 50%;
+  }
+}
+
+@media screen and (max-width: 1023px) and (orientation: portrait) {
+  .profile-tabs {
+    justify-content: flex-start;
+    width: 30%;
+  }
+  .not-selected {
+    font-size: 0.8rem;
+  }
+
+  .selected {
+    font-size: 0.8rem;
+  }
+  .address-profile {
+    margin-top: 5%;
+  }
+
+  .address-subsection {
+    height: 25%;
+    width: 45%;
+  }
+
+  .address-subsection input {
+    font-size: 0.6rem;
+  }
+
+  .tabs {
+    height: 50%;
+    margin-top: 25%;
+  }
+
+  .profile-details {
+    height: 95%;
+    padding: 1%;
+    padding-top: 5%;
+  }
+
+  .log-out {
+    font-size: 0.7rem;
   }
 }

@@ -245,6 +245,20 @@ function LaundryNavB() {
             )}
           </div>
         )}
+        {showNavBar && (
+          <div
+            onClick={navcontentshamberger}
+            style={{
+              position: "fixed",
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: "#22222250",
+              zIndex: 4,
+            }}
+          ></div>
+        )}
         <div className="hamburger-icon">
           <svg
             onClick={navcontentshamberger}

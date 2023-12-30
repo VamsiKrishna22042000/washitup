@@ -217,13 +217,18 @@
 
   .nav-bar-contents-mobile p {
     font-size: 1rem;
-    padding: 2%;
+    padding: 0%;
     margin-left: 5%;
     width: 100%;
+    width: 25%;
+  }
+
+  .nav-bar-contents-mobile p:active {
+    color: #6759ff;
   }
 
   .nav-bar-contents-mobile {
-    height: 80%;
+    height: 65%;
     width: 100%;
     position: fixed !important;
     display: flex;
@@ -232,7 +237,7 @@
     align-items: flex-start;
     margin-top: 40%;
     background-color: #b8dde3;
-    z-index: 2;
+    z-index: 5;
     padding-top: 18%;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -292,7 +297,10 @@
   .cross-mark-nav-bar {
     position: absolute;
     right: 5%;
-    bottom: 7.5%;
+    bottom: 7%;
+    border: 0 !important;
+    background-color: transparent !important;
+    color: #6759ff !important;
   }
 }
 

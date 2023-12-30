@@ -10,13 +10,13 @@ import { AiFillTwitterCircle } from "react-icons/ai";
 import Profile from "./profile.js";
 import Address from "./address.js";
 
-import Refer from "./referfriend.js";
+import ProfileOrders from "./profileorders.js";
 
-import MyOrders from "../LaundryBody/myorders.js";
+import Refer from "./referfriend.js";
 
 import Cookies from "js-cookie";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const tabsections = {
   profileDetails: "PROFILE DETAILS",
@@ -192,6 +192,20 @@ const MyProfile = () => {
               )}
             </div>
           )}
+          {showNavBar && (
+            <div
+              onClick={navcontentshamberger}
+              style={{
+                position: "fixed",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                backgroundColor: "#22222250",
+                zIndex: 4,
+              }}
+            ></div>
+          )}
           <div className="hamburger-icon">
             <svg
               onClick={navcontentshamberger}
@@ -310,7 +324,7 @@ const MyProfile = () => {
             {selected === tabsections.profileDetails && <Profile />}
             {selected === tabsections.myaddress && <Address />}
             {selected === tabsections.referfriend && <Refer />}
-            {selected === tabsections.myorders && <MyOrders />}
+            {selected === tabsections.myorders && <ProfileOrders />}
           </div>
         </div>
         <img className="star1" src="Star 1.png" alt="star1" />

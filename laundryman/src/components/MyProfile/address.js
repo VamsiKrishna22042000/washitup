@@ -91,69 +91,83 @@ const Address = () => {
     };
 
     return (
-      <div className="addAddress-Modal">
-        <button
-          onClick={() => {
-            setAddAddress({
-              ...addAddress,
-              userId: "",
-            });
+      <>
+        <div
+          style={{
+            backgroundColor: "#22222250",
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 1,
+            borderRadius: ".5rem",
           }}
-          type="button"
-        >
-          Cancel
-        </button>
-        <h4>Add New Address</h4>
-
-        <form onSubmit={submitForm}>
-          <label htmlFor="location">Location</label>
-          <input
-            value={addAddress.location}
-            onChange={(e) => {
-              setAddAddress((prevValue) => ({
-                ...prevValue,
-                location: e.target.value,
-              }));
-              setFocus("location");
-            }}
-            placeholder="Please Enter Location"
-            id="location"
-            type="text"
-            autoFocus={whatTofocus === "location" ? true : false}
-          />
-          <label htmlFor="dono">Do No / Flat No</label>
-          <input
-            value={addAddress.address.dono}
-            onChange={(e) => {
-              setAddAddress((prevValue) => ({
-                ...prevValue,
-                address: { ...addAddress.address, dono: e.target.value },
-              }));
-              setFocus("dono");
-            }}
-            placeholder="Please Enter Do No"
-            id="dono"
-            type="text"
-            autoFocus={whatTofocus === "dono" ? true : false}
-          />
-          <label htmlFor="landmark">Landmark</label>
-          <input
-            value={addAddress.address.landmark}
-            onChange={(e) => {
+        ></div>
+        <div className="addAddress-Modal">
+          <button
+            onClick={() => {
               setAddAddress({
                 ...addAddress,
-                address: { ...addAddress.address, landmark: e.target.value },
+                userId: "",
               });
-              setFocus("landmark");
             }}
-            placeholder="Please Enter Landmark"
-            id="landmark"
-            type="text"
-            autoFocus={whatTofocus === "landmark" ? true : false}
-          />
-          <button type="submit">Done</button>
-        </form>
-      </div>
+            type="button"
+          >
+            Cancel
+          </button>
+          <h4>Add New Address</h4>
+
+          <form onSubmit={submitForm}>
+            <label htmlFor="location">Location</label>
+            <input
+              value={addAddress.location}
+              onChange={(e) => {
+                setAddAddress((prevValue) => ({
+                  ...prevValue,
+                  location: e.target.value,
+                }));
+                setFocus("location");
+              }}
+              placeholder="Please Enter Location"
+              id="location"
+              type="text"
+              autoFocus={whatTofocus === "location" ? true : false}
+            />
+            <label htmlFor="dono">Do No / Flat No</label>
+            <input
+              value={addAddress.address.dono}
+              onChange={(e) => {
+                setAddAddress((prevValue) => ({
+                  ...prevValue,
+                  address: { ...addAddress.address, dono: e.target.value },
+                }));
+                setFocus("dono");
+              }}
+              placeholder="Please Enter Do No"
+              id="dono"
+              type="text"
+              autoFocus={whatTofocus === "dono" ? true : false}
+            />
+            <label htmlFor="landmark">Landmark</label>
+            <input
+              value={addAddress.address.landmark}
+              onChange={(e) => {
+                setAddAddress({
+                  ...addAddress,
+                  address: { ...addAddress.address, landmark: e.target.value },
+                });
+                setFocus("landmark");
+              }}
+              placeholder="Please Enter Landmark"
+              id="landmark"
+              type="text"
+              autoFocus={whatTofocus === "landmark" ? true : false}
+            />
+            <button type="submit">Done</button>
+          </form>
+        </div>
+      </>
     );
   };
 

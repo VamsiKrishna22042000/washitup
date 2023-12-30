@@ -61,13 +61,18 @@ const Coupons = () => {
       try {
         setLoad(false);
 
-        const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/coupon/deleteCoupon?couponId=${deleteCoupon}`;
+        const url = `${
+          process.env.REACT_APP_ROOT_URL
+        }/api/admin/coupon/deleteCoupon/${deleteCoupon}/${Cookies.get(
+          "jwt_adminId"
+        )}`;
 
         const reqConfigure = {
           method: "DELETE",
 
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
           },
         };
 
