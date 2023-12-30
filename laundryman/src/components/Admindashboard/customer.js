@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 
 import { useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
@@ -23,7 +23,7 @@ const AddCustomerModel = (props) => {
   const [newUser, setNewUser] = useState("");
 
   /**State which stores the mobile number entered*/
-  const [value, setValue] = useState();
+  const [val, setValue] = useState();
   const [load, setLoad] = useState(false);
 
   /**Function to make api call to add a new user*/
@@ -36,7 +36,7 @@ const AddCustomerModel = (props) => {
         pauseOnHover: true,
         theme: "colored",
       });
-    } else if (value === "") {
+    } else if (val === "") {
       toast.error("Please Enter Customer Number", {
         position: "top-center",
         autoClose: 2000,
@@ -59,7 +59,7 @@ const AddCustomerModel = (props) => {
             Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
           },
 
-          body: JSON.stringify({ name: newUser, mobileNumber: value }),
+          body: JSON.stringify({ name: newUser, mobileNumber: val }),
         };
 
         const res = await fetch(url, reqConfigure);
@@ -142,8 +142,16 @@ const AddCustomerModel = (props) => {
           className="add-customer-input-box"
           placeholder="Enter Phone number"
           defaultCountry="IN"
-          value={value}
+          value={val}
           onChange={setValue}
+          limitMaxLength
+          error={
+            val
+              ? isValidPhoneNumber(val)
+                ? undefined
+                : "Invalid phone number"
+              : "Phone number required"
+          }
         />
         {/**Button call's add user function to make an api call and add a new customer*/}
         <button onClick={addUser} className="add-cutomer-button" type="button">

@@ -2984,8 +2984,9 @@ const Orders = () => {
                     width: "90%",
                   }}
                 >
-                  {selectedCustomer[0].address.dono} -{" "}
+                  {selectedCustomer[0].address.dono} -
                   {selectedCustomer[0].address.landmark}
+                  {selectedCustomer[0].location}
                 </p>
               </div>
               <div style={{ position: "relative" }} className="summary-view">

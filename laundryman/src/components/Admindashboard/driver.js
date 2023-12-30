@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 
 import { FaCalendarAlt } from "react-icons/fa";
 
@@ -238,6 +238,14 @@ const Driver = () => {
             defaultCountry="IN"
             value={value}
             onChange={setValue}
+            limitMaxLength
+            error={
+              value
+                ? isValidPhoneNumber(value)
+                  ? undefined
+                  : "Invalid phone number"
+                : "Phone number required"
+            }
           />
           <p className="add-customer-titles">Driver Email</p>
           <input

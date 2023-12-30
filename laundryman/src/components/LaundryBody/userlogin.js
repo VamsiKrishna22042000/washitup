@@ -357,6 +357,7 @@ const UserLogin = () => {
                     type="tel"
                     placeholder="Enter OTP"
                     autoFocus
+                    maxLength={4}
                     inputMode="numeric"
                     pattern="[0-9]*"
                     onChange={(e) => {
@@ -495,6 +496,7 @@ const UserLogin = () => {
                       isValidInput === true && setOtp(e.target.value);
                       setOtp(e.target.value);
                     }}
+                    maxLength={4}
                   />
                 ) : (
                   <>
@@ -516,6 +518,7 @@ const UserLogin = () => {
                         className="login-input"
                         type="tel"
                         placeholder="Enter Mobile Number"
+                        maxLength={4}
                       />
                     </div>
                   </>

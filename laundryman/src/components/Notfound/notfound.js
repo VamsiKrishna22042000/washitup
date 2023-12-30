@@ -20,6 +20,12 @@ const Notfound = () => {
         }}
         className="error-button"
         type="button"
+        style={{
+          marginTop: "1%",
+          borderRadius: ".25rem",
+          padding: "1% 3%",
+          cursor: "pointer",
+        }}
       >
         Go To HomePage
       </button>

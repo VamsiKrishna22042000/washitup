@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 
 import { FaCalendarAlt } from "react-icons/fa";
 
@@ -273,6 +273,14 @@ const Vendors = () => {
               defaultCountry="IN"
               value={val}
               onChange={setValue}
+              limitMaxLength
+              error={
+                val
+                  ? isValidPhoneNumber(val)
+                    ? undefined
+                    : "Invalid phone number"
+                  : "Phone number required"
+              }
             />
             <p style={{ marginTop: "3vh" }} className="add-customer-titles2">
               Vendor Email
@@ -342,7 +350,15 @@ const Vendors = () => {
               placeholder="Enter Secondary Phone number"
               defaultCountry="IN"
               value={value2}
+              limitMaxLength
               onChange={setValue2}
+              error={
+                value2
+                  ? isValidPhoneNumber(value2)
+                    ? undefined
+                    : "Invalid phone number"
+                  : "Phone number required"
+              }
             />
             <p className="add-customer-titles2">Location</p>
             <input

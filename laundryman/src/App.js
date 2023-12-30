@@ -41,7 +41,7 @@ function App() {
       window.removeEventListener("online", handleOnlineStatusChange);
       window.removeEventListener("offline", handleOnlineStatusChange);
     };
-  }, []);
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -55,6 +55,44 @@ function App() {
         );
     }, 300);
   });
+
+  useEffect(() => {
+    const handleInput = function () {
+      let inputValue = this.value;
+
+      // Remove non-digit characters
+      inputValue = inputValue.replace(/\D/g, "");
+
+      // Ensure the number is positive
+      inputValue = Math.max(0, parseInt(inputValue, 10));
+
+      // Limit the length to 12
+      inputValue = inputValue.toString().slice(0, 12);
+
+      // Update the input value
+      this.value = inputValue;
+    };
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const numberAndTelInputs = document.querySelectorAll(
+        'input[type="number"], input[type="tel"]'
+      );
+
+      numberAndTelInputs.forEach((input) => {
+        input.addEventListener("input", handleInput);
+      });
+    });
+
+    // Cleanup the event listeners when the component unmounts
+    return () => {
+      const numberAndTelInputs = document.querySelectorAll(
+        'input[type="number"], input[type="tel"]'
+      );
+      numberAndTelInputs.forEach((input) => {
+        input.removeEventListener("input", handleInput);
+      });
+    };
+  }); // Empty dependency array means this effect runs once on mount and cleans up on unmount
 
   return (
     <BrowserRouter>

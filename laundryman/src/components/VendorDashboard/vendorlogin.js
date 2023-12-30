@@ -173,6 +173,7 @@ const VendorLogin = () => {
                   className="login-input2"
                   type="tel"
                   placeholder="Enter OTP"
+                  maxLength={4}
                   autoFocus
                   inputMode="numeric"
                   onChange={(e) => {
@@ -207,6 +208,7 @@ const VendorLogin = () => {
                       className="login-input"
                       type="tel"
                       placeholder="Enter Mobile Number"
+                      maxLength={4}
                     />
                   </div>
                 </>
