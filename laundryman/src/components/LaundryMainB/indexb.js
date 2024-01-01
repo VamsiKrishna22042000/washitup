@@ -181,6 +181,7 @@ function LaundryNavB() {
               ✖
             </button>
             <img
+              style={{ visibility: "hidden" }}
               onClick={() => {
                 window.location.href = "/";
               }}
