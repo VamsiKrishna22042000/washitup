@@ -395,6 +395,7 @@ const UserLogin = () => {
                         }}
                         className="login-input"
                         type="number"
+                        maxLength={10}
                         placeholder="Enter Mobile Number"
                       />
                     </div>
@@ -518,7 +519,7 @@ const UserLogin = () => {
                         className="login-input"
                         type="tel"
                         placeholder="Enter Mobile Number"
-                        maxLength={4}
+                        maxLength={10}
                       />
                     </div>
                   </>

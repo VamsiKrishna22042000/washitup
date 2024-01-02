@@ -208,7 +208,7 @@ const VendorLogin = () => {
                       className="login-input"
                       type="tel"
                       placeholder="Enter Mobile Number"
-                      maxLength={4}
+                      maxLength={10}
                     />
                   </div>
                 </>

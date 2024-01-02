@@ -48,3 +48,26 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: rotate(360deg);
   }
 }
+
+#root {
+  position: relative;
+}
+
+#root-image {
+  display: inline-flex;
+  position: fixed;
+  height: 30px;
+  width: 30px;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  transform: translate(50%, 50%);
+  border-radius: 50%;
+  transition: all linear 1s;
+}
+
+@media screen and (max-width: 600px) {
+  #root-image {
+    display: none;
+  }
+}
