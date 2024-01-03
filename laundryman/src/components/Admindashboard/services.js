@@ -66,6 +66,7 @@ const Services = () => {
     const [toAddCategory, setCategory] = useState({
       category: "Select",
       name: "",
+      type: "",
       drycleaning: "",
       washfold: "",
       washiron: "",
@@ -77,24 +78,60 @@ const Services = () => {
       if (e.target.id === "category") {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
       } else if (e.target.id === "item") {
-        setCategory((prevData) => ({ ...prevData, name: e.target.value }));
+        const inputVale = e.target.value;
+
+        const isTextOnly = /^[a-zA-Z\s]*$/.test(inputVale);
+        console.log(isTextOnly);
+
+        if (isTextOnly === true) {
+          console.log("hi");
+          setCategory((prevData) => ({ ...prevData, name: e.target.value }));
+        }
       } else if (e.target.id === "type") {
-        setCategory((prevData) => ({ ...prevData, type: e.target.value }));
+        const inputValu = e.target.value;
+
+        const isText = /^[a-zA-Z\s]*$/.test(inputValu);
+        console.log(isText);
+
+        if (isText === true) {
+          setCategory((prevData) => ({ ...prevData, type: e.target.value }));
+        }
       } else if (e.target.id === "drycleaning") {
-        setCategory((prevData) => ({
-          ...prevData,
-          drycleaning: e.target.value,
-        }));
+        const inputalue = e.target.value;
+
+        // Regular expression to check if the input contains only numeric characters
+        const isNumeric = /^[0-9]*$/.test(inputalue);
+
+        if (isNumeric) {
+          setCategory((prevData) => ({
+            ...prevData,
+            drycleaning: parseInt(e.target.value),
+          }));
+        }
       } else if (e.target.id === "washfold") {
-        setCategory((prevData) => ({
-          ...prevData,
-          washfold: e.target.value,
-        }));
+        const inputVlue = e.target.value;
+
+        // Regular expression to check if the input contains only numeric characters
+        const isNumeri = /^[0-9]*$/.test(inputVlue);
+
+        if (isNumeri) {
+          setCategory((prevData) => ({
+            ...prevData,
+            washfold: parseInt(e.target.value),
+          }));
+        }
       } else if (e.target.id === "washiron") {
-        setCategory((prevData) => ({
-          ...prevData,
-          washiron: e.target.value,
-        }));
+        const inptValue = e.target.value;
+
+        // Regular expression to check if the input contains only numeric characters
+        const isNume = /^[0-9]*$/.test(inptValue);
+
+        if (isNume) {
+          setCategory((prevData) => ({
+            ...prevData,
+            washiron: parseInt(e.target.value),
+          }));
+        }
       } else if (e.target.id === "image") {
         setCategory((prevData) => ({ ...prevData, image: e.target.files[0] }));
       }
@@ -252,6 +289,7 @@ const Services = () => {
               Select Category
             </p>
             <select
+              value={toAddCategory.category}
               id="category"
               onChange={addCategory}
               style={{
@@ -274,6 +312,7 @@ const Services = () => {
               Item Name
             </p>
             <input
+              value={toAddCategory.name}
               style={{ marginTop: "2%", marginBottom: "2%" }}
               id="item"
               onChange={addCategory}
@@ -288,6 +327,7 @@ const Services = () => {
               Type
             </p>
             <input
+              value={toAddCategory.type}
               style={{
                 marginTop: "2%",
                 marginBottom: "2%",
@@ -423,24 +463,57 @@ const Services = () => {
       if (e.target.id === "category") {
         setCategory((prevData) => ({ ...prevData, category: e.target.value }));
       } else if (e.target.id === "item") {
-        setCategory((prevData) => ({ ...prevData, name: e.target.value }));
+        const inputValue = e.target.value;
+
+        const isTextOnly = /^[a-zA-Z\s]*$/.test(inputValue);
+
+        if (isTextOnly === true) {
+          setCategory((prevData) => ({ ...prevData, name: e.target.value }));
+        }
       } else if (e.target.id === "type") {
-        setCategory((prevData) => ({ ...prevData, type: e.target.value }));
+        const inputValue = e.target.value;
+
+        const isText = /^[a-zA-Z\s]*$/.test(inputValue);
+
+        if (isText === true) {
+          setCategory((prevData) => ({ ...prevData, type: e.target.value }));
+        }
       } else if (e.target.id === "drycleaning") {
-        setCategory((prevData) => ({
-          ...prevData,
-          drycleaning: parseInt(e.target.value),
-        }));
+        const inputValue = e.target.value;
+
+        // Regular expression to check if the input contains only numeric characters
+        const isNumeric = /^[0-9]*$/.test(inputValue);
+
+        if (isNumeric) {
+          setCategory((prevData) => ({
+            ...prevData,
+            drycleaning: parseInt(e.target.value),
+          }));
+        }
       } else if (e.target.id === "washfold") {
-        setCategory((prevData) => ({
-          ...prevData,
-          washfold: parseInt(e.target.value),
-        }));
+        const inputValue = e.target.value;
+
+        // Regular expression to check if the input contains only numeric characters
+        const isNumeri = /^[0-9]*$/.test(inputValue);
+
+        if (isNumeri) {
+          setCategory((prevData) => ({
+            ...prevData,
+            washfold: parseInt(e.target.value),
+          }));
+        }
       } else if (e.target.id === "washiron") {
-        setCategory((prevData) => ({
-          ...prevData,
-          washiron: parseInt(e.target.value),
-        }));
+        const inputValue = e.target.value;
+
+        // Regular expression to check if the input contains only numeric characters
+        const isNume = /^[0-9]*$/.test(inputValue);
+
+        if (isNume) {
+          setCategory((prevData) => ({
+            ...prevData,
+            washiron: parseInt(e.target.value),
+          }));
+        }
       } else if (e.target.id === "image") {
         setCategory((prevData) => ({ ...prevData, image: e.target.files[0] }));
       }
@@ -786,7 +859,6 @@ const Services = () => {
             </p>
           </div>
         </div>
-
         <div className="order-summary-body">
           <div className="order-body-header">
             <h6 style={{ margin: 0 }}>List Of Items</h6>

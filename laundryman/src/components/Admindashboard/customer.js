@@ -485,7 +485,7 @@ const Customers = () => {
           <section className="order-body">
             <div className="order-summary-head">
               <h6 style={{ color: "#53545c" }}>Customers Summary</h6>
-              <button
+              {/* <button
                 onClick={() => {
                   setAddCustomer(!showAddCustomer);
                 }}
@@ -494,7 +494,7 @@ const Customers = () => {
               >
                 <AiOutlinePlus />
                 Add a New Customer
-              </button>
+              </button> */}
             </div>
             <div className="order-summary-view">
               <div style={{ position: "relative" }} className="summary-view">

@@ -260,10 +260,17 @@ const Vendors = () => {
               placeholder="Enter Vendor Name"
               value={vendorData.name}
               onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  name: e.target.value,
-                }));
+                const inputValue = e.target.value;
+
+                // Regular expression to check if the input contains only letters
+                const isTextOnly = /^[a-zA-Z\s]*$/.test(inputValue);
+
+                if (isTextOnly) {
+                  setVendorData((prevDate) => ({
+                    ...prevDate,
+                    name: inputValue,
+                  }));
+                }
               }}
             />
             <p className="add-customer-titles2">Vendor Mobile number</p>
@@ -376,7 +383,7 @@ const Vendors = () => {
             <p className="add-customer-titles2">Pin Code</p>
             <input
               className="add-customer-input-box2"
-              type="text"
+              type="tel"
               placeholder="Enter Vendor PINCODE"
               value={vendorData.pinCode}
               onChange={(e) => {
@@ -385,6 +392,7 @@ const Vendors = () => {
                   pinCode: e.target.value,
                 }));
               }}
+              maxLength={6}
             />
 
             <button

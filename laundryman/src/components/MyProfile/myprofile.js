@@ -34,6 +34,26 @@ const MyProfile = () => {
     setShowNavBar(!showNavBar);
   };
 
+  const handleToggle = () => {
+    const animationCon = document.getElementById("tabs-shift");
+
+    if (animationCon.classList.contains("hide1")) {
+      animationCon.classList.remove("hide1");
+      animationCon.classList.add("show");
+      setTimeout(() => {
+        animationCon.classList.remove("show");
+        animationCon.classList.add("show1");
+      }, 1000);
+    } else if (animationCon.classList.contains("show1")) {
+      animationCon.classList.remove("show1");
+      animationCon.classList.add("hide");
+      setTimeout(() => {
+        animationCon.classList.remove("hide");
+        animationCon.classList.add("hide1");
+      }, 900);
+    }
+  };
+
   return (
     <>
       <div className="my-profile-container">
@@ -225,6 +245,9 @@ const MyProfile = () => {
         </div>
         <h1>Profile</h1>
         <div className="profile-modal-box">
+          <h2 onClick={handleToggle} className="tabs-arrow2">
+            ❯
+          </h2>
           <div className="profile-tabs">
             <div>
               <img src="/customer2.png" alt="profile" />
@@ -320,6 +343,105 @@ const MyProfile = () => {
                 LOGOUT
               </button>
             </div>
+          </div>
+          <div id="tabs-shift" className="profile-tabs1 hide1">
+            <div>
+              <img src="/customer2.png" alt="profile" />
+              <h2>Sravan</h2>
+            </div>
+            <div className="tabs">
+              <p
+                className={
+                  selected === tabsections.profileDetails
+                    ? "selected"
+                    : "not-selected"
+                }
+                onClick={() => {
+                  selectedSection(tabsections.profileDetails);
+                }}
+              >
+                <img
+                  src={
+                    selected === tabsections.profileDetails
+                      ? "/profile2details.png"
+                      : "/profile1details.png"
+                  }
+                  alt="profiledetails"
+                />
+                PROFILE DETAILS
+              </p>
+              <p
+                className={
+                  selected === tabsections.myaddress
+                    ? "selected"
+                    : "not-selected"
+                }
+                onClick={() => {
+                  selectedSection(tabsections.myaddress);
+                }}
+              >
+                <img
+                  src={
+                    selected === tabsections.myaddress
+                      ? "/myaddress2details.png"
+                      : "/myaddress1details.png"
+                  }
+                  alt="profiledetails"
+                />{" "}
+                MY ADDRESS
+              </p>
+              <p
+                className={
+                  selected === tabsections.myorders
+                    ? "selected"
+                    : "not-selected"
+                }
+                onClick={() => {
+                  selectedSection(tabsections.myorders);
+                }}
+              >
+                <img
+                  src={
+                    selected === tabsections.myorders
+                      ? "/myorders2details.png"
+                      : "/myorders1details.png"
+                  }
+                  alt="profiledetails"
+                />{" "}
+                MY ORDERS
+              </p>
+              <p
+                className={
+                  selected === tabsections.referfriend
+                    ? "selected"
+                    : "not-selected"
+                }
+                onClick={() => {
+                  selectedSection(tabsections.referfriend);
+                }}
+              >
+                <img
+                  src={
+                    selected === tabsections.referfriend
+                      ? "/referafriend2details.png"
+                      : "/referafriend1details.png"
+                  }
+                  alt="profiledetails"
+                />{" "}
+                REFER A FRIEND
+              </p>
+              <button
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+                className="log-out"
+              >
+                LOGOUT
+              </button>
+            </div>
+            <h2 onClick={handleToggle} className="tabs-arrow1">
+              ❯
+            </h2>
           </div>
           <div className="profile-details">
             {selected === tabsections.profileDetails && <Profile />}

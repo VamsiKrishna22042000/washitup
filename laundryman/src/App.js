@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import "./App.css";
 import Laundry from "./components/Laundry/laundry";
 import LaundryB from "./components/LaundryB/laundryb.js";
@@ -94,22 +95,22 @@ function App() {
     };
   }); // Empty dependency array means this effect runs once on mount and cleans up on unmount
 
-  useEffect(() => {
-    var rootElement = document.getElementById("root");
+  // useEffect(() => {
+  //   var rootElement = document.getElementById("root");
 
-    var imgElement = document.createElement("img");
+  //   var imgElement = document.createElement("img");
 
-    imgElement.setAttribute("id", "root-image");
-    imgElement.setAttribute("src", "./washingload.gif");
-    rootElement.prepend(imgElement);
+  //   imgElement.setAttribute("id", "root-image");
+  //   imgElement.setAttribute("src", "./washingload.gif");
+  //   rootElement.prepend(imgElement);
 
-    document.addEventListener("mousemove", (e) => {
-      var x = e.clientX + 15;
-      var y = e.clientY + 15;
-      imgElement.style.left = x + "px";
-      imgElement.style.top = y + "px";
-    });
-  }, []);
+  //   document.addEventListener("mousemove", (e) => {
+  //     var x = e.clientX + 15;
+  //     var y = e.clientY + 15;
+  //     imgElement.style.left = x + "px";
+  //     imgElement.style.top = y + "px";
+  //   });
+  // }, []);
 
   return (
     <BrowserRouter>

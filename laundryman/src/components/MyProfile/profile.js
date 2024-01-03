@@ -1,7 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const Profile = () => {
+  const [userDetails, setUserDeatils] = useState({
+    name: "",
+    mobileNumber: "",
+  });
   const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
+  const getUserDetails = async () => {
+    const url = `${
+      process.env.REACT_APP_ROOT_URL
+    }/api/user/getUserDetailsByUserId/${Cookies.get("jwt_userId")}`;
+
+    const res = await axios.get(url);
+
+    if (res === 200) {
+      console.log(res.data);
+    }
+  };
 
   return (
     <div className="detials-profile">

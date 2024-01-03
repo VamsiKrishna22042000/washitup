@@ -1,5 +1,39 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap");
 
+@keyframes tabshideAnimation {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@keyframes tabsshowAnimation {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+.show {
+  animation: tabsshowAnimation linear 1s;
+}
+
+.hide {
+  animation: tabshideAnimation linear 1s;
+}
+
+.hide1 {
+  left: -100%;
+}
+
+.show1 {
+  left: 0%;
+}
+
 .my-profile-container {
   height: 100vh;
   width: 100vw;
@@ -532,7 +566,136 @@
   background-color: #ffffff;
 }
 
+.profile-tabs1 {
+  display: none;
+}
+
+.tabs-arrow2 {
+  display: none;
+}
+
 @media screen and (max-width: 600px) {
+  .tabs-arrow1 {
+    font-size: 1rem;
+    top: 0.5%;
+    right: 5%;
+    position: absolute;
+    transform: rotate(-180deg);
+  }
+
+  .tabs-arrow2 {
+    display: inline;
+    font-size: 1rem;
+    top: 0.5%;
+    left: 5%;
+    position: absolute;
+  }
+
+  .profile-modal-box {
+    overflow: hidden;
+  }
+
+  .profile-tabs {
+    display: none;
+  }
+
+  .profile-tabs1 {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    background-color: #ffffff;
+    z-index: 1;
+    box-shadow: 1px 1px 6px #222222;
+  }
+
+  .profile-tabs1 div:first-child {
+    width: 80%;
+    position: relative;
+    top: 5%;
+    padding: 1%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0.5rem;
+    background-color: #80808030;
+  }
+
+  .profile-tabs1 div:first-child h2 {
+    font-family: "Poppins", sans-serif;
+    color: #22222290;
+  }
+
+  .profile-tabs1 div:first-child > img {
+    width: 20%;
+  }
+
+  .profile-tabs1 div:last-child {
+    border: 2px solid transparent;
+  }
+
+  .tabs {
+    width: 85% !important;
+  }
+
+  .profile-details {
+    height: 100% !important;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 10% !important;
+  }
+
+  .address-subsection {
+    height: 28vh !important;
+    width: 90% !important;
+    margin: 0%;
+  }
+
+  .address-profile > button {
+    top: 1.7%;
+    font-size: 0.7rem;
+    padding: 2% 4%;
+  }
+
+  .addAddress-Modal {
+    height: 50%;
+    width: 80%;
+    top: 25%;
+    left: 10%;
+    padding: 5%;
+  }
+
+  .addAddress-Modal > form label {
+    font-size: 0.8rem;
+  }
+
+  .addAddress-Modal > form > button {
+    font-size: 0.7rem;
+    padding: 2% 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .address-subsection input {
+    font-size: 1rem !important;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    margin-left: 1%;
+  }
+
+  .addAddress-Modal > button {
+    bottom: 7%;
+    font-size: 0.7rem;
+    padding: 2% 4%;
+  }
 }
 
 @media screen and (max-width: 1025px) and (orientation: portrait) {
