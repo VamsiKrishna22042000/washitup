@@ -123,6 +123,14 @@ const Vendors = () => {
           pauseOnHover: true,
           theme: "colored",
         });
+      } else if (val.length < 13 || val.length > 13) {
+        toast.error("Mobile number should be of 10 digits", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
       } else if (vendorData.email === "") {
         toast.error("Please Enter Vendor Email", {
           position: "top-center",
@@ -149,6 +157,14 @@ const Vendors = () => {
         });
       } else if (value2 === 0) {
         toast.error("Please Enter Valid Secondary Number", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else if (value2.length < 13 || value2.length > 13) {
+        toast.error("Mobile number should be of 10 digits", {
           position: "top-center",
           autoClose: 2000,
           closeOnClick: true,

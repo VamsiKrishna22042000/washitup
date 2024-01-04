@@ -44,6 +44,14 @@ const AddCustomerModel = (props) => {
         pauseOnHover: true,
         theme: "colored",
       });
+    } else if (val.length < 13 || val.length > 13) {
+      toast.error("Mobile number should be of 10 digits", {
+        position: "top-center",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
     } else {
       try {
         setLoad(true);

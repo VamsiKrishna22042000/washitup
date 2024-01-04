@@ -23,6 +23,10 @@ const WashingB = (props) => {
 
   const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    setItems([]);
+  }, [selectedType]);
+
   const userLogged = Cookies.get("jwt_userId");
 
   const getItems = (obtained) => {
