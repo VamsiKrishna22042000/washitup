@@ -1,4 +1,4 @@
-import "../LaundryBody/myorders.css";
+import "./profileorders.css";
 
 import Cookies from "js-cookie";
 
@@ -131,6 +131,31 @@ const ProfileOrders = () => {
           let dateArray = selectedData.split("-");
           let dateString = dateArray.reverse().join("-");
 
+          let date = new Date(dateString);
+
+          const dd = String(date.getDate()).padStart(2, "0");
+          const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
+          const yyyy = date.getFullYear();
+
+          const dateArr = [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+          ];
+
+          let d = dateArr.includes(dd) ? dd[1] : dd;
+
+          let m = dateArr.includes(mm) ? mm[1] : mm;
+
+          // Combine them in the desired format
+          const formattedDate = `${m}-${d}-${yyyy}`;
+
           const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/user/changeOrderDate`;
 
           const user_JWT = Cookies.get("jwt_userToken");
@@ -143,10 +168,12 @@ const ProfileOrders = () => {
             },
             body: JSON.stringify({
               orderId,
-              date: dateString,
+              date: formattedDate,
               time: selectedTime,
             }),
           };
+
+          console.log(formattedDate);
 
           const res = await fetch(url, reqConfigure);
 
@@ -191,15 +218,15 @@ const ProfileOrders = () => {
             zIndex: 20,
           }}
         ></div>
-        <div style={{ zIndex: 20 }} className="modal">
-          <div className="items-modalbox-con">
+        <div style={{ zIndex: 20 }} className="modal1">
+          <div className="items-modalbox-con1">
             {!showDate && (
               <button
                 onClick={() => {
                   setShowSupport(true);
                   setfilterItems([]);
                 }}
-                className="support-button"
+                className="support-button1"
                 type="button"
               >
                 Customer Support
@@ -498,11 +525,11 @@ const ProfileOrders = () => {
             zIndex: "20",
           }}
         ></div>
-        <div className="modal">
+        <div className="modal1">
           <ToastContainer />
           {load ? (
             <>
-              <div style={{ zIndex: "20" }} className="support-modalbox-con">
+              <div style={{ zIndex: "20" }} className="support-modalbox-con1">
                 {issues.length === 0 ? (
                   <div>
                     <img src="./no-orders.gif" />
@@ -1759,7 +1786,7 @@ const ProfileOrders = () => {
                     id={each._id}
                     onClick={seperateItems}
                     key={each._id}
-                    className="subcon-myorders"
+                    className="subcon-myorders1"
                   >
                     {each.progress === "Active" ? (
                       <div
@@ -1936,7 +1963,7 @@ const ProfileOrders = () => {
                     onClick={seperateItems}
                     id={each._id}
                     key={each._id}
-                    className="subcon-myorders"
+                    className="subcon-myorders1"
                   >
                     {each.progress === "Active" ? (
                       <div
@@ -2296,7 +2323,7 @@ const ProfileOrders = () => {
                       setRatingBox({ ...ratingBox, orderId: each._id });
                     }}
                     key={each._id}
-                    className="subcon-myorders"
+                    className="subcon-myorders1"
                   >
                     {each.progress === "Active" ? (
                       <div

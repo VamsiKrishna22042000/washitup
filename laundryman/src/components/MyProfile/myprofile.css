@@ -19,11 +19,11 @@
 }
 
 .show {
-  animation: tabsshowAnimation linear 1s;
+  animation: tabsshowAnimation linear 0.5s;
 }
 
 .hide {
-  animation: tabshideAnimation linear 1s;
+  animation: tabshideAnimation linear 0.5s;
 }
 
 .hide1 {
@@ -203,7 +203,6 @@
 }
 
 .detials-profile {
-  border: 2px solid red;
   height: 100%;
   width: 100%;
 }
@@ -392,7 +391,6 @@
 }
 
 .refer-details {
-  border: 2px solid red;
   height: 100%;
   width: 100%;
   display: flex;
@@ -498,7 +496,7 @@
 }
 
 .addAddress-Modal > form > button {
-  border: 0;
+  border: 1px solid #222222;
   background-color: #6759ff;
   color: #ffffff;
   padding: 1% 3%;
@@ -575,6 +573,27 @@
 }
 
 @media screen and (max-width: 600px) {
+  .address-profile {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .address-subsection {
+    margin: 5% !important;
+  }
+
+  .addAddress-Modal {
+    width: 90% !important;
+    left: 5% !important;
+  }
+
   .tabs-arrow1 {
     font-size: 1rem;
     top: 0.5%;
@@ -608,7 +627,7 @@
     align-items: center;
     position: absolute;
     background-color: #ffffff;
-    z-index: 1;
+    z-index: 10;
     box-shadow: 1px 1px 6px #222222;
   }
 
@@ -696,9 +715,44 @@
     font-size: 0.7rem;
     padding: 2% 4%;
   }
+
+  .refer-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .refer-details > div {
+    margin: 3% 0% !important;
+  }
+
+  .refer-details > div > div:last-child button {
+    font-size: 0.8rem !important;
+  }
+
+  .refer-details > div > div:last-child p {
+    font-size: 0.8rem !important;
+  }
 }
 
 @media screen and (max-width: 1025px) and (orientation: portrait) {
+  .detials-profile > div {
+    height: 6%;
+    width: 50%;
+  }
+
+  .detials-profile > div input {
+    border: 1px solid #222222;
+    padding-left: 11%;
+  }
+
+  .detials-profile button {
+    margin-left: 40%;
+  }
+
   .profile-tabs {
     width: 30%;
     justify-content: space-around;
@@ -727,6 +781,15 @@
 }
 
 @media screen and (min-width: 1365px) and (orientation: landscape) {
+  .detials-profile > div {
+    height: 5%;
+  }
+
+  .detials-profile > div input {
+    border: 1px solid #222222;
+    padding-left: 11%;
+  }
+
   .address-subsection {
     height: 35%;
   }
@@ -749,9 +812,28 @@
     top: 25%;
     height: 45%;
   }
+
+  .refer-details > div {
+    height: 25%;
+    width: 45%;
+    margin: 0;
+    align-self: flex-start;
+  }
+  .refer-details > div > div:last-child p {
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1367px) and (orientation: portrait) {
+  .detials-profile > div {
+    height: 3%;
+  }
+
+  .detials-profile > div input {
+    border: 1px solid #222222;
+    padding-left: 11%;
+  }
+
   .address-profile {
     padding-top: 3%;
   }
@@ -781,9 +863,54 @@
     height: 95%;
     margin-top: 5%;
   }
+
+  .refer-details > div {
+    height: 20%;
+    width: 100%;
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  .refer-details > div > div:last-child h3 {
+    font-size: 1.5rem;
+  }
+
+  .refer-details > div > div:last-child button {
+    font-size: 1.2rem;
+  }
+
+  .refer-details > div > div:last-child p {
+    font-size: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 1024px) and (orientation: landscape) {
+  .addAddress-Modal {
+    height: 50%;
+    width: 50%;
+    top: 20%;
+    left: 25%;
+  }
+
+  .addAddress-Modal > form > input {
+    border: 2px solid #22222250;
+  }
+
+  .addAddress-Modal > button {
+    bottom: 3%;
+    padding: 1% 3%;
+    font-size: 0.9rem;
+  }
+
+  .detials-profile > div {
+    height: 6%;
+  }
+
+  .detials-profile > div input {
+    border: 1px solid #222222;
+    padding-left: 11%;
+  }
+
   .address-subsection {
     height: 45%;
     width: 45%;
@@ -797,9 +924,47 @@
     margin-top: 25%;
     height: 50%;
   }
+
+  .refer-details > div {
+    height: 25%;
+    width: 45%;
+  }
+
+  .refer-details > div > div:last-child p {
+    font-size: 0.65rem;
+  }
 }
 
 @media screen and (max-width: 1023px) and (orientation: portrait) {
+  .addAddress-Modal {
+    height: 50%;
+    width: 50%;
+    top: 20%;
+    left: 25%;
+  }
+
+  .addAddress-Modal > form > input {
+    border: 2px solid #22222250;
+  }
+
+  .addAddress-Modal > button {
+    bottom: 7%;
+  }
+
+  .detials-profile > div {
+    height: 6%;
+    width: 50%;
+  }
+
+  .detials-profile > div input {
+    border: 1px solid #222222;
+    padding-left: 11%;
+  }
+
+  .detials-profile button {
+    margin-left: 40%;
+  }
+
   .profile-tabs {
     justify-content: flex-start;
     width: 30%;
@@ -837,5 +1002,24 @@
 
   .log-out {
     font-size: 0.7rem;
+  }
+
+  .refer-details > div {
+    height: 20%;
+    width: 90%;
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  .refer-details > div > div:last-child h3 {
+    font-size: 1.2rem;
+  }
+
+  .refer-details > div > div:last-child button {
+    font-size: 1rem;
+  }
+
+  .refer-details > div > div:last-child p {
+    font-size: 1rem;
   }
 }

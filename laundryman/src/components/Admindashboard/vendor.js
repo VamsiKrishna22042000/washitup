@@ -131,6 +131,14 @@ const Vendors = () => {
           pauseOnHover: true,
           theme: "colored",
         });
+      } else if (!vendorData.email.endsWith("@gmail.com")) {
+        toast.error("Please Enter Vendor Email", {
+          position: "top-center",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
       } else if (vendorData.shopName === "") {
         toast.error("Please Enter Vendor Shop Name", {
           position: "top-center",
@@ -311,9 +319,13 @@ const Vendors = () => {
               placeholder="Enter Shop Name"
               value={vendorData.shopName}
               onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  shopName: e.target.value,
+                const inputValue = e.target.value;
+                // Use a regular expression to match only letters and spaces
+                const validInput = inputValue.replace(/[^a-zA-Z0-9\s]/g, "");
+
+                setVendorData((prevData) => ({
+                  ...prevData,
+                  shopName: validInput,
                 }));
               }}
             />
@@ -387,9 +399,13 @@ const Vendors = () => {
               placeholder="Enter Vendor PINCODE"
               value={vendorData.pinCode}
               onChange={(e) => {
-                setVendorData((prevDate) => ({
-                  ...prevDate,
-                  pinCode: e.target.value,
+                const inputValue = e.target.value;
+                // Use a regular expression to match only alphanumeric characters
+                const validInput = inputValue.replace(/\D/g, "");
+
+                setVendorData((prevData) => ({
+                  ...prevData,
+                  pinCode: validInput,
                 }));
               }}
               maxLength={6}

@@ -16,7 +16,7 @@ import Refer from "./referfriend.js";
 
 import Cookies from "js-cookie";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const tabsections = {
   profileDetails: "PROFILE DETAILS",
@@ -43,14 +43,14 @@ const MyProfile = () => {
       setTimeout(() => {
         animationCon.classList.remove("show");
         animationCon.classList.add("show1");
-      }, 1000);
+      }, 500);
     } else if (animationCon.classList.contains("show1")) {
       animationCon.classList.remove("show1");
       animationCon.classList.add("hide");
       setTimeout(() => {
         animationCon.classList.remove("hide");
         animationCon.classList.add("hide1");
-      }, 900);
+      }, 400);
     }
   };
 

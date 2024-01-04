@@ -268,11 +268,16 @@ const Coupons = () => {
             <p style={{ marginTop: 5, marginBottom: 3 }}>Enter Coupon Code</p>
             <input
               onChange={(e) => {
-                setCouponDetails((prevDe) => ({
-                  ...prevDe,
-                  couponCode: e.target.value,
+                const inputValue = e.target.value;
+                // Use a regular expression to match only alphanumeric characters
+                const validInput = inputValue.replace(/[^a-zA-Z0-9]/g, "");
+
+                setCouponDetails((prevData) => ({
+                  ...prevData,
+                  couponCode: validInput,
                 }));
               }}
+              value={coupondetails.couponCode}
               style={{
                 marginTop: 3,
                 marginBottom: 5,

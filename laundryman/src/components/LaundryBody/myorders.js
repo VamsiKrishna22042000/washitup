@@ -132,6 +132,31 @@ const MyOrders = () => {
           let dateArray = selectedData.split("-");
           let dateString = dateArray.reverse().join("-");
 
+          let date = new Date(dateString);
+
+          const dd = String(date.getDate()).padStart(2, "0");
+          const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
+          const yyyy = date.getFullYear();
+
+          const dateArr = [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+          ];
+
+          let d = dateArr.includes(dd) ? dd[1] : dd;
+
+          let m = dateArr.includes(mm) ? mm[1] : mm;
+
+          // Combine them in the desired format
+          const formattedDate = `${m}-${d}-${yyyy}`;
+
           const url = `${process.env.REACT_APP_ROOT_URL}/api/admin/user/changeOrderDate`;
 
           const user_JWT = Cookies.get("jwt_userToken");
@@ -144,10 +169,12 @@ const MyOrders = () => {
             },
             body: JSON.stringify({
               orderId,
-              date: dateString,
+              date: formattedDate,
               time: selectedTime,
             }),
           };
+
+          console.log(formattedDate);
 
           const res = await fetch(url, reqConfigure);
 
