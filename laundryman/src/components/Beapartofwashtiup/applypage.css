@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap");
+
+:root {
+  --def-color: #6759ff;
+  --def-font: "Poppins", sans-serif;
+}
+
+.apply-main-con {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--def-color);
+}
+
+/*Driver Css*/
+
+.driver-main-con {
+  height: 80%;
+  width: 80%;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 5px #222222;
+  border-radius: 1rem;
+  padding: 1%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.driver-main-con div {
+  height: 100%;
+  width: 50%;
+}
+
+.driver-main-con div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.driver-main-con div:first-child > img {
+  width: 50%;
+  filter: drop-shadow(2px 2px 2px #222222);
+}
+
+.driver-main-con div:last-child {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.driver-main-con div:last-child > h2 {
+  color: var(--def-color);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2.5%;
+}
+
+.driver-main-con div:last-child > form {
+  height: 65%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: center;
+  font-weight: bold;
+  margin-top: 2.5%;
+}
+
+.driver-main-con div:last-child > form input {
+  font-size: 1rem;
+  padding: 1%;
+  border: 1.5px solid var(--def-color);
+  padding-left: 5%;
+  border-radius: 0.25rem;
+}
+
+.driver-main-con div:last-child > form button {
+  font-size: 1rem;
+  padding: 1.5%;
+  margin-top: 5%;
+  border: 2px solid transparent;
+  background-color: var(--def-color);
+  color: #ffffff;
+  border-radius: 0.3rem;
+}
+
+.driver-main-con div:last-child > form button:hover {
+  border: 2px solid var(--def-color);
+  background-color: #ffffff;
+  color: var(--def-color);
+  cursor: pointer;
+}
+
+#buttonAnimation {
+  font-size: 1rem;
+  padding: 1.5%;
+  margin-top: 5%;
+  border: 2px solid var(--def-color);
+  background-color: #ffffff;
+  color: transparent;
+  border-top: hidden;
+  border-left: hidden;
+  border-radius: 0;
+  border-right: hidden;
+  position: relative;
+}
+
+#buttonAnimation > img {
+  position: absolute;
+  height: 110%;
+  width: 16%;
+  top: -2%;
+  transition: all linear 1s;
+}
+
+/*Driver Css*/

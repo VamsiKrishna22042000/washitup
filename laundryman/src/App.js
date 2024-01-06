@@ -18,6 +18,8 @@ import MyProfile from "./components/MyProfile/myprofile.js";
 import About from "./components/About/about.js";
 import AdminLogin from "./components/Admindashboard/adminlogin.js";
 
+import ApplyPage from "./components/Beapartofwashtiup/Applypage.js";
+
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -118,11 +120,13 @@ function App() {
         <Switch>
           <Route exact path="/" component={Laundry} />
           <Route exact path="/b" component={LaundryB} />
+
           <ProtectedRoute2
             exact
             path="/admindashboard"
             component={AdminDashboard}
           />
+
           <ProtectedRoute
             exact
             path="/vendordashboard"
@@ -133,6 +137,7 @@ function App() {
           <Route exact path="/adminlogin" component={AdminLogin} />
           <Route exact path="/myorders" component={MyOrders} />
           <Route exact path="/myprofile" component={MyProfile} />
+          <Route exact path="/apply/:id" component={ApplyPage} />
           <Route component={Notfound} />
         </Switch>
       ) : (

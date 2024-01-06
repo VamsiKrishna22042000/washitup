@@ -717,12 +717,12 @@ const ProfileOrders = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
-            className="rating-box"
+            className="rating-box1"
           >
             <TailSpin color="#6759ff" height={50} width={50} />
           </div>
         ) : (
-          <div className="rating-box">
+          <div className="rating-box1">
             <button
               id="cancle-button"
               onClick={() => {
@@ -1611,7 +1611,7 @@ const ProfileOrders = () => {
                 )
               )}
             </div>
-            <button onClick={postRating} id="review-button" type="button">
+            <button onClick={postRating} id="review-button1" type="button">
               Submit
             </button>
           </div>
@@ -1779,7 +1779,7 @@ const ProfileOrders = () => {
               margin: 0,
             }}
           >
-            <div className="myorder-con">
+            <div className="myorder-con1">
               {myorders.map((each) =>
                 each.progress !== "Completed" ? (
                   <div

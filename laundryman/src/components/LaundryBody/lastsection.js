@@ -95,9 +95,23 @@ const Lastsetion = () => {
               </div>
               <div id="items-subs2" style={{ cursor: "pointer" }}>
                 <h1 style={{ cursor: "pointer" }}>Services</h1>
-                <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
-                <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
-                <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
+                <p
+                  onClick={() => {
+                    window.location.href = "/apply/delivery";
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  Drive for Us
+                </p>
+                <p
+                  onClick={() => {
+                    window.location.href = "/apply/vendor";
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  Join Our Vendor Network
+                </p>
+                <p style={{ cursor: "pointer" }}>Carrers</p>
                 <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
                 <p style={{ cursor: "pointer" }}>Lorem ipsum</p>
               </div>

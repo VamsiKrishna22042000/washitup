@@ -29,7 +29,7 @@
   align-items: center;
 }
 
-.myorder-con {
+.myorder-con1 {
   height: 90%;
   width: 100%;
   display: flex;
@@ -377,9 +377,8 @@
   .rating-order-1 {
     margin-bottom: -6%;
   }
-  .myorder-con {
+  .myorder-con1 {
     margin-top: 15% !important;
-    border: 0%;
   }
   .no-orders > img {
     height: 30%;
@@ -501,7 +500,7 @@
     font-weight: bold;
   }
 
-  .myorder-con {
+  .myorder-con1 {
     height: 100%;
     width: 100%;
     display: flex;
@@ -666,11 +665,12 @@
   }
 }
 
-.rating-box {
+.rating-box1 {
   height: auto;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 40%;
+  width: 35%;
   transform: translate(-50%, -50%);
   background-color: #ffffff;
   border-radius: 0.5rem;
@@ -680,11 +680,11 @@
   color: #53545c;
 }
 
-.rating-box h3 {
+.rating-box1 h3 {
   font-family: "Instrument Sans", sans-serif;
 }
 
-#review-button {
+#review-button1 {
   position: relative;
   background-color: #6759ff;
   font-size: 0.8rem;
@@ -742,26 +742,28 @@
 }
 
 @media screen and (max-width: 600px) {
-  .rating-box {
+  .rating-box1 {
+    top: 50%;
     width: 85%;
   }
   #cancle-button {
     top: 1%;
   }
-  .rating-box h3 {
+  .rating-box1 h3 {
     margin-top: 1%;
   }
-  #review-button {
-    font-size: 1.2rem;
+  #review-button1 {
+    font-size: 1rem;
+    margin-left: 35%;
   }
-  .myorder-con {
-    margin-top: 20% !important;
+  .myorder-con1 {
+    margin-top: 0% !important;
   }
 }
 
 @media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
-  .rating-box {
-    width: 35%;
+  .rating-box1 {
+    width: 50%;
   }
   #cancle-button {
     top: 2.5%;
@@ -793,7 +795,7 @@
 }
 
 @media screen and (min-width: 1300px) and (max-width: 1366px) and (orientation: landscape) {
-  .rating-box {
+  .rating-box1 {
     width: 35%;
   }
   #cancle-button {
@@ -856,7 +858,7 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .rating-box {
+  .rating-box1 {
     width: 42.5%;
   }
   #cancle-button {
@@ -865,7 +867,7 @@
 }
 
 @media scree and (min-width: 1025px) and (max-width: 1366px) and (orientation: portrait) {
-  .myorder-con {
+  .myorder-con1 {
     height: 90%;
     width: 100%;
     display: flex;
@@ -916,7 +918,7 @@
 }
 
 /* @media screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
-  .rating-box {
+  .rating-box1 {
     width: 35%;
   }
   #cancle-button {

@@ -191,50 +191,76 @@ const Coupons = () => {
     });
 
     const addCouponFun = async () => {
-      try {
-        setLoad(false);
-        const url = `${
-          process.env.REACT_APP_ROOT_URL
-        }/api/admin/addCoupon/${Cookies.get("jwt_adminId")}`;
-
-        const reqConfigure = {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
-          },
-
-          body: JSON.stringify({
-            ...coupondetails,
-            couponCode: coupondetails.couponCode.toUpperCase(),
-          }),
-        };
-
-        const respone = await fetch(url, reqConfigure);
-
-        if (respone.ok) {
-          toast.success("Coupon Added", {
-            position: "top-center",
-            autoClose: 2000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            theme: "colored",
-          });
-
-          setTimeout(() => {
-            setAddCoupon(false);
-            getAllCoupons();
-          }, 1000);
-        }
-      } catch (error) {
-        toast.error(`${error}`, {
+      if (coupondetails.couponCode === "") {
+        toast.error("Please Enter Coupon Code", {
           autoClose: 2000,
           pauseOnHover: true,
           closeOnClick: true,
           position: "top-center",
           theme: "colored",
         });
+      } else if (coupondetails.discount === "") {
+        toast.error("Please Enter Discount", {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
+      } else if (coupondetails.minimumPrice === "") {
+        toast.error("Please Enter Minimum Price", {
+          autoClose: 2000,
+          pauseOnHover: true,
+          closeOnClick: true,
+          position: "top-center",
+          theme: "colored",
+        });
+      } else {
+        try {
+          setLoad(false);
+          const url = `${
+            process.env.REACT_APP_ROOT_URL
+          }/api/admin/addCoupon/${Cookies.get("jwt_adminId")}`;
+
+          const reqConfigure = {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookies.get("jwt_adminLogin")}`,
+            },
+
+            body: JSON.stringify({
+              ...coupondetails,
+              couponCode: coupondetails.couponCode.toUpperCase(),
+            }),
+          };
+
+          const respone = await fetch(url, reqConfigure);
+
+          if (respone.ok) {
+            toast.success("Coupon Added", {
+              position: "top-center",
+              autoClose: 2000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "colored",
+            });
+
+            setTimeout(() => {
+              setAddCoupon(false);
+              getAllCoupons();
+            }, 1000);
+          }
+        } catch (error) {
+          toast.error(`${error}`, {
+            autoClose: 2000,
+            pauseOnHover: true,
+            closeOnClick: true,
+            position: "top-center",
+            theme: "colored",
+          });
+        }
       }
     };
 
@@ -291,7 +317,7 @@ const Coupons = () => {
               onChange={(e) => {
                 setCouponDetails((prevDe) => ({
                   ...prevDe,
-                  discount: e.target.value.toUpperCase(),
+                  discount: e.target.value.replace(/[^0-9]/g, ""), // Remove non-numeric characters except 0-9
                 }));
               }}
               style={{ marginTop: 3 }}
@@ -305,7 +331,7 @@ const Coupons = () => {
               onChange={(e) => {
                 setCouponDetails((prevDe) => ({
                   ...prevDe,
-                  minimumPrice: e.target.value,
+                  minimumPrice: e.target.value.replace(/[^0-9]/g, ""), // Remove non-numeric characters except 0-9
                 }));
               }}
               style={{ marginTop: 3 }}
